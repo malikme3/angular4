@@ -1,3 +1,4 @@
+// tslint:disable
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -69,7 +70,7 @@ import { AdvancedDemoComponent } from './components/hotTables/handsontable/advan
     SmartTablesService,
     DataTablesService
   ],
-  exports: [BasicTables, HoverTable, ContextualTable, HandsontableSectionComponent, DataTables, SmartTables, BorderedTable]
+  exports: [BasicTables, HoverTable, ContextualTable, HandsontableSectionComponent, DataTables, SmartTables, BorderedTable, HotTablesComponent]
 })
 export class TablesModule {
 }

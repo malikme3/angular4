@@ -13,6 +13,11 @@ export class SmartTables {
   query: string = '';
 
   settings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false
+    },
     add: {
       addButtonContent: '<i class="ion-ios-plus-outline"></i>',
       createButtonContent: '<i class="ion-checkmark"></i>',

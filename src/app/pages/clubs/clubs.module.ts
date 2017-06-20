@@ -7,6 +7,7 @@ import { TreeModule } from 'ng2-tree';
 import { routing } from './clubs.routing';
 import { Clubs } from './clubs.component';
 import { TeamsView } from './components/teamsView/teamsView.component';
+import { TablesModule } from '../tables/tables.module';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { TeamsView } from './components/teamsView/teamsView.component';
     FormsModule,
     NgaModule,
     TreeModule,
+    TablesModule,
     routing
   ],
   declarations: [
