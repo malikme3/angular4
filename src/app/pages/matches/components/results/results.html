@@ -1,9 +1,5 @@
-<div class="widgets">
-
-  <div class="row">
-    <ba-card title="Basic Example" baCardClass="with-scroll" class="smart-table-container">
-      <ng2-smart-table [settings]="settings" [source]="source"></ng2-smart-table>
-    </ba-card>
-  </div>
-
+<div class="row">
+  <ba-card title="Basic Score Card" baCardClass="with-scroll" class="smart-table-container">
+    <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"></ng2-smart-table>
+  </ba-card>
 </div>

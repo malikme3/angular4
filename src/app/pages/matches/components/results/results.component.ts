@@ -1,113 +1,62 @@
 // tslint:disbale
 import { Component } from '@angular/core';
 import { TreeModel } from 'ng2-tree';
+import { ResultsService } from './results.service';
+import { BasicScorePojo } from './basicScore.pojo';
 
 @Component({
   selector: 'results-view',
   templateUrl: './results.html',
 })
 
-export class Results {
+export class ResultsComponent {
 
-  tree: TreeModel = {
-    value: 'CTCL Clubs',
-    children: [
-      {
-        value: 'Rounf Rocks',
-        children: [
-          { value: 'Lions' },
-          { value: 'Laggan' },
-          { value: 'Tiger' },
-        ]
-      },
-      {
-        value: 'HCCA',
-        children: [
-          { value: 'Ravens' },
-          { value: 'Gladiators' },
-          { value: 'Hawks' },
-        ]
-      }
-    ]
-  };
+  source: BasicScorePojo[];
+  source2: BasicScorePojo[];
 
+
+  constructor(private _resultsService: ResultsService) {
+  }
+  ngOnInit(): void {
+    this.source = this.getBasicResults();
+
+  }
+
+  getBasicResults(): BasicScorePojo[] {
+    this._resultsService.getMatchesResult().then(res => this.source = res);
+    return this.source;
+  }
   settings = {
     actions: {
       add: false,
       edit: false,
-      delete: false
+      delete: false,
+    },
+    pager: {
+      display: true,
+      perPage: 10,
     },
     columns: {
       match_date: {
-        title: 'Match',
-        type: 'string'
+        title: 'Match Date',
+        type: 'string',
       },
       host_team: {
         title: 'Host Team',
-        type: 'string'
+        type: 'string',
       },
       guest_team: {
         title: 'Guest Team',
-        type: 'string'
+        type: 'string',
       },
       player_first_name: {
         title: 'Man of the Match',
-        type: 'string'
-      },
-      player_last_name: {
-        title: 'Match Status',
-        type: 'string'
-      },
-      man_of_the_match: {
-        title: 'Man of the Match',
-        type: 'string'
+        type: 'string',
       },
       match_status: {
-        title: "Match Status",
-        type: 'string'
-      }
-    }
+        title: 'Match Status',
+        type: 'string',
+      },
+    },
   };
-
-  source = [
-    {
-      "match_date": "2017-02-18",
-      "host_team": "Tigers Pro",
-      "guest_team": "Panthers",
-      "player_first_name": "Gohar",
-      "player_last_name": "Tareen",
-      "man_of_the_match": null,
-      "match_status": "Tigers Pro won by 7 wickets"
-    },
-    {
-      "match_date": "2017-02-25",
-      "host_team": "Tigers Pro",
-      "guest_team": "Lagaan Jaguars",
-      "player_first_name": "Awais",
-      "player_last_name": "Mubarak",
-      "man_of_the_match": null,
-      "match_status": "Tigers Pro won by 6 wickets"
-    },
-    {
-      "match_date": "2017-02-25",
-      "host_team": "Hurricanes",
-      "guest_team": "Thunders",
-      "player_first_name": "Prabhuram",
-      "player_last_name": "Jagadeesan",
-      "man_of_the_match": null,
-      "match_status": "Hurricanes won by 5 wickets"
-    },
-    {
-      "match_date": "2017-02-26",
-      "host_team": "Lions",
-      "guest_team": "Star XI",
-      "player_first_name": "Samir",
-      "player_last_name": "Maredia",
-      "man_of_the_match": null,
-      "match_status": "Star XI won by 14 runs"
-    }]
-
-  constructor() {
-  }
-
 }

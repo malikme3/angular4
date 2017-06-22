@@ -10,8 +10,9 @@ import { DataTableModule } from "angular2-datatable";
 import { HotTable, HotTableModule } from 'ng2-handsontable';
 import { routing } from './matches.routing';
 import { Matches } from './matches.component';
-import { Results } from './components/results/results.component';
+import { ResultsComponent } from './components/results/results.component';
 import { TablesModule } from '../tables/tables.module';
+import { ResultsService } from './components/results/results.service';
 
 @NgModule({
   imports: [
@@ -24,11 +25,14 @@ import { TablesModule } from '../tables/tables.module';
     Ng2SmartTableModule,
     DataTableModule,
     HttpModule,
-    HotTableModule
+    HotTableModule,
   ],
   declarations: [
     Matches,
-    Results,
-  ]
+    ResultsComponent,
+  ],
+  providers: [
+    ResultsService,
+  ],
 })
 export class MatchesModule { }
