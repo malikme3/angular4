@@ -14,6 +14,7 @@ import { ResultsComponent } from './components/results/results.component';
 import { TablesModule } from '../tables/tables.module';
 import { ResultsService } from './components/results/results.service';
 import { MatchesConstants } from './components/matches.constant.service';
+import { UiModule } from '../ui/ui.module';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { MatchesConstants } from './components/matches.constant.service';
     DataTableModule,
     HttpModule,
     HotTableModule,
+    UiModule,
   ],
   declarations: [
     Matches,

@@ -22,8 +22,25 @@ export class ResultsComponent {
     this.source = this.getBasicResults();
 
   }
+
   // columns setting for basic score card table
   settings = this.matchesConstants.scoreTableSettings;
+  options = [
+    {id: 20, name: '20 Overs Leagues', path: '', year: 2017},
+    {id: 30, name: '30 Overs Leagues', path: '', year: 2017},
+    {id: 35, name: '35 Overs Leagues', path: '', year: 2017},
+    {id: 20, name: '20 Overs Leagues', path: '', year: 2016},
+    {id: 30, name: '30 Overs Leagues', path: '', year: 2016},
+    {id: 35, name: '35 Overs Leagues', path: '', year: 2016},
+    {id: 20, name: '20 Overs Leagues', path: '', year: 2015},
+    {id: 30, name: '30 Overs Leagues', path: '', year: 2015},
+    {id: 35, name: '35 Overs Leagues', path: '', year: 2015}
+  ];
+  options2017 = [
+    {id: 20, name: '20 Overs Leagues', path: '', year: 2017},
+    {id: 30, name: '30 Overs Leagues', path: '', year: 2017},
+    {id: 35, name: '35 Overs Leagues', path: '', year: 2017}];
+
 
   // columns data for basic score card table
   getBasicResults(): BasicScorePojo[] {

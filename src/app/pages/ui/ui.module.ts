@@ -59,7 +59,8 @@ import { DefaultModal } from './components/modals/default-modal/default-modal.co
   ],
   providers: [
     IconsService
-  ]
+  ],
+  exports: [DropdownButtons, GroupButtons]
 })
 export class UiModule {
 }

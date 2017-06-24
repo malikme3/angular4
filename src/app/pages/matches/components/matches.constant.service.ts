@@ -18,10 +18,8 @@ export class MatchesConstants {
     },
     columns: {
       match_date: {
-        title: 'Match Date',
+        title: 'Date',
         type: 'string',
-        width: '100',
-        editable: true,
       },
       host_team: {
         title: 'Host Team',
@@ -32,11 +30,11 @@ export class MatchesConstants {
         type: 'string',
       },
       player_first_name: {
-        title: 'Man of the Match',
+        title: 'MOM',
         type: 'string',
       },
       match_status: {
-        title: 'Match Status',
+        title: 'Result',
         type: 'string',
       },
     },
