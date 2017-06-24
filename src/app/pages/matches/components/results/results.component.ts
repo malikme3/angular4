@@ -8,6 +8,7 @@ import {MatchesConstants} from '../matches.constant.service';
 @Component({
   selector: 'results-view',
   templateUrl: './results.html',
+  styleUrls: ['./resultTables.scss'],
 })
 
 export class ResultsComponent {

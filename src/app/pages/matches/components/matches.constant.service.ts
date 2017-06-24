@@ -20,6 +20,8 @@ export class MatchesConstants {
       match_date: {
         title: 'Match Date',
         type: 'string',
+        width: '100',
+        editable: true,
       },
       host_team: {
         title: 'Host Team',
