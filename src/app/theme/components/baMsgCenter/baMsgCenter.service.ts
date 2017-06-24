@@ -5,7 +5,7 @@ export class BaMsgCenterService {
 
   private _notifications = [
     {
-      name: 'Vlad',
+      name: 'images',
       text: 'Vlad posted a new article.',
       time: '1 min ago'
     },
@@ -25,7 +25,7 @@ export class BaMsgCenterService {
       time: '1 day ago'
     },
     {
-      name: 'Nasta',
+      name: 'images',
       text: 'Today is Nasta\'s birthday.',
       time: '2 days ago'
     },
@@ -43,12 +43,12 @@ export class BaMsgCenterService {
 
   private _messages = [
     {
-      name: 'Nasta',
+      name: 'images',
       text: 'After you get up and running, you can place Font Awesome icons just about...',
       time: '1 min ago'
     },
     {
-      name: 'Vlad',
+      name: 'images',
       text: 'You asked, Font Awesome delivers with 40 shiny new icons in version 4.2.',
       time: '2 hrs ago'
     },
@@ -63,7 +63,7 @@ export class BaMsgCenterService {
       time: '1 day ago'
     },
     {
-      name: 'Nasta',
+      name: 'images',
       text: 'Get to know who we are - from the inside out. From our history and culture, to the...',
       time: '1 day ago'
     },
@@ -73,7 +73,7 @@ export class BaMsgCenterService {
       time: '2 days ago'
     },
     {
-      name: 'Vlad',
+      name: 'images',
       text: 'Wrap the dropdown\'s trigger and the dropdown menu within .dropdown, or...',
       time: '1 week ago'
     }

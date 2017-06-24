@@ -13,6 +13,7 @@ import { Matches } from './matches.component';
 import { ResultsComponent } from './components/results/results.component';
 import { TablesModule } from '../tables/tables.module';
 import { ResultsService } from './components/results/results.service';
+import { MatchesConstants } from './components/matches.constant.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,7 @@ import { ResultsService } from './components/results/results.service';
     ResultsComponent,
   ],
   providers: [
-    ResultsService,
+    ResultsService, MatchesConstants,
   ],
 })
 export class MatchesModule { }

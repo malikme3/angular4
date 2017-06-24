@@ -10,7 +10,7 @@ export class ResultsService {
     // private headers = new Headers({ 'Content-Type': 'application/json' });
     private headers = new Headers({ 'Access-Control-Allow-Origin': '*.*', 'Content-Type': 'application/x-www-form-urlencoded' });
 
-    private basicScoredUrl = 'https://d63215b7.ngrok.io/ZulfiCricket/basic/scorecard/?seasonId=31';  // URL to web api
+    private basicScoredUrl = 'https://a13fbafb.ngrok.io/ZulfiCricket/basic/scorecard/?seasonId=31';  // URL to web api
     constructor(private http: Http) {
     }
 

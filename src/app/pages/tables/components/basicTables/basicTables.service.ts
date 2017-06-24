@@ -9,7 +9,7 @@ export class BasicTablesService {
   // private headers = new Headers({ 'Content-Type': 'application/json' });
   private headers = new Headers({ 'Access-Control-Allow-Origin': '*.*', 'Content-Type': 'application/x-www-form-urlencoded' });
 
-  private heroesUrl = 'https://d63215b7.ngrok.io/ZulfiCricket/team/position/?seasonName=2017+20+Overs+League&seasonYear=Group+A';  // URL to web api
+  private heroesUrl = 'https://a13fbafb.ngrok.io/ZulfiCricket/team/position/?seasonName=2017+20+Overs+League&seasonYear=Group+A';  // URL to web api
   constructor(private http: Http) {
     this.editableTableData = this.smartTableData.slice(0, 36);
   }
