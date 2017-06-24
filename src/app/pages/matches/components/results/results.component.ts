@@ -25,6 +25,8 @@ export class ResultsComponent {
 
   // columns setting for basic score card table
   settings = this.matchesConstants.scoreTableSettings;
+  isDropDown = true;
+
   options = [
     {id: 20, name: '20 Overs Leagues', path: '', year: 2017},
     {id: 30, name: '30 Overs Leagues', path: '', year: 2017},

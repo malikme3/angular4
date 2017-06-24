@@ -1,8 +1,14 @@
 <div baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
-    <div *ngIf="title" class="card-header clearfix">
-        <h3 class="card-title" translate>{{title}}</h3>
+  <div *ngIf="title" class="card-header clearfix">
+    <div>
+      <p class="float-left h3"> {{title}}</p>
+      <p class="float-right btn-group  " *ngFor="let option of options" name="success-drop-down">
+        <button class="btn-danger">{{option.name}}</button>
+      </p>
     </div>
-    <div class="card-body">
-        <ng-content></ng-content>
-    </div>
+  </div>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
 </div>
+

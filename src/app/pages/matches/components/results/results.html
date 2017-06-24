@@ -1,7 +1,8 @@
-<ba-card>
+<!--<ba-card>
   <group-buttons name="buttons-multi-groups" [options]="options"></group-buttons>
 <dropdown-buttons name="success-drop-down" [options]="options2017" ></dropdown-buttons>
-</ba-card>
-<ba-card title="Basic Score Card" baCardClass="with-scroll" class="smart-table-container">
+</ba-card>-->
+<ba-card title="Basic Score Card" baCardClass="with-scroll" class="smart-table-container" isDropDown="isDropDown"
+         name="success-drop-down" [options]="options2017">
   <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"></ng2-smart-table>
 </ba-card>
