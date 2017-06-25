@@ -9,7 +9,8 @@ const routes: Routes = [
     path: '',
     component: Matches,
     children: [
-      { path: 'resultsView', component: ResultsComponent }
+      { path: 'resultsView', component: ResultsComponent },
+      { path: 'scheduleView', component: ResultsComponent }
     ]
   }
 ];

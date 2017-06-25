@@ -40,9 +40,9 @@ export class ResultsComponent {
     {id: 35, name: '35 Overs Leagues', path: '', year: 2015}
   ];
   options2017 = [
-    {id: 20, name: '20 Overs Leagues', path: '', year: 2017},
-    {id: 30, name: '30 Overs Leagues', path: '', year: 2017},
-    {id: 35, name: '35 Overs Leagues', path: '', year: 2017}];
+    {id: 20, name: '20 Overs', path: '', year: 2017},
+    {id: 30, name: '30 Overs', path: '', year: 2017},
+    {id: 35, name: '35 Overs', path: '', year: 2017}];
 
 
   // columns data for basic score card table
