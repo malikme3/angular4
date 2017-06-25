@@ -26,6 +26,7 @@ export class ResultsComponent {
   // columns setting for basic score card table
   settings = this.matchesConstants.scoreTableSettings;
   isDropDown = true;
+  title = 'Basic Score Card'
 
   options = [
     {id: 20, name: '20 Overs Leagues', path: '', year: 2017},

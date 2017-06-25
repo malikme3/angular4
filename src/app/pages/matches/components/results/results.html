@@ -1,8 +1,14 @@
-<!--<ba-card>
-  <group-buttons name="buttons-multi-groups" [options]="options"></group-buttons>
-<dropdown-buttons name="success-drop-down" [options]="options2017" ></dropdown-buttons>
-</ba-card>-->
-<ba-card title="Basic Score Card" baCardClass="with-scroll" class="smart-table-container" isDropDown="isDropDown"
-         name="success-drop-down" [options]="options2017">
+<div *ngIf="isDropDown" baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
+  <div *ngIf="title" class="card-header clearfix">
+    <div class="dropdown">
+      <p class="float-left h5 "> {{title}}</p>
+      <p class="float-right h5 ">
+        <select class="btn-outline-warning">
+          <option *ngFor=" let country of options2017">{{country.name}}</option>
+        </select>
+      </p>
+    </div>
+    <ng-content></ng-content>
+  </div>
   <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"></ng2-smart-table>
-</ba-card>
+</div>

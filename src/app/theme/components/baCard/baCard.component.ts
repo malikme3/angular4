@@ -11,4 +11,9 @@ export class BaCard {
   @Input() isDropDown: boolean;
   @Input() name: String;
   @Input() options;
+
+  options2016 = [
+    {id: 20, name: '20 Overs', path: '', year: 2017},
+    {id: 30, name: '30 Overs', path: '', year: 2017},
+    {id: 35, name: '35 Overs', path: '', year: 2017}];
 }
