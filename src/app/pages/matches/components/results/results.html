@@ -3,8 +3,8 @@
     <div class="dropdown">
       <p class="float-left h5 "> {{title}}</p>
       <p class="float-right h5 ">
-        <select class="btn-outline-warning">
-          <option *ngFor=" let country of options2017">{{country.name}}</option>
+        <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
+          <option *ngFor=" let option of options2017" value= {{option.id}}>{{option.name}}</option>
         </select>
       </p>
     </div>

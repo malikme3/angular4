@@ -34,6 +34,14 @@ export const PAGES_MENU = [
                 title: 'general.menu.results',
               }
             }
+          },
+          {
+            path: 'scheduleView',
+            data: {
+              menu: {
+                title: 'general.menu.schedule',
+              }
+            }
           }
         ]
       },
