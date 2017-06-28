@@ -18,6 +18,8 @@ import {MatchesConstants} from './components/matches.constant.service';
 import {UiModule} from '../ui/ui.module';
 import {PointsTableComponent} from "./components/points.table/pointstable.component";
 import {DashboardService} from "../dashboard/dashboard.service";
+import {ScheduleComponent} from "./components/schedule/schedule.component";
+import {MatchesService} from "./matches.service";
 
 @NgModule({
   imports: [
@@ -37,10 +39,11 @@ import {DashboardService} from "../dashboard/dashboard.service";
   declarations: [
     Matches,
     ResultsComponent,
-    PointsTableComponent
+    PointsTableComponent,
+    ScheduleComponent
   ],
   providers: [
-    ResultsService, MatchesConstants, DashboardService
+    ResultsService, MatchesConstants, DashboardService, MatchesService
   ],
 })
 export class MatchesModule {

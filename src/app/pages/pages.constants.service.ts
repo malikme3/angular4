@@ -10,7 +10,7 @@ export class PagesConstants {
     'Content-Type': 'application/x-www-form-urlencoded'
   });
 
-  private url = 'https://a13fbafb.ngrok.io/ZulfiCricket/';  // URL to middle tier Java (Spring MVC)
+  private url = 'http://localhost:8080/ZulfiCricket/';  // URL to middle tier Java (Spring MVC)
 
   pagesContants = {
     url: {
