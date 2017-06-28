@@ -1,0 +1,6 @@
+<div class="row" *ngFor="let group of groups">
+  <ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-12" title="{{group.seasonName | slice:4:13}} :: {{group.groupCategory}}"
+           baCardClass="medium-card">
+    <bordered-table [group]="group"></bordered-table>
+  </ba-card>
+</div>

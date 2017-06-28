@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 import { BasicTablesService } from '../../basicTables.service';
 import { PointsTablePojo } from '../../PointsTable.pojo';
@@ -9,6 +9,8 @@ import { PointsTablePojo } from '../../PointsTable.pojo';
   templateUrl: './borderedTable.html',
 })
 export class BorderedTable {
+  @Input() points;
+  @Input() group;
 
   metricsTableData: Array<any>;
 
@@ -16,14 +18,14 @@ export class BorderedTable {
     this.metricsTableData = _basicTablesService.metricsTableData;
   }
   ngOnInit(): void {
-    this.teamPoints = this.team_points();
+    this.teamPoints = this.team_points(this.group.groupCategory, this.group.seasonName);
 
   }
 
   teamPoints: PointsTablePojo[];
-  team_points(): PointsTablePojo[] {
+  team_points(group: string, season: string): PointsTablePojo[] {
     this._basicTablesService
-      .getTeamPoints()
+      .getTeamPoints(group, season)
       .then(res => this.teamPoints = res);
     return this.teamPoints;
   }

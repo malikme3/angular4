@@ -1,7 +1,7 @@
 <div *ngIf="isDropDown" baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
-  <div *ngIf="title" class="card-header clearfix">
+  <div class="card-header clearfix">
     <div class="dropdown">
-      <p class="float-left h5 "> {{title}}</p>
+      <p class="float-left h5 " translate> {{'matches.title'}}</p>
       <p class="float-right h5 ">
         <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
           <option *ngFor=" let option of options2017" value= {{option.id}}>{{option.name}}</option>

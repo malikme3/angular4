@@ -1,5 +1,6 @@
 /* tslint:disable */
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {DashboardService} from "./dashboard.service";
 
 @Component({
   selector: 'dashboard',
@@ -8,10 +9,30 @@ import { Component } from '@angular/core';
 })
 export class Dashboard {
 
-  constructor() {
+  points;
+  groups;
+  //Default year : 2017
+  year:String = '2017';
+
+  constructor(private dashboardService: DashboardService) {
   }
 
-  message: String = 'Asalam-o-Aliakum';
+  ngOnInit(): void {
+    this.points = this.teamsStanding();
+    this.groups = this.seasonGroups(this.year);
 
+  }
+
+  seasonGroups(year: String){
+    console.info("Fetching results for season groups")
+    this.dashboardService.getSeasonGroups(year).then(res => this.groups = res);
+    return this.groups;
+  }
+    teamsStanding() {
+    console.info("Fetching results for teams standing :")
+    this.dashboardService.getTeamStanding().then(res => this.points = res);
+    console.info("Point are back from backend", this.points)
+    return this.points;
+  }
 
 }

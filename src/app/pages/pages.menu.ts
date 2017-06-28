@@ -42,6 +42,14 @@ export const PAGES_MENU = [
                 title: 'general.menu.schedule',
               }
             }
+          },
+          {
+            path: 'pointsTableView',
+            data: {
+              menu: {
+                title: 'general.menu.pointstable',
+              }
+            }
           }
         ]
       },

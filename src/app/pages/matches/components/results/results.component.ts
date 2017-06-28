@@ -26,7 +26,6 @@ export class ResultsComponent {
   // columns setting for basic score card table
   settings = this.matchesConstants.scoreTableSettings;
   isDropDown = true;
-  title = 'Basic Score Card';
   /* 35 overs- Defualt league result display*/
   leagueType:number = 30;
 
@@ -49,7 +48,7 @@ export class ResultsComponent {
 
   // columns data for basic score card table
   getBasicResults(seasonId): BasicScorePojo[] {
-    console.info("Fetching result for league for id :", seasonId)
+    console.info("Fetching results for league for id :", seasonId)
     this._resultsService.getMatchesResult(seasonId).then(res => this.source = res);
     return this.source;
   }

@@ -23,6 +23,7 @@ import { TodoService } from './todo/todo.service';
 import { TrafficChartService } from './trafficChart/trafficChart.service';
 import { UsersMapService } from './usersMap/usersMap.service';
 import { TablesModule } from '../tables/tables.module';
+import {DashboardService} from "./dashboard.service";
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { TablesModule } from '../tables/tables.module';
     PieChartService,
     TodoService,
     TrafficChartService,
-    UsersMapService
+    UsersMapService,
+    DashboardService
   ]
 })
 export class DashboardModule { }

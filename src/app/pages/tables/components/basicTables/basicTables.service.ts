@@ -3,23 +3,25 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { PointsTablePojo } from './PointsTable.pojo';
+import {PagesConstants} from "../../../pages.constants.service";
 
 @Injectable()
 export class BasicTablesService {
-  // private headers = new Headers({ 'Content-Type': 'application/json' });
-  private headers = new Headers({ 'Access-Control-Allow-Origin': '*.*', 'Content-Type': 'application/x-www-form-urlencoded' });
 
-  private heroesUrl = 'https://a13fbafb.ngrok.io/ZulfiCricket/team/position/?seasonName=2017+20+Overs+League&seasonYear=Group+A';  // URL to web api
-  constructor(private http: Http) {
+  private teamsPosition = 'team/position/?';  // URL to web api
+  constructor(private http: Http, private  pagesConstant: PagesConstants) {
     this.editableTableData = this.smartTableData.slice(0, 36);
   }
 
   smartTablePageSize = 10;
   // For points table
-  getTeamPoints(): Promise<PointsTablePojo[]> {
-    return this.http.get(this.heroesUrl, this.headers).toPromise().then(res => res.json() as PointsTablePojo[])
-      .catch(this.handleError);
+  getTeamPoints(group: string, season: string): Promise<any[]> {
 
+    const ul = this.pagesConstant.pagesContants.url.baseUrl+ this.teamsPosition +'seasonName='+season+'&seasonYear='+group;
+    const header = this.pagesConstant.pagesContants.url.header;
+
+    return this.http.get(ul, header).toPromise().then(res => res.json())
+      .catch(this.handleError);
   }
 
   smartTableData = [

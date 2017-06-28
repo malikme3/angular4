@@ -2,6 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { Matches } from './matches.component';
 import { ResultsComponent } from './components/results/results.component';
+import {PointsTableComponent} from "./components/points.table/pointstable.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -10,7 +11,8 @@ const routes: Routes = [
     component: Matches,
     children: [
       { path: 'resultsView', component: ResultsComponent },
-      { path: 'scheduleView', component: ResultsComponent }
+      { path: 'scheduleView', component: ResultsComponent },
+      {path: 'pointsTableView', component: PointsTableComponent}
     ]
   }
 ];
