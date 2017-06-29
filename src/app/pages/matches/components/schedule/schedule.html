@@ -1,6 +1,14 @@
-<div class="row" *ngFor="let group of groups">
-  <ba-card class="col-xlg-12 col-xl-12 col-lg-12 col-sm-12 col-12" title="{{group.seasonName | slice:4:13}} :: {{group.groupCategory}}"
-           baCardClass="medium-card">
-    <bordered-table [group]="group"></bordered-table>
-  </ba-card>
+<div  baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
+  <div class="card-header clearfix">
+    <!--<div class="dropdown">
+      <p class="float-left h5 " translate> {{'matches.title'}}</p>
+      <p class="float-right h5 ">
+        <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
+          <option *ngFor=" let option of data" value= {{option.id}}>{{option.name}}</option>
+        </select>
+      </p>
+    </div>-->
+    <ng-content></ng-content>
+  </div>
+  <ng2-smart-table [settings]="settings" [source]="data" (edit)="onRowEdit($event)"></ng2-smart-table>
 </div>

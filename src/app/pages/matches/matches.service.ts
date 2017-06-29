@@ -9,18 +9,19 @@ import {PagesConstants} from "../pages.constants.service";
 @Injectable()
 export class MatchesService {
 
-  private schdUrl = 'matches/schedule';  // URL to web api
+  private schdUrl = 'matches/schedule/?';  // URL to web api
   constructor(private http: Http, private pagesConstants: PagesConstants) {
   }
 
   header = this.pagesConstants.pagesContants.url.header;
-  url = this.pagesConstants.pagesContants.url.baseUrl + this.schdUrl;
+  baseUrl = this.pagesConstants.pagesContants.url.baseUrl + this.schdUrl;
 
   // For points table
-  getSchedule(): Promise<any> {
+  getSchedule(seasonId: string): Promise<any> {
 
-    console.info("Call for getSchedule() is");
-    return this.http.get(this.url, this.header).toPromise().then(res => res.json())
+    const url = `${this.baseUrl}seasonId=${seasonId}`;
+    console.info("Call for getSchedule() is", url);
+    return this.http.get(url, this.header).toPromise().then(res => res.json())
       .catch(this.handleError);
   }
 

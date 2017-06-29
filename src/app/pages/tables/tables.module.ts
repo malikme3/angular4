@@ -70,7 +70,7 @@ import { AdvancedDemoComponent } from './components/hotTables/handsontable/advan
     SmartTablesService,
     DataTablesService
   ],
-  exports: [BasicTables, HoverTable, ContextualTable, HandsontableSectionComponent, DataTables, SmartTables, BorderedTable, HotTablesComponent]
+  exports: [BasicTables, HoverTable, ContextualTable, HandsontableSectionComponent, DataTables, SmartTables, BorderedTable, HotTablesComponent, ResponsiveTable]
 })
 export class TablesModule {
 }
