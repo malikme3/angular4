@@ -103,7 +103,8 @@
     "lua": "Lua"
   },
   "matches": {
-    "title": "Basic Score Card"
+    "title": "Basic Score Card",
+    "schedule": "Schedule"
   },
   "chart": {
     "lines": "Lines",

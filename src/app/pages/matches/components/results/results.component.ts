@@ -27,7 +27,7 @@ export class ResultsComponent {
   settings = this.matchesConstants.scoreTableSettings;
   isDropDown = true;
   /* 35 overs- Defualt league result display*/
-  leagueType:number = 30;
+
 
 
   options = [
@@ -41,6 +41,7 @@ export class ResultsComponent {
     {id: 30, name: '30 Overs Leagues', path: '', year: 2015},
     {id: 35, name: '35 Overs Leagues', path: '', year: 2015}
   ];
+  leagueType:number = 30;
   options2017 = [
     {id: 31, name: '20 Overs', path: '', year: 2017},
     {id: 30, name: '35 Overs', path: '', year: 2017}];

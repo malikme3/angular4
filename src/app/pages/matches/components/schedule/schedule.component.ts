@@ -7,6 +7,7 @@ import {MatchesConstants} from "../matches.constant.service";
 @Component({
   selector: 'matches-schedule',
   templateUrl: 'schedule.html',
+  styleUrls: ['../results/resultTables.scss'],
 })
 export class ScheduleComponent {
 
@@ -14,24 +15,25 @@ export class ScheduleComponent {
   }
 
   data;
-
+  // Default schedule for all leagues
+  leagueType = 'null';
   options2017 = [
-    {id: 31, name: '20 Overs', path: '', year: 2017},
-    {id: 30, name: '35 Overs', path: '', year: 2017}];
-// Default schedule for all leagues
-  default_schedule: string = null;
+    {id: 'null', name: '2017: All Format', year: 2017},
+    {id: '31', name: '2017:20 Overs', year: 2017},
+    {id: '30', name: '2017:35 Overs', year: 2017}];
+
   ngOnInit(): void {
-    this.data = this.getSeasonGroups(this.default_schedule);
+    this.data = this.getSeasonGroups(this.leagueType);
   }
 
   settings = this.matchesConstants.scheduelTable;
-
-
   getSeasonGroups(seasonId: string) {
-    console.info('Request for matches schedules from schedule component');
+    console.info('Request for league schedules from schedule component');
     this.matchesService.getSchedule(seasonId).then(res => this.data = res);
     return this.data;
   }
 
-
+  getLeagueSchedule() {
+    this.getSeasonGroups(this.leagueType);
+  }
 }
