@@ -9,20 +9,42 @@ import {PagesConstants} from "../pages.constants.service";
 @Injectable()
 export class MatchesService {
 
-  private schdUrl = 'matches/schedule/?';  // URL to web api
+
   constructor(private http: Http, private pagesConstants: PagesConstants) {
   }
 
-  header = this.pagesConstants.pagesContants.url.header;
-  baseUrl = this.pagesConstants.pagesContants.url.baseUrl + this.schdUrl;
+  private header = this.pagesConstants.pagesContants.url.header;
+  private baseUrl = this.pagesConstants.pagesContants.url.baseUrl;
+
+  private sch_path = 'matches/schedule/bowling/?';
+  private batting_path = 'detailed/scorecard/batting/?';
+  private bowling_path = 'detailed/scorecard/bowling/?';
+
+  private schduel_url = this.baseUrl + this.sch_path;
+  private batting_url = this.baseUrl + this.batting_path;
+  private bowling_url = this.baseUrl + this.bowling_path;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
 
-    const url = `${this.baseUrl}seasonId=${seasonId}`;
-    console.info("Call for getSchedule() is", url);
+    const url = `${this.schduel_url}seasonId=${seasonId}`;
+    console.info("Call for getSchedule() with url : ", url);
     return this.http.get(url, this.header).toPromise().then(res => res.json())
       .catch(this.handleError);
+  }
+
+  getBattingDetails(gameId: string): Promise<any> {
+    const url = `${this.batting_url}gameId=${gameId}`;
+    console.info("Call for getDetailedScore() with url : ", url);
+    return this.http.get(url, this.header).toPromise().then(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getBowlingDetails(gameId: string): Promise<any> {
+    const url = `${this.bowling_url}gameId=${gameId}`;
+    console.info("Call for getDetailedScore() with url : ", url);
+    return this.http.get(url, this.header).toPromise().then(responce => responce.json())
+      .catch(this.handleError)
   }
 
   private handleError(error: any): Promise<any> {

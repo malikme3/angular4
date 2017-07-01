@@ -70,7 +70,7 @@ export class MatchesConstants {
     columns: {
       match_date: {
         title: 'Date',
-        type: 'string',
+        type: Date,
       },
       host_team: {
         title: 'Host Team',
@@ -90,4 +90,89 @@ export class MatchesConstants {
       },
     },
   };
+  // for detailed score card
+  detailedScoreSettings = {
+    actions: {
+      add: false,
+      edit: false,
+      delete: false,
+    },
+    pager: {
+      display: true,
+      perPage: 10,
+    },
+    hideSubHeader: true,
+    columns: {
+
+      batting_position: {
+        title: '',
+        type: 'number',
+      },
+      BatterLName: {
+        title: '',
+        type: 'string',
+        width: '10px'
+      },
+      BatterFName: {
+        title: '',
+        type: 'string',
+        width: '10px'
+      },
+      runs: {
+        title: 'R',
+        type: 'number',
+        width: '5px'
+      },
+      balls: {
+        title: 'B',
+        type: 'number',
+        width: '5px'
+      },
+      fours: {
+        title: '4s',
+        type: 'number',
+        width: '5px'
+      },
+      sixes: {
+        title: '6s',
+        type: 'number',
+        width: '5px'
+      },
+
+      HowOutAbbrev: {
+        title: '',
+        type: 'string',
+      },
+      AssistLName: {
+        title: '',
+        type: 'string',
+      },
+      AssistFName: {
+        title: '',
+        type: 'string',
+      },
+      AssistFInitial: {
+        title: '',
+        type: 'string',
+      },
+      BowlerLName: {
+        title: '',
+        type: 'string',
+      },
+      BowlerFName: {
+        title: '',
+        type: 'string',
+      },
+      BowlerFInitial: {
+        title: '',
+        type: 'string',
+      }
+      ,
+      Batter_id: {
+        title: 'SR',
+        type: 'number',
+      }
+    }
+  };
+
 }

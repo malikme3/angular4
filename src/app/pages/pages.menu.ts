@@ -50,6 +50,13 @@ export const PAGES_MENU = [
                 title: 'general.menu.pointstable',
               }
             }
+          }, {
+            path: 'scoreView',
+            data: {
+              menu: {
+                title: 'score',
+              }
+            }
           }
         ]
       },
