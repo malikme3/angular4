@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {MatchesConstants} from '../matches.constant.service';
 import {MatchesService} from "../../matches.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'score-view',
@@ -11,48 +12,39 @@ import {MatchesService} from "../../matches.service";
 export class ScoreComponent {
 
   batting_data: any[];
-  batting_team_first;
-  batting_team_second;
   bowling_data: any[];
-  bowling_team_first;
-  bowling_team_second;
+  queryParamsSub;
+  gameId: String;
 
+  constructor(private  router: Router, private route: ActivatedRoute, private _matchesService: MatchesService, private matchesConstants: MatchesConstants) {
+    this.queryParamsSub = route.queryParams.subscribe(
+      params => {
+        this.gameId = params['gameId'];
+      }
+    );
 
-  constructor(private _matchesService: MatchesService, private matchesConstants: MatchesConstants) {
   }
 
   ngOnInit(): void {
-    this.batting_data = this.getBattingDetails('2061');
-    this.bowling_data = this.getBowlingDetails('2061');
-
+    this.gameId === '2065' ? this.gameId === '2071' : this.gameId;
+    this.batting_data = this.getBattingDetails(this.gameId);
+    this.bowling_data = this.getBowlingDetails(this.gameId);
   }
 
   getBattingDetails(gameId): any[] {
     console.info("Fetching results for batting details for game id :", gameId)
     this._matchesService.getBattingDetails(gameId).then(res => this.batting_data = res);
-    //this.getTitle(this.batting_data);
     return this.batting_data;
   }
 
   getBowlingDetails(gameId): any[] {
     console.info("Fetching results for batting details for game id :", gameId)
     this._matchesService.getBowlingDetails(gameId).then(res => this.bowling_data = res);
-    // this.getTitle(this.bowling_data);
     return this.bowling_data;
   };
 
-/*getTitle(data: any[]) {
-  data.forEach((val: any) => {
-    if(val.innings_id == 1){
-      this.batting_team_first = val.batting_team;
-      console.info("Ist Inning Batting first :: ", this.batting_team_first  );
-      this.bowling_team_first = val.bowling_team;
-      console.info("Ist Inning bowling first :: ", this.bowling_team_first  )
-    } else if(val.innings_id == 2)
-      this.batting_team_second = val.batting_team;
-    console.info("2nd Inning Batting first :: ", this.batting_team_second  )
-    this.bowling_team_second = val.bowling_team;
-    console.info("2nd Inning bowling first :: ", this.bowling_team_second  )
-    });
-  };*/
-};
+  ngOnDestory() {
+    this.queryParamsSub.unsubscribe();
+  }
+
+}

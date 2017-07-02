@@ -2,6 +2,7 @@
   <div class="card-header clearfix">
     <div class="dropdown">
       <p class="float-left h5 " translate> {{'matches.title'}}</p>
+      <a [routerLink]="['/pages/matches/scoreView']"  [queryParams]="{gameId:''}" translate>{{'matches.home'}}</a>
       <p class="float-right h5 ">
         <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
           <option *ngFor=" let option of options2017" value= {{option.id}}>{{option.name}}</option>
@@ -10,5 +11,5 @@
     </div>
     <ng-content></ng-content>
   </div>
-  <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"></ng2-smart-table>
+  <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)" (userRowSelect)="getDetailedScore($event)"> </ng2-smart-table>
 </div>

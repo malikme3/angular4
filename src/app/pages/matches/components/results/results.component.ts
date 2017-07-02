@@ -4,6 +4,7 @@ import {TreeModel} from 'ng2-tree';
 import {ResultsService} from './results.service';
 import {BasicScorePojo} from './basicScore.pojo';
 import {MatchesConstants} from '../matches.constant.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'results-view',
@@ -13,9 +14,10 @@ import {MatchesConstants} from '../matches.constant.service';
 
 export class ResultsComponent {
 
-  source: BasicScorePojo[];
+  source;
+  private url:string = '/pages/matches/scoreView';
 
-  constructor(private _resultsService: ResultsService, private matchesConstants: MatchesConstants) {
+  constructor(private router: Router, private _resultsService: ResultsService, private matchesConstants: MatchesConstants) {
   }
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class ResultsComponent {
 
 
   // columns data for basic score card table
-  getBasicResults(seasonId): BasicScorePojo[] {
+  getBasicResults(seasonId) {
     console.info("Fetching results for league for id :", seasonId)
     this._resultsService.getMatchesResult(seasonId).then(res => this.source = res);
     return this.source;
@@ -58,4 +60,9 @@ export class ResultsComponent {
     this.getBasicResults(this.leagueType);
   }
 
+  getDetailedScore(gameId){
+    const id:string = gameId.data.game_id;
+    console.info(" *** Sending :: gameId = ***",gameId.data.game_id);
+    this.router.navigate([this.url], { queryParams: { gameId: id } });
+  }
 }
