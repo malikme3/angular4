@@ -1,15 +1,17 @@
-<div *ngIf="isDropDown" baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
-  <div class="card-header clearfix">
-    <div class="dropdown">
-      <p class="float-left h5 " translate> {{'matches.title'}}</p>
-      <a [routerLink]="['/pages/matches/scoreView']"  [queryParams]="{gameId:''}" translate>{{'matches.home'}}</a>
+<div class="row" data-toggle="collapse" data-target="#bowling-1">
+  <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-1">
+    <h2 class="box" translate> {{'matches.title'}}
       <p class="float-right h5 ">
         <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
-          <option *ngFor=" let option of options2017" value= {{option.id}}>{{option.name}}</option>
+          <option *ngFor=" let option of options2017" value={{option.id}}>{{option.name}}</option>
         </select>
       </p>
-    </div>
-    <ng-content></ng-content>
+    </h2>
+    <ba-card baCardClass="with-scroll">
+      <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"
+                       (userRowSelect)="getDetailedScore($event)">
+      </ng2-smart-table>
+
+    </ba-card>
   </div>
-  <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)" (userRowSelect)="getDetailedScore($event)"> </ng2-smart-table>
 </div>

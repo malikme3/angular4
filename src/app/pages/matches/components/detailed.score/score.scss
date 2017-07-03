@@ -198,6 +198,25 @@ table.vitamins tfoot td {
   border: double;
 }
 
+table.score {
+  width:100%;
+  height:100%;
+  font-size: 150%;
+  text-align: left;
+  color: #583707;
+}
+
+.box {
+  margin-top: 20px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+  text-align: center;
+  color: darkred;
+  font-weight: bold;
+  font-family: 'Courier New', Monospace;
+}
+
 
 /* Mobile Layout */
 
@@ -216,3 +235,5 @@ table.vitamins tfoot td {
     font-size: 0.8em;
   }
 }
+
+

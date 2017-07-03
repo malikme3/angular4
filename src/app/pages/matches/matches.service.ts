@@ -16,7 +16,7 @@ export class MatchesService {
   private header = this.pagesConstants.pagesContants.url.header;
   private baseUrl = this.pagesConstants.pagesContants.url.baseUrl;
 
-  private sch_path = 'matches/schedule/bowling/?';
+  private sch_path = 'matches/schedule/?';
   private batting_path = 'detailed/scorecard/batting/?';
   private bowling_path = 'detailed/scorecard/bowling/?';
 
