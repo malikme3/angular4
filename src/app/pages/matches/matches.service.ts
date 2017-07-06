@@ -5,10 +5,11 @@
 import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {PagesConstants} from "../pages.constants.service";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class MatchesService {
-
+  extra_details;
 
   constructor(private http: Http, private pagesConstants: PagesConstants) {
   }
@@ -19,10 +20,12 @@ export class MatchesService {
   private sch_path = 'matches/schedule/?';
   private batting_path = 'detailed/scorecard/batting/?';
   private bowling_path = 'detailed/scorecard/bowling/?';
+  private extras_path = 'detailed/scorecard/extras/?';
 
   private schduel_url = this.baseUrl + this.sch_path;
   private batting_url = this.baseUrl + this.batting_path;
   private bowling_url = this.baseUrl + this.bowling_path;
+  private extras_url = this.baseUrl + this.extras_path;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -47,8 +50,26 @@ export class MatchesService {
       .catch(this.handleError)
   }
 
+  loadBattingDetails(gameId: string): Observable<any> {
+    const url = `${this.batting_url}gameId=${gameId}`;
+    console.info("Observable Call for getDetailedScore() with url : ", url);
+    return this.http.get(url, this.header).map(res => res.json()).catch(this.handleError);
+  }
+
+  loadBowlingDetails(gameId: string): Observable<any> {
+    const url = `${this.bowling_url}gameId=${gameId}`;
+    console.info("Observable Call for getDetailedScore() with url : ", url);
+    return this.http.get(url, this.header).map(res => res.json()).catch(this.handleError);
+  }
+
+  loadExtrasDetails(gameId: string): Observable<any> {
+    const url = `${this.extras_url}gameId=${gameId}`;
+    console.info("Observable Call for getDetailedScore() with url : ", url);
+    return this.http.get(url, this.header).map(res => res.json()).catch(this.handleError);
+  }
+
   private handleError(error: any): Promise<any> {
-    console.error('Error while date from servier', error); // for demo purposes only
+    console.error('Error while fetching date from servier', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 }

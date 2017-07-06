@@ -15,7 +15,7 @@ import {Router} from "@angular/router";
 export class ResultsComponent {
 
   source;
-  private url:string = '/pages/matches/scoreView';
+  private url: string = '/pages/matches/scoreView';
 
   constructor(private router: Router, private _resultsService: ResultsService, private matchesConstants: MatchesConstants) {
   }
@@ -31,7 +31,6 @@ export class ResultsComponent {
   /* 35 overs- Defualt league result display*/
 
 
-
   options = [
     {id: 20, name: '20 Overs Leagues', path: '', year: 2017},
     {id: 30, name: '30 Overs Leagues', path: '', year: 2017},
@@ -43,7 +42,7 @@ export class ResultsComponent {
     {id: 30, name: '30 Overs Leagues', path: '', year: 2015},
     {id: 35, name: '35 Overs Leagues', path: '', year: 2015}
   ];
-  leagueType:number = 30;
+  leagueType: number = 30;
   options2017 = [
     {id: 31, name: '20 Overs', path: '', year: 2017},
     {id: 30, name: '35 Overs', path: '', year: 2017}];
@@ -56,13 +55,13 @@ export class ResultsComponent {
     return this.source;
   }
 
-  getLeagueResults(){
+  getLeagueResults() {
     this.getBasicResults(this.leagueType);
   }
 
-  getDetailedScore(gameId){
-    const id:string = gameId.data.game_id;
-    console.info(" *** Sending :: gameId = ***",gameId.data.game_id);
-    this.router.navigate([this.url], { queryParams: { gameId: id } });
+  getDetailedScore(gameId) {
+    const id: string = gameId.data.game_id;
+    console.info(" *** Sending :: gameId = ***", gameId.data.game_id);
+    this.router.navigate([this.url], {queryParams: {gameId: id}});
   }
 }
