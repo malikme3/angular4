@@ -31,7 +31,7 @@ export class ScoreComponent {
     //this.gameId === '2065' ? this.gameId = '2071' : this.gameId;
     this.getBowlingDetails$(this.gameId);
     this.getBattingDetails$(this.gameId);
-    this.getExtrasDetails$('1946');
+    this.getExtrasDetails$(this.gameId);
   }
 
   getBattingDetails(gameId): any[] {

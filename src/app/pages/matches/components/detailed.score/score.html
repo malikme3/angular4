@@ -1,32 +1,27 @@
 <div class="row">
-  <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-1">
-    <ba-card baCardClass="with-scroll">
-
-      <table class="score">
-        <thead>
+  <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12">
+    <ba-card baCardClass="with-scroll" title="{{firstInnings_info?.BatFirst}} vs {{firstInnings_info?.BatSecond}}">
+      <table with="100%" align="center">
         <tr>
-          <!--<th style="width:35%">Man of the match : {{batting_data[1].PlayerFullName}}</th>-->
-          <th style="width:40%"> League Name 35 overs</th>
-          <th style="width:40%">Won toss by: {{firstInnings_info?.WonToss}}</th>
+          <th class="topscore"> League: 35 overs</th>
+          <th class="topscore">Toss won by: <strong>{{firstInnings_info?.WonToss | uppercase }}</strong></th>
+          <th class="topscore"> Match Result: <strong>{{firstInnings_info?.result}}</strong></th>
+          <th class="topscore"> Played at: {{firstInnings_info?.GroundName}}</th>
         </tr>
-        </thead>
       </table>
-      <h2 class="box" align="center" paddomg> {{firstInnings_info?.BatFirst}} vs {{firstInnings_info?.BatSecond}} </h2>
-      <div align="left"> Match Result: {{firstInnings_info?.result}}</div>
-      <p align="right"> Played at {{firstInnings_info?.GroundName}}</p>
     </ba-card>
   </div>
 </div>
 <!-- ************************ For batting details :: 1st Innings  starts *********************-->
 <div class="row" data-toggle="collapse" data-target="#batting-1">
   <div class="col-xlg-7 col-lg-7 col-md-12 col-sm-1">
-    <ba-card baCardClass="with-scroll" title="{{: First Innings Batting">
+    <ba-card baCardClass="with-scroll">
       <!--<h3 class="box">1st: Batting</h3>-->
       <table class="vitamins" width="100%" id="batting-1">
         <thead>
         <tr>
           <th style="width:20%">Batsman</th>
-          <th style="width:40%">Lions Innings : 30 over max</th>
+          <th style="width:40%">{{firstInnings_info?.BatFirst}} Innings : 30 over max</th>
           <th style="width:8%">R</th>
           <th style="width:8%">B</th>
           <th style="width:8%">4s</th>
@@ -61,17 +56,25 @@
         </tr>
         </tbody>
       </table>
+      <table class="vitamins" width="100%" style="background-color:darkgoldenrod;,font-weight: 800 ">
+        <strong>Did not bat:</strong>
+        <th *ngFor="let ex of extras_score; let i = index">
+          <ul *ngIf="ex.innings_id == 1">
+            {{ex.batsmanFullName | uppercase}}
+          </ul>
+        </th>
+      </table>
     </ba-card>
   </div>
-  <!-- ************************ For batting details :: 2nd Innings  ends *********************-->
+  <!-- ************************ For batting details :: Ist Innings  ends *********************-->
   <!-- ************************ For bowling details :: Ist Innings starts *********************-->
   <div class="col-xlg-5 col-lg-5 col-md-12 col-sm-1">
-    <ba-card baCardClass="with-scroll" title=": First Innings Bowling">
+    <ba-card baCardClass="with-scroll" title="{{firstInnings_info?.BatSecond}}: First Innings Bowling">
       <!--<h3 class="box">1st: Bowling</h3>-->
       <table class="vitamins" width="100%" hight="100%" id="bowling-1">
         <thead>
         <tr>
-          <th style="width:20%"></th>
+          <th style="width:20%">Bowler</th>
           <th style="width:11.4286%">Overs</th>
           <th style="width:11.4286%">Maidens</th>
           <th style="width:11.4286%">Runs</th>
@@ -102,13 +105,13 @@
 <!-- ************************ For batting details :: 2nd Innings  starts *********************-->
 <div class="row" data-toggle="collapse" data-target="#batting-2">
   <div class="col-xlg-7 col-lg-7 col-md-12 col-sm-1">
-    <ba-card baCardClass="with-scroll" title=": Second Innings Batting">
+    <ba-card baCardClass="with-scroll">
       <!--<h3 class="box">2nd: Batting</h3>-->
       <table class="vitamins" width="100%" id="batting-2">
         <thead>
         <tr>
           <th style="width:20%">Batsman</th>
-          <th style="width:40%">Lions Innings : 30 over max</th>
+          <th style="width:40%">{{firstInnings_info?.BatSecond}} Innings : 30 over max</th>
           <th style="width:8%">R</th>
           <th style="width:8%">B</th>
           <th style="width:8%">4s</th>
@@ -144,12 +147,20 @@
 
         </tbody>
       </table>
+      <table class="vitamins" width="100%" style="background-color:darkgoldenrod;,font-weight: 800">
+        <strong>Did not bat:</strong>
+        <th *ngFor="let ex of extras_score; let i = index">
+          <ul *ngIf="ex.innings_id == 2">
+            {{ex.batsmanFullName | uppercase}}
+          </ul>
+        </th>
+      </table>
     </ba-card>
   </div>
   <!-- ************************ For batting details :: 2nd Innings  ends *********************-->
   <!-- ************************ For bowling details :: 2nd Innings starts *********************-->
   <div class="col-xlg-5 col-lg-5 col-md-12 col-sm-1">
-    <ba-card baCardClass="with-scroll" title=": Second Innings Bowling">
+    <ba-card baCardClass="with-scroll" title="{{firstInnings_info?.BatFirst}} : Second Innings Bowling">
       <!--<h3 class="box">2nd: Bowling</h3>-->
       <table class="vitamins" width="100%" id="bowling-2">
         <thead>
