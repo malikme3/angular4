@@ -21,6 +21,7 @@ import {DashboardService} from "../dashboard/dashboard.service";
 import {ScheduleComponent} from "./components/schedule/schedule.component";
 import {MatchesService} from "./matches.service";
 import {ScoreComponent} from "./components/detailed.score/score.component";
+import {SubmitScoreComponent} from "./components/submit.score/submitScore.component";
 
 @NgModule({
   imports: [
@@ -43,6 +44,7 @@ import {ScoreComponent} from "./components/detailed.score/score.component";
     PointsTableComponent,
     ScheduleComponent,
     ScoreComponent,
+    SubmitScoreComponent
   ],
   providers: [
     ResultsService, MatchesConstants, DashboardService, MatchesService

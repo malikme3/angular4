@@ -57,6 +57,13 @@ export const PAGES_MENU = [
                 title: 'score',
               }
             }
+          }, {
+            path: 'submitScore',
+            data: {
+              menu: {
+                title: 'Submit Score',
+              }
+            }
           }
         ]
       },
