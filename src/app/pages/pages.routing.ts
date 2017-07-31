@@ -26,7 +26,7 @@ export const routes: Routes = [
       {path: 'components', loadChildren: './components/components.module#ComponentsModule'},
       {path: 'charts', loadChildren: './charts/charts.module#ChartsModule'},
       {path: 'ui', loadChildren: './ui/ui.module#UiModule'},
-      {path: 'forms', loadChildren: './forms/forms.module#FormsModule'},
+      {path: 'forms', loadChildren: './forms/forms.module#FormsInPutModule'},
       {path: 'tables', loadChildren: './tables/tables.module#TablesModule'},
       {path: 'maps', loadChildren: './maps/maps.module#MapsModule'}
     ]

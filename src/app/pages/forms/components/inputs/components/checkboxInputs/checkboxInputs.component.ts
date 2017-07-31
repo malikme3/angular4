@@ -6,15 +6,15 @@ import {Component} from '@angular/core';
 })
 export class CheckboxInputs {
   public checkboxModel = [{
-    name: 'Check 1',
+    name: '20 Overs',
     checked: false,
     class: 'col-md-4'
   }, {
-    name: 'Check 2',
+    name: '30 Overs',
     checked: true,
     class: 'col-md-4'
   }, {
-    name: 'Check 3',
+    name: '35 Overs',
     checked: false,
     class: 'col-md-4'
   }];

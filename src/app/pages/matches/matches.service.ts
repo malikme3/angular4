@@ -21,11 +21,13 @@ export class MatchesService {
   private batting_path = 'detailed/scorecard/batting/?';
   private bowling_path = 'detailed/scorecard/bowling/?';
   private extras_path = 'detailed/scorecard/extras/?';
+  private teams_list = '/teams/namue/list';
 
   private schduel_url = this.baseUrl + this.sch_path;
   private batting_url = this.baseUrl + this.batting_path;
   private bowling_url = this.baseUrl + this.bowling_path;
   private extras_url = this.baseUrl + this.extras_path;
+  private teams_url = this.baseUrl + this.teams_list;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -47,6 +49,13 @@ export class MatchesService {
     const url = `${this.bowling_url}gameId=${gameId}`;
     console.info("Call for getDetailedScore() with url : ", url);
     return this.http.get(url, this.header).toPromise().then(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getTeamslist(): Observable<any> {
+    const url = this.baseUrl + this.teams_list;
+    console.info("Call for getTeamList() with url : ", url);
+    return this.http.get(this.teams_url, this.header).map(responce => responce.json())
       .catch(this.handleError)
   }
 

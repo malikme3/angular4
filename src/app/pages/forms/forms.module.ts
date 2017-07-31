@@ -48,7 +48,21 @@ import { WithoutLabelsForm } from './components/layouts/components/withoutLabels
     HorizontalForm,
     BasicForm,
     WithoutLabelsForm
-  ]
+  ],
+  exports: [Layouts,
+    Inputs,
+    Forms,
+    StandardInputs,
+    ValidationInputs,
+    GroupInputs,
+    CheckboxInputs,
+    Rating,
+    SelectInputs,
+    InlineForm,
+    BlockForm,
+    HorizontalForm,
+    BasicForm,
+    WithoutLabelsForm]
 })
-export class FormsModule {
+export class FormsInPutModule {
 }

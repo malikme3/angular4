@@ -1,7 +1,7 @@
 // tslint:disbable
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgaModule} from '../../theme/nga.module';
 import {AppTranslationModule} from '../../app.translation.module';
 import {TreeModule} from 'ng2-tree';
@@ -22,6 +22,14 @@ import {ScheduleComponent} from "./components/schedule/schedule.component";
 import {MatchesService} from "./matches.service";
 import {ScoreComponent} from "./components/detailed.score/score.component";
 import {SubmitScoreComponent} from "./components/submit.score/submitScore.component";
+import {FormsInPutModule} from "../forms/forms.module";
+import {
+  MdAutocompleteModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdInputModule, MdNativeDateModule,
+  MdRadioModule
+} from "@angular/material";
+import {SelectModule} from "ng-select";
+import {DatePickerModule, DateModel } from "ng2-datepicker";
+
 
 @NgModule({
   imports: [
@@ -37,6 +45,17 @@ import {SubmitScoreComponent} from "./components/submit.score/submitScore.compon
     HttpModule,
     HotTableModule,
     UiModule,
+    FormsInPutModule,
+    MdButtonModule,
+    MdCheckboxModule,
+    MdInputModule,
+    MdRadioModule,
+    MdAutocompleteModule,
+    SelectModule,
+    ReactiveFormsModule,
+    MdDatepickerModule,
+    MdNativeDateModule,
+    DatePickerModule
   ],
   declarations: [
     Matches,

@@ -1,0 +1,152 @@
+<ba-card baCardClass="with-scroll" title="">
+  <div class="row">
+    <div class="col-xlg-4 col-lg-4 col-md-4 col-sm-12">
+      <ba-card baCardClass="with-scroll" title="Select League">
+        <md-radio-group class="example-radio-group" *ngFor="let league of checkLeagues" [(ngModel)]="selectedLeague"
+                        (click)="onSelected('league', league.name)">
+          <md-radio-button class="example-radio-button" [value]="league">
+            {{league.name}}
+          </md-radio-button>
+        </md-radio-group>
+      </ba-card>
+    </div>
+    <div class="col-xlg-4 col-lg-4 col-md-3 col-sm-12">
+      <ba-card baCardClass="with-scroll" title="Select Venue">
+        <md-radio-group class="example-radio-group" [(ngModel)]="selectedVenue">
+          <md-radio-button class="example-radio-button" *ngFor="let venue of checkVenues" [value]="venue"
+                           (click)="onSelected('venue', venue.name)">
+            {{venue.name}}
+          </md-radio-button>
+        </md-radio-group>
+      </ba-card>
+    </div>
+    <!--Ground Venues-->
+    <div class="col-xlg-4 col-lg-4 col-md-5 col-sm-12">
+      <ba-card baCardClass="with-scroll" title="Select Result">
+        <md-radio-group class="example-radio-group" [(ngModel)]="selectedResult">
+          <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result"
+                           (click)="onSelected('result', result.name)">
+            {{result.name}}
+          </md-radio-button>
+        </md-radio-group>
+      </ba-card>
+    </div>
+  </div>
+</ba-card>
+
+
+<ba-card baCardClass="with-scroll" title="">
+  <!--<h1>Sign up to ng2-admin</h1>
+      <a routerLink="/login" class="auth-link">Already have an ng2-admin account? Sign in!</a>-->
+  <div class="form-group row">
+    <label class="col-sm-2 control-label">Select Match Date</label>
+    <ng2-datepicker [options]="options" [(ngModel)]="date"></ng2-datepicker>
+  </div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!visitTeam.valid && visitTeam.touched), 'has-success': (visitTeam.valid && visitTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
+                 highlightTextColor="black"
+                 (selected)="onSelected('visitTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!homeTeam.valid && homeTeam.touched), 'has-success': (homeTeam.valid && homeTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
+                 highlightTextColor="black"
+                 (selected)="onSelected('homeTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!umpireTeam.valid && umpireTeam.touched), 'has-success': (umpireTeam.valid && umpireTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
+                 highlightTextColor="black"
+                 (selected)="onSelected('umpireTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!winTossTeam.valid && winTossTeam.touched), 'has-success': (winTossTeam.valid && winTossTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select Winning Toss team" highlightTextColor="black"
+                 (selected)="onSelected('winTossTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!batFirstTeam.valid && batFirstTeam.touched), 'has-success': (batFirstTeam.valid && batFirstTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select Batting Firt Team" highlightTextColor="black"
+                 (selected)="onSelected('batFirstTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!vitoryTeam.valid && vitoryTeam.touched), 'has-success': (vitoryTeam.valid && vitoryTeam.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select Victorious Team" highlightTextColor="black"
+                 (selected)="onSelected('vitoryTeam',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!firstUmpire.valid && firstUmpire.touched), 'has-success': (firstUmpire.valid && firstUmpire.touched)}">
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select First Umpire " highlightTextColor="black"
+                 (selected)="onSelected('firstUmpire',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!secondUmpire.valid && secondUmpire.touched), 'has-success': (secondUmpire.valid && secondUmpire.touched)}">
+
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select Second Umpire " highlightTextColor="black"
+                 (selected)="onSelected('secondUmpire',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="has-error">
+
+      <ng-select [formControl]="email"
+                 [options]="myOptions" [allowClear]="true"
+                 placeholder="Select Man of the Match " highlightTextColor="black"
+                 (selected)="onSelected('manOfMatch',$event.label)">
+      </ng-select>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!matchResult.valid && matchResult.touched), 'has-success': (matchResult.valid && matchResult.touched)}">
+      <label for="inputName3" class="col-sm-2 control-label">Match Result</label>
+      <div class="col-sm-10">
+        <input [formControl]="matchResult" type="text" class="form-control" id="inputName3" placeholder="Enter Result">
+      </div>
+    </div>
+    <div class="form-group row"
+         [ngClass]="{'has-error': (!email.valid && email.touched), 'has-success': (email.valid && email.touched)}">
+      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+
+      <div class="col-sm-10">
+        <input [formControl]="email" type="email" class="form-control" id="inputEmail3" placeholder="Email">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+        <button type="submit" class="btn btn-default btn-auth">Submit Step 1 Score Card details !!</button>
+      </div>
+    </div>
+  </form>
+  <!--[disabled]="!form.valid"-->
+  <!--<div class="auth-sep"><span><span>or Sign up with one click</span></span></div>-->
+
+  <!--<div class="al-share-auth">-->
+  <!--<ul class="al-share clearfix">-->
+  <!--<li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>-->
+  <!--<li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>-->
+  <!--<li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>-->
+  <!--</ul>-->
+  <!--</div>-->
+</ba-card>

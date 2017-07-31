@@ -1,1 +1,78 @@
-From Submit Score html
+<ba-card title="{{today | date:'fullDate'}}" baCardClass="with-scroll">
+  <checkbox-inputs></checkbox-inputs>
+</ba-card>
+
+<div class="row">
+  <div class="col-xlg-6 col-lg-6 col-md-6 col-sm-12">
+    <ba-card baCardClass="with-scroll" title="League Format">
+      <div>
+      <span>
+        <label class="checkbox-inline custom-checkbox nowrap"> Pick the Format
+
+          <span value="t20"> <input value="t20" type="checkbox" (change)="onChange($event.target.value)">T20</span>
+          <span>
+             <input value="t30" type="checkbox" (change)="onChange($event.target.value)">
+            T30</span>
+          <span>
+             <input value="t35" type="checkbox" (change)="onChange($event.target.value)">T35</span>
+        </label>
+      </span>
+        <span class="float-right">
+        <label class="checkbox-inline custom-checkbox nowrap">Pick the Ground
+          <input type="checkbox" (change)="onChange($event)">
+          <span>RRCC-Ground</span> <span>HCCG-Ground</span><span>HCCG-Ground</span>
+        </label>
+      </span>
+      </div>
+    </ba-card>
+  </div>
+  <div class="col-xlg-6 col-lg-6 col-md-6 col-sm-12">
+    <ba-card baCardClass="with-scroll" title="{{today | date:'fullDate'}}">
+      <label for="inputFirstName"></label>
+      <input type="text" class="form-control" id="matchweek" placeholder="Week #">
+      <input type="date" class="form-control" id="matchdate" placeholder="Today's Date" [(ngModel)]="today">
+    </ba-card>
+  </div>
+</div>
+
+<!--<div class="{{baCheckboxClass}}">
+  <ba-card baCardClass="with-scroll">
+  <label class="checkbox-inline custom-checkbox nowrap">
+    <input type="checkbox" [checked]=state
+           (change)="onChange($event.target.checked)"
+           [disabled]="disabled" [value]="value">
+    <span>{{label}}</span> <span>T20</span><span>T35</span><span>Week #</span><span>Game Date</span>
+  </label>
+</ba-card>
+</div>-->
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputFirstName">First Name</label>
+      <input type="text" class="form-control" id="inputFirstName" placeholder="First Name">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputLastName">Last Name</label>
+      <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputEmail">Email</label>
+      <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label for="inputWebsite">Website</label>
+      <input type="text" class="form-control" id="inputWebsite" placeholder="Website">
+    </div>
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+
