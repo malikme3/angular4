@@ -48,7 +48,7 @@
       <ng-select [formControl]="email"
                  [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
                  highlightTextColor="black"
-                 (selected)="onSelected('visitTeam',$event.label)">
+                 (selected)="onSelected('visitTeam',$event.label)" (selected)="playing_teams('homeTeam',$event.label)">
       </ng-select>
     </div>
     <div class="form-group row"
@@ -56,7 +56,7 @@
       <ng-select [formControl]="email"
                  [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
                  highlightTextColor="black"
-                 (selected)="onSelected('homeTeam',$event.label)">
+                 (selected)="onSelected('homeTeam',$event.label)" (selected)="playing_teams('guestTeam',$event.label)">
       </ng-select>
     </div>
     <div class="form-group row"
@@ -70,7 +70,7 @@
     <div class="form-group row"
          [ngClass]="{'has-error': (!winTossTeam.valid && winTossTeam.touched), 'has-success': (winTossTeam.valid && winTossTeam.touched)}">
       <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+                 [options]="teams_playings" [allowClear]="true"
                  placeholder="Select Winning Toss team" highlightTextColor="black"
                  (selected)="onSelected('winTossTeam',$event.label)">
       </ng-select>
@@ -78,7 +78,7 @@
     <div class="form-group row"
          [ngClass]="{'has-error': (!batFirstTeam.valid && batFirstTeam.touched), 'has-success': (batFirstTeam.valid && batFirstTeam.touched)}">
       <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+                 [(options)]="teams_playings" [allowClear]="true"
                  placeholder="Select Batting Firt Team" highlightTextColor="black"
                  (selected)="onSelected('batFirstTeam',$event.label)">
       </ng-select>
@@ -86,7 +86,7 @@
     <div class="form-group row"
          [ngClass]="{'has-error': (!vitoryTeam.valid && vitoryTeam.touched), 'has-success': (vitoryTeam.valid && vitoryTeam.touched)}">
       <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+                 [options]="teams_playings" [allowClear]="true"
                  placeholder="Select Victorious Team" highlightTextColor="black"
                  (selected)="onSelected('vitoryTeam',$event.label)">
       </ng-select>
