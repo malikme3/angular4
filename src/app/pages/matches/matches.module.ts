@@ -29,6 +29,7 @@ import {
 } from "@angular/material";
 import {SelectModule} from "ng-select";
 import {DatePickerModule, DateModel } from "ng2-datepicker";
+import {SubmitScoreBatting} from "./components/submit.score/submitScoreBatting.component";
 
 
 @NgModule({
@@ -63,7 +64,8 @@ import {DatePickerModule, DateModel } from "ng2-datepicker";
     PointsTableComponent,
     ScheduleComponent,
     ScoreComponent,
-    SubmitScoreComponent
+    SubmitScoreComponent,
+    SubmitScoreBatting
   ],
   providers: [
     ResultsService, MatchesConstants, DashboardService, MatchesService
