@@ -5,7 +5,9 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class MatchesConstants {
-
+  checkLeagues;
+  checkVenues;
+  checkResults;
   scheduelTable = {
     title: 'Matches Fixture',
     actions: {
@@ -88,6 +90,7 @@ export class MatchesConstants {
         title: 'Result',
         type: 'string',
       },
+
     },
   };
   // for detailed score card
@@ -175,4 +178,87 @@ export class MatchesConstants {
     }
   };
 
+  getLeagues() {
+    this.checkLeagues = [{
+      name: '20 Overs',
+      leagueId: 31,
+      seasonId:2,
+      checked: false,
+      disabled: false,
+      class: 'col-md-4'
+    }, {
+      name: '30 Overs',
+      disabled: true,
+      checked: false,
+      class: 'col-md-4'
+    }, {
+      name: '35 Overs',
+      leagueId: 30,
+      seasonId:5,
+      checked: false,
+      disabled: false,
+      class: 'col-md-4'
+    }, {
+      name: '40 Overs',
+      checked: false,
+      disabled: true,
+      class: 'col-md-4'
+    }]
+    return this.checkLeagues;
+
+  }
+
+  getCheckVenues() {
+    this.checkVenues = [{
+      name: 'RRCG',
+      value:16,
+      checked: false,
+      disabled: false,
+      class: 'col-md-4'
+    }, {
+      name: 'HCCG',
+      value:14,
+      checked: false,
+      disabled: false,
+      class: 'col-md-4'
+    }, {
+      name: 'ACAG',
+      value:24,
+      checked: false,
+      disabled: false,
+      class: 'col-md-4'
+    }, {
+      name: 'TCCG',
+      value:22,
+      checked: false,
+      disabled: true,
+      class: 'col-md-4'
+    }];
+    return this.checkVenues;
+  }
+
+  getCheckResults() {
+    this.checkResults = [{
+      name: 'Match Tied',
+      value:1,
+      checked: false,
+      class: 'col-md-3'
+    }, {
+      name: 'Won by forfeit',
+      value:1,
+      checked: false,
+      class: 'col-md-3'
+    }, {
+      name: 'Match Cancelled- No Play',
+      value:1,
+      checked: false,
+      class: 'col-md-3'
+    }, {
+      name: 'Match Cancelled- SomePlay',
+      value:1,
+      checked: false,
+      class: 'col-md-3'
+    }];
+    return this.checkResults;
+  }
 }
