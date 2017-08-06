@@ -182,7 +182,7 @@ export class MatchesConstants {
     this.checkLeagues = [{
       name: '20 Overs',
       leagueId: 31,
-      seasonId:2,
+      seasonId: 2,
       checked: false,
       disabled: false,
       class: 'col-md-4'
@@ -194,7 +194,7 @@ export class MatchesConstants {
     }, {
       name: '35 Overs',
       leagueId: 30,
-      seasonId:5,
+      seasonId: 5,
       checked: false,
       disabled: false,
       class: 'col-md-4'
@@ -211,25 +211,25 @@ export class MatchesConstants {
   getCheckVenues() {
     this.checkVenues = [{
       name: 'RRCG',
-      value:16,
+      value: 16,
       checked: false,
       disabled: false,
       class: 'col-md-4'
     }, {
       name: 'HCCG',
-      value:14,
+      value: 14,
       checked: false,
       disabled: false,
       class: 'col-md-4'
     }, {
       name: 'ACAG',
-      value:24,
+      value: 24,
       checked: false,
       disabled: false,
       class: 'col-md-4'
     }, {
       name: 'TCCG',
-      value:22,
+      value: 22,
       checked: false,
       disabled: true,
       class: 'col-md-4'
@@ -238,27 +238,38 @@ export class MatchesConstants {
   }
 
   getCheckResults() {
-    this.checkResults = [{
-      name: 'Match Tied',
-      value:1,
-      checked: false,
-      class: 'col-md-3'
-    }, {
-      name: 'Won by forfeit',
-      value:1,
-      checked: false,
-      class: 'col-md-3'
-    }, {
-      name: 'Match Cancelled- No Play',
-      value:1,
-      checked: false,
-      class: 'col-md-3'
-    }, {
-      name: 'Match Cancelled- SomePlay',
-      value:1,
-      checked: false,
-      class: 'col-md-3'
-    }];
+    this.checkResults = [
+      {
+        text: 'Match Completed With Result',
+        name: 'completed',
+        value: 1,
+        checked: false,
+        class: 'col-md-3'
+      }, {
+        text: 'Match Tied',
+        name: 'tied',
+        value: 1,
+        checked: false,
+        class: 'col-md-3'
+      }, {
+        text: 'Won by forfeit',
+        name: 'forfeit',
+        value: 1,
+        checked: false,
+        class: 'col-md-3'
+      }, {
+        text: 'Match Cancelled- No Play',
+        name: 'cancelled',
+        value: 1,
+        checked: false,
+        class: 'col-md-3'
+      }, {
+        text: 'Match Cancelled- SomePlay',
+        name: 'cancelledplay',
+        value: 1,
+        checked: false,
+        class: 'col-md-3'
+      }];
     return this.checkResults;
   }
 }

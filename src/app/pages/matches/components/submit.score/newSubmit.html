@@ -3,7 +3,8 @@
     <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
       <ba-card baCardClass="with-scroll" title="Select League">
         <md-radio-group class="example-radio-group" *ngFor="let league of checkLeagues" [(ngModel)]="selectedLeague"
-                        (click)="onSelected('leagueId', league.leagueId); onSelected('season', league.seasonId) " [disabled]="league.disabled">
+                        (click)="onSelected('leagueId', league.leagueId); onSelected('season', league.seasonId) "
+                        [disabled]="league.disabled">
           <md-radio-button class="example-radio-button" [value]="league">
             {{league.name}}
           </md-radio-button>
@@ -26,8 +27,8 @@
       <ba-card baCardClass="with-scroll" title="Select Result">
         <md-radio-group class="example-radio-group" [(ngModel)]="selectedResult">
           <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result"
-                           (click)="onSelected('result', result.name)">
-            {{result.name}}
+                           (click)="onSelectedResult(result.name, result.value)">
+            {{result.text}}
           </md-radio-button>
         </md-radio-group>
       </ba-card>
@@ -42,97 +43,101 @@
   <div class="form-group row">
     <label class="col-sm-1 control-label">Match Date</label>
     <div class="col-lg-5 col-md-5 col-sm-5">
-      <ng2-datepicker [options]="options" [(ngModel)]="date"  (click)="onSelected('date', date)" id="dateplayed"></ng2-datepicker>
+      <ng2-datepicker [options]="options" [(ngModel)]="game_date"></ng2-datepicker>
     </div>
 
     <label for="week" class="  col-sm-1 control-label">Week</label>
     <div class="col-lg-5 col-md-5 col-sm-5">
-      <input [formControl]="matchResult" type="text" class="form-control" id="week" placeholder="Enter Week #" [(ngModel)]="weekNo" (change)="onSelected('week', weekNo)">
+      <input [formControl]="matchResult" type="text" class="form-control" id="week" placeholder="Enter Week #"
+             [(ngModel)]="weekNo" (change)="onSelected('week', weekNo)">
     </div>
   </div>
-  <div class="form-group row"
-       [ngClass]="{'has-error': (!matchResult.valid && matchResult.touched), 'has-success': (matchResult.valid && matchResult.touched)}">
-    <label for="matchresult" class="col-sm-1 control-label">Match Result</label>
-    <div class="col-sm-11">
-      <input [formControl]="matchResult" type="text" class="form-control" id="matchresult" placeholder="Enter Result">
+  <div class="form-group row">
+    <label for="result" class="col-sm-1 control-label">Match Result</label>
+    <div class="col-sm-5">
+      <input [formControl]="result" type="text" class="form-control" id="result" placeholder="Enter Result">
+    </div>
+    <label for="maxovers" class="col-sm-1 control-label">Maximum Overs</label>
+    <div class="col-sm-5">
+      <input [formControl]="maxovers" type="text" class="form-control" id="maxovers" placeholder="Maximum Overs">
     </div>
   </div>
 </ba-card>
 
 <ba-card baCardClass="with-scroll" title="Select Match Teams">
   <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!visitTeam.valid && visitTeam.touched), 'has-success': (visitTeam.valid && visitTeam.touched)}">
-      <ng-select [formControl]="email"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
                  highlightTextColor="black"
-                 (selected)="onSelected('visitTeam',$event.label)" (selected)="playing_teams('homeTeam',$event.label)">
+                 (selected)="onSelected('awayteam',$event.value)" (selected)="playing_teams('awayteam',$event)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!homeTeam.valid && homeTeam.touched), 'has-success': (homeTeam.valid && homeTeam.touched)}">
-      <ng-select [formControl]="email"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
                  highlightTextColor="black"
-                 (selected)="onSelected('homeTeam',$event.label)" (selected)="playing_teams('guestTeam',$event.label)">
+                 (selected)="onSelected('hometeam',$event.value)" (selected)="playing_teams('hometeam',$event)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!umpireTeam.valid && umpireTeam.touched), 'has-success': (umpireTeam.valid && umpireTeam.touched)}">
-      <ng-select [formControl]="email"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
                  highlightTextColor="black"
-                 (selected)="onSelected('umpireTeam',$event.label)">
+                 (selected)="onSelected('umpireTeam',$event.value)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!winTossTeam.valid && winTossTeam.touched), 'has-success': (winTossTeam.valid && winTossTeam.touched)}">
-      <ng-select [formControl]="email"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [options]="teams_playings" [allowClear]="true"
                  placeholder="Select Winning Toss team" highlightTextColor="black"
-                 (selected)="onSelected('winTossTeam',$event.label)">
+                 (selected)="onSelected('tossWonId',$event.value)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!batFirstTeam.valid && batFirstTeam.touched), 'has-success': (batFirstTeam.valid && batFirstTeam.touched)}">
-      <ng-select [formControl]="email"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [(options)]="teams_playings" [allowClear]="true"
                  placeholder="Select Batting Firt Team" highlightTextColor="black"
-                 (selected)="onSelected('batFirstTeam',$event.label)">
+                 (selected)="onSelected('battingSecondId',$event.value)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!vitoryTeam.valid && vitoryTeam.touched), 'has-success': (vitoryTeam.valid && vitoryTeam.touched)}">
-      <ng-select [formControl]="email"
+
+    <div class="form-group row">
+      <ng-select [formControl]="name"
+                 [(options)]="teams_playings" [allowClear]="true"
+                 placeholder="Select Batting Second Team" highlightTextColor="black"
+                 (selected)="onSelected('battingFirstId',$event.value)">
+      </ng-select>
+    </div>
+    <div class="form-group row">
+      <ng-select [formControl]="name"
                  [options]="teams_playings" [allowClear]="true"
                  placeholder="Select Victorious Team" highlightTextColor="black"
-                 (selected)="onSelected('vitoryTeam',$event.label)">
+                 (selected)="onSelected('resultWonId',$event.value)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!firstUmpire.valid && firstUmpire.touched), 'has-success': (firstUmpire.valid && firstUmpire.touched)}">
-      <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+    <div class="form-group row">
+      <ng-select [formControl]="name"
+                 [options]="playersList" [allowClear]="true"
                  placeholder="Select First Umpire " highlightTextColor="black"
-                 (selected)="onSelected('firstUmpire',$event.label)">
+                 (selected)="onSelected('umpire1',$event.value)">
       </ng-select>
     </div>
-    <div class="form-group row"
-         [ngClass]="{'has-error': (!secondUmpire.valid && secondUmpire.touched), 'has-success': (secondUmpire.valid && secondUmpire.touched)}">
+    <div class="form-group row">
 
-      <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+      <ng-select [formControl]="name"
+                 [options]="playersList" [allowClear]="true"
                  placeholder="Select Second Umpire " highlightTextColor="black"
-                 (selected)="onSelected('secondUmpire',$event.label)">
+                 (selected)="onSelected('umpire2',$event.value)">
       </ng-select>
     </div>
     <div class="form-group row"
          [ngClass]="has-error">
 
-      <ng-select [formControl]="email"
-                 [options]="myOptions" [allowClear]="true"
+      <ng-select [formControl]="name"
+                 [options]="playersList" [allowClear]="true"
                  placeholder="Select Man of the Match " highlightTextColor="black"
-                 (selected)="onSelected('manOfMatch',$event.label)">
+                 (selected)="onSelected('mom',$event.value)">
       </ng-select>
     </div>
     <!--   <div class="form-group row"

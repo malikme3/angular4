@@ -3,9 +3,11 @@
  */
 
 import {Injectable} from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, RequestOptions} from '@angular/http';
 import {PagesConstants} from "../pages.constants.service";
 import {Observable} from "rxjs/Observable";
+import {Headers} from '@angular/http';
+import {Hero} from "./Hero";
 
 @Injectable()
 export class MatchesService {
@@ -15,6 +17,7 @@ export class MatchesService {
   }
 
   private header = this.pagesConstants.pagesContants.url.header;
+  private options = this.pagesConstants.pagesContants.url.options;
   private baseUrl = this.pagesConstants.pagesContants.url.baseUrl;
 
   private sch_path = 'matches/schedule/?';
@@ -22,12 +25,16 @@ export class MatchesService {
   private bowling_path = 'detailed/scorecard/bowling/?';
   private extras_path = 'detailed/scorecard/extras/?';
   private teams_list = '/teams/namue/list';
+  private players_list = '/submit/score/players?';
+  private scorecard_game_details = '/submit/score/scorecardGameDetails';
 
   private schduel_url = this.baseUrl + this.sch_path;
   private batting_url = this.baseUrl + this.batting_path;
   private bowling_url = this.baseUrl + this.bowling_path;
   private extras_url = this.baseUrl + this.extras_path;
   private teams_url = this.baseUrl + this.teams_list;
+  private players_url = this.baseUrl + this.players_list;
+  private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -57,6 +64,33 @@ export class MatchesService {
     console.info("Call for getTeamList() with url : ", url);
     return this.http.get(this.teams_url, this.header).map(responce => responce.json())
       .catch(this.handleError)
+  }
+
+  getPlayerslist(): Observable<any> {
+    console.info("Call for getPlayerslist() with url : ", this.players_url);
+    return this.http.get(this.players_url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  /* Observable did work: work aroud used promise as below
+
+   updateScorecardGameDetails(values: Object): Observable<any> {
+   // const url = `${this.scorecard_game_details_url}gameDetails=${values}`;
+   let body = JSON.stringify({gameId:gameId});
+   let headers = new Headers({ 'Content-Type': 'application/json' });
+   let options = new RequestOptions({ headers: headers });
+
+   console.info("In MatchService for updateScorecardGameDetails() with url : ", this.scorecard_game_details_url);
+   return this.http.post(this.scorecard_game_details_url, body, options).map(responce => responce)
+   .catch(this.handleError)
+   }
+   */
+  updateScorecardGameDetails(values: Object): Promise<any> {
+    return this.http
+      .post(this.scorecard_game_details_url, values, this.options)
+      .toPromise()
+      .then(res => res)
+      .catch(this.handleError);
   }
 
   loadBattingDetails(gameId: string): Observable<any> {
