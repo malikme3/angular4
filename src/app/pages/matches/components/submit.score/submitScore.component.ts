@@ -69,8 +69,17 @@ export class SubmitScoreComponent {
   private teamsname;
   myOptions: Array<any>;
   playersList: Array<any>;
+  batFirstPlayers: Array<any>;
+  batSecondPlayers: Array<any>;
   playersByTeamsIds: Array<any>;
+  playersForHomeTeam: Array<any>;
+  playersForAwayTeam: Array<any>;
+  playersForUmpiringTeam: Array<any>;
+
   teamsIds: Array<number> = [47, 42];
+  homeTeamsIds: Array<number> = [];
+  awayTeamsIds: Array<number> = [];
+  umpiringTeamsIds: Array<number> = [];
   teams_playings: Array<IOption> = [
     {label: 'Select Home Team First', value: '0'},
     {label: 'Select Guest Team First', value: '0'}
@@ -156,7 +165,6 @@ export class SubmitScoreComponent {
   ngOnInit(): void {
     this.getTeamslist();
     this.getPlayerslist();
-    this.playersByIds(this.teamsIds);
   }
 
   //eague_id,season,week,awayteam,hometeam,game_date,result_won_id,forfeit,mom,umpire1,umpire2,maxovers,isactive
@@ -187,17 +195,15 @@ export class SubmitScoreComponent {
   }
 
   getPlayerslist() {
-    console.info("Fetching results for Players list :")
+    console.info("Fetching Players list")
     const teams$ = this.matchesService.getPlayerslist();
-    console.log('this.playersList', this.playersList)
     teams$.subscribe(responce => this.playersList = responce,
       () => console.log("responce", this.playersList));
-    console.info("********** playersList %%%%%%%%%%%", this.playersList)
   }
 
-  playersByIds(teamIds) {
-    console.info("******** Fetching results for Players list :")
-    const teams$ = this.matchesService.getPlayersByIds(teamIds);
+  playersListByTeamsIds(teamIds) {
+    console.info("Fetching Players list for TeamsIds: ", teamIds)
+    const teams$ = this.matchesService.getPlayersByTeamsIds(teamIds);
     teams$.subscribe(responce => this.playersByTeamsIds = responce);
   }
 
@@ -211,8 +217,42 @@ export class SubmitScoreComponent {
   }
 
   onTeamsSelected(type: any, value: any) {
-    console.log('onTeamsSelected -> type: ', type, 'onTeamsSelected ->  value: ');
+    console.info("onTeamsSelected: Type:", type, 'Value: ', value)
+    if (type === 'homeTeamsPortable' || type === 'homeTeam') {
+      this.homeTeamsIds.push(value);
+      if (type === 'homeTeam') {
+        console.info("Fetching Players for Home Teams with => Ids: ", this.homeTeamsIds)
+        const teams$ = this.matchesService.getPlayersByTeamsIds(this.homeTeamsIds);
+        teams$.subscribe(responce => this.playersForHomeTeam = responce);
+      }
+    }
+    if (type === 'awayTeamsPortable' || type === 'awayTeam') {
+      this.awayTeamsIds.push(value);
+      if (type === 'awayTeam') {
+        console.info("Fetching Players for Away with => Ids: ", this.awayTeamsIds)
+        const teams$ = this.matchesService.getPlayersByTeamsIds(this.awayTeamsIds);
+        teams$.subscribe(responce => this.playersForAwayTeam = responce);
+      }
+    }
+    if (type === 'umpiringTeam') {
+      this.umpiringTeamsIds.push(value);
+      console.info("Fetching Players for Umpiring with => Ids: ", this.umpiringTeamsIds)
+      const teams$ = this.matchesService.getPlayersByTeamsIds(this.umpiringTeamsIds);
+      teams$.subscribe(responce => this.playersForUmpiringTeam = responce);
+    }
+  }
 
+  battingOrderStatus(teamId) {
+    console.log('homeTeam Ids ',this.homeTeamsIds);
+    if (this.homeTeamsIds.indexOf(teamId) > -1) {
+      console.log("Home Team is Batting First id: ",teamId)
+      this.batFirstPlayers = this.playersForHomeTeam;
+      this.batSecondPlayers = this.playersForAwayTeam;
+    } else {
+      console.log("Away Team is Batting First id: ",teamId)
+      this.batFirstPlayers = this.playersForAwayTeam;
+      this.batSecondPlayers = this.playersForHomeTeam;
+    }
   }
 
   onSelectedResult(type: any, value: any) {

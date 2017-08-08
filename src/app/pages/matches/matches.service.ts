@@ -73,7 +73,7 @@ export class MatchesService {
       .catch(this.handleError)
   }
 
-  getPlayersByIds(teamIds): Observable<any> {
+  getPlayersByTeamsIds(teamIds): Observable<any> {
     console.info("Call for getPlayerslist() with url : ", this.players_url);
     return this.http.post(this.playersByIds_url, teamIds, this.options).map(responce => responce.json())
       .catch(this.handleError)
