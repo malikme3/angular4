@@ -7,11 +7,10 @@ import {Http, RequestOptions} from '@angular/http';
 import {PagesConstants} from "../pages.constants.service";
 import {Observable} from "rxjs/Observable";
 import {Headers} from '@angular/http';
-import {Hero} from "./Hero";
+import {Team} from "./components/submit.score/Team";
 
 @Injectable()
 export class MatchesService {
-  extra_details;
 
   constructor(private http: Http, private pagesConstants: PagesConstants) {
   }
@@ -26,6 +25,7 @@ export class MatchesService {
   private extras_path = 'detailed/scorecard/extras/?';
   private teams_list = '/teams/namue/list';
   private players_list = '/submit/score/players?';
+  private playersByIds = '/teams/players/teamsIds';
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -34,6 +34,7 @@ export class MatchesService {
   private extras_url = this.baseUrl + this.extras_path;
   private teams_url = this.baseUrl + this.teams_list;
   private players_url = this.baseUrl + this.players_list;
+  private playersByIds_url = this.baseUrl + this.playersByIds;
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
 
   // For points table
@@ -72,19 +73,12 @@ export class MatchesService {
       .catch(this.handleError)
   }
 
-  /* Observable did work: work aroud used promise as below
+  getPlayersByIds(teamIds): Observable<any> {
+    console.info("Call for getPlayerslist() with url : ", this.players_url);
+    return this.http.post(this.playersByIds_url, teamIds, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
 
-   updateScorecardGameDetails(values: Object): Observable<any> {
-   // const url = `${this.scorecard_game_details_url}gameDetails=${values}`;
-   let body = JSON.stringify({gameId:gameId});
-   let headers = new Headers({ 'Content-Type': 'application/json' });
-   let options = new RequestOptions({ headers: headers });
-
-   console.info("In MatchService for updateScorecardGameDetails() with url : ", this.scorecard_game_details_url);
-   return this.http.post(this.scorecard_game_details_url, body, options).map(responce => responce)
-   .catch(this.handleError)
-   }
-   */
   updateScorecardGameDetails(values: Object): Promise<any> {
     return this.http
       .post(this.scorecard_game_details_url, values, this.options)

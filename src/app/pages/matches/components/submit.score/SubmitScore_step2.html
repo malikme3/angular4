@@ -1,10 +1,9 @@
 <ba-card baCardClass="with-scroll" title="Batsman Score Details">
-  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <form [formGroup]="battingForm" (ngSubmit)="onSubmit(battingForm.value)" class="form-horizontal">
     <div class="row" *ngFor="let position of batting_poistion">
       <div class="col-sm-2">
-        <div class="form-group row"
-             [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-          <ng-select [formControl]="name"
+        <div class="form-group row">
+          <ng-select [formControl]="battingName"
                      [options]="player_out_type" [allowClear]="true" placeholder="Select Batsman Name"
                      highlightTextColor="black"
                      (selected)="onSelected($event.label, position.id)">
@@ -12,7 +11,7 @@
         </div>
       </div>
       <div class="col-sm-2">
-        <ng-select highlightColor="#9575cd" highlightTextColor="#fff" [formControl]="name"
+        <ng-select highlightColor="#9575cd" highlightTextColor="#fff" [formControl]="battingName"
                    [options]="player_out_type" [allowClear]="true" placeholder="Slect out type"
                    highlightTextColor="black"
                    (selected)="onSelected($event.label, position.id)">
@@ -20,9 +19,8 @@
       </div>
 
       <div class="col-sm-2">
-        <div class="form-group row"
-             [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-          <ng-select [formControl]="name"
+        <div class="form-group row">
+          <ng-select [formControl]="battingName"
                      [options]="player_out_type" [allowClear]="true" placeholder="Select Assist Fielder"
                      highlightTextColor="black"
                      (selected)="onSelected($event, position.id)">
@@ -30,9 +28,8 @@
         </div>
       </div>
       <div class="col-sm-2">
-        <div class="form-group row"
-             [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-          <ng-select [formControl]="name"
+        <div class="form-group row">
+          <ng-select [formControl]="battingName"
                      [options]="player_out_type" [allowClear]="true" placeholder="Select Bowler Name"
                      highlightTextColor="black"
                      (selected)="onSelected($event, position.id)">
@@ -121,9 +118,8 @@
       <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
         <div class="col-sm-2">
           <label *ngIf="fst" for="byes">Bowler Names</label>
-          <div class="form-group row"
-               [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">
-            <ng-select [formControl]="name"
+          <div class="form-group row">
+            <ng-select [formControl]="battingName"
                        [options]="player_out_type" [allowClear]="true" placeholder="Select Bowler Name"
                        highlightTextColor="black"
                        (selected)="onSelected($event.label, position.id)">

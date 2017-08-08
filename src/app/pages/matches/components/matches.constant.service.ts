@@ -8,6 +8,8 @@ export class MatchesConstants {
   checkLeagues;
   checkVenues;
   checkResults;
+  playerOutType;
+  battingPositions;
   scheduelTable = {
     title: 'Matches Fixture',
     actions: {
@@ -272,4 +274,85 @@ export class MatchesConstants {
       }];
     return this.checkResults;
   }
+  getPlayerOutType(){
+    this.playerOutType = [
+      {label: 'Did not Bat', value: 'dnb', position: 0},
+      {label: 'LBW', value: 'lbw', position: 0},
+      {label: 'Not Out', value: 'notout', position: 0},
+      {label: 'Bowled', value: 'bowled', position: 0},
+      {label: 'Caught', value: 'caught', position: 0},
+      {label: 'Caught && Bowled', value: 'c&b', position: 0},
+      {label: 'Run Out', value: 'runout', position: 0},
+      {label: 'Hit Wicket', value: 'hitwicket', position: 0},
+      {label: 'Retired Hurst', value: 'retdhurt', position: 0},
+      {label: 'Hit Twice', value: 'hittwice', position: 0},
+      {label: 'Handled Ball', value: 'handledball', position: 0},
+      {label: 'Absent Hurt', value: 'absenthurt', position: 0},
+      {label: 'Absent Ill', value: 'absentill', position: 0},
+      {label: 'Retired Out', value: 'Retiredout', position: 0},
+      {label: 'Obstructing the field ', value: 'obstrfield', position: 0}
+
+    ];
+    return this.playerOutType;
+  }
+getBattingPositions() {
+  this.battingPositions = [
+    {
+      id: 1,
+      type: 'First Batting Position',
+      wicket: 'wicket#1'
+    },
+    {
+      id: 2,
+      type: 'Second Batting Position',
+      wicket: 'wicket#2'
+
+    },
+    {
+      id: 3,
+      type: 'Third Batting Position',
+      wicket: 'wicket#3'
+    },
+    {
+      id: 4,
+      type: 'Fourth Batting Position',
+      wicket: 'wicket#4'
+    },
+    {
+      id: 5,
+      type: 'Fifth Batting Position',
+      wicket: 'wicket#5'
+    }, {
+      id: 6,
+      type: 'Sixt Batting Position',
+      wicket: 'wicket#6'
+    },
+    {
+      id: 7,
+      type: 'Seventh Batting Position',
+      wicket: 'wicket#7'
+    },
+    {
+      id: 8,
+      type: 'Eight Batting Position',
+      wicket: 'wicket#8'
+    },
+    {
+      id: 9,
+      type: 'Ninth Batting Position',
+      wicket: 'wicket#9'
+    },
+    {
+      id: 10,
+      type: 'Tenth Batting Position',
+      wicket: 'wicket#10'
+    }
+    ,
+    {
+      id: 11,
+      type: 'Eleventh Batting Position'
+    }];
+
+  return this.battingPositions;
+}
 }

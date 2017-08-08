@@ -10,6 +10,7 @@ import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/form
 import {IOption} from "ng-select";
 import {EmailValidator} from "../../../../theme/validators/email.validator";
 import {DatePickerOptions} from "ng2-datepicker";
+import {Team} from "./Team";
 
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
@@ -68,14 +69,18 @@ export class SubmitScoreComponent {
   private teamsname;
   myOptions: Array<any>;
   playersList: Array<any>;
+  playersByTeamsIds: Array<any>;
+  teamsIds: Array<number> = [47, 42];
   teams_playings: Array<IOption> = [
     {label: 'Select Home Team First', value: '0'},
     {label: 'Select Guest Team First', value: '0'}
   ];
 
-  public submitted: boolean = false;
-  //characters: Array<IOption> = this.optionService.getCharacters();
-  msg: string = '';
+  public submitted_step1: boolean = false;
+  public submitted_step2: boolean = false;
+
+  public battingForm: FormGroup;
+  public battingName: AbstractControl;
 
   constructor(fb: FormBuilder, private matchesService: MatchesService, private matchesConstants: MatchesConstants) {
 
@@ -140,11 +145,18 @@ export class SubmitScoreComponent {
     this.tied = this.form.controls['tied'];
     this.cancelledplay = this.form.controls['cancelledplay'];
 
+    this.battingForm = fb.group({
+      'battingName': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
+
+    });
+    this.battingName = this.battingForm.controls['battingName'];
+
   }
 
   ngOnInit(): void {
     this.getTeamslist();
     this.getPlayerslist();
+    this.playersByIds(this.teamsIds);
   }
 
   //eague_id,season,week,awayteam,hometeam,game_date,result_won_id,forfeit,mom,umpire1,umpire2,maxovers,isactive
@@ -160,7 +172,7 @@ export class SubmitScoreComponent {
   };
 
   public onSubmit(values: Object): void {
-    this.submitted = true;
+    this.submitted_step1 = true;
     console.log("In SubmitScore Component --> updateScorecardGameDetails(value): ", values)
     this.matchesService.updateScorecardGameDetails(values);
   }
@@ -180,7 +192,13 @@ export class SubmitScoreComponent {
     console.log('this.playersList', this.playersList)
     teams$.subscribe(responce => this.playersList = responce,
       () => console.log("responce", this.playersList));
+    console.info("********** playersList %%%%%%%%%%%", this.playersList)
+  }
 
+  playersByIds(teamIds) {
+    console.info("******** Fetching results for Players list :")
+    const teams$ = this.matchesService.getPlayersByIds(teamIds);
+    teams$.subscribe(responce => this.playersByTeamsIds = responce);
   }
 
 
@@ -192,6 +210,11 @@ export class SubmitScoreComponent {
     }
   }
 
+  onTeamsSelected(type: any, value: any) {
+    console.log('onTeamsSelected -> type: ', type, 'onTeamsSelected ->  value: ');
+
+  }
+
   onSelectedResult(type: any, value: any) {
     console.log('type: ', type, ' value: ', value);
     if (type == 'forfeit') {
@@ -201,7 +224,7 @@ export class SubmitScoreComponent {
       (this.form.controls['tied']).setValue(0);
       (this.form.controls['cancelledplay']).setValue(0);
 
-    }else if (type == 'completed') {
+    } else if (type == 'completed') {
 
       (this.form.controls[type]).setValue(value);
       (this.form.controls['forfeit']).setValue(0);
@@ -234,7 +257,7 @@ export class SubmitScoreComponent {
   }
 
   public onSubmit_matchDetails(values: Object): void {
-    this.submitted = true;
+    this.submitted_step1 = true;
     console.log("onSubmit_matchDetails:: value  ", values)
 
     this.matchesService.updateScorecardGameDetails(values);
@@ -257,4 +280,13 @@ export class SubmitScoreComponent {
     (this.form.controls['leagueId']).setValue(val);
   }
 
+  player_out_type = this.matchesConstants.getPlayerOutType();
+  batting_poistion = this.matchesConstants.getBattingPositions();
+
+  public onSubmit_step2(values: Object): void {
+    this.submitted_step2 = true;
+    console.log("value  ", values)
+    if (this.battingForm.valid) {
+    }
+  }
 }
