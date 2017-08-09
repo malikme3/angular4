@@ -75,7 +75,7 @@ export class SubmitScoreComponent {
   playersForHomeTeam: Array<any>;
   playersForAwayTeam: Array<any>;
   playersForUmpiringTeam: Array<any>;
-
+  matchByDate;
   teamsIds: Array<number> = [47, 42];
   homeTeamsIds: Array<number> = [];
   awayTeamsIds: Array<number> = [];
@@ -300,13 +300,13 @@ export class SubmitScoreComponent {
   }
 
   battingOrderStatus(teamId) {
-    console.log('homeTeam Ids ',this.homeTeamsIds);
+    console.log('homeTeam Ids ', this.homeTeamsIds);
     if (this.homeTeamsIds.indexOf(teamId) > -1) {
-      console.log("Home Team is Batting First id: ",teamId)
+      console.log("Home Team is Batting First id: ", teamId)
       this.batFirstPlayers = this.playersForHomeTeam;
       this.batSecondPlayers = this.playersForAwayTeam;
     } else {
-      console.log("Away Team is Batting First id: ",teamId)
+      console.log("Away Team is Batting First id: ", teamId)
       this.batFirstPlayers = this.playersForAwayTeam;
       this.batSecondPlayers = this.playersForHomeTeam;
     }
@@ -351,6 +351,16 @@ export class SubmitScoreComponent {
       (this.form.controls['tied']).setValue(0);
 
     }
+  }
+
+  matchByPlayingTeamAndDate() {
+    let homeTeam = this.form.controls['hometeam'].value;
+    let awayTeam = this.form.controls['awayteam'].value;
+    let date = this.form.controls['game_date'].value;
+    console.log('findMatchByPlayingTeamsAndDate == > hometeam Id',homeTeam,' awayTeam ', awayTeam, ' date ',date);
+    const match$ = this.matchesService.findMatchByPlayingTeamsAndDate(homeTeam, awayTeam, date);
+    match$.subscribe(responce => this.matchByDate = responce);
+    console.log('findMatchByPlayingTeamsAndDate => Match : ',this.matchByDate)
   }
 
   public onSubmit_matchDetails(values: Object): void {

@@ -26,6 +26,7 @@ export class MatchesService {
   private teams_list = '/teams/namue/list';
   private players_list = '/submit/score/players?';
   private playersByIds = '/teams/players/teamsIds';
+  private findMatch = 'findMatchByPlayingTeamsAndDate?';
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -35,6 +36,7 @@ export class MatchesService {
   private teams_url = this.baseUrl + this.teams_list;
   private players_url = this.baseUrl + this.players_list;
   private playersByIds_url = this.baseUrl + this.playersByIds;
+  private findMatch_url = this.baseUrl + this.findMatch;
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
 
   // For points table
@@ -78,6 +80,14 @@ export class MatchesService {
     return this.http.post(this.playersByIds_url, teamIds, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }
+
+  findMatchByPlayingTeamsAndDate(homeTeam: number, awayTeam: number, date: Date):Observable<any>  {
+    const url = `${this.findMatch_url}homeTeam=${homeTeam}&awayTeam=${awayTeam}&matchDate=${date}`;
+    console.info("Call for findMatchByPlayingTeamsAndDate() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
 
   updateScorecardGameDetails(values: Object): Promise<any> {
     return this.http

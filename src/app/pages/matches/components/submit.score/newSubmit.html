@@ -104,7 +104,7 @@
         <div class="form-group row">
           <ng-select [formControl]="name"
                      [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
-                     highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)"
+                     highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)" (selected)="matchByPlayingTeamAndDate()"
                      (selected)="onSelected('umpireTeam',$event.value)">
           </ng-select>
         </div>
