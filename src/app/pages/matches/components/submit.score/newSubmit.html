@@ -245,7 +245,7 @@
       ======================= Extras Details Section => Start =======================
      -->
       <ba-card baCardClass="with-scroll" title="Enter Total & Extras Detail">
-        <submit-score-totals></submit-score-totals>
+        <submit-score-totals (notify)='onNotify($event)'></submit-score-totals>
         <submit-score-extras></submit-score-extras>
       </ba-card>
 
@@ -262,7 +262,7 @@
       <ba-card baCardClass="with-scroll" title="Enter Bowling Details">
         <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
           <div class="col-sm-2">
-            <label *ngIf="fst" for="byes">Bowler Names</label>
+            <label *ngIf="fst" >Bowler Names</label>
             <div class="form-group row">
               <ng-select [formControl]="battingName"
                          [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Bowler Name"

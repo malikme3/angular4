@@ -1,4 +1,4 @@
-import {Component} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
 import {NgUploaderOptions} from 'ngx-uploader';
@@ -15,6 +15,7 @@ import 'rxjs/add/operator/map';
   styleUrls: ['../submitScore.scss'],
 })
 export class SubmitScoreTotalsComponent {
+  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
   public totalsForm: FormGroup;
   public name: AbstractControl;
@@ -46,7 +47,10 @@ export class SubmitScoreTotalsComponent {
   }
 
   batting_poistion = this.matchesConstants.getBattingPositions();
-
+onClick(){
+  console.log('this.totalsForm.value from total: ',this.totalsForm.value)
+  this.notify.emit(this.totalsForm.value);
+}
   onSelectedTotals(type: any, value: any) {
     console.info("onSelectedTotals: Type:", type, 'Value: ', value)
     //this.extrasDetails.controls[type].setValue(value);

@@ -4,17 +4,17 @@
       <label for="totalwickets">Wickets</label>
       <input [formControl]="wickets" type="text" class="form-control" id="totalwickets"
              placeholder="Wickets"
-             [(ngModel)]="wicketsVal" (change)="onSelectedTotals('wickets', wicketsVal)">
+             [(ngModel)]="wicketsVal" (click)='onClick()'(change)="onSelectedTotals('wickets', wicketsVal)">
     </div>
     <div class="col-sm-4">
       <label for="overs">Overs</label>
       <input [formControl]="overs" type="text" class="form-control" id="overs" placeholder="Overs"
-             [(ngModel)]="oversVal" (change)="onSelectedTotals('overs', oversVal)">
+             [(ngModel)]="oversVal" (change)="onSelectedTotals('overs', oversVal)" (change)="onClick()">
     </div>
     <div class="col-sm-4">
       <label for="total">Total</label>
       <input [formControl]="total" type="text" class="form-control" id="total" placeholder="Total"
-             [(ngModel)]="totalVal" (change)="onSelectedTotals('total', totalVal)">
+             [(ngModel)]="totalVal" (change)="onSelectedTotals('total', totalVal)" (change)="onClick()">
     </div>
   </div>
 </ba-card>

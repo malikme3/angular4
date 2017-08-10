@@ -330,8 +330,8 @@ export class SubmitScoreComponent {
     console.log('Playing teams are :: ', this.teams_playings)
   }
 
-  onNotify(val: string): void {
-    (this.form.controls['leagueId']).setValue(val);
+  onNotify(val: any): void {
+    console.log('this.totalsForm.value frrom total in Parent: ',val)
   }
 
   player_out_type = this.matchesConstants.getPlayerOutType();
