@@ -26,6 +26,20 @@ export class SubmitScoreBattingComponent {
   public balls: AbstractControl;
   public fours: AbstractControl;
   public sixes: AbstractControl;
+  
+  //Batting positions
+  public First Batting Position: AbstractControl;
+public First Batting Position: AbstractControl;
+public Second Batting Position: AbstractControl;
+public Third Batting Position: AbstractControl;
+public Fourth Batting Position: AbstractControl;
+public Fifth Batting Position: AbstractControl;
+public Sixth Batting Position: AbstractControl;
+public Seventh Batting Position: AbstractControl;
+public Eighth Batting Position: AbstractControl;
+public Ninth Batting Position: AbstractControl;
+public Tenth Batting Position: AbstractControl;
+public Eleventh Batting Position: AbstractControl;
 
   constructor(fb: FormBuilder, private matchesService: MatchesService, private matchesConstants: MatchesConstants) {
 
@@ -38,6 +52,21 @@ export class SubmitScoreBattingComponent {
       'balls': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'fours': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'sixes': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+       
+      //Batting positions
+      'First Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Second Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Third Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Fourth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Fifth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Sixth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],      
+      'Seventh Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],      
+      'Eighth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'Ninth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],      
+      'Tenth Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],      
+      'Eleventh Batting Position': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      
+      
     });
 
     this.name = this.battingForm.controls['name'];
@@ -47,6 +76,19 @@ export class SubmitScoreBattingComponent {
     this.balls = this.battingForm.controls['balls'];
     this.fours = this.battingForm.controls['fours'];
     this.sixes = this.battingForm.controls['sixes'];
+    
+    //Batting positions
+    this.sixes = this.battingForm.controls['sixes'];
+    this.Second = this.battingForm.controls['Second'];
+    this.Third = this.battingForm.controls['Third'];
+    this.Fourth = this.battingForm.controls['Fourth'];
+    this.Fifth = this.battingForm.controls['Fifth'];
+    this.Sixth = this.battingForm.controls['Sixth'];
+    this.Seventh = this.battingForm.controls['Seventh'];
+    this.Eighth = this.battingForm.controls['Eighth'];
+    this.Ninth = this.battingForm.controls['Ninth'];
+    this.Tenth = this.battingForm.controls['Tenth'];
+    this.Eleventh = this.battingForm.controls['Eleventh'];
 
   }
 
