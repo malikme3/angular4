@@ -1,4 +1,4 @@
- <div class="row" *ngFor="let position of batting_poistion">
+<div class="row" *ngFor="let position of batting_poistion">
         <div class="col-sm-2">
           <div class="form-group row">
             <ng-select [formControl]="battingName"
@@ -38,12 +38,18 @@
           <input type="text" class="form-control" id="runs" placeholder="Runs">
         </div>
         <div class="col-sm-1">
-          <input type="text" class="form-control" id="balls" placeholder="Balls">
+            <input [formControl]="name" type="text" class="form-control" id="balls"
+               placeholder="Balls" #input
+               (change)="onSelectedBatting('balls', input.value)">          
         </div>
         <div class="col-sm-1">
-          <input type="text" class="form-control" id="4s" placeholder="4s">
+          <input [formControl]="name" type="text" class="form-control" id="fours"
+               placeholder="4s" #input
+               (change)="onSelectedBatting('fours', input.value)">   
         </div>
         <div class="col-sm-1">
-          <input type="text" class="form-control" id="6s" placeholder="6s">
+         <input [formControl]="name" type="text" class="form-control" id="sixes"
+               placeholder="6s" #input
+               (change)="onSelectedBatting('sixes', input.value)"> 
         </div>
       </div>
