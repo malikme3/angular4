@@ -1,0 +1,20 @@
+<ba-card baCardClass="with-scroll" title="Fall of Wickets">
+  <div class="row">
+    <div class="col-sm-2" *ngFor="let position of batting_poistion">
+      <div *ngIf="position.wicket">
+        <label for="position.id">{{position.wicket}}</label>
+        <input [formControl]="name" type="text" class="form-control" id="position.id"
+               placeholder="Score@wicket" #input
+               (change)="onSelectedWickets(position.wicket, input.value)">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+      <button type="button" class="btn btn-success btn-icon">
+        <i class="ion-android-checkmark-circle"></i></button>
+    </div>
+  </div>
+
+</ba-card>

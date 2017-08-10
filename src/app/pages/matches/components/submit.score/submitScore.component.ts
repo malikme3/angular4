@@ -24,9 +24,11 @@ import {Team} from "./Team";
 export class SubmitScoreComponent {
 
   options: DatePickerOptions;
+  wicket: any;
 
 
   public form: FormGroup;
+  // public extrasDetails
   public name: AbstractControl;
   public teams;
   public password: AbstractControl;
@@ -90,25 +92,9 @@ export class SubmitScoreComponent {
 
   public battingForm: FormGroup;
   public battingName: AbstractControl;
-  //======================= Extras Details Section => Start =======================
-  public extrasDetails: FormGroup;
-  public gameId: AbstractControl;
-  public inningsId: AbstractControl; 
-  public team: AbstractControl;
-  
-  //TOTOAL
-  public wickets: AbstractControl;
-  public overs: AbstractControl;
-  public total: AbstractControl;
-  
-  //Extras 
-  public legbye: AbstractControl;
-  public wides: AbstractControl;
-  public noballs: AbstractControl;
-  public extrastotal: AbstractControl;
-  //======================= Extras Details Section => End =======================
 
-  constructor(fb: FormBuilder, private matchesService: MatchesService, private matchesConstants: MatchesConstants) {
+  constructor(fb: FormBuilder, private matchesService: MatchesService,
+              private matchesConstants: MatchesConstants) {
 
     this.options = new DatePickerOptions();
 
@@ -177,45 +163,9 @@ export class SubmitScoreComponent {
     });
     this.battingName = this.battingForm.controls['battingName'];
 
+
   }
-  
-  //======================= Extras Details Section => Start =======================
-    //validating input
-      this.extrasDetails = fb.group({
-      
-      //Total
-      'wickets': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'overs': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'total': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      
-      //Extras
-      'legbye': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'byes': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'wides': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'noballs': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'extrastotal': ['', Validators.compose([Validators.required, Validators.minLength(4)])],       
-     
-    });
-    
-    //Assigning values  
-  this.gameId = this.extrasDetails.controls['gameId'];
-  this.inningsId = this.extrasDetails.controls['inningsId'];
-  
-    //TOTAL
-  this.wickets = this.extrasDetails.controls['wickets'];
-  this.overs = this.extrasDetails.controls['overs'];
-  this.total = this.extrasDetails.controls['total'];
-  
-  //Extras
- 
-  this.legbye = this.extrasDetails.controls['legbye'];
-  this.byes = this.extrasDetails.controls['byes'];
-  this.wides = this.extrasDetails.controls['wides'];
-  this.noballs = this.extrasDetails.controls['noballs'];
-  this.extrastotal = this.extrasDetails.controls['extrastotal'];
-  
-//======================= Extras Details Section => END =======================
-  
+
   ngOnInit(): void {
     this.getTeamslist();
     this.getPlayerslist();
@@ -295,9 +245,6 @@ export class SubmitScoreComponent {
       teams$.subscribe(responce => this.playersForUmpiringTeam = responce);
     }
   }
-  onSelected_extrasDetails(type: any, value: any) {
-     console.info("onSelected_etrasDetails: Type:", type, 'Value: ', value)
-  }
 
   battingOrderStatus(teamId) {
     console.log('homeTeam Ids ', this.homeTeamsIds);
@@ -357,10 +304,10 @@ export class SubmitScoreComponent {
     let homeTeam = this.form.controls['hometeam'].value;
     let awayTeam = this.form.controls['awayteam'].value;
     let date = this.form.controls['game_date'].value;
-    console.log('findMatchByPlayingTeamsAndDate == > hometeam Id',homeTeam,' awayTeam ', awayTeam, ' date ',date);
+    console.log('findMatchByPlayingTeamsAndDate == > hometeam Id', homeTeam, ' awayTeam ', awayTeam, ' date ', date);
     const match$ = this.matchesService.findMatchByPlayingTeamsAndDate(homeTeam, awayTeam, date);
     match$.subscribe(responce => this.matchByDate = responce);
-    console.log('findMatchByPlayingTeamsAndDate => Match : ',this.matchByDate)
+    console.log('findMatchByPlayingTeamsAndDate => Match : ', this.matchByDate)
   }
 
   public onSubmit_matchDetails(values: Object): void {

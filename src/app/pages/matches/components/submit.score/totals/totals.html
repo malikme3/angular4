@@ -1,0 +1,20 @@
+<ba-card title="Enter Total">
+  <div class="row" col-lg-12 col-md-12 col-sm-12>
+    <div class="col-sm-4">
+      <label for="totalwickets">Wickets</label>
+      <input [formControl]="wickets" type="text" class="form-control" id="totalwickets"
+             placeholder="Wickets"
+             [(ngModel)]="wicketsVal" (change)="onSelectedTotals('wickets', wicketsVal)">
+    </div>
+    <div class="col-sm-4">
+      <label for="overs">Overs</label>
+      <input [formControl]="overs" type="text" class="form-control" id="overs" placeholder="Overs"
+             [(ngModel)]="oversVal" (change)="onSelectedTotals('overs', oversVal)">
+    </div>
+    <div class="col-sm-4">
+      <label for="total">Total</label>
+      <input [formControl]="total" type="text" class="form-control" id="total" placeholder="Total"
+             [(ngModel)]="totalVal" (change)="onSelectedTotals('total', totalVal)">
+    </div>
+  </div>
+</ba-card>

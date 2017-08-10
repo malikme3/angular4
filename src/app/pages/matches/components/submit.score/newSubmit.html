@@ -104,7 +104,8 @@
         <div class="form-group row">
           <ng-select [formControl]="name"
                      [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
-                     highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)" (selected)="matchByPlayingTeamAndDate()"
+                     highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)"
+                     (selected)="matchByPlayingTeamAndDate()"
                      (selected)="onSelected('umpireTeam',$event.value)">
           </ng-select>
         </div>
@@ -238,91 +239,25 @@
           <input type="text" class="form-control" id="6s" placeholder="6s">
         </div>
       </div>
-     <!-- 
-     ================= Batsman Score Details Section <= End ========================
-     ================ ************  STEP 2 ************ ============================
-     ======================= Extras Details Section => Start =======================
-    -->
+      <!--
+      ================= Batsman Score Details Section <= End ========================
+      ================ ************  STEP 2 ************ ============================
+      ======================= Extras Details Section => Start =======================
+     -->
       <ba-card baCardClass="with-scroll" title="Enter Total & Extras Detail">
-        <div class="row">
-          <div class="col-sm-2">
-            <div class="form-group">
-              <label for="inputFirstName">Wickets</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="inputFirstName" placeholder="Wickets"
-                 [(ngModel)]="wickets" (change)="onSelected_extrasDetails('wickets', wickets)">
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="form-group">
-              <label for="inputFirstName">Overs</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="overs" placeholder="Overs"
-                     [(ngModel)]="overs" (change)="onSelected_extrasDetails('overs', overs)">
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="form-group">
-              <label for="inputFirstName">Total</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="total" placeholder="Total"
-                     [(ngModel)]="total" (change)="onSelected_extrasDetails('total', total)">
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <div class="form-group">
-              <label for="legbye">Leg Byes</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="legbye" placeholder="Leg Byes"
-                     [(ngModel)]="legbye" (change)="onSelected_extrasDetails('legbye', legbye)">
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <div class="form-group">
-              <label for="byes">Byes</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="byes" placeholder="Byes"
-                     [(ngModel)]="byes" (change)="onSelected_extrasDetails('byes', byes)">
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <div class="form-group">
-              <label for="wides">Wides</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="wides" placeholder="Wides"
-                     [(ngModel)]="wides" (change)="onSelected_extrasDetails('wides', wides)">
-            </div>
-          </div>
-          <div class="col-sm-1">
-            <div class="form-group">
-              <label for="noballs">No Balls</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control" id="noballs" placeholder="No Balls"
-                     [(ngModel)]="noballs" (change)="onSelected_extrasDetails('noballs', noballs)">
-            </div>
-          </div>
-          <div class="col-sm-2">
-            <div class="form-group">
-              <label for="extrastotal">Total</label>
-              <input [formControl]="extrasDetails"  type="text" class="form-control"  id="extrastotal" placeholder="Extras Total"
-                     [(ngModel)]="extrastotal" (change)="onSelected_extrasDetails('extrastotal', extrastotal)">
-            </div>
-          </div>
-        </div>
+        <submit-score-totals></submit-score-totals>
+        <submit-score-extras></submit-score-extras>
       </ba-card>
-         <!-- 
-     ================= Bowling Details Section <= End ===============================
-     ================ ************  STEP 2 ************ ============================
-     ======================= Fall of wickets => Start ==============================
-    -->
-      <ba-card baCardClass="with-scroll" title="Fall of Wickets">
-        <div class="row">
-          <div class="col-sm-2" *ngFor="let position of batting_poistion">
-            <div class="form-group " *ngIf="position.wicket">
-              <label for=position.wicket>{{position.wicket}}</label>
-              <input type="text" class="form-control" id=position.wicket placeholder="position.wicket">
-            </div>
-          </div>
-        </div>
-      </ba-card>
-    <!-- 
-     ================= Fall of wickets <= End ===============================
-     ================ ************  STEP 2 ************ ============================
-     ======================= Bowling Details Section => Start ======================
-    -->
+
+      <!--================= Bowling Details Section <= End ===============================
+      ================ ************  STEP 2 ************ ============================
+      ======================= Fall of wickets => Start ==============================-->
+
+      <submit-score-wickets></submit-score-wickets>
+
+      <!-- ================= Fall of wickets <= End ==================================
+       ================ ************  STEP 2 ************ ============================
+       ======================= Bowling Details Section => Start ======================-->
       <!--Bowling Details-->
       <ba-card baCardClass="with-scroll" title="Enter Bowling Details">
         <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
@@ -362,12 +297,12 @@
           </div>
         </div>
       </ba-card>
-        
-         <!-- 
-     ================= Bowling Details Section <= End ===============================
-     ================ ************  STEP 2 ************ =============================
-     ======================= *********END************* ==============================
-    -->
+
+      <!--
+  ================= Bowling Details Section <= End ===============================
+  ================ ************  STEP 2 ************ =============================
+  ======================= *********END************* ==============================
+ -->
       <div class="form-group row">
         <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
           <button type="submit" class="btn btn-default btn-auth">Submit Step 2 Score Card details !!</button>

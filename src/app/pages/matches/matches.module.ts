@@ -30,6 +30,9 @@ import {
 import {SelectModule} from "ng-select";
 import {DatePickerModule, DateModel } from "ng2-datepicker";
 import {SubmitScoreBatting} from "./components/submit.score/submitScoreBatting.component";
+import {SubmitScoreWicketComponent} from "./components/submit.score/submit.score.wickets/submitScoreWickets.component";
+import {SubmitScoreTotalsComponent} from "./components/submit.score/totals/totals.component";
+import {SubmitScoreExtrasComponent} from "./components/submit.score/extras/extras.component";
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import {SubmitScoreBatting} from "./components/submit.score/submitScoreBatting.c
     ScheduleComponent,
     ScoreComponent,
     SubmitScoreComponent,
-    SubmitScoreBatting
+    SubmitScoreBatting,
+    SubmitScoreWicketComponent,
+    SubmitScoreTotalsComponent,
+    SubmitScoreExtrasComponent
   ],
   providers: [
     ResultsService, MatchesConstants, DashboardService, MatchesService
