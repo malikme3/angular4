@@ -324,7 +324,7 @@ getBattingPositions() {
       wicket: 'wicket#5'
     }, {
       id: 6,
-      type: 'Sixt Batting Position',
+      type: 'sixth Batting Position',
       wicket: 'wicket#6'
     },
     {
@@ -334,7 +334,7 @@ getBattingPositions() {
     },
     {
       id: 8,
-      type: 'Eight Batting Position',
+      type: 'Eighth Batting Position',
       wicket: 'wicket#8'
     },
     {
