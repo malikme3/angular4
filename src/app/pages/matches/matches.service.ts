@@ -27,7 +27,9 @@ export class MatchesService {
   private players_list = '/submit/score/players?';
   private playersByIds = '/teams/players/teamsIds';
   private findMatch = 'findMatchByPlayingTeamsAndDate?';
+  private howOutType = '/submit/score/howout';
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
+
 
   private schduel_url = this.baseUrl + this.sch_path;
   private batting_url = this.baseUrl + this.batting_path;
@@ -37,6 +39,7 @@ export class MatchesService {
   private players_url = this.baseUrl + this.players_list;
   private playersByIds_url = this.baseUrl + this.playersByIds;
   private findMatch_url = this.baseUrl + this.findMatch;
+  private howOutType_url = this.baseUrl + this.howOutType;
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
 
   // For points table
@@ -81,7 +84,13 @@ export class MatchesService {
       .catch(this.handleError)
   }
 
-  findMatchByPlayingTeamsAndDate(homeTeam: number, awayTeam: number, date: Date):Observable<any>  {
+  getHowOutType() {
+    console.info("Call for getHowOutType() with url : ", this.players_url);
+    return this.http.get(this.howOutType_url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  };
+
+  findMatchByPlayingTeamsAndDate(homeTeam: number, awayTeam: number, date: Date): Observable<any> {
     const url = `${this.findMatch_url}homeTeam=${homeTeam}&awayTeam=${awayTeam}&matchDate=${date}`;
     console.info("Call for findMatchByPlayingTeamsAndDate() with url : ", url);
     return this.http.get(url, this.header).map(responce => responce.json())

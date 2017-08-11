@@ -190,55 +190,7 @@
 <div *ngIf="!submitted_step1">
   <ba-card baCardClass="with-scroll" title="Batsman Score Details">
     <form [formGroup]="battingForm" (ngSubmit)="onSubmit(battingForm.value)" class="form-horizontal">
-      <div class="row" *ngFor="let position of batting_poistion">
-        <div class="col-sm-2">
-          <div class="form-group row">
-            <ng-select [formControl]="battingName"
-                       [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Batsman Name"
-                       highlightTextColor="black"
-                       (selected)="onSelected($event.label, position.id)">
-            </ng-select>
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <ng-select highlightColor="#9575cd" highlightTextColor="#fff" [formControl]="battingName"
-                     [options]="player_out_type" [allowClear]="true" placeholder="Slect out type"
-                     highlightTextColor="black"
-                     (selected)="onSelected($event.label, position.id)">
-          </ng-select>
-        </div>
-
-        <div class="col-sm-2">
-          <div class="form-group row">
-            <ng-select [formControl]="battingName"
-                       [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Assist Fielder"
-                       highlightTextColor="black"
-                       (selected)="onSelected($event, position.id)">
-            </ng-select>
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <div class="form-group row">
-            <ng-select [formControl]="battingName"
-                       [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Bowler Name"
-                       highlightTextColor="black"
-                       (selected)="onSelected($event, position.id)">
-            </ng-select>
-          </div>
-        </div>
-        <div class="col-sm-1">
-          <input type="text" class="form-control" id="runs" placeholder="Runs">
-        </div>
-        <div class="col-sm-1">
-          <input type="text" class="form-control" id="balls" placeholder="Balls">
-        </div>
-        <div class="col-sm-1">
-          <input type="text" class="form-control" id="4s" placeholder="4s">
-        </div>
-        <div class="col-sm-1">
-          <input type="text" class="form-control" id="6s" placeholder="6s">
-        </div>
-      </div>
+      <submit-score-batting (notify)='onNotify_batting($event)' [batFirstPlayers]="batFirstPlayers"></submit-score-batting>
       <!--
       ================= Batsman Score Details Section <= End ========================
       ================ ************  STEP 2 ************ ============================

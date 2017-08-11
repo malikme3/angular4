@@ -7,7 +7,7 @@ import {MatchesConstants} from "../matches.constant.service";
  * Created by HudaZulifqar on 8/2/2017.
  */
 @Component({
-  selector: 'submit-score-batting',
+  selector: 'submit-score',
   templateUrl: 'SubmitScore_step2.html',
   //styleUrls: ['../../../../theme/components/baCheckbox/baCheckbox.scss'],
   styleUrls: ['submitScore.scss'],

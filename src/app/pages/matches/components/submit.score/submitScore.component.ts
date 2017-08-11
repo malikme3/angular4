@@ -331,7 +331,11 @@ export class SubmitScoreComponent {
   }
 
   onNotify(val: any): void {
-    console.log('this.totalsForm.value frrom total in Parent: ',val)
+    console.log('this.totalsForm.value frrom total in Parent: ', val)
+  }
+
+  onNotify_batting(val: any): void {
+    console.log('Batting_parent ==> this.totalsForm.value: ', val)
   }
 
   player_out_type = this.matchesConstants.getPlayerOutType();
