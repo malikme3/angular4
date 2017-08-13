@@ -190,7 +190,7 @@
 <div *ngIf="!submitted_step1">
   <ba-card baCardClass="with-scroll" title="Batsman Score Details">
     <form [formGroup]="battingForm" (ngSubmit)="onSubmit(battingForm.value)" class="form-horizontal">
-      <submit-score-batting (notify)='onNotify_batting($event)' [batFirstPlayers]="batFirstPlayers"></submit-score-batting>
+      <submit-score-batting (notify)='onNotify_batting($event)' [batFirstPlayers]="playersList"></submit-score-batting>
       <!--
       ================= Batsman Score Details Section <= End ========================
       ================ ************  STEP 2 ************ ============================

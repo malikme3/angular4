@@ -12,44 +12,46 @@
     <ng-select highlightColor="#9575cd" highlightTextColor="#fff" [formControl]="name"
                [options]="player_out_type" [allowClear]="true" placeholder="Slect out type"
                highlightTextColor="black"
-               (selected)="onSelectedHowOutTypes($event.value, $event.label)">
+               (selected)="onSelectedHowOutTypes(i, $event.label)">
     </ng-select>
   </div>
 
   <div class="col-sm-2">
     <div class="form-group row">
       <ng-select [formControl]="name"
-                 [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Assist Fielder"
+                 [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Assist Fielder"
                  highlightTextColor="black"
-                 (selected)="onSelectedBatting($event, position.value)">
+                 (selected)="onSelectedFielder(i, $event.value)">
       </ng-select>
     </div>
   </div>
   <div class="col-sm-2">
     <div class="form-group row">
       <ng-select [formControl]="name"
-                 [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Bowler Name"
+                 [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Bowler Name"
                  highlightTextColor="black"
-                 (selected)="onSelectedBatting($event, position.value)">
+                 (selected)="onSelectedBowler(i, $event.value)">
       </ng-select>
     </div>
   </div>
   <div class="col-sm-1">
-    <input type="text" class="form-control" id="runs" placeholder="Runs">
+    <input [formControl]="name" type="text" class="form-control" id="runs"
+           placeholder="Runs" #runs
+           (change)="onSelectedRuns(i, runs.value)">
   </div>
   <div class="col-sm-1">
     <input [formControl]="name" type="text" class="form-control" id="balls"
-           placeholder="Balls" #input
-           (change)="onSelectedBatting('balls', input.value)">
+           placeholder="Balls" #balls
+           (change)="onSelectedBalls(i, balls.value)">
   </div>
   <div class="col-sm-1">
-    <input [formControl]="name" type="text" class="form-control" id="fours"
-           placeholder="4s" #input
-           (change)="onSelectedBatting('fours', input.value)">
+    <input type="text" class="form-control" id="fours"
+           placeholder="4s" #fours
+           (change)="onSelectedFours(i, fours.value)">
   </div>
   <div class="col-sm-1">
     <input [formControl]="name" type="text" class="form-control" id="sixes"
-           placeholder="6s" #input (click)='onClick()'
-           (change)="onSelectedBatting('sixes', input.value)">
+           placeholder="6s" #sixes
+           (change)="onSelectedSixes(i, sixes.value)">
   </div>
 </div>
