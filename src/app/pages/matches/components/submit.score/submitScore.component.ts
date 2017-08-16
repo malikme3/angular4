@@ -11,10 +11,12 @@ import {IOption} from "ng-select";
 import {EmailValidator} from "../../../../theme/validators/email.validator";
 import {DatePickerOptions} from "ng2-datepicker";
 import {Team} from "./Team";
+import {MatchesDataStoreService} from "../matches-data-store";
 
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
+
 @Component({
   selector: 'submit-score',
   templateUrl: 'newSubmit.html',
@@ -24,7 +26,7 @@ import {Team} from "./Team";
 export class SubmitScoreComponent {
 
   options: DatePickerOptions;
-  wicket: any;
+  inningsId: number;
 
 
   public form: FormGroup;
@@ -94,7 +96,7 @@ export class SubmitScoreComponent {
   public battingName: AbstractControl;
 
   constructor(fb: FormBuilder, private matchesService: MatchesService,
-              private matchesConstants: MatchesConstants) {
+              private matchesConstants: MatchesConstants, private matchesDataStoreService: MatchesDataStoreService) {
 
     this.options = new DatePickerOptions();
 
@@ -183,8 +185,9 @@ export class SubmitScoreComponent {
     baCheckboxClass: 'class'
   };
 
-  public onSubmit(values: Object): void {
+  public onSubmitBasicDetails(values: Object): void {
     this.submitted_step1 = true;
+    this.inningsId = 1;
     console.log("In SubmitScore Component --> updateScorecardGameDetails(value): ", values)
     this.matchesService.updateScorecardGameDetails(values);
   }
@@ -307,7 +310,11 @@ export class SubmitScoreComponent {
     console.log('findMatchByPlayingTeamsAndDate == > hometeam Id', homeTeam, ' awayTeam ', awayTeam, ' date ', date);
     const match$ = this.matchesService.findMatchByPlayingTeamsAndDate(homeTeam, awayTeam, date);
     match$.subscribe(responce => this.matchByDate = responce);
-    console.log('findMatchByPlayingTeamsAndDate => Match : ', this.matchByDate)
+  }
+
+  storeMatchDetails() {
+    console.log("The Match Detail for Data Store", this.matchByDate)
+    this.matchesDataStoreService.setMatchDetails(this.matchByDate);
   }
 
   public onSubmit_matchDetails(values: Object): void {

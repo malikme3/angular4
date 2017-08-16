@@ -34,6 +34,7 @@ import {SubmitScoreWicketComponent} from "./components/submit.score/submit.score
 import {SubmitScoreTotalsComponent} from "./components/submit.score/totals/totals.component";
 import {SubmitScoreExtrasComponent} from "./components/submit.score/extras/extras.component";
 import {SubmitScoreBattingComponent} from "./components/submit.score/batting/batting.component";
+import {MatchesDataStoreService} from "./components/matches-data-store";
 
 
 @NgModule({
@@ -76,7 +77,7 @@ import {SubmitScoreBattingComponent} from "./components/submit.score/batting/bat
     SubmitScoreBattingComponent
   ],
   providers: [
-    ResultsService, MatchesConstants, DashboardService, MatchesService
+    ResultsService, MatchesConstants, DashboardService, MatchesService, MatchesDataStoreService
   ],
 })
 export class MatchesModule {

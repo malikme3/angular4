@@ -5,9 +5,11 @@ import {NgUploaderOptions} from 'ngx-uploader';
 import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+import {MatchesDataStoreService} from "../../matches-data-store";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
+
 @Component({
   selector: 'submit-score-batting',
   templateUrl: 'batting.html',
@@ -17,378 +19,367 @@ import 'rxjs/add/operator/map';
 export class SubmitScoreBattingComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @Input() batFirstPlayers: Array<any>;
+  @Input() inningsId: number;
   playersList;
   player_out_type;
+  matchScore;
 
   form: FormGroup;
   public name: AbstractControl;
+  public game_id: AbstractControl;
+  public season: AbstractControl;
+  public innings_id: AbstractControl;
+  public team: AbstractControl;
+  public opponent: AbstractControl;
 
 //Batsman # 1
-  battingInf_1: FormGroup;
-  public batsmanId_1: AbstractControl;
-  public outTypeId_1: AbstractControl;
-  public fielder_1: AbstractControl;
-  public bowler_1: AbstractControl;
-  public runs_1: AbstractControl;
-  public balls_1: AbstractControl;
-  public fours_1: AbstractControl;
-  public sixes_1: AbstractControl;
+  batsman_1: FormGroup;
+  public player_id: AbstractControl;
+  public batting_position: AbstractControl;
+  public how_out: AbstractControl;
+  public notout: AbstractControl;
+  public assist: AbstractControl;
+  public bowler: AbstractControl;
+  public runs: AbstractControl;
+  public balls: AbstractControl;
+  public fours: AbstractControl;
+  public sixes: AbstractControl;
 
   //Batsman # 2
-  battingInf_2: FormGroup;
-  public batsmanId_2: AbstractControl;
-  public outTypeId_2: AbstractControl;
-  public fielder_2: AbstractControl;
-  public bowler_2: AbstractControl;
-  public runs_2: AbstractControl;
-  public balls_2: AbstractControl;
-  public fours_2: AbstractControl;
-  public sixes_2: AbstractControl;
+  batsman_2: FormGroup;
 
   //Batsman # 3
-  battingInf_3: FormGroup;
-  public batsmanId_3: AbstractControl;
-  public outTypeId_3: AbstractControl;
-  public fielder_3: AbstractControl;
-  public bowler_3: AbstractControl;
-  public runs_3: AbstractControl;
-  public balls_3: AbstractControl;
-  public fours_3: AbstractControl;
-  public sixes_3: AbstractControl;
+  batsman_3: FormGroup;
 
   //Batsman # 4
-  battingInf_4: FormGroup;
-  public outTypeId_4: AbstractControl;
-  public batsmanId_4: AbstractControl;
-  public fielder_4: AbstractControl;
-  public bowler_4: AbstractControl;
-  public runs_4: AbstractControl;
-  public balls_4: AbstractControl;
-  public fours_4: AbstractControl;
-  public sixes_4: AbstractControl;
+  batsman_4: FormGroup;
+
 
   //Batsman # 5
-  battingInf_5: FormGroup;
-  public batsmanId_5: AbstractControl;
-  public outTypeId_5: AbstractControl;
-  public fielder_5: AbstractControl;
-  public bowler_5: AbstractControl;
-  public runs_5: AbstractControl;
-  public balls_5: AbstractControl;
-  public fours_5: AbstractControl;
-  public sixes_5: AbstractControl;
+  batsman_5: FormGroup;
 
   //Batsman # 6
-  battingInf_6: FormGroup;
-  public batsmanId_6: AbstractControl;
-  public outTypeId_6: AbstractControl;
-  public fielder_6: AbstractControl;
-  public bowler_6: AbstractControl;
-  public runs_6: AbstractControl;
-  public balls_6: AbstractControl;
-  public fours_6: AbstractControl;
-  public sixes_6: AbstractControl;
+  batsman_6: FormGroup;
+
 
   //Batsman # 7
-  battingInf_7: FormGroup;
-  public batsmanId_7: AbstractControl;
-  public outTypeId_7: AbstractControl;
-  public fielder_7: AbstractControl;
-  public bowler_7: AbstractControl;
-  public runs_7: AbstractControl;
-  public balls_7: AbstractControl;
-  public fours_7: AbstractControl;
-  public sixes_7: AbstractControl;
+  batsman_7: FormGroup;
+
 
   //Batsman # 8
-  battingInf_8: FormGroup;
-  public batsmanId_8: AbstractControl;
-  public outTypeId_8: AbstractControl;
-  public fielder_8: AbstractControl;
-  public bowler_8: AbstractControl;
-  public runs_8: AbstractControl;
-  public balls_8: AbstractControl;
-  public fours_8: AbstractControl;
-  public sixes_8: AbstractControl;
+  batsman_8: FormGroup;
 
   //Batsman # 9
-  battingInf_9: FormGroup;
-  public batsmanId_9: AbstractControl;
-  public outTypeId_9: AbstractControl;
-  public fielder_9: AbstractControl;
-  public bowler_9: AbstractControl;
-  public runs_9: AbstractControl;
-  public balls_9: AbstractControl;
-  public fours_9: AbstractControl;
-  public sixes_9: AbstractControl;
+  batsman_9: FormGroup;
+
 
   //Batsman # 10
-  battingInf_10: FormGroup;
-  public batsmanId_10: AbstractControl;
-  public outTypeId_10: AbstractControl;
-  public fielder_10: AbstractControl;
-  public bowler_10: AbstractControl;
-  public runs_10: AbstractControl;
-  public balls_10: AbstractControl;
-  public fours_10: AbstractControl;
-  public sixes_10: AbstractControl;
+  batsman_10: FormGroup;
 
   //Batsman # 11
-  battingInf_11: FormGroup;
-  public batsmanId_11: AbstractControl;
-  public outTypeId_11: AbstractControl;
-  public fielder_11: AbstractControl;
-  public bowler_11: AbstractControl;
-  public runs_11: AbstractControl;
-  public balls_11: AbstractControl;
-  public fours_11: AbstractControl;
-  public sixes_11: AbstractControl;
+  batsman_11: FormGroup;
 
 
-  constructor(fb: FormBuilder, private matchesService: MatchesService, private matchesConstants: MatchesConstants) {
+  constructor(fb: FormBuilder, private matchesService: MatchesService,
+              private matchesConstants: MatchesConstants,
+              private matchesDataStoreService: MatchesDataStoreService) {
+
     this.form = fb.group({
       'name': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'battingInf_1': fb.group({
-        'batsmanId_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_1': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'season': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'team': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'opponent': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      //Batsman Details
+      'batsman_1': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_2': fb.group({
-        'batsmanId_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_2': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_2': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_3': fb.group({
-        'batsmanId_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_3': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_3': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_4': fb.group({
-        'batsmanId_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_4': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_4': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_5': fb.group({
-        'batsmanId_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_5': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_5': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_6': fb.group({
-        'batsmanId_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_6': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_6': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_7': fb.group({
-        'batsmanId_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'batsmanId_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_7': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_7': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_8': fb.group({
-        'batsmanId_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_8': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_8': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_9': fb.group({
-        'batsmanId_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_9': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_9': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_10': fb.group({
-        'batsmanId_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_10': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_10': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       }),
-      'battingInf_11': fb.group({
-        'batsmanId_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'outTypeId_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fielder_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'bowler_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'runs_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'balls_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'fours_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
-        'sixes_11': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+      'batsman_11': fb.group({
+        'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'how_out': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'notout': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'assist': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'bowler': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'runs': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'balls': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'fours': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
+        'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       })
     });
 
     this.name = this.form.controls['name'];
+    this.game_id = this.form.controls['game_id'];
+    this.season = this.form.controls['season'];
+    this.innings_id = this.form.controls['innings_id'];
+    this.team = this.form.controls['team'];
+    this.opponent = this.form.controls['opponent'];
 
     //Batting Position # 1
-    this.battingInf_1 = <FormGroup> this.form.controls['battingInf_1'];
-    this.batsmanId_1 = this.battingInf_1.controls['batsmanId_1'];
-    this.outTypeId_1 = this.battingInf_1.controls['outTypeId_1'];
-    this.fielder_1 = this.battingInf_1.controls['fielder_1'];
-    this.bowler_1 = this.battingInf_1.controls['bowler_1'];
-    this.runs_1 = this.battingInf_1.controls['runs_1'];
-    this.balls_1 = this.battingInf_1.controls['balls_1'];
-    this.fours_1 = this.battingInf_1.controls['fours_1'];
-    this.sixes_1 = this.battingInf_1.controls['sixes_1'];
+    this.batsman_1 = <FormGroup> this.form.controls['batsman_1'];
+    this.player_id = this.batsman_1.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['1'];
+    this.how_out = this.batsman_1.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_1.controls['assist'];
+    this.bowler = this.batsman_1.controls['bowler'];
+    this.runs = this.batsman_1.controls['runs'];
+    this.balls = this.batsman_1.controls['balls'];
+    this.fours = this.batsman_1.controls['fours'];
+    this.sixes = this.batsman_1.controls['sixes'];
 
     //Batting Position # 2
-    this.battingInf_2 = <FormGroup> this.form.controls['battingInf_2'];
-    this.batsmanId_2 = this.battingInf_1.controls['batsmanId_2'];
-    this.outTypeId_2 = this.battingInf_2.controls['outTypeId_2'];
-    this.fielder_2 = this.battingInf_2.controls['fielder_2'];
-    this.bowler_2 = this.battingInf_2.controls['bowler_2'];
-    this.runs_2 = this.battingInf_2.controls['runs_2'];
-    this.balls_2 = this.battingInf_2.controls['balls_2'];
-    this.fours_2 = this.battingInf_2.controls['fours_2'];
-    this.sixes_2 = this.battingInf_2.controls['sixes_2'];
+    this.batsman_2 = <FormGroup> this.form.controls['batsman_2'];
+    this.player_id = this.batsman_1.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['2'];
+    this.how_out = this.batsman_2.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_2.controls['assist'];
+    this.bowler = this.batsman_2.controls['bowler'];
+    this.runs = this.batsman_2.controls['runs'];
+    this.balls = this.batsman_2.controls['balls'];
+    this.fours = this.batsman_2.controls['fours'];
+    this.sixes = this.batsman_2.controls['sixes'];
 
     //Batting Position # 3
-    this.battingInf_3 = <FormGroup> this.form.controls['battingInf_3'];
-    this.batsmanId_3 = this.battingInf_1.controls['batsmanId_3'];
-    this.outTypeId_3 = this.battingInf_3.controls['outTypeId_3'];
-    this.fielder_3 = this.battingInf_3.controls['fielder_3'];
-    this.bowler_3 = this.battingInf_3.controls['bowler_3'];
-    this.runs_3 = this.battingInf_3.controls['runs_3'];
-    this.balls_3 = this.battingInf_3.controls['balls_3'];
-    this.fours_3 = this.battingInf_3.controls['fours_3'];
-    this.sixes_3 = this.battingInf_3.controls['sixes_3'];
+    this.batsman_3 = <FormGroup> this.form.controls['batsman_3'];
+    this.player_id = this.batsman_3.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['3'];
+    this.how_out = this.batsman_3.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_3.controls['assist'];
+    this.bowler = this.batsman_3.controls['bowler'];
+    this.runs = this.batsman_3.controls['runs'];
+    this.balls = this.batsman_3.controls['balls'];
+    this.fours = this.batsman_3.controls['fours'];
+    this.sixes = this.batsman_3.controls['sixes'];
 
     //Batting Position # 4
-    this.battingInf_4 = <FormGroup> this.form.controls['battingInf_4'];
-    this.batsmanId_4 = this.battingInf_1.controls['batsmanId_4'];
-    this.outTypeId_4 = this.battingInf_4.controls['outTypeId_4'];
-    this.fielder_4 = this.battingInf_4.controls['fielder_4'];
-    this.bowler_4 = this.battingInf_4.controls['bowler_4'];
-    this.runs_4 = this.battingInf_4.controls['runs_4'];
-    this.balls_4 = this.battingInf_4.controls['balls_4'];
-    this.fours_4 = this.battingInf_4.controls['fours_4'];
-    this.sixes_4 = this.battingInf_4.controls['sixes_4'];
+    this.batsman_4 = <FormGroup> this.form.controls['batsman_4'];
+    this.player_id = this.batsman_4.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['4'];
+    this.how_out = this.batsman_4.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_4.controls['assist'];
+    this.bowler = this.batsman_4.controls['bowler'];
+    this.runs = this.batsman_4.controls['runs'];
+    this.balls = this.batsman_4.controls['balls'];
+    this.fours = this.batsman_4.controls['fours'];
+    this.sixes = this.batsman_4.controls['sixes'];
 
     //Batting Position # 5
-    this.battingInf_5 = <FormGroup> this.form.controls['battingInf_5'];
-    this.batsmanId_5 = this.battingInf_1.controls['batsmanId_5'];
-    this.outTypeId_5 = this.battingInf_5.controls['outTypeId_5'];
-    this.fielder_5 = this.battingInf_5.controls['fielder_5'];
-    this.bowler_5 = this.battingInf_5.controls['bowler_5'];
-    this.runs_5 = this.battingInf_5.controls['runs_5'];
-    this.balls_5 = this.battingInf_5.controls['balls_5'];
-    this.fours_5 = this.battingInf_5.controls['fours_5'];
-    this.sixes_5 = this.battingInf_5.controls['sixes_5'];
+    this.batsman_5 = <FormGroup> this.form.controls['batsman_5'];
+    this.player_id = this.batsman_5.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['5'];
+    this.how_out = this.batsman_5.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_5.controls['assist'];
+    this.bowler = this.batsman_5.controls['bowler'];
+    this.runs = this.batsman_5.controls['runs'];
+    this.balls = this.batsman_5.controls['balls'];
+    this.fours = this.batsman_5.controls['fours'];
+    this.sixes = this.batsman_5.controls['sixes'];
 
     //Batting Position # 6
-    this.battingInf_6 = <FormGroup> this.form.controls['battingInf_6'];
-    this.batsmanId_6 = this.battingInf_1.controls['batsmanId_6'];
-    this.outTypeId_6 = this.battingInf_6.controls['outTypeId_6'];
-    this.fielder_6 = this.battingInf_6.controls['fielder_6'];
-    this.bowler_6 = this.battingInf_6.controls['bowler_6'];
-    this.runs_6 = this.battingInf_6.controls['runs_6'];
-    this.balls_6 = this.battingInf_6.controls['balls_6'];
-    this.fours_6 = this.battingInf_6.controls['fours_6'];
-    this.sixes_6 = this.battingInf_6.controls['sixes_6'];
+    this.batsman_6 = <FormGroup> this.form.controls['batsman_6'];
+    this.player_id = this.batsman_6.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['6'];
+    this.how_out = this.batsman_6.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_6.controls['assist'];
+    this.bowler = this.batsman_6.controls['bowler'];
+    this.runs = this.batsman_6.controls['runs'];
+    this.balls = this.batsman_6.controls['balls'];
+    this.fours = this.batsman_6.controls['fours'];
+    this.sixes = this.batsman_6.controls['sixes'];
 
     //Batting Position # 7
-    this.battingInf_7 = <FormGroup> this.form.controls['battingInf_7'];
-    this.batsmanId_7 = this.battingInf_1.controls['batsmanId_7'];
-    this.outTypeId_7 = this.battingInf_7.controls['outTypeId_7'];
-    this.fielder_7 = this.battingInf_7.controls['fielder_7'];
-    this.bowler_7 = this.battingInf_7.controls['bowler_7'];
-    this.runs_7 = this.battingInf_7.controls['runs_7'];
-    this.balls_7 = this.battingInf_7.controls['balls_7'];
-    this.fours_7 = this.battingInf_7.controls['fours_7'];
-    this.sixes_7 = this.battingInf_7.controls['sixes_7'];
+    this.batsman_7 = <FormGroup> this.form.controls['batsman_7'];
+    this.player_id = this.batsman_7.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['7'];
+    this.how_out = this.batsman_7.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_7.controls['assist'];
+    this.bowler = this.batsman_7.controls['bowler'];
+    this.runs = this.batsman_7.controls['runs'];
+    this.balls = this.batsman_7.controls['balls'];
+    this.fours = this.batsman_7.controls['fours'];
+    this.sixes = this.batsman_7.controls['sixes'];
 
     //Batting Position # 8
-    this.battingInf_8 = <FormGroup> this.form.controls['battingInf_8'];
-    this.batsmanId_8 = this.battingInf_1.controls['batsmanId_8'];
-    this.outTypeId_8 = this.battingInf_8.controls['outTypeId_8'];
-    this.fielder_8 = this.battingInf_8.controls['fielder_8'];
-    this.bowler_8 = this.battingInf_8.controls['bowler_8'];
-    this.runs_8 = this.battingInf_8.controls['runs_8'];
-    this.balls_8 = this.battingInf_8.controls['balls_8'];
-    this.fours_8 = this.battingInf_8.controls['fours_8'];
-    this.sixes_8 = this.battingInf_8.controls['sixes_8'];
-
+    this.batsman_8 = <FormGroup> this.form.controls['batsman_8'];
+    this.player_id = this.batsman_8.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['8'];
+    this.how_out = this.batsman_8.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_8.controls['assist'];
+    this.bowler = this.batsman_8.controls['bowler'];
+    this.runs = this.batsman_8.controls['runs'];
+    this.balls = this.batsman_8.controls['balls'];
+    this.fours = this.batsman_8.controls['fours'];
+    this.sixes = this.batsman_8.controls['sixes'];
     //Batting Position # 9
-    this.battingInf_9 = <FormGroup> this.form.controls['battingInf_9'];
-    this.batsmanId_9 = this.battingInf_1.controls['batsmanId_9'];
-    this.outTypeId_9 = this.battingInf_9.controls['outTypeId_9'];
-    this.fielder_9 = this.battingInf_9.controls['fielder_9'];
-    this.bowler_9 = this.battingInf_9.controls['bowler_9'];
-    this.runs_9 = this.battingInf_9.controls['runs_9'];
-    this.balls_9 = this.battingInf_9.controls['balls_9'];
-    this.fours_9 = this.battingInf_9.controls['fours_9'];
-    this.sixes_9 = this.battingInf_9.controls['sixes_9'];
+    this.batsman_9 = <FormGroup> this.form.controls['batsman_9'];
+    this.player_id = this.batsman_9.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['9'];
+    this.how_out = this.batsman_9.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_9.controls['assist'];
+    this.bowler = this.batsman_9.controls['bowler'];
+    this.runs = this.batsman_9.controls['runs'];
+    this.balls = this.batsman_9.controls['balls'];
+    this.fours = this.batsman_9.controls['fours'];
+    this.sixes = this.batsman_9.controls['sixes'];
 
     //Batting Position # 10
-    this.battingInf_10 = <FormGroup> this.form.controls['battingInf_10'];
-    this.batsmanId_10 = this.battingInf_1.controls['batsmanId_10'];
-    this.outTypeId_10 = this.battingInf_10.controls['outTypeId_10'];
-    this.fielder_10 = this.battingInf_10.controls['fielder_10'];
-    this.bowler_10 = this.battingInf_10.controls['bowler_10'];
-    this.runs_10 = this.battingInf_10.controls['runs_10'];
-    this.balls_10 = this.battingInf_10.controls['balls_10'];
-    this.fours_10 = this.battingInf_10.controls['fours_10'];
-    this.sixes_10 = this.battingInf_10.controls['sixes_10'];
+    this.batsman_10 = <FormGroup> this.form.controls['batsman_10'];
+    this.player_id = this.batsman_10.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['10'];
+    this.how_out = this.batsman_10.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_10.controls['assist'];
+    this.bowler = this.batsman_10.controls['bowler'];
+    this.runs = this.batsman_10.controls['runs'];
+    this.balls = this.batsman_10.controls['balls'];
+    this.fours = this.batsman_10.controls['fours'];
+    this.sixes = this.batsman_10.controls['sixes'];
 
     //Batting Position # 11
-    this.battingInf_11 = <FormGroup> this.form.controls['battingInf_11'];
-    this.batsmanId_11 = this.battingInf_1.controls['batsmanId_11'];
-    this.outTypeId_11 = this.battingInf_11.controls['outTypeId_11'];
-    this.fielder_11 = this.battingInf_11.controls['fielder_11'];
-    this.bowler_11 = this.battingInf_11.controls['bowler_11'];
-    this.runs_11 = this.battingInf_11.controls['runs_11'];
-    this.balls_11 = this.battingInf_11.controls['balls_11'];
-    this.fours_11 = this.battingInf_11.controls['fours_11'];
-    this.sixes_11 = this.battingInf_11.controls['sixes_11'];
+    this.batsman_11 = <FormGroup> this.form.controls['batsman_11'];
+    this.player_id = this.batsman_11.controls['player_id'];
+    this.batting_position = this.batsman_1.controls['11'];
+    this.how_out = this.batsman_11.controls['how_out'];
+    this.notout = this.batsman_1.controls['notout'];
+    this.assist = this.batsman_11.controls['assist'];
+    this.bowler = this.batsman_11.controls['bowler'];
+    this.runs = this.batsman_11.controls['runs'];
+    this.balls = this.batsman_11.controls['balls'];
+    this.fours = this.batsman_11.controls['fours'];
+    this.sixes = this.batsman_11.controls['sixes'];
 
   }
 
   ngOnInit(): void {
     this.howOutTypes();
     this.getPlayerslist();
-
   }
 
 
@@ -410,37 +401,37 @@ export class SubmitScoreBattingComponent {
   onSelectedBatting(index, value) {
     console.log('index', index, 'value ', value)
     if (index == 0) {
-      this.battingInf_1.controls['batsmanId_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['player_id'].setValue(value);
+      console.info("this.batsman_1.controls :: ", this.batsman_1.controls.value)
     } else if (index == 1) {
-      this.battingInf_2.controls['batsmanId_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['player_id'].setValue(value);
+      console.info("this.batsman_2.controls :: ", this.batsman_2.controls)
     } else if (index == 2) {
-      this.battingInf_3.controls['batsmanId_3'].setValue(value);
+      this.batsman_3.controls['player_id'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['batsmanId_4'].setValue(value);
+      this.batsman_4.controls['player_id'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['batsmanId_5'].setValue(value);
+      this.batsman_5.controls['player_id'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['batsmanId_6'].setValue(value);
+      this.batsman_6.controls['player_id'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['batsmanId_7'].setValue(value);
+      this.batsman_7.controls['player_id'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['batsmanId_8'].setValue(value);
+      this.batsman_8.controls['player_id'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['batsmanId_9'].setValue(value);
+      this.batsman_9.controls['player_id'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['batsmanId_10'].setValue(value);
+      this.batsman_10.controls['player_id'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['batsmanId_11'].setValue(value);
+      this.batsman_11.controls['player_id'].setValue(value);
     }
     console.info("this.form.controls.value :: ", this.form.value)
   }
@@ -448,37 +439,90 @@ export class SubmitScoreBattingComponent {
   onSelectedHowOutTypes(index, value) {
     console.log('index', index, 'value ', value)
     if (index == 0) {
-      this.battingInf_1.controls['outTypeId_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_1.controls['notout'].setValue('1');
+      } else {
+        this.batsman_1.controls['notout'].setValue('0');
+      }
     } else if (index == 1) {
-      this.battingInf_2.controls['outTypeId_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_2.controls['notout'].setValue('1');
+      } else {
+        this.batsman_2.controls['notout'].setValue('0');
+      }
     } else if (index == 2) {
-      this.battingInf_3.controls['outTypeId_3'].setValue(value);
+      this.batsman_3.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_3.controls['notout'].setValue('1');
+      } else {
+        this.batsman_3.controls['notout'].setValue('0');
+      }
     }
     else if (index == 3) {
-      this.battingInf_4.controls['outTypeId_4'].setValue(value);
+      this.batsman_4.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_4.controls['notout'].setValue('1');
+      } else {
+        this.batsman_4.controls['notout'].setValue('0');
+      }
     }
     else if (index == 4) {
-      this.battingInf_5.controls['outTypeId_5'].setValue(value);
+      this.batsman_5.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_5.controls['notout'].setValue('1');
+      } else {
+        this.batsman_5.controls['notout'].setValue('0');
+      }
     }
     else if (index == 5) {
-      this.battingInf_6.controls['outTypeId_6'].setValue(value);
+      this.batsman_6.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_6.controls['notout'].setValue('1');
+      } else {
+        this.batsman_6.controls['notout'].setValue('0');
+      }
     }
     else if (index == 6) {
-      this.battingInf_7.controls['outTypeId_7'].setValue(value);
+      this.batsman_7.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_7.controls['notout'].setValue('1');
+      } else {
+        this.batsman_7.controls['notout'].setValue('0');
+      }
     }
     else if (index == 7) {
-      this.battingInf_8.controls['outTypeId_8'].setValue(value);
+      this.batsman_8.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_8.controls['notout'].setValue('1');
+      } else {
+        this.batsman_8.controls['notout'].setValue('0');
+      }
     }
     else if (index == 8) {
-      this.battingInf_9.controls['outTypeId_9'].setValue(value);
+      this.batsman_9.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_9.controls['notout'].setValue('1');
+      } else {
+        this.batsman_9.controls['notout'].setValue('0');
+      }
     }
     else if (index == 9) {
-      this.battingInf_10.controls['outTypeId_10'].setValue(value);
+      this.batsman_10.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_10.controls['notout'].setValue('1');
+      } else {
+        this.batsman_10.controls['notout'].setValue('0');
+      }
     }
     else if (index == 10) {
-      this.battingInf_11.controls['outTypeId_11'].setValue(value);
+      this.batsman_11.controls['how_out'].setValue(value);
+      if (value == 2 || value == 8) {
+        this.batsman_11.controls['notout'].setValue('1');
+      } else {
+        this.batsman_11.controls['notout'].setValue('0');
+      }
     }
     console.info("this.form.controls.value :: ", this.form.value)
   }
@@ -486,37 +530,37 @@ export class SubmitScoreBattingComponent {
   onSelectedBowler(index, value: any) {
     console.log('index', index, 'value ', value)
     if (index == 0) {
-      this.battingInf_1.controls['bowler_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['bowler'].setValue(value);
+      console.info("this.batsman_1.controls :: ", this.batsman_1.controls.value)
     } else if (index == 1) {
-      this.battingInf_2.controls['bowler_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['bowler'].setValue(value);
+      console.info("this.batsman_2.controls :: ", this.batsman_2.controls)
     } else if (index == 2) {
-      this.battingInf_3.controls['bowler_3'].setValue(value);
+      this.batsman_3.controls['bowler'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['bowler_4'].setValue(value);
+      this.batsman_4.controls['bowler'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['bowler_5'].setValue(value);
+      this.batsman_5.controls['bowler'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['bowler_6'].setValue(value);
+      this.batsman_6.controls['bowler'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['bowler_7'].setValue(value);
+      this.batsman_7.controls['bowler'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['bowler_8'].setValue(value);
+      this.batsman_8.controls['bowler'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['bowler_9'].setValue(value);
+      this.batsman_9.controls['bowler'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['bowler_10'].setValue(value);
+      this.batsman_10.controls['bowler'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['bowler_11'].setValue(value);
+      this.batsman_11.controls['bowler'].setValue(value);
     }
     console.info("this.form.controls.value :: ", this.form.value)
   }
@@ -524,148 +568,140 @@ export class SubmitScoreBattingComponent {
   onSelectedFielder(index, value: any) {
     console.log('index', index, 'value ', value)
     if (index == 0) {
-      this.battingInf_1.controls['fielder_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['assist'].setValue(value);
     } else if (index == 1) {
-      this.battingInf_2.controls['fielder_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['assist'].setValue(value);
     } else if (index == 2) {
-      this.battingInf_3.controls['fielder_3'].setValue(value);
+      this.batsman_3.controls['assist'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['fielder_4'].setValue(value);
+      this.batsman_4.controls['assist'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['fielder_5'].setValue(value);
+      this.batsman_5.controls['assist'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['fielder_6'].setValue(value);
+      this.batsman_6.controls['assist'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['fielder_7'].setValue(value);
+      this.batsman_7.controls['assist'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['fielder_8'].setValue(value);
+      this.batsman_8.controls['assist'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['fielder_9'].setValue(value);
+      this.batsman_9.controls['assist'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['fielder_10'].setValue(value);
+      this.batsman_10.controls['assist'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['fielder_11'].setValue(value);
+      this.batsman_11.controls['assist'].setValue(value);
     }
   }
 
   onSelectedRuns(index, value) {
     console.log('index ', index, 'value', value)
     if (index == 0) {
-      this.battingInf_1.controls['runs_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['runs'].setValue(value);
     } else if (index == 1) {
-      this.battingInf_2.controls['runs_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['runs'].setValue(value);
     } else if (index == 2) {
-      this.battingInf_3.controls['runs_3'].setValue(value);
+      this.batsman_3.controls['runs'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['runs_4'].setValue(value);
+      this.batsman_4.controls['runs'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['runs_5'].setValue(value);
+      this.batsman_5.controls['runs'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['runs_6'].setValue(value);
+      this.batsman_6.controls['runs'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['runs_7'].setValue(value);
+      this.batsman_7.controls['runs'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['runs_8'].setValue(value);
+      this.batsman_8.controls['runs'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['runs_9'].setValue(value);
+      this.batsman_9.controls['runs'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['runs_10'].setValue(value);
+      this.batsman_10.controls['runs'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['runs_11'].setValue(value);
+      this.batsman_11.controls['runs'].setValue(value);
     }
   }
 
   onSelectedBalls(index, value) {
     console.log('index ', index, 'value', value)
     if (index == 0) {
-      this.battingInf_1.controls['balls_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['balls'].setValue(value);
     } else if (index == 1) {
-      this.battingInf_2.controls['balls_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['balls'].setValue(value);
     } else if (index == 2) {
-      this.battingInf_3.controls['balls_3'].setValue(value);
+      this.batsman_3.controls['balls'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['balls_4'].setValue(value);
+      this.batsman_4.controls['balls'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['balls_5'].setValue(value);
+      this.batsman_5.controls['balls'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['balls_6'].setValue(value);
+      this.batsman_6.controls['balls'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['balls_7'].setValue(value);
+      this.batsman_7.controls['balls'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['balls_8'].setValue(value);
+      this.batsman_8.controls['balls'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['balls_9'].setValue(value);
+      this.batsman_9.controls['balls'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['balls_10'].setValue(value);
+      this.batsman_10.controls['balls'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['balls_11'].setValue(value);
+      this.batsman_11.controls['balls'].setValue(value);
     }
   }
 
   onSelectedFours(index, value) {
     console.log('index ', index, 'value', value)
     if (index == 0) {
-      this.battingInf_1.controls['fours_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['fours'].setValue(value);
     } else if (index == 1) {
-      this.battingInf_2.controls['fours_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['fours'].setValue(value);
     } else if (index == 2) {
-      this.battingInf_3.controls['fours_3'].setValue(value);
+      this.batsman_3.controls['fours'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['fours_4'].setValue(value);
+      this.batsman_4.controls['fours'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['fours_5'].setValue(value);
+      this.batsman_5.controls['fours'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['fours_6'].setValue(value);
+      this.batsman_6.controls['fours'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['fours_7'].setValue(value);
+      this.batsman_7.controls['fours'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['fours_8'].setValue(value);
+      this.batsman_8.controls['fours'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['fours_9'].setValue(value);
+      this.batsman_9.controls['fours'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['fours_10'].setValue(value);
+      this.batsman_10.controls['fours'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['fours_11'].setValue(value);
+      this.batsman_11.controls['fours'].setValue(value);
     }
   }
 
@@ -673,41 +709,65 @@ export class SubmitScoreBattingComponent {
   onSelectedSixes(index, value) {
     console.log('index ', index, 'value', value)
     if (index == 0) {
-      this.battingInf_1.controls['sixes_1'].setValue(value);
-      console.info("this.battingInf_1.controls :: ", this.battingInf_1.controls.value)
+      this.batsman_1.controls['sixes'].setValue(value);
     } else if (index == 1) {
-      this.battingInf_2.controls['sixes_2'].setValue(value);
-      console.info("this.battingInf_2.controls :: ", this.battingInf_2.controls)
+      this.batsman_2.controls['sixes'].setValue(value);
+      console.info("this.batsman_2.controls :: ", this.batsman_2.controls)
     } else if (index == 2) {
-      this.battingInf_3.controls['sixes_3'].setValue(value);
+      this.batsman_3.controls['sixes'].setValue(value);
     }
     else if (index == 3) {
-      this.battingInf_4.controls['sixes_4'].setValue(value);
+      this.batsman_4.controls['sixes'].setValue(value);
     }
     else if (index == 4) {
-      this.battingInf_5.controls['sixes_5'].setValue(value);
+      this.batsman_5.controls['sixes'].setValue(value);
     }
     else if (index == 5) {
-      this.battingInf_6.controls['sixes_6'].setValue(value);
+      this.batsman_6.controls['sixes'].setValue(value);
     }
     else if (index == 6) {
-      this.battingInf_7.controls['sixes_7'].setValue(value);
+      this.batsman_7.controls['sixes'].setValue(value);
     }
     else if (index == 7) {
-      this.battingInf_8.controls['sixes_8'].setValue(value);
+      this.batsman_8.controls['sixes'].setValue(value);
     }
     else if (index == 8) {
-      this.battingInf_9.controls['sixes_9'].setValue(value);
+      this.batsman_9.controls['sixes'].setValue(value);
     }
     else if (index == 9) {
-      this.battingInf_10.controls['sixes_10'].setValue(value);
+      this.batsman_10.controls['sixes'].setValue(value);
     }
     else if (index == 10) {
-      this.battingInf_11.controls['sixes_11'].setValue(value);
+      this.batsman_11.controls['sixes'].setValue(value);
     }
   }
 
-  check() {
-    console.log("check val")
+  getMatchDetails() {
+    let match = this.matchesDataStoreService.getMatchDetails();
+    console.log("Match information ::", match)
+    if (match != null || match != undefined) {
+      console.log("Match inside ::", match);
+      this.form.controls['game_id'].setValue(match[0].game_id);
+      this.form.controls['season'].setValue(match[0].season);
+      this.form.controls['innings_id'].setValue(this.inningsId);
+      this.form.controls['team'].setValue(match[0].hometeam);
+      this.form.controls['opponent'].setValue(match[0].awayteam);
+    }
+  }
+
+  public onSubmit(values: Object): void {
+    this.getMatchDetails();
+    console.log("form value :: ==>", this.batsman_1.value);
+    console.log("group", this.form.value.array);
+    let details = JSON.stringify(this.form.value);
+    /*var array = $.map(details, function(value, index) {
+     return [value];
+     });*/
+
+    /*console.log("is array :: ", Array.isArray(array));
+     console.log("Yahoo Array is ::", array);*/
+    const match$ = this.matchesService.submit_score_batting_details(details);
+    match$.subscribe(responce => this.matchScore = responce);
+    console.log("After submitting match$ :: ", match$);
   }
 }

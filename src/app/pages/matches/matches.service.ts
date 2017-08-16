@@ -29,6 +29,7 @@ export class MatchesService {
   private findMatch = 'findMatchByPlayingTeamsAndDate?';
   private howOutType = '/submit/score/howout';
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
+  private score_batting_details = 'updateScorecardBattingDetailss';
 
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -41,6 +42,7 @@ export class MatchesService {
   private findMatch_url = this.baseUrl + this.findMatch;
   private howOutType_url = this.baseUrl + this.howOutType;
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
+  private score_batting_details_url = this.baseUrl + this.score_batting_details;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -79,8 +81,15 @@ export class MatchesService {
   }
 
   getPlayersByTeamsIds(teamIds): Observable<any> {
-    console.info("Call for getPlayerslist() with url : ", this.players_url);
+    console.info("Call for getPlayerslist() with id :: ", teamIds, ' && url : ', this.players_url);
     return this.http.post(this.playersByIds_url, teamIds, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  submit_score_batting_details(battingDetails): Observable<any> {
+    console.info("Batting object for update batting score care :: ", battingDetails);
+    console.info("Call for submit_score_batting_details() with  url : ", this.score_batting_details_url);
+    return this.http.post(this.score_batting_details_url, battingDetails, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }
 
