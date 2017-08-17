@@ -30,6 +30,7 @@ export class MatchesService {
   private howOutType = '/submit/score/howout';
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
   private score_batting_details = 'updateScorecardBattingDetailss';
+  private score_bowling_details = 'updateScorecardBowlingDetails';
 
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -43,6 +44,7 @@ export class MatchesService {
   private howOutType_url = this.baseUrl + this.howOutType;
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
   private score_batting_details_url = this.baseUrl + this.score_batting_details;
+  private score_bowling_details_url = this.baseUrl + this.score_bowling_details;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -87,9 +89,14 @@ export class MatchesService {
   }
 
   submit_score_batting_details(battingDetails): Observable<any> {
-    console.info("Batting object for update batting score care :: ", battingDetails);
     console.info("Call for submit_score_batting_details() with  url : ", this.score_batting_details_url);
     return this.http.post(this.score_batting_details_url, battingDetails, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  submit_score_bowling_details(bowlingDetails): Observable<any> {
+    console.info("Call for submit_score_bowling_details() with  url : ", this.score_bowling_details_url);
+    return this.http.put(this.score_bowling_details_url, bowlingDetails, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }
 

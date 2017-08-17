@@ -218,8 +218,10 @@
       <!-- ================= Fall of wickets <= End ==================================
        ================ ************  STEP 2 ************ ============================
        ======================= Bowling Details Section => Start ======================-->
+
+      <submit-score-bowling [Players]="playersList" [inningsId]="1" ></submit-score-bowling>
       <!--Bowling Details-->
-      <ba-card baCardClass="with-scroll" title="Enter Bowling Details">
+      <!--<ba-card baCardClass="with-scroll" title="Enter Bowling Details">
         <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
           <div class="col-sm-2">
             <label *ngIf="fst">Bowler Names</label>
@@ -256,7 +258,7 @@
             <input type="text" class="form-control" id="bowlerwides" placeholder="wides">
           </div>
         </div>
-      </ba-card>
+      </ba-card>-->
 
       <!--
   ================= Bowling Details Section <= End ===============================

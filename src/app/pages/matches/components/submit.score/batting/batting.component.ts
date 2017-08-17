@@ -402,36 +402,45 @@ export class SubmitScoreBattingComponent {
     console.log('index', index, 'value ', value)
     if (index == 0) {
       this.batsman_1.controls['player_id'].setValue(value);
-      console.info("this.batsman_1.controls :: ", this.batsman_1.controls.value)
+      this.batsman_1.controls['batting_position'].setValue('1');
     } else if (index == 1) {
       this.batsman_2.controls['player_id'].setValue(value);
-      console.info("this.batsman_2.controls :: ", this.batsman_2.controls)
+      this.batsman_2.controls['batting_position'].setValue('2');
     } else if (index == 2) {
       this.batsman_3.controls['player_id'].setValue(value);
+      this.batsman_3.controls['batting_position'].setValue('3');
     }
     else if (index == 3) {
       this.batsman_4.controls['player_id'].setValue(value);
+      this.batsman_4.controls['batting_position'].setValue('4');
     }
     else if (index == 4) {
       this.batsman_5.controls['player_id'].setValue(value);
+      this.batsman_5.controls['batting_position'].setValue('5');
     }
     else if (index == 5) {
       this.batsman_6.controls['player_id'].setValue(value);
+      this.batsman_6.controls['batting_position'].setValue('6');
     }
     else if (index == 6) {
       this.batsman_7.controls['player_id'].setValue(value);
+      this.batsman_7.controls['batting_position'].setValue('7');
     }
     else if (index == 7) {
       this.batsman_8.controls['player_id'].setValue(value);
+      this.batsman_8.controls['batting_position'].setValue('8');
     }
     else if (index == 8) {
       this.batsman_9.controls['player_id'].setValue(value);
+      this.batsman_9.controls['batting_position'].setValue('9');
     }
     else if (index == 9) {
       this.batsman_10.controls['player_id'].setValue(value);
+      this.batsman_10.controls['batting_position'].setValue('10');
     }
     else if (index == 10) {
       this.batsman_11.controls['player_id'].setValue(value);
+      this.batsman_11.controls['batting_position'].setValue('11');
     }
     console.info("this.form.controls.value :: ", this.form.value)
   }
@@ -757,17 +766,8 @@ export class SubmitScoreBattingComponent {
 
   public onSubmit(values: Object): void {
     this.getMatchDetails();
-    console.log("form value :: ==>", this.batsman_1.value);
-    console.log("group", this.form.value.array);
     let details = JSON.stringify(this.form.value);
-    /*var array = $.map(details, function(value, index) {
-     return [value];
-     });*/
-
-    /*console.log("is array :: ", Array.isArray(array));
-     console.log("Yahoo Array is ::", array);*/
     const match$ = this.matchesService.submit_score_batting_details(details);
     match$.subscribe(responce => this.matchScore = responce);
-    console.log("After submitting match$ :: ", match$);
   }
 }
