@@ -144,6 +144,11 @@ export class DashboardService {
       alt: 'Description for Image 12',
       title: 'Title 17'
     });
+    this.images_odd.push({
+      source: ' ../../../../assets/images/Galleria/galleria18.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 17'
+    });
     return this.images_odd;
   }
 

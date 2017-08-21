@@ -26,6 +26,7 @@ import { TablesModule } from '../tables/tables.module';
 import {DashboardService} from "./dashboard.service";
 import {GalleryComponent} from "./cricGallery/gallery";
 import {DomHandlerService} from "./cricGallery/domhandler";
+import {PlotChartComponent} from "./charts/teamChartComponent";
 
 @NgModule({
   imports: [
@@ -34,7 +35,7 @@ import {DomHandlerService} from "./cricGallery/domhandler";
     AppTranslationModule,
     NgaModule,
     routing,
-    TablesModule
+    TablesModule,
   ],
   declarations: [
     PopularApp,
@@ -46,7 +47,8 @@ import {DomHandlerService} from "./cricGallery/domhandler";
     Todo,
     Calendar,
     Dashboard,
-    GalleryComponent
+    GalleryComponent,
+    PlotChartComponent
   ],
   exports: [
     TablesModule
