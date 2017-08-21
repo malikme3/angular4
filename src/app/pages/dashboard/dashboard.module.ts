@@ -24,6 +24,8 @@ import { TrafficChartService } from './trafficChart/trafficChart.service';
 import { UsersMapService } from './usersMap/usersMap.service';
 import { TablesModule } from '../tables/tables.module';
 import {DashboardService} from "./dashboard.service";
+import {GalleryComponent} from "./cricGallery/gallery";
+import {DomHandlerService} from "./cricGallery/domhandler";
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import {DashboardService} from "./dashboard.service";
     Feed,
     Todo,
     Calendar,
-    Dashboard
+    Dashboard,
+    GalleryComponent
   ],
   exports: [
     TablesModule
@@ -56,7 +59,9 @@ import {DashboardService} from "./dashboard.service";
     TodoService,
     TrafficChartService,
     UsersMapService,
-    DashboardService
+    DashboardService,
+    DomHandlerService,
+
   ]
 })
 export class DashboardModule { }
