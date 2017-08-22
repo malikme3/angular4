@@ -20,9 +20,9 @@ export class PlotChartComponent implements AfterViewInit, OnDestroy {
 
   @Input() options: any;
 
-  @Input() width: number;
+  @Input() width: string;
 
-  @Input() height: number;
+  @Input() height: string;
 
   @Output() onDataSelect: EventEmitter<any> = new EventEmitter();
 

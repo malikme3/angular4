@@ -7,6 +7,7 @@ import {ScheduleComponent} from "./components/schedule/schedule.component";
 import {ScoreComponent} from "./components/detailed.score/score.component";
 import {SubmitScoreComponent} from "./components/submit.score/submitScore.component";
 import {SubmitScoreBatting} from "./components/submit.score/submitScoreBatting.component";
+import {SubmitScoreBattingComponent} from "./components/submit.score/batting/batting.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
       {path: 'pointsTableView', component: PointsTableComponent},
       {path: 'scoreView', component: ScoreComponent},
       {path: 'submitScore', component: SubmitScoreComponent},
+      {path: 'scoreBattingtFirst', component: SubmitScoreBattingComponent},
       {path: 'submitScoreStep2', component: SubmitScoreBatting}
     ]
   }

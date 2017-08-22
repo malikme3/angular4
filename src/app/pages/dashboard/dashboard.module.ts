@@ -27,6 +27,8 @@ import {DashboardService} from "./dashboard.service";
 import {GalleryComponent} from "./cricGallery/gallery";
 import {DomHandlerService} from "./cricGallery/domhandler";
 import {PlotChartComponent} from "./charts/teamChartComponent";
+import {ChartsModule} from "ng2-charts";
+import {PlotChartNgComponent} from "./charts/ngchartsComponent";
 
 @NgModule({
   imports: [
@@ -36,6 +38,7 @@ import {PlotChartComponent} from "./charts/teamChartComponent";
     NgaModule,
     routing,
     TablesModule,
+    ChartsModule
   ],
   declarations: [
     PopularApp,
@@ -48,7 +51,9 @@ import {PlotChartComponent} from "./charts/teamChartComponent";
     Calendar,
     Dashboard,
     GalleryComponent,
-    PlotChartComponent
+    PlotChartComponent,
+    PlotChartNgComponent,
+
   ],
   exports: [
     TablesModule

@@ -11,38 +11,28 @@ export class Dashboard {
 
   points;
   groups;
-  data:any;
+  data: any;
   images: any[];
   images_odd: any[];
   //Default year : 2017
   year: String = '2017';
 
   constructor(private dashboardService: DashboardService) {
-    this.data = {
-      datasets: [{
-        data: [
-          17,
-          19,
-          12,
-          7,
-          14
-        ],
-        backgroundColor: [
-          "#FF6384",
-          "#4BC0C0",
-          "#FFCE56",
-          "#E7E9ED",
-          "#36A2EB"
-        ],
-        label: 'My dataset'
-      }],
-      labels: [
-        "Red",
-        "Green",
-        "Yellow",
-        "Grey"
-      ]
-    }
+    /*
+     this.data = {
+     datasets: [{
+     data: [6, 4, 2, 12],
+     backgroundColor: [
+     "#FF6384",
+     "#7d1ac0",
+     "#FFCE56",
+     "#22ed19"
+     ],
+     label: 'My dataset'
+     }],
+     labels: ['Played', 'Won', 'Lost', 'Total']
+     }
+     */
 
   }
 

@@ -70,6 +70,15 @@ export const PAGES_MENU = [
             data: {
               menu: {
                 title: 'Submit Score-2',
+                hidden: true,
+              }
+            }
+          }, {
+            path: 'scoreBattingtFirst',
+            data: {
+              menu: {
+                title: 'Submit Score: Batting First Innings',
+                hidden: false,
               }
             }
           }
