@@ -74,10 +74,10 @@ export const PAGES_MENU = [
               }
             }
           }, {
-            path: 'scoreBattingtFirst',
+            path: 'submitScoreStep2',
             data: {
               menu: {
-                title: 'Submit Score: Batting First Innings',
+                title: 'Submit Score',
                 hidden: false,
               }
             }

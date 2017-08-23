@@ -1,0 +1,219 @@
+<div>
+  <ba-card baCardClass="with-scroll" title="Match Basic Details">
+    <div id="step1">
+      <div class="row">
+        <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select League">
+            <md-radio-group class="example-radio-group" *ngFor="let league of checkLeagues" [(ngModel)]="selectedLeague"
+                            (click)="onSelected('league_id', league.league_id); onSelected('season', league.seasonId) "
+                            [disabled]="league.disabled">
+              <md-radio-button class="example-radio-button" [value]="league">
+                {{league.name}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+        <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select Venue">
+            <md-radio-group class="example-radio-group" [(ngModel)]="selectedVenue" *ngFor="let venue of checkVenues"
+                            [disabled]="venue.disabled">
+              <md-radio-button class="example-radio-button" [value]="venue"
+                               (click)="onSelected('ground_id', venue.value)"
+                               (click)="onSelected('ground_name', venue.name)">
+                {{venue.name}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+        <!--Ground Venues-->
+        <div class="col-xlg-6 col-lg-6 col-md-6 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select Result">
+            <md-radio-group class="example-radio-group" [(ngModel)]="selectedResult">
+              <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result"
+                               (click)="onSelectedResult(result.name, result.value)">
+                {{result.text}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class=" col-lg-6 col-md-6 col-sm-12 control-label"><h4>Select Match Date</h4></label>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <ng2-datepicker [options]="options" [(ngModel)]="game_date"></ng2-datepicker>
+        </div>
+      </div>
+      <ba-card baCardClass="with-scroll" title="Select Match Result">
+
+        <div class="form-group row">
+          <label for="week" class="  col-sm-4 control-label">Week</label>
+          <div class="col-lg-8 col-md-8 col-sm-8">
+            <input [formControl]="result" type="text" class="form-control" id="week" placeholder="Enter Week #"
+                   [(ngModel)]="weekNo" (change)="onSelected('week', weekNo)">
+          </div>
+          <label for="result" class="col-sm-4 control-label">Match Result</label>
+          <div class="col-sm-8">
+            <input [formControl]="result" type="text" class="form-control" id="result" placeholder="Enter Result">
+          </div>
+          <label for="maxovers" class="col-sm-4 control-label">Maximum Overs</label>
+          <div class="col-sm-8">
+            <input [formControl]="maxovers" type="text" class="form-control" id="maxovers" placeholder="Maximum Overs">
+          </div>
+        </div>
+      </ba-card>
+
+      <ba-card baCardClass="with-scroll" title="Select Playing Teams">
+        <form [formGroup]="form" (ngSubmit)="onSubmitBasicDetails(form.value)" class="form-horizontal">
+
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Teams for Home Team's Portable Players</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [multiple]="true" [allowClear]="true"
+                         placeholder="Select Teams for Home Team's Portable Players"
+                         highlightTextColor="black"
+                         (selected)="onTeamsSelected('homeTeamsPortable',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Teams for Away Team's Portable Players</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [multiple]="true" [allowClear]="true"
+                         placeholder="Select Teams for Away Team's Portable Players"
+                         highlightTextColor="black" (selected)="onTeamsSelected('awayTeamsPortable',$event.value)"
+                         (selected)="onTeamsSelected('awayTeamsPortable',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="form-group row" >
+            <div class="col-sm-2" *ngIf="!name.valid && name.touched">Must be Selectd</div>
+            <label for="result" class="col-sm-3 control-label" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">Home Team</label>
+            <div class="col-sm-7 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
+                         highlightColor="#FFCE56" (selected)="onTeamsSelected('homeTeam',$event.value)"
+                         (selected)="onSelected('hometeam',$event.value)" (selected)="playing_teams('hometeam',$event)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Away Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
+                         highlightTextColor="black" (selected)="onTeamsSelected('awayTeam',$event.value)"
+                         (selected)="onSelected('awayteam',$event.value)" (selected)="playing_teams('awayteam',$event)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Umpiring Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
+                         highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)"
+                         (selected)="matchByPlayingTeamAndDate()"
+                         (selected)="onSelected('umpireTeam',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label"> Winning Toss Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="teams_playings" [allowClear]="true"
+                         placeholder="Select Winning Toss team" highlightTextColor="black"
+                         (selected)="storeMatchDetails()"
+                         (selected)="onSelected('toss_won_id',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Batting First Team</label>
+            <div class="col-sm-8">
+              <ng-select [formControl]="name"
+                         [(options)]="teams_playings" [allowClear]="true" (selected)="battingOrderStatus($event.value)"
+                         placeholder="Select Batting First Team" highlightTextColor="black"
+                         (selected)="onSelected('batting_second_id',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Batting Second Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [(options)]="teams_playings" [allowClear]="true"
+                         placeholder="Select Batting Second Team" highlightTextColor="black"
+                         (selected)="onSelected('batting_first_id',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Victorious Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="teams_playings" [allowClear]="true"
+                         placeholder="Select Victorious Team" highlightTextColor="black"
+                         (selected)="onSelected('result_won_id',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">First Umpire Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="playersForUmpiringTeam" [allowClear]="true"
+                         placeholder="Select First Umpire " highlightTextColor="black"
+                         (selected)="onSelected('umpire1',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Second Umpire Team</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="playersList" [allowClear]="true"
+                         placeholder="Select Second Umpire " highlightTextColor="black"
+                         (selected)="onSelected('umpire2',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row"
+               [ngClass]="has-error">
+            <label for="result" class="col-sm-4 control-label">Man of the Match</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="playersList" [allowClear]="true"
+                         placeholder="Select Man of the Match " highlightTextColor="black"
+                         (selected)="onSelected('mom',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+        </form>
+        <!--[disabled]="!form.valid"-->
+        <!--<div class="auth-sep"><span><span>or Sign up with one click</span></span></div>-->
+
+        <!--<div class="al-share-auth">-->
+        <!--<ul claSss="al-share clearfix">-->
+        <!--<li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>-->
+        <!--<li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>-->
+        <!--<li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>-->
+        <!--</ul>-->
+        <!--</div>-->
+      </ba-card>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+        <button type="submit" class="btn btn-default btn-auth" (click)="onSubmitBasicDetails(form.value)">Submit Match
+          Details !!
+        </button>
+      </div>
+    </div>
+
+  </ba-card>
+</div>

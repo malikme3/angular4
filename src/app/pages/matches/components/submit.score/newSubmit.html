@@ -1,6 +1,6 @@
 <div *ngIf="!submitted_step1">
   <ba-card baCardClass="with-scroll" title="Step 1">
-    <div id="step1" class="collapse">
+    <div id="step1" >
       <div class="row">
         <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
           <ba-card baCardClass="with-scroll" title="Select League">
@@ -181,7 +181,7 @@
     </div>
     <div class="form-group row">
       <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
-        <button type="submit" class="btn btn-default btn-auth" data-toggle="collapse" data-target="#step1">Score Card
+        <button type="submit" class="btn btn-default btn-auth" data-target="#step1">Score Card
           details !!
         </button>
       </div>
@@ -193,35 +193,35 @@
 <!--*************************************************************
 *******************************  STEP 2 ******************************
 *************************************************************-->
-
+<!--
 <div *ngIf="!submitted_step1">
   <ba-card baCardClass="with-scroll" title="Batsman Score Details">
     <form [formGroup]="battingForm" (ngSubmit)="onSubmit(battingForm.value)" class="form-horizontal">
       <submit-score-batting (notify)='onNotify_batting($event)' [batFirstPlayers]="playersList"
                             [inningsId]="1"></submit-score-batting>
-      <!--
+      &lt;!&ndash;
       ================= Batsman Score Details Section <= End ========================
       ================ ************  STEP 2 ************ ============================
       ======================= Extras Details Section => Start =======================
-     -->
+     &ndash;&gt;
       <ba-card baCardClass="with-scroll" title="Enter Total & Extras Detail">
         <submit-score-totals (notify)='onNotify($event)'></submit-score-totals>
         <submit-score-extras></submit-score-extras>
       </ba-card>
 
-      <!--================= Bowling Details Section <= End ===============================
+      &lt;!&ndash;================= Bowling Details Section <= End ===============================
       ================ ************  STEP 2 ************ ============================
-      ======================= Fall of wickets => Start ==============================-->
+      ======================= Fall of wickets => Start ==============================&ndash;&gt;
 
       <submit-score-wickets></submit-score-wickets>
 
-      <!-- ================= Fall of wickets <= End ==================================
+      &lt;!&ndash; ================= Fall of wickets <= End ==================================
        ================ ************  STEP 2 ************ ============================
-       ======================= Bowling Details Section => Start ======================-->
+       ======================= Bowling Details Section => Start ======================&ndash;&gt;
 
       <submit-score-bowling [Players]="playersList" [inningsId]="1" ></submit-score-bowling>
-      <!--Bowling Details-->
-      <!--<ba-card baCardClass="with-scroll" title="Enter Bowling Details">
+      &lt;!&ndash;Bowling Details&ndash;&gt;
+      &lt;!&ndash;<ba-card baCardClass="with-scroll" title="Enter Bowling Details">
         <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
           <div class="col-sm-2">
             <label *ngIf="fst">Bowler Names</label>
@@ -258,13 +258,13 @@
             <input type="text" class="form-control" id="bowlerwides" placeholder="wides">
           </div>
         </div>
-      </ba-card>-->
+      </ba-card>&ndash;&gt;
 
-      <!--
+      &lt;!&ndash;
   ================= Bowling Details Section <= End ===============================
   ================ ************  STEP 2 ************ =============================
   ======================= *********END************* ==============================
- -->
+ &ndash;&gt;
       <div class="form-group row">
         <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
           <button type="submit" class="btn btn-default btn-auth">Submit Step 2 Score Card details !!</button>
@@ -273,4 +273,4 @@
 
     </form>
   </ba-card>
-</div>
+</div>-->

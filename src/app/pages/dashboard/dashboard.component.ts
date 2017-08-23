@@ -18,23 +18,24 @@ export class Dashboard {
   year: String = '2017';
 
   constructor(private dashboardService: DashboardService) {
-    /*
+
      this.data = {
      datasets: [{
      data: [6, 4, 2, 12],
      backgroundColor: [
-     "#FF6384",
-     "#7d1ac0",
+     "#ff96ec",
+     "#a9c05e",
      "#FFCE56",
-     "#22ed19"
+     "#8bebed"
      ],
      label: 'My dataset'
      }],
      labels: ['Played', 'Won', 'Lost', 'Total']
      }
-     */
+
 
   }
+
 
   ngOnInit(): void {
     this.points = this.teamsStanding();
