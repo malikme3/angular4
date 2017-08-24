@@ -89,31 +89,62 @@
             </div>
           </div>
 
-          <div class="form-group row" >
-            <div class="col-sm-2" *ngIf="!name.valid && name.touched">Must be Selectd</div>
-            <label for="result" class="col-sm-3 control-label" [ngClass]="{'has-error': (!name.valid && name.touched), 'has-success': (name.valid && name.touched)}">Home Team</label>
-            <div class="col-sm-7 ">
-              <ng-select [formControl]="name"
+          <div class="form-group row">
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!hometeam.touched && !hometeam.valid" type="button" class="btn btn-info"
+                      disabled="disabled">Home Team
+              </button>
+              <button *ngSwitchCase="hometeam.valid" type="button" class="btn btn-success" disabled="disabled">Home Team
+              </button>
+              <button *ngSwitchCase="!hometeam.valid && hometeam.touched" type="button" class="btn btn-danger"
+                      disabled="disabled">Home Team
+              </button>
+            </div>
+            <div class="col-sm-8">
+              <ng-select [formControl]="hometeam"
                          [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
                          highlightColor="#FFCE56" (selected)="onTeamsSelected('homeTeam',$event.value)"
                          (selected)="onSelected('hometeam',$event.value)" (selected)="playing_teams('hometeam',$event)">
               </ng-select>
             </div>
           </div>
+
+          <!--Guest Team-->
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Away Team</label>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!awayteam.touched && !awayteam.valid" type="button" class="btn btn-info"
+                      disabled="disabled">Away Team
+              </button>
+              <button *ngSwitchCase="awayteam.valid" type="button" class="btn btn-success" disabled="disabled">Away Team
+              </button>
+              <button *ngSwitchCase="!awayteam.valid && awayteam.touched" type="button" class="btn btn-danger"
+                      disabled="disabled">Away Team
+              </button>
+            </div>
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="awayteam"
                          [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
                          highlightTextColor="black" (selected)="onTeamsSelected('awayTeam',$event.value)"
                          (selected)="onSelected('awayteam',$event.value)" (selected)="playing_teams('awayteam',$event)">
               </ng-select>
             </div>
           </div>
+
+          <!--Umpiring Team-->
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Umpiring Team</label>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!umpireTeam.touched && !umpireTeam.valid" type="button" class="btn btn-info"
+                      disabled="disabled">Home Team
+              </button>
+              <button *ngSwitchCase="umpireTeam.valid" type="button" class="btn btn-success" disabled="disabled">
+                Umpiring Team
+              </button>
+              <button *ngSwitchCase="!umpireTeam.valid && umpireTeam.touched" type="button" class="btn btn-danger"
+                      disabled="disabled">Home Team
+              </button>
+            </div>
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="umpireTeam"
                          [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
                          highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)"
                          (selected)="matchByPlayingTeamAndDate()"
@@ -121,10 +152,22 @@
               </ng-select>
             </div>
           </div>
+
+          <!--Winning Toss Team-->
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label"> Winning Toss Team</label>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!toss_won_id.touched && !toss_won_id.valid" type="button" class="btn btn-info"
+                      disabled="disabled">Winning Toss Team
+              </button>
+              <button *ngSwitchCase="toss_won_id.valid" type="button" class="btn btn-success" disabled="disabled">
+                Winning Toss Team
+              </button>
+              <button *ngSwitchCase="!toss_won_id.valid && toss_won_id.touched" type="button" class="btn btn-danger"
+                      disabled="disabled">Winning Toss Team
+              </button>
+            </div>
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="toss_won_id"
                          [options]="teams_playings" [allowClear]="true"
                          placeholder="Select Winning Toss team" highlightTextColor="black"
                          (selected)="storeMatchDetails()"
@@ -132,31 +175,71 @@
               </ng-select>
             </div>
           </div>
+
+          <!--Bating First Team-->
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Batting First Team</label>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!batting_first_id.touched && !batting_first_id.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">Batting First Team
+              </button>
+              <button *ngSwitchCase="batting_first_id.valid" type="button" class="btn btn-success" disabled="disabled">
+                Batting First Team
+              </button>
+              <button *ngSwitchCase="!batting_first_id.valid && batting_first_id.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">Batting First Team
+              </button>
+            </div>
             <div class="col-sm-8">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="batting_first_id"
                          [(options)]="teams_playings" [allowClear]="true" (selected)="battingOrderStatus($event.value)"
                          placeholder="Select Batting First Team" highlightTextColor="black"
+                         (selected)="onSelected('batting_first_id',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <!--Batting second-->
+          <div class="form-group row">
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!batting_second_id.touched && !batting_second_id.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">Batting Second Team
+              </button>
+              <button *ngSwitchCase="batting_second_id.valid" type="button" class="btn btn-success" disabled="disabled">
+                Batting Second Team
+              </button>
+              <button *ngSwitchCase="!batting_second_id.valid && batting_second_id.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">Batting Second Team
+              </button>
+            </div>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="batting_second_id"
+                         [(options)]="teams_playings" [allowClear]="true"
+                         placeholder="Select Batting Second Team" highlightTextColor="black"
                          (selected)="onSelected('batting_second_id',$event.value)">
               </ng-select>
             </div>
           </div>
 
+          <!--Victorious team -->
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Batting Second Team</label>
-            <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
-                         [(options)]="teams_playings" [allowClear]="true"
-                         placeholder="Select Batting Second Team" highlightTextColor="black"
-                         (selected)="onSelected('batting_first_id',$event.value)">
-              </ng-select>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!result_won_id.touched && !result_won_id.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">Victorious Team
+              </button>
+              <button *ngSwitchCase="result_won_id.valid" type="button" class="btn btn-success" disabled="disabled">
+                Victorious Team
+              </button>
+              <button *ngSwitchCase="!result_won_id.valid && result_won_id.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">Victorious Team
+              </button>
             </div>
-          </div>
-          <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Victorious Team</label>
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="result_won_id"
                          [options]="teams_playings" [allowClear]="true"
                          placeholder="Select Victorious Team" highlightTextColor="black"
                          (selected)="onSelected('result_won_id',$event.value)">
@@ -164,30 +247,71 @@
             </div>
           </div>
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">First Umpire Team</label>
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!umpire1.touched && !umpire1.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">First Umpire Team
+              </button>
+              <button *ngSwitchCase="umpire1.valid" type="button" class="btn btn-success" disabled="disabled">
+                First Umpire Team
+              </button>
+              <button *ngSwitchCase="!umpire1.valid && umpire1.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">First Umpire Team
+              </button>
+            </div>
+
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="umpire1"
                          [options]="playersForUmpiringTeam" [allowClear]="true"
                          placeholder="Select First Umpire " highlightTextColor="black"
                          (selected)="onSelected('umpire1',$event.value)">
               </ng-select>
             </div>
           </div>
+
+
           <div class="form-group row">
-            <label for="result" class="col-sm-4 control-label">Second Umpire Team</label>
+
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!umpire2.touched && !umpire2.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">Second Umpire Team
+              </button>
+              <button *ngSwitchCase="umpire2.valid" type="button" class="btn btn-success" disabled="disabled">
+                Second Umpire Team
+              </button>
+              <button *ngSwitchCase="!umpire2.valid && umpire2.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">Second Umpire Team
+              </button>
+            </div>
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="umpire2"
                          [options]="playersList" [allowClear]="true"
                          placeholder="Select Second Umpire " highlightTextColor="black"
                          (selected)="onSelected('umpire2',$event.value)">
               </ng-select>
             </div>
           </div>
-          <div class="form-group row"
-               [ngClass]="has-error">
-            <label for="result" class="col-sm-4 control-label">Man of the Match</label>
+          <div class="form-group row">
+
+            <div class="button-wrapper" class="col-sm-4 " [ngSwitch]="true">
+              <button *ngSwitchCase="!mom.touched && !mom.valid" type="button"
+                      class="btn btn-info"
+                      disabled="disabled">Man of the Match
+              </button>
+              <button *ngSwitchCase="mom.valid" type="button" class="btn btn-success" disabled="disabled">
+                Man of the Match
+              </button>
+              <button *ngSwitchCase="!mom.valid && mom.touched" type="button"
+                      class="btn btn-danger"
+                      disabled="disabled">Man of the Match
+              </button>
+            </div>
+
             <div class="col-sm-8 ">
-              <ng-select [formControl]="name"
+              <ng-select [formControl]="mom"
                          [options]="playersList" [allowClear]="true"
                          placeholder="Select Man of the Match " highlightTextColor="black"
                          (selected)="onSelected('mom',$event.value)">
