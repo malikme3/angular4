@@ -59,6 +59,8 @@ export class matchBasicDetailsComponent {
 
   private teamsname;
   myOptions: Array<any>;
+  myOptions2: any;
+  valueNew;
   playersList: Array<any>;
   batFirstPlayers: Array<any>;
   batSecondPlayers: Array<any>;
@@ -158,6 +160,16 @@ export class matchBasicDetailsComponent {
   ngOnInit(): void {
     this.getTeamslist();
     this.getPlayerslist();
+    console.warn("valueNew : ", this.valueNew)
+    this.myOptions2 = {
+      theme: 'green',
+      range: 'tm',
+      dayNames: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      presetNames: ['This Month', 'Last Month', 'This Week', 'Last Week', 'This Year', 'Last Year', 'Start', 'End'],
+      dateFormat: 'yMd',
+      outputFormat: 'MM/DD/YYYY',
+      startOfWeek: 1
+    };
   }
 
   //eague_id,season,week,awayteam,hometeam,game_date,result_won_id,forfeit,mom,umpire1,umpire2,maxovers,isactive

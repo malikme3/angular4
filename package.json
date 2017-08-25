@@ -67,6 +67,7 @@
     "leaflet": "0.7.7",
     "leaflet-map": "0.2.1",
     "lodash": "4.17.4",
+    "ng-daterangepicker": "^0.2.0",
     "ng-select": "^1.0.0-beta.6",
     "ng2-charts": "^1.6.0",
     "ng2-ckeditor": "1.1.6",

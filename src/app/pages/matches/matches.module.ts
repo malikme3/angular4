@@ -39,6 +39,7 @@ import {SubmitScoreBowlingComponent} from "./components/submit.score/bowling/bow
 import {submitScoreComponent_step2} from "./components/submit.score/submitScore_step2/submitScoreComponent_step2";
 import {matchBasicDetailsComponent} from "./components/submit.score/submitScore_step3/matchBasicDetails";
 import {LabelComponent} from "./components/label/labelComponent";
+import {NgDateRangePickerModule} from "ng-daterangepicker";
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import {LabelComponent} from "./components/label/labelComponent";
     ReactiveFormsModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    DatePickerModule
+    DatePickerModule,
+    NgDateRangePickerModule
   ],
   declarations: [
     Matches,
