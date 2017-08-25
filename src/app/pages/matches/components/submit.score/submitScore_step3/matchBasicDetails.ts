@@ -176,6 +176,7 @@ export class matchBasicDetailsComponent {
   checkLeagues = this.matchesConstants.getLeagues()
   checkVenues = this.matchesConstants.getCheckVenues();
   checkResults = this.matchesConstants.getCheckResults();
+  checkStatus = this.matchesConstants.getYesNo();
 
   public checkboxPropertiesMapping = {
     model: 'checked',

@@ -67,7 +67,7 @@ import {NgDateRangePickerModule} from "ng-daterangepicker";
     MdDatepickerModule,
     MdNativeDateModule,
     DatePickerModule,
-    NgDateRangePickerModule
+    NgDateRangePickerModule,
   ],
   declarations: [
     Matches,

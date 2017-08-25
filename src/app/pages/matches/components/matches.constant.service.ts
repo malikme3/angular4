@@ -8,6 +8,7 @@ export class MatchesConstants {
   checkLeagues;
   checkVenues;
   checkResults;
+  yesNoStatus;
   playerOutType;
   battingPositions;
   scheduelTable = {
@@ -60,6 +61,7 @@ export class MatchesConstants {
       }
     }
   }
+
 
   scoreTableSettings = {
     actions: {
@@ -180,6 +182,20 @@ export class MatchesConstants {
     }
   };
 
+  getYesNo() {
+    this.yesNoStatus = [{
+      yes: {
+        label: 'Yes',
+        value: '0',
+      },
+      no: {
+        label: 'No',
+        value: '1',
+      }
+    }]
+    return this.yesNoStatus;
+  }
+
   getLeagues() {
     this.checkLeagues = [{
       name: '20 Overs',
@@ -274,7 +290,8 @@ export class MatchesConstants {
       }];
     return this.checkResults;
   }
-  getPlayerOutType(){
+
+  getPlayerOutType() {
     this.playerOutType = [
       {label: 'Did not Bat', value: 'dnb', position: 0},
       {label: 'LBW', value: 'lbw', position: 0},
@@ -295,64 +312,65 @@ export class MatchesConstants {
     ];
     return this.playerOutType;
   }
-getBattingPositions() {
-  this.battingPositions = [
-    {
-      id: 1,
-      type: 'First Batting Position',
-      wicket: 'wicket#1'
-    },
-    {
-      id: 2,
-      type: 'Second Batting Position',
-      wicket: 'wicket#2'
 
-    },
-    {
-      id: 3,
-      type: 'Third Batting Position',
-      wicket: 'wicket#3'
-    },
-    {
-      id: 4,
-      type: 'Fourth Batting Position',
-      wicket: 'wicket#4'
-    },
-    {
-      id: 5,
-      type: 'Fifth Batting Position',
-      wicket: 'wicket#5'
-    }, {
-      id: 6,
-      type: 'sixth Batting Position',
-      wicket: 'wicket#6'
-    },
-    {
-      id: 7,
-      type: 'Seventh Batting Position',
-      wicket: 'wicket#7'
-    },
-    {
-      id: 8,
-      type: 'Eighth Batting Position',
-      wicket: 'wicket#8'
-    },
-    {
-      id: 9,
-      type: 'Ninth Batting Position',
-      wicket: 'wicket#9'
-    },
-    {
-      id: 10,
-      type: 'Tenth Batting Position',
-      wicket: 'wicket#10'
-    }
-    ,
-    {
-      id: 11,
-      type: 'Eleventh Batting Position'
-    }];
+  getBattingPositions() {
+    this.battingPositions = [
+      {
+        id: 1,
+        type: 'First Batting Position',
+        wicket: 'wicket#1'
+      },
+      {
+        id: 2,
+        type: 'Second Batting Position',
+        wicket: 'wicket#2'
 
-  return this.battingPositions;
-}
+      },
+      {
+        id: 3,
+        type: 'Third Batting Position',
+        wicket: 'wicket#3'
+      },
+      {
+        id: 4,
+        type: 'Fourth Batting Position',
+        wicket: 'wicket#4'
+      },
+      {
+        id: 5,
+        type: 'Fifth Batting Position',
+        wicket: 'wicket#5'
+      }, {
+        id: 6,
+        type: 'sixth Batting Position',
+        wicket: 'wicket#6'
+      },
+      {
+        id: 7,
+        type: 'Seventh Batting Position',
+        wicket: 'wicket#7'
+      },
+      {
+        id: 8,
+        type: 'Eighth Batting Position',
+        wicket: 'wicket#8'
+      },
+      {
+        id: 9,
+        type: 'Ninth Batting Position',
+        wicket: 'wicket#9'
+      },
+      {
+        id: 10,
+        type: 'Tenth Batting Position',
+        wicket: 'wicket#10'
+      }
+      ,
+      {
+        id: 11,
+        type: 'Eleventh Batting Position'
+      }];
+
+    return this.battingPositions;
+  }
 }
