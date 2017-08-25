@@ -38,6 +38,7 @@ import {MatchesDataStoreService} from "./components/matches-data-store";
 import {SubmitScoreBowlingComponent} from "./components/submit.score/bowling/bowling.component";
 import {submitScoreComponent_step2} from "./components/submit.score/submitScore_step2/submitScoreComponent_step2";
 import {matchBasicDetailsComponent} from "./components/submit.score/submitScore_step3/matchBasicDetails";
+import {LabelComponent} from "./components/label/labelComponent";
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import {matchBasicDetailsComponent} from "./components/submit.score/submitScore_
     matchBasicDetailsComponent,
     SubmitScoreBattingComponent,
     SubmitScoreBowlingComponent,
-    submitScoreComponent_step2
+    submitScoreComponent_step2,
+    LabelComponent
   ],
   providers: [
     ResultsService, MatchesConstants, DashboardService, MatchesService, MatchesDataStoreService
