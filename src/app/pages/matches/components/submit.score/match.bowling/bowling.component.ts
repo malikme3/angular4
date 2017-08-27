@@ -20,6 +20,7 @@ export class SubmitScoreBowlingComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @Input() Players: Array<any>;
   @Input() inningsId: number;
+  @Input() innings: string;
   playersList;
   player_out_type;
   matchScore;

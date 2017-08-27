@@ -144,5 +144,11 @@ export class MatchesService {
     console.error('Error while fetching date from servier', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
+
+  isEmpty(val:any): boolean {
+    return (val === undefined || val == null || val.length <= 0) ? true : false;
+  };
+
+
 }
 

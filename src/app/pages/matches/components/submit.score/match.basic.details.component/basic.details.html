@@ -15,9 +15,9 @@
                                 *ngFor="let league of checkLeagues"
                                 [(ngModel)]="selectedLeague"
                                 layout="column"
-                                (click)="onSelected('league_id', league.league_id); onSelected('season', league.seasonId) "
+                                (click)="onSelected('league_id', league.leagueId); onSelected('season', league.seasonId) "
                                 [disabled]="league.disabled">
-                  <md-radio-button class="example-radio-button" [value]="league">
+                  <md-radio-button class="example-radio-button" [value]="league.leagueId">
                     {{league.name}}
                   </md-radio-button>
                 </md-radio-group>
@@ -30,7 +30,7 @@
                 <md-radio-group [formControl]="ground_name" class="example-radio-group" [(ngModel)]="selectedVenue"
                                 *ngFor="let venue of checkVenues"
                                 [disabled]="venue.disabled">
-                  <md-radio-button class="example-radio-button" [value]="venue"
+                  <md-radio-button class="example-radio-button" [value]="venue.name"
                                    (click)="onSelected('ground_id', venue.value)"
                                    (click)="onSelected('ground_name', venue.name)">
                     {{venue.name}}
@@ -45,7 +45,7 @@
                 <dynamic-label *ngIf="matchResult.valid" [labelStatus]="'success'"
                                [labelText]="'Match Result Selected'"></dynamic-label>
                 <md-radio-group [formControl]="matchResult" class="example-radio-group" [(ngModel)]="selectedResult">
-                  <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result"
+                  <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result.value"
                                    (click)="onSelectedResult(result.name, result.value)">
                     {{result.text}}
                   </md-radio-button>
@@ -55,14 +55,14 @@
           </div>
         </ba-card>
         <div class="form-group row">
-          <div class="button-wrapper" class="col-sm-3 " [ngSwitch]="true">
+          <div class="button-wrapper" class="col-sm-3 " >
             <dynamic-label *ngIf="!game_date.valid" [labelStatus]="'error'"
                            [labelText]="'Select Match Date'"></dynamic-label>
             <dynamic-label *ngIf="game_date.valid" [labelStatus]="'success'"
                            [labelText]="'Date Selected'"></dynamic-label>
           </div>
           <div class="col-lg-3 col-md-3 col-sm-12">
-            <ng2-datepicker [formControl]="game_date" [(ngModel)]="valueNew" [options]="myOptions2"></ng2-datepicker>
+            <ng2-datepicker [formControl]="game_date"  [(ngModel)]="dateValue" [options]="myOptions2"></ng2-datepicker>
             <!--<ng-daterangepicker [formControl]="game_date" [(ngModel)]="valueNew" [options]="myOptions2"></ng-daterangepicker>-->
           </div>
 
@@ -77,7 +77,7 @@
             <!-- <input [formControl]="week" type="text" class="form-control" id="potables" placeholder="Portable Yes or No"
                     [(ngModel)]="weekNo" (change)="onSelected('week', weekNo)">-->
 
-            <md-checkbox>Please check !</md-checkbox>
+            <md-checkbox>Please check</md-checkbox>
 
           </div>
         </div>

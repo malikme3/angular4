@@ -1,0 +1,16 @@
+<!--Basic Match Scoring => code implementation in matchBasicDetailsComponent-->
+<!--<score-basic-details></score-basic-details>-->
+
+<!--First Innings Match Scoring => code implementation in matchBasicDetailsComponent-->
+<!--<submit-score-batting></submit-score-batting>-->
+
+<!--<submit-score-extras></submit-score-extras>
+<submit-score-totals></submit-score-totals>
+<submit-score-wickets></submit-score-wickets>-->
+
+
+<!--First Innings Match Scoring => code implementation in SubmitScoreBowlingComponent-->
+<div [ngSwitch]="true">
+<submit-score-bowling  [innings]="'First Innings'" *ngSwitchDefault></submit-score-bowling>
+<submit-score-bowling  [innings]="'Second Innings'" *ngSwitchCase ="secondInnings"></submit-score-bowling>
+</div>

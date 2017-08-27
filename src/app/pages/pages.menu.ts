@@ -65,23 +65,6 @@ export const PAGES_MENU = [
               }
             }
           }
-          , {
-            path: 'submitScoreStep2',
-            data: {
-              menu: {
-                title: 'Submit Score-2',
-                hidden: true,
-              }
-            }
-          }, {
-            path: 'submitScoreStep2',
-            data: {
-              menu: {
-                title: 'Submit Score',
-                hidden: false,
-              }
-            }
-          }
         ]
       },
       {

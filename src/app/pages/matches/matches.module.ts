@@ -21,7 +21,6 @@ import {DashboardService} from "../dashboard/dashboard.service";
 import {ScheduleComponent} from "./components/schedule/schedule.component";
 import {MatchesService} from "./matches.service";
 import {ScoreComponent} from "./components/detailed.score/score.component";
-import {SubmitScoreComponent} from "./components/submit.score/submitScore.component";
 import {FormsInPutModule} from "../forms/forms.module";
 import {
   MdAutocompleteModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdInputModule, MdNativeDateModule,
@@ -30,16 +29,16 @@ import {
 import {SelectModule} from "ng-select";
 import {DatePickerModule, DateModel } from "ng2-datepicker";
 import {SubmitScoreBatting} from "./components/submit.score/submitScoreBatting.component";
-import {SubmitScoreWicketComponent} from "./components/submit.score/submit.score.wickets/submitScoreWickets.component";
-import {SubmitScoreTotalsComponent} from "./components/submit.score/totals/totals.component";
-import {SubmitScoreExtrasComponent} from "./components/submit.score/extras/extras.component";
-import {SubmitScoreBattingComponent} from "./components/submit.score/batting/batting.component";
-import {MatchesDataStoreService} from "./components/matches-data-store";
-import {SubmitScoreBowlingComponent} from "./components/submit.score/bowling/bowling.component";
-import {submitScoreComponent_step2} from "./components/submit.score/submitScore_step2/submitScoreComponent_step2";
-import {matchBasicDetailsComponent} from "./components/submit.score/submitScore_step3/matchBasicDetails";
 import {LabelComponent} from "./components/label/labelComponent";
 import {NgDateRangePickerModule} from "ng-daterangepicker";
+import {MatchesDataStoreService} from "./components/matches-data-store";
+import {SubmitScoreComponent} from "./components/submit.score/submit.match.score.component";
+import {matchBasicDetailsComponent} from "./components/submit.score/match.basic.details.component/basic.details.component";
+import {SubmitScoreBattingComponent} from "./components/submit.score/match.batting/batting.component";
+import {SubmitScoreExtrasComponent} from "./components/submit.score/match.extras/extras.component";
+import {SubmitScoreTotalsComponent} from "./components/submit.score/match.totals/totals.component";
+import {SubmitScoreWicketComponent} from "./components/submit.score/match.wickets/wickets.component";
+import {SubmitScoreBowlingComponent} from "./components/submit.score/match.bowling/bowling.component";
 
 
 @NgModule({
@@ -68,6 +67,7 @@ import {NgDateRangePickerModule} from "ng-daterangepicker";
     MdNativeDateModule,
     DatePickerModule,
     NgDateRangePickerModule,
+
   ],
   declarations: [
     Matches,
@@ -77,14 +77,15 @@ import {NgDateRangePickerModule} from "ng-daterangepicker";
     ScoreComponent,
     SubmitScoreComponent,
     SubmitScoreBatting,
-    SubmitScoreWicketComponent,
-    SubmitScoreTotalsComponent,
-    SubmitScoreExtrasComponent,
+    LabelComponent,
+    //Score cared workd
     matchBasicDetailsComponent,
     SubmitScoreBattingComponent,
+    SubmitScoreExtrasComponent,
+    SubmitScoreTotalsComponent,
+    SubmitScoreWicketComponent,
     SubmitScoreBowlingComponent,
-    submitScoreComponent_step2,
-    LabelComponent
+
   ],
   providers: [
     ResultsService, MatchesConstants, DashboardService, MatchesService, MatchesDataStoreService

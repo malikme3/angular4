@@ -82,9 +82,41 @@ export class DashboardService {
 
     this.images.push({
       source: ' ../../../../assets/images/Galleria/galleria16.jpg',
-      alt: 'Description for Image 12',
+      alt: 'Description for Image 16',
       title: 'Title 16'
     });
+
+    this.images.push({
+      source: ' ../../../../assets/images/Galleria/galleria18.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 18'
+    });
+
+    this.images.push({
+      source: ' ../../../../assets/images/Galleria/galleria20.jpg',
+      alt: 'Description for Image 20',
+      title: 'Title 20'
+    });
+
+    this.images.push({
+      source: ' ../../../../assets/images/Galleria/galleria22.jpg',
+      alt: 'Description for Image 22',
+      title: 'Title 22'
+    });
+
+    this.images.push({
+      source: ' ../../../../assets/images/Galleria/galleria24.jpg',
+      alt: 'Description for Image 24',
+      title: 'Title 24'
+    });
+
+    this.images.push({
+      source: ' ../../../../assets/images/Galleria/galleria26.jpg',
+      alt: 'Description for Image 26',
+      title: 'Title 26'
+    });
+
+
 
     return this.images;
   }
@@ -144,11 +176,37 @@ export class DashboardService {
       alt: 'Description for Image 12',
       title: 'Title 17'
     });
+
     this.images_odd.push({
-      source: ' ../../../../assets/images/Galleria/galleria18.jpg',
+      source: ' ../../../../assets/images/Galleria/galleria19.jpg',
       alt: 'Description for Image 18',
       title: 'Title 17'
     });
+
+    this.images_odd.push({
+      source: ' ../../../../assets/images/Galleria/galleria21.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 17'
+    });
+
+    this.images_odd.push({
+      source: ' ../../../../assets/images/Galleria/galleria23.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 17'
+    });
+
+    this.images_odd.push({
+      source: ' ../../../../assets/images/Galleria/galleria25.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 17'
+    });
+
+    this.images_odd.push({
+      source: ' ../../../../assets/images/Galleria/galleria27.jpg',
+      alt: 'Description for Image 18',
+      title: 'Title 17'
+    });
+
     return this.images_odd;
   }
 
