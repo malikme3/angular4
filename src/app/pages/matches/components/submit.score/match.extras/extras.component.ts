@@ -24,6 +24,7 @@ export class SubmitScoreExtrasComponent {
   public extrasForm: FormGroup;
   public innings_id: AbstractControl;
   public game_id: AbstractControl;
+  public team: AbstractControl;
   //Extras
   public legbyes: AbstractControl;
   public byes: AbstractControl;
@@ -40,6 +41,7 @@ export class SubmitScoreExtrasComponent {
     this.extrasForm = fb.group({
       'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'team': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
       //Extras
       'legbyes': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'byes': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
@@ -50,6 +52,7 @@ export class SubmitScoreExtrasComponent {
     });
     this.innings_id = this.extrasForm.controls['innings_id'];
     this.game_id = this.extrasForm.controls['game_id'];
+    this.team = this.extrasForm.controls['team'];
     this.legbyes = this.extrasForm.controls['legbyes'];
     this.byes = this.extrasForm.controls['byes'];
     this.wides = this.extrasForm.controls['wides'];

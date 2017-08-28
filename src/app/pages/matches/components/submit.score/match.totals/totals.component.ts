@@ -40,7 +40,7 @@ export class SubmitScoreTotalsComponent {
       'team': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'wickets': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(2), Validators.pattern('^(0|[1-9][0-9]*)')])],
-      'overs': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3)])],
+      'overs': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(4)])],
       'total': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
     });
 
