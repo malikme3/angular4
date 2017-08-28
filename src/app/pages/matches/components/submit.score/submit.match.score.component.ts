@@ -1,3 +1,7 @@
+/*/!**
+ * Created by HudaZulifqar on 6/27/2017.
+ *!/*/
+
 import {Component} from "@angular/core";
 import {MatchesService} from "../../matches.service";
 import {MatchesConstants} from "../matches.constant.service";
@@ -7,10 +11,6 @@ import "rxjs/add/operator/map";
 import {AbstractControl, FormBuilder, FormGroup} from "@angular/forms";
 import {MatchesDataStoreService} from "../matches-data-store";
 
-/*/!**
- * Created by HudaZulifqar on 6/27/2017.
- *!/*/
-
 @Component({
   selector: 'submit-score',
   // templateUrl: 'newSubmit.html',
@@ -19,8 +19,12 @@ import {MatchesDataStoreService} from "../matches-data-store";
 })
 export class SubmitScoreComponent {
 
-
-  public secondInnings: boolean = true;
+//default status
+  public isFirstInnings: boolean = true;
+  public isBasicDetails: boolean = true;
+  public isBatting: boolean = false;
+  public isBowling: boolean = false;
+  public isExtras: boolean = false;
 
   public battingForm: FormGroup;
   public battingName: AbstractControl;
@@ -31,7 +35,9 @@ export class SubmitScoreComponent {
   }
 
   ngOnInit(): void {
-
+    this.isBasicDetails = false;
+    this.isFirstInnings = false;
+    this.isExtras = true;
   }
 
 }

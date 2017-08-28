@@ -2,12 +2,10 @@
  * Created by HudaZulifqar on 6/28/2017.
  */
 
-import {Injectable} from '@angular/core';
-import {Http, RequestOptions} from '@angular/http';
+import {Injectable} from "@angular/core";
+import {Http} from "@angular/http";
 import {PagesConstants} from "../pages.constants.service";
 import {Observable} from "rxjs/Observable";
-import {Headers} from '@angular/http';
-import {Team} from "./components/submit.score/Team";
 
 @Injectable()
 export class MatchesService {
@@ -31,6 +29,9 @@ export class MatchesService {
   private scorecard_game_details = '/submit/score/scorecardGameDetails';
   private score_batting_details = 'updateScorecardBattingDetailss';
   private score_bowling_details = 'updateScorecardBowlingDetails';
+  private score_fow_details = 'updateScorecardFowDetails';
+  private score_extras_details = 'updateScorecardExtrasDetails';
+  private score_totals_details = 'updateScorecardTotalDetails';
 
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -45,6 +46,9 @@ export class MatchesService {
   private scorecard_game_details_url = this.baseUrl + this.scorecard_game_details;
   private score_batting_details_url = this.baseUrl + this.score_batting_details;
   private score_bowling_details_url = this.baseUrl + this.score_bowling_details;
+  private score_fow_details_url = this.baseUrl + this.score_fow_details;
+  private score_extras_details_url = this.baseUrl + this.score_extras_details;
+  private score_totals_details_url = this.baseUrl + this.score_totals_details;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -100,6 +104,25 @@ export class MatchesService {
       .catch(this.handleError)
   }
 
+  submit_score_fow_details(fowDetails): Observable<any> {
+    console.info("Call for submit_score_fow_details() with  url : ", this.score_fow_details_url);
+    return this.http.put(this.score_fow_details_url, fowDetails, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  submit_score_extras_details(extrasDetails): Observable<any> {
+    console.info("Call for submit_score_extras_details() with  url : ", this.score_extras_details_url);
+    return this.http.put(this.score_extras_details_url, extrasDetails, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  scorecard_total_details(totalsDetails): Observable<any> {
+    console.info("Call for scorecard_total_details() with  url : ", this.score_totals_details_url);
+    return this.http.put(this.score_totals_details_url, totalsDetails, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+
   getHowOutType() {
     console.info("Call for getHowOutType() with url : ", this.players_url);
     return this.http.get(this.howOutType_url, this.header).map(responce => responce.json())
@@ -145,7 +168,7 @@ export class MatchesService {
     return Promise.reject(error.message || error);
   }
 
-  isEmpty(val:any): boolean {
+  isEmpty(val: any): boolean {
     return (val === undefined || val == null || val.length <= 0) ? true : false;
   };
 

@@ -6,7 +6,9 @@ import {Component, Input} from '@angular/core';
 })
 export class BaCard {
   @Input() title:String;
+  @Input() submitVal:String;
   @Input() baCardClass:String;
+  @Input() buttonClass:String;
   @Input() cardType:String;
   @Input() isDropDown: boolean;
   @Input() name: String;

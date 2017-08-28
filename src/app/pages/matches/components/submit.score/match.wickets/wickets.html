@@ -1,20 +1,15 @@
-<ba-card baCardClass="with-scroll" title="Fall of Wickets">
-  <div class="row">
-    <div class="col-sm-2" *ngFor="let position of batting_poistion">
-      <div *ngIf="position.wicket">
-        <label for="position.id">{{position.wicket}}</label>
-        <input [formControl]="name" type="text" class="form-control" id="position.id"
-               placeholder="Score@wicket" #input
-               (change)="onSelectedWickets(position.wicket, input.value)">
+<ba-card baCardClass="with-scroll" title="Fall of Wickets: {{innings}}" [submitVal]="'Submit Wickets'">
+  <form [formGroup]="wicketForm" (ngSubmit)="submitWickets(wicketForm.value)" class="form-horizontal">
+    <div class="row ">
+      <div class="col-sm-2 form-control-success" *ngFor="let position of batting_poistion; let i = index">
+        <div *ngIf="position.wicket">
+          <input type="text" class="form-control" id="position.id"
+                 placeholder=" index: {{i+1}}" #input
+                 (change)="onSelectedWickets(position.wicket, input.value)">
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="form-group row">
-    <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
-      <button type="button" class="btn btn-success btn-icon">
-        <i class="ion-android-checkmark-circle"></i></button>
-    </div>
-  </div>
-
+    <submit-button [title]="'Submit Please!'" [isSubmitted]="isSubmitted" [isValid]="fow1.valid"
+                   (notify)='onNotify($event)'></submit-button>
+  </form>
 </ba-card>

@@ -35,8 +35,4 @@ export class LabelComponent {
 
   constructor() {
   }
-
-  ngOnInit() {
-    console.info("In Labe Component")
-  }
 }

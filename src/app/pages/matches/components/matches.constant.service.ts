@@ -318,52 +318,52 @@ export class MatchesConstants {
       {
         id: 1,
         type: 'First Batting Position',
-        wicket: 'wicket#1'
+        wicket: 'fow1'
       },
       {
         id: 2,
         type: 'Second Batting Position',
-        wicket: 'wicket#2'
+        wicket: 'fow2'
 
       },
       {
         id: 3,
         type: 'Third Batting Position',
-        wicket: 'wicket#3'
+        wicket: 'fow3'
       },
       {
         id: 4,
         type: 'Fourth Batting Position',
-        wicket: 'wicket#4'
+        wicket: 'fow4'
       },
       {
         id: 5,
         type: 'Fifth Batting Position',
-        wicket: 'wicket#5'
+        wicket: 'fow5'
       }, {
         id: 6,
         type: 'sixth Batting Position',
-        wicket: 'wicket#6'
+        wicket: 'fow6'
       },
       {
         id: 7,
         type: 'Seventh Batting Position',
-        wicket: 'wicket#7'
+        wicket: 'fow7'
       },
       {
         id: 8,
         type: 'Eighth Batting Position',
-        wicket: 'wicket#8'
+        wicket: 'fow8'
       },
       {
         id: 9,
         type: 'Ninth Batting Position',
-        wicket: 'wicket#9'
+        wicket: 'fow9'
       },
       {
         id: 10,
         type: 'Tenth Batting Position',
-        wicket: 'wicket#10'
+        wicket: 'fow10'
       }
       ,
       {

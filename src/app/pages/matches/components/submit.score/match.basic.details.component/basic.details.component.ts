@@ -4,7 +4,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 import {MatchesConstants} from "../../matches.constant.service";
 import {MatchesService} from "../../../matches.service";
 import {IOption} from "ng-select";
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 /**
  * Created by HudaZulifqar on 8/22/2017.
  */
@@ -16,6 +16,7 @@ import {Component} from "@angular/core";
   styleUrls: ['../submitScore.scss'],
 })
 export class matchBasicDetailsComponent {
+  //@Input() innings: string;
   options: DatePickerOptions;
   inningsId: number;
 
@@ -297,7 +298,7 @@ export class matchBasicDetailsComponent {
   matchByPlayingTeamAndDate() {
     let homeTeam = this.form.controls['hometeam'].value;
     let awayTeam = this.form.controls['awayteam'].value;
-    let date = this.form.controls['game_date'].value;
+    let date = this.form.controls['game_date'].value.formatted;
     console.log('findMatchByPlayingTeamsAndDate == > hometeam Id', homeTeam, ' awayTeam ', awayTeam, ' date ', date);
     const match$ = this.matchesService.findMatchByPlayingTeamsAndDate(homeTeam, awayTeam, date);
     match$.subscribe(responce => this.matchByDate = responce);

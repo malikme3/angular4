@@ -1,10 +1,12 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
-import {NgUploaderOptions} from 'ngx-uploader';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import "rxjs/add/operator/startWith";
+import "rxjs/add/operator/map";
+import {DefaultModal} from "../../../../ui/components/modals/default-modal/default-modal.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {MatchesDataStoreService} from "../../matches-data-store";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -16,56 +18,117 @@ import 'rxjs/add/operator/map';
 })
 export class SubmitScoreWicketComponent {
 
+  @Input() innings: string;
+  @Input() isFirstInnings: boolean = true;
+  isSubmitted: boolean = false;
+  public matchInfo: any;
+  public fowResStatus: string;
   public wicketForm: FormGroup;
   public name: AbstractControl;
-  public wicket_1: AbstractControl;
-  public wicket_2: AbstractControl;
-  public wicket_3: AbstractControl;
-  public wicket_4: AbstractControl;
-  public wicket_5: AbstractControl;
-  public wicket_6: AbstractControl;
-  public wicket_7: AbstractControl;
-  public wicket_8: AbstractControl;
-  public wicket_9: AbstractControl;
-  public wicket_10: AbstractControl;
-  public wicket_11: AbstractControl;
+  public innings_id: AbstractControl;
+  public game_id: AbstractControl;
+  public fow1: AbstractControl;
+  public fow2: AbstractControl;
+  public fow3: AbstractControl;
+  public fow4: AbstractControl;
+  public fow5: AbstractControl;
+  public fow6: AbstractControl;
+  public fow7: AbstractControl;
+  public fow8: AbstractControl;
+  public fow9: AbstractControl;
+  public fow10: AbstractControl;
+  public fow11: AbstractControl;
 
-  constructor(fb: FormBuilder, private matchesService: MatchesService, private matchesConstants: MatchesConstants) {
-
+  constructor(fb: FormBuilder,
+              private matchesService: MatchesService,
+              private matchesConstants: MatchesConstants,
+              private matchesDataStoreService: MatchesDataStoreService,
+              private modalService: NgbModal) {
 
     this.wicketForm = fb.group({
-      'name': ['', Validators.compose([Validators.required, Validators.minLength(4)])],
-      'wicket_1': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_2': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_3': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_4': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_5': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_6': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_7': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_8': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_9': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_10': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
-      'wicket_11': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'name': ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(3)])],
+      'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])],
+      'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])],
+      'fow1': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow2': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow3': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow4': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow5': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow6': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow7': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow8': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow9': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow10': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
+      'fow11': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
 
-  });
+    });
+
     this.name = this.wicketForm.controls['name'];
-    this.wicket_1 = this.wicketForm.controls['wicket_1'];
-    this.wicket_2 = this.wicketForm.controls['wicket_2'];
-    this.wicket_3 = this.wicketForm.controls['wicket_3'];
-    this.wicket_4 = this.wicketForm.controls['wicket_4'];
-    this.wicket_5 = this.wicketForm.controls['wicket_5'];
-    this.wicket_6 = this.wicketForm.controls['wicket_6'];
-    this.wicket_7 = this.wicketForm.controls['wicket_7'];
-    this.wicket_8 = this.wicketForm.controls['wicket_8'];
-    this.wicket_9 = this.wicketForm.controls['wicket_9'];
-    this.wicket_10 = this.wicketForm.controls['wicket_10'];
-    this.wicket_11 = this.wicketForm.controls['wicket_11'];
+    this.innings_id = this.wicketForm.controls['innings_id'];
+    this.game_id = this.wicketForm.controls['game_id'];
+    this.fow1 = this.wicketForm.controls['fow1'];
+    this.fow2 = this.wicketForm.controls['fow2'];
+    this.fow3 = this.wicketForm.controls['fow3'];
+    this.fow4 = this.wicketForm.controls['fow4'];
+    this.fow5 = this.wicketForm.controls['fow5'];
+    this.fow6 = this.wicketForm.controls['fow6'];
+    this.fow7 = this.wicketForm.controls['fow7'];
+    this.fow8 = this.wicketForm.controls['fow8'];
+    this.fow9 = this.wicketForm.controls['fow9'];
+    this.fow10 = this.wicketForm.controls['fow10'];
+    this.fow11 = this.wicketForm.controls['fow11'];
 
-}
+  }
+
   batting_poistion = this.matchesConstants.getBattingPositions();
+
+
+  childModalShow() {
+    const activeModal = this.modalService.open(DefaultModal, {size: 'sm'});
+    activeModal.componentInstance.modalHeader = 'wicket';
+    activeModal.componentInstance.modalContent = `I am a child modal, opened from parent component!`;
+    activeModal.componentInstance.name = 'Hello for you '!;
+    activeModal.componentInstance.createConfirm = 'Yes';
+    console.log(activeModal.componentInstance);
+
+  }
+
   onSelectedWickets(type: any, value: any) {
     console.info("onSelectedWickets: Type:", type, 'Value: ', value)
-    //this.extrasDetails.controls[type].setValue(value);
-    //console.log('this.extrasDetails.controls ', this.extrasDetails.value)
+    this.wicketForm.controls[type].setValue(value);
+    this.isSubmitted = false;
+    console.log('this.extrasDetails.controls ', this.wicketForm.value)
+  }
+
+  getMatchData() {
+    let matchInfo$ = this.matchesDataStoreService.getMatchDetails();
+    console.log("Match Info", matchInfo$)
+
+    if (!this.matchesService.isEmpty(matchInfo$)) {
+      this.wicketForm.controls['game_id'].setValue(matchInfo$[0].game_id);
+      if (this.isFirstInnings) {
+        this.wicketForm.controls['team'].setValue(matchInfo$[0].batting_first_id);
+        this.wicketForm.controls['innings_id'].setValue('1');
+      } else {
+        this.wicketForm.controls['team'].setValue(matchInfo$[0].batting_second_id);
+        this.wicketForm.controls['innings_id'].setValue('2');
+      }
+    }
+  }
+
+
+  onNotify(event) {
+    this.wicketForm.controls['game_id'].setValue(1);
+    this.wicketForm.controls['innings_id'].setValue(1);
+    this.submitWickets();
+  }
+
+  submitWickets() {
+    this.getMatchData();
+    let fowValue = this.wicketForm.value;
+    console.log("SubmitScoreWicketComponent :: Request", fowValue)
+    const fow$ = this.matchesService.submit_score_fow_details(fowValue)
+    fow$.subscribe(responce => this.fowResStatus = responce);
+    this.isSubmitted = true;
   }
 }

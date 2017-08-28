@@ -4,12 +4,15 @@ import {Injectable} from "@angular/core";
  */
 @Injectable()
 export class MatchesDataStoreService {
-  private _matchDetails:any;
-  getMatchDetails():any {
+  private _matchDetails: any;
+
+  getMatchDetails(): any {
+    console.log("Date Store ==> Getting match details :: ", this._matchDetails)
     return this._matchDetails;
   }
-  setMatchDetails(match:any) {
-    console.log("Date Store ==> match details :: ",match)
+
+  setMatchDetails(match: any) {
+    console.log("Date Store ==> match details :: ", match)
     this._matchDetails = match;
   }
 

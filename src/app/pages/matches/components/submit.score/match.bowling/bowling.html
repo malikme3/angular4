@@ -1,4 +1,3 @@
-
 <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
   <ba-card baCardClass="with-scroll" title="Enter Bowling Details: {{innings}}">
     <div class="row" *ngFor="let position of batting_poistion; let fst = first; let i = index; ">

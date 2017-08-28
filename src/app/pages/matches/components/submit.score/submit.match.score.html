@@ -1,16 +1,28 @@
-<!--Basic Match Scoring => code implementation in matchBasicDetailsComponent-->
-<!--<score-basic-details></score-basic-details>-->
-
-<!--First Innings Match Scoring => code implementation in matchBasicDetailsComponent-->
-<!--<submit-score-batting></submit-score-batting>-->
-
-<!--<submit-score-extras></submit-score-extras>
-<submit-score-totals></submit-score-totals>
-<submit-score-wickets></submit-score-wickets>-->
-
-
-<!--First Innings Match Scoring => code implementation in SubmitScoreBowlingComponent-->
 <div [ngSwitch]="true">
-<submit-score-bowling  [innings]="'First Innings'" *ngSwitchDefault></submit-score-bowling>
-<submit-score-bowling  [innings]="'Second Innings'" *ngSwitchCase ="secondInnings"></submit-score-bowling>
+  <!--Basic Match Scoring => code implementation in matchBasicDetailsComponent-->
+  <div *ngIf="!isBasicDetails">
+    <score-basic-details *ngSwitchCase="isFirstInnings"></score-basic-details>
+    <score-basic-details *ngSwitchCase="!isFirstInnings"></score-basic-details>
+  </div>
+  <!--First Innings Match Scoring => code implementation in matchBasicDetailsComponent-->
+  <div *ngIf="isBatting">
+    <submit-score-batting [innings]="'First Innings'" *ngSwitchCase="isFirstInnings"></submit-score-batting>
+    <submit-score-batting [innings]="'Second Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-batting>
+  </div>
+
+  <div *ngIf="isExtras">
+    <submit-score-extras [innings]="'First Innings'" *ngSwitchCase="isFirstInnings"></submit-score-extras>
+    <submit-score-totals [innings]="'First Innings'" *ngSwitchCase="isFirstInnings"></submit-score-totals>
+    <submit-score-wickets [innings]="'First Innings'" *ngSwitchCase="isFirstInnings"></submit-score-wickets>
+
+    <submit-score-extras [innings]="'Second Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-extras>
+    <submit-score-totals [innings]="'Second Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-totals>
+    <submit-score-wickets [innings]="'Second Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-wickets>
+  </div>
+
+  <!--First Innings Match Scoring => code implementation in SubmitScoreBowlingComponent-->
+  <div *ngIf="isBowling">
+    <submit-score-bowling [innings]="'First Innings'" *ngSwitchCase="isFirstInnings"></submit-score-bowling>
+    <submit-score-bowling [innings]="'Second Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-bowling>
+  </div>
 </div>

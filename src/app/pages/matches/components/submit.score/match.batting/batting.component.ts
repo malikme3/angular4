@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
-import {NgUploaderOptions} from 'ngx-uploader';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import "rxjs/add/operator/startWith";
+import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
@@ -20,6 +19,8 @@ export class SubmitScoreBattingComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @Input() batFirstPlayers: Array<any>;
   @Input() inningsId: number;
+  @Input() innings: string;
+  
   playersList;
   player_out_type;
   matchScore;
