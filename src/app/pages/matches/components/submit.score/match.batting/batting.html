@@ -5,7 +5,7 @@
         <div class="col-sm-2">
           <div class="form-group row">
             <ng-select [formControl]="name"
-                       [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Batsman Name"
+                       [options]="playersList" [allowClear]="true" placeholder="Select Batsman Name"
                        highlightTextColor="black"
                        (selected)="onSelectedBatting(i, $event.value)">
             </ng-select>
@@ -23,7 +23,7 @@
         <div class="col-sm-2">
           <div class="form-group row">
             <ng-select [formControl]="name"
-                       [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Assist Fielder"
+                       [options]="playersList" [allowClear]="true" placeholder="Select Assist Fielder"
                        highlightTextColor="black"
                        (selected)="onSelectedFielder(i, $event.value)">
             </ng-select>
@@ -32,7 +32,7 @@
         <div class="col-sm-2">
           <div class="form-group row">
             <ng-select [formControl]="name"
-                       [options]="batFirstPlayers" [allowClear]="true" placeholder="Select Bowler Name"
+                       [options]="playersList" [allowClear]="true" placeholder="Select Bowler Name"
                        highlightTextColor="black"
                        (selected)="onSelectedBowler(i, $event.value)">
             </ng-select>

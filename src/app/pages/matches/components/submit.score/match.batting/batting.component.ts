@@ -20,12 +20,16 @@ export class SubmitScoreBattingComponent {
   @Input() batFirstPlayers: Array<any>;
   @Input() inningsId: number;
   @Input() innings: string;
-  
+  batsmansList: any[] = [];
+  matchDetails: any[] = [];
   playersList;
   player_out_type;
   matchScore;
 
+  battingScoreDetails: any;
+
   form: FormGroup;
+  match_info: FormGroup;
   public name: AbstractControl;
   public game_id: AbstractControl;
   public season: AbstractControl;
@@ -93,6 +97,14 @@ export class SubmitScoreBattingComponent {
       'team': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'opponent': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       //Batsman Details
+      'match_info': fb.group({
+        'name': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'season': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'team': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'opponent': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      }),
       'batsman_1': fb.group({
         'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
         'batting_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -226,13 +238,13 @@ export class SubmitScoreBattingComponent {
         'sixes': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
       })
     });
-
-    this.name = this.form.controls['name'];
-    this.game_id = this.form.controls['game_id'];
-    this.season = this.form.controls['season'];
-    this.innings_id = this.form.controls['innings_id'];
-    this.team = this.form.controls['team'];
-    this.opponent = this.form.controls['opponent'];
+    this.match_info = <FormGroup> this.form.controls['match_info'];
+    this.name = this.match_info.controls['name'];
+    this.game_id = this.match_info.controls['game_id'];
+    this.season = this.match_info.controls['season'];
+    this.innings_id = this.match_info.controls['innings_id'];
+    this.team = this.match_info.controls['team'];
+    this.opponent = this.match_info.controls['opponent'];
 
     //Batting Position # 1
     this.batsman_1 = <FormGroup> this.form.controls['batsman_1'];
@@ -757,18 +769,52 @@ export class SubmitScoreBattingComponent {
     console.log("Match information ::", match)
     if (match != null || match != undefined) {
       console.log("Match inside ::", match);
-      this.form.controls['game_id'].setValue(match[0].game_id);
-      this.form.controls['season'].setValue(match[0].season);
-      this.form.controls['innings_id'].setValue(this.inningsId);
-      this.form.controls['team'].setValue(match[0].hometeam);
-      this.form.controls['opponent'].setValue(match[0].awayteam);
+      this.match_info.controls['game_id'].setValue(match[0].game_id);
+      this.match_info.controls['season'].setValue(match[0].season);
+
+      this.match_info.controls['opponent'].setValue(match[0].awayteam);
+      if (this.innings == 'First Innings') {
+        this.match_info.controls['innings_id'].setValue(1);
+        this.match_info.controls['team'].setValue(match[0].batting_first_id);
+        this.match_info.controls['opponent'].setValue(match[0].batting_second_id);
+      }
+      if (this.innings == 'Second Innings') {
+        this.match_info.controls['innings_id'].setValue(2);
+        this.match_info.controls['team'].setValue(match[0].batting_second_id);
+        this.match_info.controls['opponent'].setValue(match[0].batting_first_id);
+      }
     }
   }
 
+  addToBatsmanList() {
+
+    Object.keys(this.form.controls).forEach(key => {
+
+      if (this.form.get(key) && this.form.get(key).value.batting_position) {
+        console.info("Key is =>", key)
+        const battingPosition = this.form.get(key).value.batting_position;
+        console.log("Adding details for battingPosition => :", battingPosition);
+        //to start index from 0, minus 1;
+        this.batsmansList[battingPosition - 1] = this.form.get(key).value;
+      }
+      this.form.get(key).markAsPending();
+    });
+
+
+  };
+
   public onSubmit(values: Object): void {
     this.getMatchDetails();
-    let details = JSON.stringify(this.form.value);
-    const match$ = this.matchesService.submit_score_batting_details(details);
+    let details = JSON.stringify(this.batsmansList);
+    this.addToBatsmanList();
+    console.log("this.batsmansList => ", this.batsmansList)
+    this.battingScoreDetails = {
+      "batsmanDetails": this.batsmansList,
+      "matchInfo": this.form.get('match_info').value,
+
+    }
+
+    const match$ = this.matchesService.submit_score_batting_details(this.battingScoreDetails);
     match$.subscribe(responce => this.matchScore = responce);
   }
 }
