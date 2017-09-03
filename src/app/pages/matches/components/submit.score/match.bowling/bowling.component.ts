@@ -1,10 +1,9 @@
 import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
-import {NgUploaderOptions} from 'ngx-uploader';
-import {FormGroup, AbstractControl, FormBuilder, Validators} from '@angular/forms';
-import 'rxjs/add/operator/startWith';
-import 'rxjs/add/operator/map';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import "rxjs/add/operator/startWith";
+import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
@@ -25,7 +24,11 @@ export class SubmitScoreBowlingComponent {
   player_out_type;
   matchScore;
 
+  bowlersList: any[] = [];
+  bowlingScoreDetails: any;
+
   form: FormGroup;
+  match_info: FormGroup;
   public name: AbstractControl;
   public game_id: AbstractControl;
   public season: AbstractControl;
@@ -92,6 +95,14 @@ export class SubmitScoreBowlingComponent {
       'team': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'opponent': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       //Bowler Details
+      'match_info': fb.group({
+        'name': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'season': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'team': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+        'opponent': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      }),
       'bowler_1': fb.group({
         'player_id': ['', Validators.compose([Validators.required, Validators.minLength(2)])],
         'bowling_position': ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -215,12 +226,13 @@ export class SubmitScoreBowlingComponent {
       })
     });
 
-    this.name = this.form.controls['name'];
-    this.game_id = this.form.controls['game_id'];
-    this.season = this.form.controls['season'];
-    this.innings_id = this.form.controls['innings_id'];
-    this.team = this.form.controls['team'];
-    this.opponent = this.form.controls['opponent'];
+    this.match_info = <FormGroup> this.form.controls['match_info'];
+    this.name = this.match_info.controls['name'];
+    this.game_id = this.match_info.controls['game_id'];
+    this.season = this.match_info.controls['season'];
+    this.innings_id = this.match_info.controls['innings_id'];
+    this.team = this.match_info.controls['team'];
+    this.opponent = this.match_info.controls['opponent'];
 
     //Batting Position # 1
     this.bowler_1 = <FormGroup> this.form.controls['bowler_1'];
@@ -639,15 +651,56 @@ export class SubmitScoreBowlingComponent {
     console.log("Match information ::", match)
     if (match != null || match != undefined) {
       console.log("Match inside ::", match);
-      this.form.controls['game_id'].setValue(match[0].game_id);
-      this.form.controls['season'].setValue(match[0].season);
-      this.form.controls['innings_id'].setValue(this.inningsId);
-      this.form.controls['team'].setValue(match[0].hometeam);
-      this.form.controls['opponent'].setValue(match[0].awayteam);
+      this.match_info.controls['game_id'].setValue(match[0].game_id);
+      this.match_info.controls['season'].setValue(match[0].season);
+
+      this.match_info.controls['opponent'].setValue(match[0].awayteam);
+      if (this.innings == 'First Innings') {
+        this.match_info.controls['innings_id'].setValue(1);
+        this.match_info.controls['team'].setValue(match[0].batting_first_id);
+        this.match_info.controls['opponent'].setValue(match[0].batting_second_id);
+      }
+      if (this.innings == 'Second Innings') {
+        this.match_info.controls['innings_id'].setValue(2);
+        this.match_info.controls['team'].setValue(match[0].batting_second_id);
+        this.match_info.controls['opponent'].setValue(match[0].batting_first_id);
+      }
     }
   }
 
+  addBowlersToList() {
+
+    Object.keys(this.form.controls).forEach(key => {
+
+      if (this.form.get(key) && this.form.get(key).value.bowling_position) {
+        console.info("Key is =>", key)
+        const bowlingPosition = this.form.get(key).value.bowling_position;
+        console.log("Adding details for battingPosition => :", bowlingPosition);
+        //to start index from 0, minus 1;
+        this.bowlersList[bowlingPosition - 1] = this.form.get(key).value;
+      }
+      this.form.get(key).markAsPending();
+    });
+
+
+  };
+
   public onSubmitBowling(values: Object): void {
+    this.getMatchDetails();
+    let details = JSON.stringify(this.bowlersList);
+    this.addBowlersToList();
+    console.log("this.bowlersList => ", this.bowlersList)
+    this.bowlingScoreDetails = {
+      "bowlingDetails": this.bowlersList,
+      "matchInfo": this.form.get('match_info').value,
+
+    }
+
+    const match$ = this.matchesService.submit_score_bowling_details(this.bowlingScoreDetails);
+    match$.subscribe(responce => this.matchScore = responce);
+  }
+
+  public onSubmitBowling_1(values: Object): void {
     this.getMatchDetails();
     let details = JSON.stringify(this.form.value);
     console.log("Submitted Form values ==> ", details)

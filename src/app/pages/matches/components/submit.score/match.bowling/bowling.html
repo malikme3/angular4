@@ -5,7 +5,7 @@
         <label *ngIf="fst">Bowler Names</label>
         <div class="form-group row">
           <ng-select [formControl]="name"
-                     [options]="Players" [allowClear]="true" placeholder="Select Bowler Name"
+                     [options]="playersList" [allowClear]="true" placeholder="Select Bowler Name"
                      highlightTextColor="black"
                      (selected)="onSelectedBowler(i, $event.value)">
           </ng-select>
