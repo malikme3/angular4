@@ -1,12 +1,20 @@
 <div [ngSwitch]="true">
   <!--Basic Match Scoring => code implementation in matchBasicDetailsComponent-->
   <div *ngIf="!isBasicDetails">
-    <score-basic-details *ngSwitchCase="!isFirstInnings"></score-basic-details>
+    <score-basic-details *ngSwitchCase="!isFirstInnings"
+                         (notify_homeTeam)='onNotify_homeTeam($event)'
+                         (notify_awayTeam)='onNotify_awayTeam($event)'
+                         (notify_date)='onNotify_date($event)'
+                         (notify_matchCall)='onNotify_matchInfo($event)'
+    ></score-basic-details>
     <score-basic-details *ngSwitchCase="isFirstInnings"></score-basic-details>
   </div>
   <!--First Innings Match Scoring => code implementation in matchBasicDetailsComponent-->
-  <div *ngIf="isBatting">
-    <submit-score-batting [innings]="'First Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-batting>
+  <div *ngIf="!isBatting">
+    <submit-score-batting
+      [innings]="'First Innings'"
+      [matchData]="matchObjectByDate"
+      *ngSwitchCase="!isFirstInnings"></submit-score-batting>
     <submit-score-batting [innings]="'Second Innings'" *ngSwitchCase="isFirstInnings"></submit-score-batting>
   </div>
 
@@ -21,7 +29,7 @@
   </div>
 
   <!--First Innings Match Scoring => code implementation in SubmitScoreBowlingComponent-->
-  <div *ngIf="!!11111isBowling">
+  <div *ngIf="isBowling">
     <submit-score-bowling [innings]="'First Innings'" *ngSwitchCase="!isFirstInnings"></submit-score-bowling>
     <submit-score-bowling [innings]="'Second Innings'" *ngSwitchCase="isFirstInnings"></submit-score-bowling>
   </div>

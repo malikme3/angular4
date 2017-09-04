@@ -129,20 +129,16 @@ export class MatchesService {
       .catch(this.handleError)
   };
 
-  findMatchByPlayingTeamsAndDate(homeTeam: number, awayTeam: number, date: Date): Observable<any> {
+  findMatchByPlayingTeamsAndDate(homeTeam: number, awayTeam: number, date: any): Observable<any> {
     const url = `${this.findMatch_url}homeTeam=${homeTeam}&awayTeam=${awayTeam}&matchDate=${date}`;
     console.info("Call for findMatchByPlayingTeamsAndDate() with url : ", url);
     return this.http.get(url, this.header).map(responce => responce.json())
       .catch(this.handleError)
   }
 
-
-  updateScorecardGameDetails(values: Object): Promise<any> {
-    return this.http
-      .post(this.scorecard_game_details_url, values, this.options)
-      .toPromise()
-      .then(res => res)
-      .catch(this.handleError);
+  updateScorecardGameDetails(matchDetails): Observable<any> {
+    return this.http.post(this.scorecard_game_details_url, matchDetails, this.options).map(responce => responce.json())
+      .catch(this.handleError)
   }
 
   loadBattingDetails(gameId: string): Observable<any> {

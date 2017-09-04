@@ -4,7 +4,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 import {MatchesConstants} from "../../matches.constant.service";
 import {MatchesService} from "../../../matches.service";
 import {IOption} from "ng-select";
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Output} from "@angular/core";
 /**
  * Created by HudaZulifqar on 8/22/2017.
  */
@@ -16,9 +16,15 @@ import {Component, Input} from "@angular/core";
   styleUrls: ['../submitScore.scss'],
 })
 export class matchBasicDetailsComponent {
+  @Output() notify_homeTeam: EventEmitter<string> = new EventEmitter<string>();
+  @Output() notify_awayTeam: EventEmitter<string> = new EventEmitter<string>();
+  @Output() notify_date: EventEmitter<string> = new EventEmitter<string>();
+  @Output() notify_matchCall: EventEmitter<string> = new EventEmitter<string>();
+
   //@Input() innings: string;
   options: DatePickerOptions;
   inningsId: number;
+  submiScoreStatus: any;
 
 
   public form: FormGroup;
@@ -59,9 +65,9 @@ export class matchBasicDetailsComponent {
   public cancelledplay: AbstractControl;
 
   private teamsname;
-  myOptions: Array<any>;
+  teamsList: Array<any>;
   myOptions2: any;
-  dateValue: any;
+  dateValue: any = null;
   playersList: Array<any>;
   batFirstPlayers: Array<any>;
   batSecondPlayers: Array<any>;
@@ -189,9 +195,10 @@ export class matchBasicDetailsComponent {
   getTeamslist() {
     console.info("Fetching results for teams list :")
     const teams$ = this.matchesService.getTeamslist();
-    console.log('this.teamsname', this.myOptions)
-    teams$.subscribe(responce => this.myOptions = responce,
-      () => console.log("responce", this.myOptions));
+    console.log('this.teamsname', this.teamsList)
+    teams$.subscribe(responce => this.teamsList = responce,
+      (err) => console.error(err),
+      () => console.info("responce  for teamList", this.teamsList));
 
   }
 
@@ -199,13 +206,17 @@ export class matchBasicDetailsComponent {
     console.info("Fetching Players list")
     const teams$ = this.matchesService.getPlayerslist();
     teams$.subscribe(responce => this.playersList = responce,
-      () => console.log("responce", this.playersList));
+      (err) => console.error(err),
+      () => console.info("responce", this.playersList));
   }
 
   playersListByTeamsIds(teamIds) {
     console.info("Fetching Players list for TeamsIds: ", teamIds)
     const teams$ = this.matchesService.getPlayersByTeamsIds(teamIds);
-    teams$.subscribe(responce => this.playersByTeamsIds = responce);
+    teams$.subscribe(responce => this.playersByTeamsIds = responce,
+      (err) => console.error(err),
+      () => console.info("responce", this.playersList));
+
   }
 
 
@@ -295,50 +306,35 @@ export class matchBasicDetailsComponent {
     }
   }
 
-  matchByPlayingTeamAndDate() {
-    let homeTeam = this.form.controls['hometeam'].value;
-    let awayTeam = this.form.controls['awayteam'].value;
-    let date = this.form.controls['game_date'].value.formatted;
-    console.log('findMatchByPlayingTeamsAndDate == > hometeam Id', homeTeam, ' awayTeam ', awayTeam, ' date ', date);
-    const match$ = this.matchesService.findMatchByPlayingTeamsAndDate(homeTeam, awayTeam, date);
-    match$.subscribe(responce => this.matchByDate = responce);
-  }
-
-  storeMatchDetails() {
-    console.log("The Match Detail for Data Store", this.matchByDate)
-    this.matchesDataStoreService.setMatchDetails(this.matchByDate);
-  }
-
-  public onSubmitBasicDetails(values: Object): void {
-    this.submitted_step1 = true;
-    this.inningsId = 1;
-    let matchDetailsObject = values;
-    if (!this.matchesService.isEmpty(values['game_date'])) {
-      let consFormattedDate = values['game_date']['formatted'];
-      //Making sure only date value submitting instead whole date object
-      matchDetailsObject['game_date'] = consFormattedDate;
+  dateEmit() {
+    if (this.dateValue != null || this.dateValue == 'undefined') {
+      this.notify_date.emit(this.dateValue);
     }
-    console.log(" ***onSubmitBasicDetails**** HTTP Req Val => ", matchDetailsObject);
-    this.matchesService.updateScorecardGameDetails(matchDetailsObject);
-  }
-
-  public onSubmit_matchDetails(values: Object): void {
-    this.submitted_step1 = true;
-    console.log("onSubmit_matchDetails:: value  ", values);
-    this.matchesService.updateScorecardGameDetails(values);
   }
 
   playing_teams(type: any, obj: any) {
-    console.log('type: ', type, ' obj: ', obj);
+    console.log('type: ', type, ' obj: ', obj)
+
     if (type === 'hometeam') {
+      //Passing value to parent ***** !!!
+      this.notify_homeTeam.emit(obj);
+      this.dateEmit();
+      //Passing value to parent ***** !!
+
       this.teams_playings[0].label = obj.label;
       this.teams_playings[0].value = obj.value;
     }
     if (type === 'awayteam') {
+
+      //Passing value to parent ***** !!!
+      this.notify_awayTeam.emit(obj);
+      this.dateEmit();
+      //Passing value to parent ***** !!
+
       this.teams_playings[1].label = obj.label
       this.teams_playings[1].value = obj.value
     }
-    console.log('Playing teams are :: ', this.teams_playings)
+    console.log('Playing teams for Match :: ', this.teams_playings)
   }
 
   onNotify(val: any): void {
@@ -352,11 +348,18 @@ export class matchBasicDetailsComponent {
   player_out_type = this.matchesConstants.getPlayerOutType();
   batting_poistion = this.matchesConstants.getBattingPositions();
 
-  public onSubmit_step2(values: Object): void {
-    this.submitted_step2 = true;
-    console.log("value  ", values)
-    if (this.battingForm.valid) {
-    }
+  public onSubmitBasicDetails(values: Object): void {
+
+    this.submitted_step1 = true;
+    this.inningsId = 1;
+    let matchDetailsObject = values;
+    //Making sure only date value submitting instead whole date object
+    matchDetailsObject['game_date'] = this.dateValue.formatted;
+    console.log(" ***onSubmitBasicDetails**** HTTP Request => ", matchDetailsObject);
+    this.matchesService.updateScorecardGameDetails(matchDetailsObject).subscribe(
+      res => this.submiScoreStatus = res,
+      (err) => console.error('onSubmitBasicDetails: Res Error =>', err),
+      () => console.info("Call is successfull, notify Parent", this.notify_matchCall.emit(this.dateValue)));
   }
 
 }

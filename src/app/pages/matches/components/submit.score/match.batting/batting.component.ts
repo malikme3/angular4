@@ -20,6 +20,7 @@ export class SubmitScoreBattingComponent {
   @Input() batFirstPlayers: Array<any>;
   @Input() inningsId: number;
   @Input() innings: string;
+  @Input() matchData: any;
   batsmansList: any[] = [];
   matchDetails: any[] = [];
   playersList;
@@ -767,7 +768,7 @@ export class SubmitScoreBattingComponent {
   getMatchDetails() {
     let match = this.matchesDataStoreService.getMatchDetails();
     console.log("Match information ::", match)
-    if (match != null || match != undefined) {
+    if (match) {
       console.log("Match inside ::", match);
       this.match_info.controls['game_id'].setValue(match[0].game_id);
       this.match_info.controls['season'].setValue(match[0].season);
@@ -789,7 +790,6 @@ export class SubmitScoreBattingComponent {
   addToBatsmanList() {
 
     Object.keys(this.form.controls).forEach(key => {
-
       if (this.form.get(key) && this.form.get(key).value.batting_position) {
         console.info("Key is =>", key)
         const battingPosition = this.form.get(key).value.batting_position;
