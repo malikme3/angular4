@@ -354,12 +354,15 @@ export class matchBasicDetailsComponent {
     this.inningsId = 1;
     let matchDetailsObject = values;
     //Making sure only date value submitting instead whole date object
-    matchDetailsObject['game_date'] = this.dateValue.formatted;
+    //this.dateValue ? this.dateValue.formatted : this.dateValue;
+    this.dateValue ? matchDetailsObject['game_date'] = this.dateValue.formatted : this.dateValue;
+
     console.log(" ***onSubmitBasicDetails**** HTTP Request => ", matchDetailsObject);
     this.matchesService.updateScorecardGameDetails(matchDetailsObject).subscribe(
       res => this.submiScoreStatus = res,
       (err) => console.error('onSubmitBasicDetails: Res Error =>', err),
-      () => console.info("Call is successfull, notify Parent", this.notify_matchCall.emit(this.dateValue)));
+      () => this.notify_matchCall.emit(this.dateValue));
   }
+
 
 }

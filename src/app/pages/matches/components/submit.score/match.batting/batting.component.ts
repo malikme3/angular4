@@ -16,7 +16,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
   styleUrls: ['../submitScore.scss'],
 })
 export class SubmitScoreBattingComponent {
-  @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notify_Batting: EventEmitter<any> = new EventEmitter<any>();
   @Input() batFirstPlayers: Array<any>;
   @Input() inningsId: number;
   @Input() innings: string;
@@ -815,6 +815,8 @@ export class SubmitScoreBattingComponent {
     }
 
     const match$ = this.matchesService.submit_score_batting_details(this.battingScoreDetails);
-    match$.subscribe(responce => this.matchScore = responce);
+    match$.subscribe(responce => this.matchScore = responce,
+      (err) => console.error("Submitting Batting details failed", err),
+        () => this.notify_Batting.emit(this.innings));
   }
 }

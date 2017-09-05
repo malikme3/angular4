@@ -16,6 +16,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 })
 export class SubmitScoreTotalsComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
   @Input() innings: string;
   @Input() isFirstInnings: boolean = true;
   isSubmitted: boolean = false;
@@ -89,9 +90,13 @@ export class SubmitScoreTotalsComponent {
     this.getMatchData();
     let fowValue = this.totalsForm.value;
     console.log("SubmitScoreTotalsComponent :: Request", fowValue)
-    const fow$ = this.matchesService.scorecard_total_details(fowValue)
-    fow$.subscribe(responce => this.totalsResStatus = responce);
-    this.isSubmitted = true;
+    this.matchesService.scorecard_total_details(fowValue)
+      .subscribe(res => this.totalsResStatus = res,
+        (err) => console.error("Submitting Totals failed", err),
+        () => this.notify_Extras.emit({
+          "innings": this.innings,
+          "component": 'total'
+        }));
 
   }
 

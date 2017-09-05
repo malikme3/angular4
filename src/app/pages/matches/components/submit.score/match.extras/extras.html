@@ -1,5 +1,5 @@
 <ba-card title="Enter Extras Detail: {{innings}}">
-  <form [formGroup]="extrasForm" (ngSubmit)="submitExtras(extrasForm.value)" class="form-horizontal">
+  <form [formGroup]="extrasForm"  class="form-horizontal">
     <div class="row" col-lg-6 col-md-6 col-sm-12>
       <div class="col-4">
         <label class="col-12" for="legbyes"
@@ -66,7 +66,14 @@
                 'btn-danger': (!total.valid && !total.pristine)}">
       </div>
     </div>
-    <submit-button [title]="'Submit Please!'" [isSubmitted]="isSubmitted" [isValid]="total.valid && !total.pristine "
-                   (notify)='onNotify($event)'></submit-button>
+    <!--<submit-button [title]="'Submit Please!'" [isSubmitted]="isSubmitted" [isValid]="total.valid && !total.pristine "
+                   (notify)='onNotify($event)'></submit-button>-->
+    <div class="form-group row">
+      <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+        <button type="submit" class="btn btn-default btn-auth"
+                (click)="onSubmitExtrasDetails()">Submit Match Details !!
+        </button>
+      </div>
+    </div>
   </form>
 </ba-card>

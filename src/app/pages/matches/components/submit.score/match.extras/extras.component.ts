@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -15,7 +15,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
   styleUrls: ['../submitScore.scss'],
 })
 export class SubmitScoreExtrasComponent {
-
+  @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
   @Input() innings: string;
   private isSubmitted: boolean = false;
   @Input() isFirstInnings: boolean = true;
@@ -65,7 +65,7 @@ export class SubmitScoreExtrasComponent {
   batting_poistion = this.matchesConstants.getBattingPositions();
 
   onNotify() {
-    this.submitExtras();
+
   }
 
   getMatchData() {
@@ -85,20 +85,24 @@ export class SubmitScoreExtrasComponent {
     }
   }
 
-  submitExtras() {
-
-    this.getMatchData();
-    let fowValue = this.extrasForm.value;
-    console.log("SubmitScoreExtrasComponent :: Request", fowValue)
-    const fow$ = this.matchesService.submit_score_extras_details(fowValue)
-    fow$.subscribe(responce => this.extrasResStatus = responce);
-    this.isSubmitted = true;
-  }
-
   onSelectedExtras(type: any, value: any) {
     this.isSubmitted = false;
     console.info("onSelectedExtras: Type:", type, 'Value: ', value)
     this.extrasForm.controls[type].setValue(value);
     console.log('this.extrasDetails.controls ', this.extrasForm.value)
+  }
+
+  onSubmitExtrasDetails() {
+       this.getMatchData();
+    let extrasValues = this.extrasForm.value;
+    console.log("SubmitScoreExtrasComponent :: Request", extrasValues)
+    this.matchesService.submit_score_extras_details(extrasValues)
+      .subscribe(responce => this.extrasResStatus = responce,
+        (err) => console.error("Submitting Extras details failed", err),
+        () => this.notify_Extras.emit({
+          "innings": this.innings,
+          "component": 'extras'
+        }));
+
   }
 }

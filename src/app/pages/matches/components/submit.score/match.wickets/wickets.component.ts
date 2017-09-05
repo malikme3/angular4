@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, EventEmitter, Input, Output} from "@angular/core";
 import {MatchesService} from "../../../matches.service";
 import {MatchesConstants} from "../../matches.constant.service";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -17,7 +17,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
   styleUrls: ['../submitScore.scss'],
 })
 export class SubmitScoreWicketComponent {
-
+  @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
   @Input() innings: string;
   @Input() isFirstInnings: boolean = true;
   isSubmitted: boolean = false;
@@ -27,6 +27,7 @@ export class SubmitScoreWicketComponent {
   public name: AbstractControl;
   public innings_id: AbstractControl;
   public game_id: AbstractControl;
+  public team: AbstractControl;
   public fow1: AbstractControl;
   public fow2: AbstractControl;
   public fow3: AbstractControl;
@@ -49,6 +50,7 @@ export class SubmitScoreWicketComponent {
       'name': ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(3)])],
       'innings_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])],
       'game_id': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])],
+      'team': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(1)])],
       'fow1': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'fow2': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
       'fow3': ['', Validators.compose([Validators.required, Validators.minLength(1), Validators.maxLength(3), Validators.pattern('^(0|[1-9][0-9]*)')])],
@@ -66,6 +68,7 @@ export class SubmitScoreWicketComponent {
     this.name = this.wicketForm.controls['name'];
     this.innings_id = this.wicketForm.controls['innings_id'];
     this.game_id = this.wicketForm.controls['game_id'];
+    this.team = this.wicketForm.controls['team'];
     this.fow1 = this.wicketForm.controls['fow1'];
     this.fow2 = this.wicketForm.controls['fow2'];
     this.fow3 = this.wicketForm.controls['fow3'];
@@ -81,7 +84,6 @@ export class SubmitScoreWicketComponent {
   }
 
   batting_poistion = this.matchesConstants.getBattingPositions();
-
 
   childModalShow() {
     const activeModal = this.modalService.open(DefaultModal, {size: 'sm'});
@@ -116,19 +118,16 @@ export class SubmitScoreWicketComponent {
     }
   }
 
-
-  onNotify(event) {
-    this.wicketForm.controls['game_id'].setValue(1);
-    this.wicketForm.controls['innings_id'].setValue(1);
-    this.submitWickets();
-  }
-
   submitWickets() {
     this.getMatchData();
     let fowValue = this.wicketForm.value;
     console.log("SubmitScoreWicketComponent :: Request", fowValue)
-    const fow$ = this.matchesService.submit_score_fow_details(fowValue)
-    fow$.subscribe(responce => this.fowResStatus = responce);
-    this.isSubmitted = true;
+    this.matchesService.submit_score_fow_details(fowValue)
+      .subscribe(responce => this.fowResStatus = responce,
+        (err) => console.error("Submitting Totals failed", err),
+        () => this.notify_Extras.emit({
+          "innings": this.innings,
+          "component": 'wickets'
+        }));
   }
 }

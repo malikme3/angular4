@@ -17,6 +17,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 })
 export class SubmitScoreBowlingComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+  @Output() notify_Bowling: EventEmitter<any> = new EventEmitter<any>();
   @Input() Players: Array<any>;
   @Input() inningsId: number;
   @Input() innings: string;
@@ -697,14 +698,17 @@ export class SubmitScoreBowlingComponent {
     }
 
     const match$ = this.matchesService.submit_score_bowling_details(this.bowlingScoreDetails);
-    match$.subscribe(responce => this.matchScore = responce);
+    match$.subscribe(responce => this.matchScore = responce,
+      (err) => console.error("Submitting Bowling details failed", err),
+      () => this.notify_Bowling.emit(this.innings));
+    ;
   }
 
-  public onSubmitBowling_1(values: Object): void {
+ /* public onSubmitBowling_1(values: Object): void {
     this.getMatchDetails();
     let details = JSON.stringify(this.form.value);
     console.log("Submitted Form values ==> ", details)
     const match$ = this.matchesService.submit_score_bowling_details(details);
     match$.subscribe(responce => this.matchScore = responce);
-  }
+  }*/
 }
