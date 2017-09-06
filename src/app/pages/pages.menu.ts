@@ -20,7 +20,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'general.menu.matchtes',
-            icon: 'ion-android-home',
+            icon: 'ion-happy-outline',
             selected: false,
             expanded: false,
             order: 0
@@ -66,6 +66,27 @@ export const PAGES_MENU = [
             }
           }
         ]
+      },
+      {
+        path: 'statistics',
+        data: {
+          menu: {
+            title: 'Statistics',
+            icon: 'ion-speedometer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'battingRecords',
+            data: {
+              menu: {
+                title: 'Batting Record',
+              }
+            }
+          }]
       },
       {
         path: 'clubs',
