@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {Statistics} from "./statistics.component";
-import {BattingComponent} from "./components/battings/battingComponent";
+import {BattingRecordComponent} from "./components/battings/batting.record.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [
@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: Statistics,
     children: [
-      {path: 'battingRecords', component: BattingComponent},
+      {path: 'battingRecords', component: BattingRecordComponent},
       //{ path: 'scheduleView', component: ScheduleComponent },
     ]
   }

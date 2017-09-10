@@ -26,7 +26,9 @@ import {UiModule} from "../ui/ui.module";
 import {NgDateRangePickerModule} from "ng-daterangepicker";
 import {Statistics} from "./statistics.component";
 import {routing} from "./statistics.routing";
-import {BattingComponent} from "./components/battings/battingComponent";
+import {StatisticsService} from "./statistics.service";
+import {BattingRecordComponent} from "./components/battings/batting.record.component";
+import {StatisticsConstantsService} from "./statistics.constants.service";
 
 
 @NgModule({
@@ -59,10 +61,10 @@ import {BattingComponent} from "./components/battings/battingComponent";
   ],
   declarations: [
     Statistics,
-    BattingComponent,
+    BattingRecordComponent,
 
   ],
-  providers: [],
+  providers: [StatisticsService, StatisticsConstantsService],
 })
 export class StatisticsModule {
 }

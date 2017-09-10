@@ -1,14 +1,15 @@
+Batting Component !!!!
 <div class="row">
   <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-1">
-   <!-- <h2 class="box" translate> {{'matches.title'}}
+    <h2 class="box" translate> {{'matches.title'}}
       <p class="float-right h5 ">
         <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
           <option *ngFor=" let option of options2017" value={{option.id}}>{{option.name}}</option>
         </select>
       </p>
-    </h2>-->
+    </h2>
     <ba-card baCardClass="with-scroll">
-      <ng2-smart-table [settings]="settings" [source]="source" (edit)="onRowEdit($event)"
+      <ng2-smart-table [settings]="settings" [source]="battingRecordsList" (edit)="onRowEdit($event)"
                        (userRowSelect)="getDetailedScore($event)">
       </ng2-smart-table>
 

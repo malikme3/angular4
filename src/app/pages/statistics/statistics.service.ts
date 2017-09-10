@@ -5,6 +5,7 @@
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {PagesConstants} from "../pages.constants.service";
+import {BattingRecordInput} from "./battingRecordInput";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()
@@ -18,15 +19,10 @@ export class StatisticsService {
   private baseUrl = this.pagesConstants.pagesContants.url.baseUrl;
 
   private sch_path = 'matches/schedule/?';
-  private batting_path = 'detailed/scorecard/batting/?';
-
-  private score_totals_details = 'updateScorecardTotalDetails';
-
+  private batting_path = '/records/battings/?';
 
   private schduel_url = this.baseUrl + this.sch_path;
   private batting_url = this.baseUrl + this.batting_path;
-
-  private score_totals_details_url = this.baseUrl + this.score_totals_details;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -37,23 +33,19 @@ export class StatisticsService {
       .catch(this.handleError);
   }
 
-  getBattingDetails(gameId: string): Promise<any> {
-    const url = `${this.batting_url}gameId=${gameId}`;
-    console.info("Call for getDetailedScore() with url : ", url);
-    return this.http.get(url, this.header).toPromise().then(responce => responce.json())
-      .catch(this.handleError)
-  }
-
-
-  scorecard_total_details(totalsDetails): Observable<any> {
-    console.info("Call for scorecard_total_details() with  url : ", this.score_totals_details_url);
-    return this.http.put(this.score_totals_details_url, totalsDetails, this.options).map(responce => responce.json())
+  getBattingRecords(): Observable<any> {
+    let team = "47";
+    let player = "1396";
+    const url = `${this.batting_url}team=${team}&player=${player}`;
+    console.info("Call for getBattingRecond() with url : ", url);
+   return this.http.get(url, this.header).map(responce => responce.json())
+   // return this.http.get(url, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }
 
 
   private handleError(error: any): Promise<any> {
-    console.error('Error while fetching date from servier', error); // for demo purposes only
+    console.error('StatisticsService: Error while fetching date from servier', error);
     return Promise.reject(error.message || error);
   }
 
