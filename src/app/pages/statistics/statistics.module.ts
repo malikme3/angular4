@@ -29,6 +29,7 @@ import {routing} from "./statistics.routing";
 import {StatisticsService} from "./statistics.service";
 import {BattingRecordComponent} from "./components/battings/batting.record.component";
 import {StatisticsConstantsService} from "./statistics.constants.service";
+import {ChartModule} from "primeng/primeng";
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import {StatisticsConstantsService} from "./statistics.constants.service";
     MdNativeDateModule,
     DatePickerModule,
     NgDateRangePickerModule,
+    ChartModule
 
   ],
   declarations: [

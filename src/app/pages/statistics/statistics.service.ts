@@ -7,6 +7,7 @@ import {Http} from "@angular/http";
 import {PagesConstants} from "../pages.constants.service";
 import {BattingRecordInput} from "./battingRecordInput";
 import {Observable} from "rxjs/Observable";
+import {isNull} from "util";
 
 @Injectable()
 export class StatisticsService {
@@ -36,7 +37,10 @@ export class StatisticsService {
   getBattingRecords(): Observable<any> {
     let team = "47";
     let player = "1396";
-    const url = `${this.batting_url}team=${team}&player=${player}`;
+    let season = "31";
+    let year = "2017";
+    let club = "10";
+    const url = `${this.batting_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
     console.info("Call for getBattingRecond() with url : ", url);
    return this.http.get(url, this.header).map(responce => responce.json())
    // return this.http.get(url, this.options).map(responce => responce.json())
