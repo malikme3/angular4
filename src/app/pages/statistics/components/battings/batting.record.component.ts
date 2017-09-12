@@ -1,6 +1,9 @@
 import {Component} from "@angular/core";
 import {StatisticsService} from "../../statistics.service";
 import {StatisticsConstantsService} from "../../statistics.constants.service";
+import {MenuItem, Message} from "primeng/primeng";
+import {MessageService} from "../shared.message/messageservice";
+import {Subject} from "rxjs/Subject";
 /**
  * Created by HudaZulifqar on 9/5/2017.
  */
@@ -8,20 +11,45 @@ import {StatisticsConstantsService} from "../../statistics.constants.service";
   selector: 'battings-record',
   templateUrl: './batting.record.html',
   styleUrls: ['../../../matches/components/results/resultTables.scss'],
+  providers : [MessageService],
 })
 
 export class BattingRecordComponent {
-
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   battingRecordsList: any;
   data: any;
+  msgs: Message[] = [];
+  items: MenuItem[];
+  itemsSteps: MenuItem[];
 
   constructor(private statisticsService: StatisticsService,
-              private  statisticsConstantsService: StatisticsConstantsService) {
+              private  statisticsConstantsService: StatisticsConstantsService,
+              private messageService: MessageService) {
 
   }
 
+
   ngOnInit() {
+    this.itemsSteps = [
+      {label: 'Step 1'},
+      {label: 'Step 2'},
+      {label: 'Step 3'}
+    ];
+    this.items = [
+      {label: 'Stats', icon: 'fa-bar-chart'},
+      {label: 'Teams', icon: 'fa-calendar'},
+      {label: 'Clubs', icon: 'fa-book'},
+      {label: 'League', icon: 'fa-support'},
+      {label: 'Social', icon: 'fa-twitter'}
+    ];
     this.battingRecords();
+  }
+
+
+
+  onTabChange(event) {
+    this.msgs = [];
+    this.msgs.push({severity:'info', summary:'Tab Expanded', detail: 'Index: ' + event.index});
   }
 
   settings = this.statisticsConstantsService.battingRecordsTableSettings;
@@ -29,7 +57,7 @@ export class BattingRecordComponent {
   battingRecords() {
     console.info("Fetching battingRecords list: ")
     const types$ = this.statisticsService.getBattingRecords();
-    types$.subscribe(responce => this.battingRecordsList = responce,
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.battingRecordsList = responce,
       (err) => console.error('battingRecords: Response Error =>', err),
       () => this.loadData());
 
@@ -59,6 +87,17 @@ export class BattingRecordComponent {
         }
       ]
     }
+  }
+  showViaService() {
+    this.messageService.add({severity:'success', summary:'Service Message', detail:'Via MessageService'});
+  }
+
+  clear() {
+    this.msgs = [];
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }

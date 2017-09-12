@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
+import {Subject} from "rxjs/Subject";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -21,6 +22,7 @@ export class SubmitScoreBattingComponent {
   @Input() inningsId: number;
   @Input() innings: string;
   @Input() matchData: any;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   batsmansList: any[] = [];
   matchDetails: any[] = [];
   playersList;
@@ -400,13 +402,13 @@ export class SubmitScoreBattingComponent {
   howOutTypes() {
     console.info("Fetching howOutTypes list: ")
     const types$ = this.matchesService.getHowOutType();
-    types$.subscribe(responce => this.player_out_type = responce);
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.player_out_type = responce);
   }
 
   getPlayerslist() {
     console.info("Fetching Players list")
     const teams$ = this.matchesService.getPlayerslist();
-    teams$.subscribe(responce => this.playersList = responce,
+    teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersList = responce,
       () => console.log("responce", this.playersList));
   }
 
@@ -815,8 +817,12 @@ export class SubmitScoreBattingComponent {
     }
 
     const match$ = this.matchesService.submit_score_batting_details(this.battingScoreDetails);
-    match$.subscribe(responce => this.matchScore = responce,
+    match$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.matchScore = responce,
       (err) => console.error("Submitting Batting details failed", err),
         () => this.notify_Batting.emit(this.innings));
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

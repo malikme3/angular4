@@ -7,6 +7,7 @@ import "rxjs/add/operator/map";
 import {DefaultModal} from "../../../../ui/components/modals/default-modal/default-modal.component";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {MatchesDataStoreService} from "../../matches-data-store";
+import {Subject} from "rxjs/Subject";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -20,6 +21,7 @@ export class SubmitScoreWicketComponent {
   @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
   @Input() innings: string;
   @Input() isFirstInnings: boolean = true;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   isSubmitted: boolean = false;
   public matchInfo: any;
   public fowResStatus: string;
@@ -123,11 +125,17 @@ export class SubmitScoreWicketComponent {
     let fowValue = this.wicketForm.value;
     console.log("SubmitScoreWicketComponent :: Request", fowValue)
     this.matchesService.submit_score_fow_details(fowValue)
+      .takeUntil(this.ngUnsubscribe)
       .subscribe(responce => this.fowResStatus = responce,
         (err) => console.error("Submitting Totals failed", err),
         () => this.notify_Extras.emit({
           "innings": this.innings,
           "component": 'wickets'
         }));
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

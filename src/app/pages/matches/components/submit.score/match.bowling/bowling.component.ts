@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
+import {Subject} from "rxjs/Subject";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -18,6 +19,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 export class SubmitScoreBowlingComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @Output() notify_Bowling: EventEmitter<any> = new EventEmitter<any>();
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   @Input() Players: Array<any>;
   @Input() inningsId: number;
   @Input() innings: string;
@@ -377,13 +379,13 @@ export class SubmitScoreBowlingComponent {
   howOutTypes() {
     console.info("Fetching howOutTypes list: ")
     const types$ = this.matchesService.getHowOutType();
-    types$.subscribe(responce => this.player_out_type = responce);
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.player_out_type = responce);
   }
 
   getPlayerslist() {
     console.info("Fetching Players list")
     const teams$ = this.matchesService.getPlayerslist();
-    teams$.subscribe(responce => this.playersList = responce,
+    teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersList = responce,
       () => console.log("responce", this.playersList));
   }
 
@@ -698,7 +700,7 @@ export class SubmitScoreBowlingComponent {
     }
 
     const match$ = this.matchesService.submit_score_bowling_details(this.bowlingScoreDetails);
-    match$.subscribe(responce => this.matchScore = responce,
+    match$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.matchScore = responce,
       (err) => console.error("Submitting Bowling details failed", err),
       () => this.notify_Bowling.emit(this.innings));
     ;
@@ -709,6 +711,11 @@ export class SubmitScoreBowlingComponent {
     let details = JSON.stringify(this.form.value);
     console.log("Submitted Form values ==> ", details)
     const match$ = this.matchesService.submit_score_bowling_details(details);
-    match$.subscribe(responce => this.matchScore = responce);
+    match$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.matchScore = responce);
   }*/
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

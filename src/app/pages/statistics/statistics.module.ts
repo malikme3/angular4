@@ -29,7 +29,9 @@ import {routing} from "./statistics.routing";
 import {StatisticsService} from "./statistics.service";
 import {BattingRecordComponent} from "./components/battings/batting.record.component";
 import {StatisticsConstantsService} from "./statistics.constants.service";
-import {ChartModule} from "primeng/primeng";
+import {ChartModule, GrowlModule, MessagesModule, StepsModule, TabMenuModule, TabViewModule} from "primeng/primeng";
+import {MessageService} from "./components/shared.message/messageservice";
+import {Messages} from "./components/shared.message/messages";
 
 
 @NgModule({
@@ -58,15 +60,20 @@ import {ChartModule} from "primeng/primeng";
     MdNativeDateModule,
     DatePickerModule,
     NgDateRangePickerModule,
-    ChartModule
+    ChartModule,
+    TabMenuModule,
+    MessagesModule,
+    TabViewModule,
+    StepsModule,
+    GrowlModule,
 
   ],
   declarations: [
     Statistics,
     BattingRecordComponent,
-
+    Messages,
   ],
-  providers: [StatisticsService, StatisticsConstantsService],
+  providers: [StatisticsService, StatisticsConstantsService,MessageService,],
 })
 export class StatisticsModule {
 }

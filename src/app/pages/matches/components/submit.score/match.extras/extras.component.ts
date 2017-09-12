@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
+import {Subject} from "rxjs/Subject";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -17,6 +18,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 export class SubmitScoreExtrasComponent {
   @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
   @Input() innings: string;
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   private isSubmitted: boolean = false;
   @Input() isFirstInnings: boolean = true;
   private extrasResStatus: string;
@@ -96,7 +98,7 @@ export class SubmitScoreExtrasComponent {
        this.getMatchData();
     let extrasValues = this.extrasForm.value;
     console.log("SubmitScoreExtrasComponent :: Request", extrasValues)
-    this.matchesService.submit_score_extras_details(extrasValues)
+    this.matchesService.submit_score_extras_details(extrasValues).takeUntil(this.ngUnsubscribe)
       .subscribe(responce => this.extrasResStatus = responce,
         (err) => console.error("Submitting Extras details failed", err),
         () => this.notify_Extras.emit({
@@ -104,5 +106,9 @@ export class SubmitScoreExtrasComponent {
           "component": 'extras'
         }));
 
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

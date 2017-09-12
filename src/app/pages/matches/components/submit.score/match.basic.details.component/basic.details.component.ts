@@ -5,6 +5,7 @@ import {MatchesConstants} from "../../matches.constant.service";
 import {MatchesService} from "../../../matches.service";
 import {IOption} from "ng-select";
 import {Component, EventEmitter, Output} from "@angular/core";
+import {Subject} from "rxjs/Subject";
 /**
  * Created by HudaZulifqar on 8/22/2017.
  */
@@ -20,6 +21,7 @@ export class matchBasicDetailsComponent {
   @Output() notify_awayTeam: EventEmitter<string> = new EventEmitter<string>();
   @Output() notify_date: EventEmitter<string> = new EventEmitter<string>();
   @Output() notify_matchCall: EventEmitter<string> = new EventEmitter<string>();
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   //@Input() innings: string;
   options: DatePickerOptions;
@@ -91,7 +93,8 @@ export class matchBasicDetailsComponent {
   public battingName: AbstractControl;
 
   constructor(fb: FormBuilder, private matchesService: MatchesService,
-              private matchesConstants: MatchesConstants, private matchesDataStoreService: MatchesDataStoreService) {
+              private matchesConstants: MatchesConstants,
+              private matchesDataStoreService: MatchesDataStoreService) {
 
     this.options = new DatePickerOptions();
 
@@ -196,7 +199,7 @@ export class matchBasicDetailsComponent {
     console.info("Fetching results for teams list :")
     const teams$ = this.matchesService.getTeamslist();
     console.log('this.teamsname', this.teamsList)
-    teams$.subscribe(responce => this.teamsList = responce,
+    teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.teamsList = responce,
       (err) => console.error(err),
       () => console.info("responce  for teamList", this.teamsList));
 
@@ -205,7 +208,7 @@ export class matchBasicDetailsComponent {
   getPlayerslist() {
     console.info("Fetching Players list")
     const teams$ = this.matchesService.getPlayerslist();
-    teams$.subscribe(responce => this.playersList = responce,
+    teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersList = responce,
       (err) => console.error(err),
       () => console.info("responce", this.playersList));
   }
@@ -213,7 +216,7 @@ export class matchBasicDetailsComponent {
   playersListByTeamsIds(teamIds) {
     console.info("Fetching Players list for TeamsIds: ", teamIds)
     const teams$ = this.matchesService.getPlayersByTeamsIds(teamIds);
-    teams$.subscribe(responce => this.playersByTeamsIds = responce,
+    teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersByTeamsIds = responce,
       (err) => console.error(err),
       () => console.info("responce", this.playersList));
 
@@ -233,7 +236,7 @@ export class matchBasicDetailsComponent {
       if (type === 'homeTeam') {
         console.info("Fetching Players for Home Teams with => Ids: ", this.homeTeamsIds)
         const teams$ = this.matchesService.getPlayersByTeamsIds(this.homeTeamsIds);
-        teams$.subscribe(responce => this.playersForHomeTeam = responce);
+        teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersForHomeTeam = responce);
       }
     }
     if (type === 'awayTeamsPortable' || type === 'awayTeam') {
@@ -241,14 +244,14 @@ export class matchBasicDetailsComponent {
       if (type === 'awayTeam') {
         console.info("Fetching Players for Away with => Ids: ", this.awayTeamsIds)
         const teams$ = this.matchesService.getPlayersByTeamsIds(this.awayTeamsIds);
-        teams$.subscribe(responce => this.playersForAwayTeam = responce);
+        teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersForAwayTeam = responce);
       }
     }
     if (type === 'umpiringTeam') {
       this.umpiringTeamsIds.push(value);
       console.info("Fetching Players for Umpiring with => Ids: ", this.umpiringTeamsIds)
       const teams$ = this.matchesService.getPlayersByTeamsIds(this.umpiringTeamsIds);
-      teams$.subscribe(responce => this.playersForUmpiringTeam = responce);
+      teams$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.playersForUmpiringTeam = responce);
     }
   }
 
@@ -358,11 +361,14 @@ export class matchBasicDetailsComponent {
     this.dateValue ? matchDetailsObject['game_date'] = this.dateValue.formatted : this.dateValue;
 
     console.log(" ***onSubmitBasicDetails**** HTTP Request => ", matchDetailsObject);
-    this.matchesService.updateScorecardGameDetails(matchDetailsObject).subscribe(
+    this.matchesService.updateScorecardGameDetails(matchDetailsObject).takeUntil(this.ngUnsubscribe).subscribe(
       res => this.submiScoreStatus = res,
       (err) => console.error('onSubmitBasicDetails: Res Error =>', err),
       () => this.notify_matchCall.emit(this.dateValue));
   }
 
-
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 }

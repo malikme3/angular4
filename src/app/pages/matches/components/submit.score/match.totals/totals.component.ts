@@ -5,6 +5,7 @@ import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/form
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../../matches-data-store";
+import {Subject} from "rxjs/Subject";
 /*/!**
  * Created by HudaZulifqar on 6/27/2017.
  *!/*/
@@ -17,6 +18,7 @@ import {MatchesDataStoreService} from "../../matches-data-store";
 export class SubmitScoreTotalsComponent {
   @Output() notify: EventEmitter<any> = new EventEmitter<any>();
   @Output() notify_Extras: EventEmitter<any> = new EventEmitter<any>();
+  private ngUnsubscribe: Subject<void> = new Subject<void>()
   @Input() innings: string;
   @Input() isFirstInnings: boolean = true;
   isSubmitted: boolean = false;
@@ -90,7 +92,7 @@ export class SubmitScoreTotalsComponent {
     this.getMatchData();
     let fowValue = this.totalsForm.value;
     console.log("SubmitScoreTotalsComponent :: Request", fowValue)
-    this.matchesService.scorecard_total_details(fowValue)
+    this.matchesService.scorecard_total_details(fowValue).takeUntil(this.ngUnsubscribe)
       .subscribe(res => this.totalsResStatus = res,
         (err) => console.error("Submitting Totals failed", err),
         () => this.notify_Extras.emit({
@@ -105,5 +107,9 @@ export class SubmitScoreTotalsComponent {
     console.info("onSelectedTotals: Type:", type, 'Value: ', value)
     //this.extrasDetails.controls[type].setValue(value);
     //console.log('this.extrasDetails.controls ', this.extrasDetails.value)
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }
