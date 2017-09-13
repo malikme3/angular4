@@ -8,6 +8,7 @@ import {MatchesConstants} from "../matches.constant.service";
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../matches-data-store";
+import {MenuItem} from "primeng/primeng";
 
 @Component({
   selector: 'submit-score',
@@ -16,9 +17,10 @@ import {MatchesDataStoreService} from "../matches-data-store";
   styleUrls: ['submitScore.scss'],
 })
 export class SubmitScoreComponent {
-
+  items: MenuItem[];
 //default status
   public isBasicDetails: boolean = true;
+  public isEditScore: boolean = false;
   public isBatting: boolean = false;
 
   public isBowling: boolean = false;
@@ -29,16 +31,55 @@ export class SubmitScoreComponent {
   public matchDate: string = null;
   matchObjectByDate: any;
   matchTeamsDate: any;
+  editScore: any [];
 
   constructor(private matchesService: MatchesService,
               private matchesConstants: MatchesConstants, private matchesDataStoreService: MatchesDataStoreService) {
 
   }
-
+  value: number = 45;
   ngOnInit(): void {
+    this.items = [
+      {label: 'Match Basic Details', icon: 'fa-list'},
+      {label: 'Batting Details', icon: 'fa-edit'},
+      {label: 'Bowling Details', icon: 'fa-futbol-o'},
+      {label: 'Extras && Total Details', icon: 'fa-bar-chart'},
+      // {label: 'Edit Existing Score', icon: 'fa-cog'}
+    ];
+
+    this.editScore = [
+      {
+        label: 'File',
+        items: [{
+          label: 'New',
+          icon: 'fa-plus',
+          items: [
+            {label: 'Project'},
+            {label: 'Other'},
+          ]
+        },
+          {label: 'Open'},
+          {label: 'Quit'}
+        ]
+      },
+      {
+        label: 'Edit',
+        icon: 'fa-edit',
+        items: [
+          {label: 'Undo', icon: 'fa-mail-forward'},
+          {label: 'Redo', icon: 'fa-mail-reply'}
+        ]
+      }
+    ];
 
   }
+  menuToggle(val){
+    console.log("Val => ",val)
+  }
+  onNotify_menuTab(val){
 
+    this.isEditScore = true;
+  }
 
   onNotify_homeTeam(homeTeam) {
     this.homeTeam = homeTeam.value;
