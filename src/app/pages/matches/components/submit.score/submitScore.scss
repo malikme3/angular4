@@ -113,3 +113,36 @@ label.custom-checkbox {
 .example-full-width {
   width: 100%;
 }
+:host/deep/
+.ui-dropdown .ui-dropdown-trigger {
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  cursor: pointer;
+  background-color: #718c00;
+  width: 1.5em;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 .25em;
+}
+:host/deep/
+.ui-dropdown {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+  width: 9.5em;;
+  background-color: #3b5998;
+  padding: 0 .25em;
+}
+
+#tabSelect {
+  float: left;
+  height: 100%;
+}
+#selectEdit{
+  float: right;
+}
+

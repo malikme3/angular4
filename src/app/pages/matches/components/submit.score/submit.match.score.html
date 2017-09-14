@@ -5,6 +5,8 @@
                   styleClass="float center"></cric-tabMenu>
   </ng-container>
   <ng-container class="row col-xlg-4 col-lg4 col-md-4 col-sm-12">
+    <p-dropdown [options]="scoreEditOpt" [(ngModel)]="selectedEditScoreOpt" placeholder="Edit Score"
+                (click)="selectedEditScore(selectedEditScoreOpt)"></p-dropdown>
    <!-- <p-slideMenu #menuToggleu [model]="items" [popup]="true"></p-slideMenu>-->
     <!--<cric-megaMenu [model]="items"></cric-megaMenu>-->
   </ng-container>

@@ -40,7 +40,7 @@ import {SubmitScoreTotalsComponent} from "./components/submit.score/match.totals
 import {SubmitScoreWicketComponent} from "./components/submit.score/match.wickets/wickets.component";
 import {SubmitScoreBowlingComponent} from "./components/submit.score/match.bowling/bowling.component";
 import {submitButtonComponent} from "./components/submit.button/submit.button.component";
-import {ProgressBarModule, SplitButtonModule} from "primeng/primeng";
+import {DropdownModule, ProgressBarModule, SplitButtonModule} from "primeng/primeng";
 import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
 
 
@@ -71,7 +71,8 @@ import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
     DatePickerModule,
     NgDateRangePickerModule,
     ProgressBarModule,
-    SplitButtonModule
+    SplitButtonModule,
+    DropdownModule
     //SharedModule
 
   ],
@@ -92,7 +93,7 @@ import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
     SubmitScoreWicketComponent,
     SubmitScoreBowlingComponent,
     submitButtonComponent,
-    CricTabMenu
+    CricTabMenu,
 
   ],
   providers: [

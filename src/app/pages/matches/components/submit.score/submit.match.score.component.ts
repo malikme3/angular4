@@ -8,7 +8,7 @@ import {MatchesConstants} from "../matches.constant.service";
 import "rxjs/add/operator/startWith";
 import "rxjs/add/operator/map";
 import {MatchesDataStoreService} from "../matches-data-store";
-import {MenuItem} from "primeng/primeng";
+import {SelectItem} from "primeng/primeng";
 
 @Component({
   selector: 'submit-score',
@@ -17,12 +17,11 @@ import {MenuItem} from "primeng/primeng";
   styleUrls: ['submitScore.scss'],
 })
 export class SubmitScoreComponent {
-  items: MenuItem[];
+  items: any[];
 //default status
   public isBasicDetails: boolean = true;
   public isEditScore: boolean = false;
   public isBatting: boolean = false;
-
   public isBowling: boolean = false;
   public isExtrasSec: boolean = false;
 
@@ -32,18 +31,26 @@ export class SubmitScoreComponent {
   matchObjectByDate: any;
   matchTeamsDate: any;
   editScore: any [];
+  scoreEditOpt: SelectItem[];
+  selectedEditScoreOpt: any;
 
   constructor(private matchesService: MatchesService,
               private matchesConstants: MatchesConstants, private matchesDataStoreService: MatchesDataStoreService) {
-
+    this.scoreEditOpt = [];
+    this.scoreEditOpt.push({label: 'Basic Details', value: {id: 1, name: 'Basic', code: 'NY'}});
+    this.scoreEditOpt.push({label: 'Batting Details', value: {id: 2, name: 'Batting', code: 'RM'}});
+    this.scoreEditOpt.push({label: 'Bowling Details', value: {id: 3, name: 'Bowling', code: 'LDN'}});
+    this.scoreEditOpt.push({label: 'Extras/Total Details', value: {id: 4, name: 'Extras', code: 'IST'}});
   }
+
   value: number = 45;
+
   ngOnInit(): void {
     this.items = [
-      {label: 'Match Basic Details', icon: 'fa-list'},
-      {label: 'Batting Details', icon: 'fa-edit'},
-      {label: 'Bowling Details', icon: 'fa-futbol-o'},
-      {label: 'Extras && Total Details', icon: 'fa-bar-chart'},
+      {label: 'Match Basic Details', icon: 'fa-list', step: '1'},
+      {label: 'Batting Details', icon: 'fa-edit', step: '2'},
+      {label: 'Bowling Details', icon: 'fa-futbol-o', step: '3'},
+      {label: 'Extras && Total Details', icon: 'fa-bar-chart', step: '4'},
       // {label: 'Edit Existing Score', icon: 'fa-cog'}
     ];
 
@@ -73,12 +80,37 @@ export class SubmitScoreComponent {
     ];
 
   }
-  menuToggle(val){
-    console.log("Val => ",val)
-  }
-  onNotify_menuTab(val){
 
-    this.isEditScore = true;
+  selectedEditScore(option) {
+    console.log("Selected Score for Edit: ", option)
+  }
+
+  menuToggle(val) {
+    console.log("Val => ", val)
+  }
+
+  onNotify_menuTab(tab) {
+    console.log("Selected Score Tab: ", tab)
+    this.isEditScore = false;
+    this.isBasicDetails = false;
+    this.isEditScore = false;
+    this.isBatting = false;
+    this.isBowling = false;
+    this.isExtrasSec = false;
+
+    if (tab.step == "1") {
+      this.isBasicDetails = true;
+    }
+    if (tab.step == "2") {
+      this.isBatting = true;
+    }
+    if (tab.step == "3") {
+      this.isBowling = true;
+    }
+    if (tab.step == "4") {
+      this.isExtrasSec = true;
+    }
+
   }
 
   onNotify_homeTeam(homeTeam) {
