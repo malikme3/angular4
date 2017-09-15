@@ -7,7 +7,7 @@ import {AppTranslationModule} from '../../app.translation.module';
 import {TreeModule} from 'ng2-tree';
 import {HttpModule} from "@angular/http";
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-import {DataTableModule} from "angular2-datatable";
+//import {DataTableModule} from "angular2-datatable";
 import {HotTable, HotTableModule} from 'ng2-handsontable';
 import {routing} from './matches.routing';
 import {Matches} from './matches.component';
@@ -40,8 +40,13 @@ import {SubmitScoreTotalsComponent} from "./components/submit.score/match.totals
 import {SubmitScoreWicketComponent} from "./components/submit.score/match.wickets/wickets.component";
 import {SubmitScoreBowlingComponent} from "./components/submit.score/match.bowling/bowling.component";
 import {submitButtonComponent} from "./components/submit.button/submit.button.component";
-import {DropdownModule, ProgressBarModule, SplitButtonModule} from "primeng/primeng";
+import {
+  DataTableModule, DropdownModule, ProgressBarModule, SharedModule, Slider,
+  SplitButtonModule,
+  MultiSelect,
+} from "primeng/primeng";
 import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
+import {CarService} from "../shared/carservice";
 
 
 @NgModule({
@@ -72,7 +77,10 @@ import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
     NgDateRangePickerModule,
     ProgressBarModule,
     SplitButtonModule,
-    DropdownModule
+    DropdownModule,
+    DataTableModule,
+    SharedModule,
+
     //SharedModule
 
   ],
@@ -94,10 +102,12 @@ import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
     SubmitScoreBowlingComponent,
     submitButtonComponent,
     CricTabMenu,
+    Slider,
+    MultiSelect,
 
   ],
   providers: [
-    ResultsService, MatchesConstants, DashboardService, MatchesService, MatchesDataStoreService
+    ResultsService, MatchesConstants, DashboardService, MatchesService, MatchesDataStoreService,CarService
   ],
 })
 export class MatchesModule {

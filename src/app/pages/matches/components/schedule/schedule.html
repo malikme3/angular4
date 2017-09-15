@@ -1,3 +1,4 @@
+<ng-container *ngIf="options2017; else loading;">
 <div baCardBlur class="animated fadeIn card {{cardType}} {{baCardClass || ''}}" zoom-in>
   <div class="card-header clearfix">
     <div class="dropdown">
@@ -12,4 +13,5 @@
   </div>
   <ng2-smart-table [settings]="settings" [source]="data" (edit)="onRowEdit($event)"></ng2-smart-table>
 </div>
-
+</ng-container>
+<ng-template #loading> Schdule Sheet is loading ...</ng-template>

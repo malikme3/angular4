@@ -43,7 +43,7 @@ export class SubmitScoreComponent {
     this.scoreEditOpt.push({label: 'Extras/Total Details', value: {id: 4, name: 'Extras', code: 'IST'}});
   }
 
-  value: number = 45;
+  value: number = 5;
 
   ngOnInit(): void {
     this.items = [
@@ -100,15 +100,20 @@ export class SubmitScoreComponent {
 
     if (tab.step == "1") {
       this.isBasicDetails = true;
+      this.value = 20;
     }
     if (tab.step == "2") {
       this.isBatting = true;
+      this.value = 50;
     }
     if (tab.step == "3") {
       this.isBowling = true;
+      this.value = 80;
     }
     if (tab.step == "4") {
       this.isExtrasSec = true;
+      this.value = 100;
+
     }
 
   }

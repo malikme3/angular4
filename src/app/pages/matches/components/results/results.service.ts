@@ -4,6 +4,8 @@ import {Injectable} from '@angular/core';
 import {Http} from '@angular/http';
 import {BasicScorePojo} from './basicScore.pojo';
 import {PagesConstants} from "../../../pages.constants.service";
+import {Result} from "../../matches.domain/result";
+import {Observable} from "rxjs/Observable";
 //import { PointsTablePojo } from './PointsTable.pojo';
 
 @Injectable()
@@ -17,12 +19,19 @@ export class ResultsService {
   resultUrl = this.pagesConstants.pagesContants.url.baseUrl + this.url;
   smartTablePageSize = 10;
   // For points table
-  getMatchesResult(seasonId: number): Promise<BasicScorePojo[]> {
+  getMatchesResult1(seasonId: number): Promise<Result[]> {
     const url = `${this.resultUrl}seasonId=${seasonId}`;
     console.info("The url for getMatchesResult() is", url);
-    return this.http.get(url, this.header).toPromise().then(res => res.json() as BasicScorePojo[])
+    return this.http.get(url, this.header).toPromise().then(res => res.json() as Result[])
       .catch(this.handleError);
 
+  }
+
+  getMatchesResult(seasonId: number): Observable<Result> {
+    const url = `${this.resultUrl}seasonId=${seasonId}`;
+    console.info("Call for getMatchesResult() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json() as Result[])
+      .catch(this.handleError)
   }
 
   private handleError(error: any): Promise<any> {
