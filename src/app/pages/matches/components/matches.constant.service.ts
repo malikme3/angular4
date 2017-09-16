@@ -1,7 +1,7 @@
 /**
  * Created by HudaZulifqar on 6/24/2017.
  */
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class MatchesConstants {
@@ -23,36 +23,28 @@ export class MatchesConstants {
       perPage: 10,
     },
     columns: {
-      seasonId: {
-        title: 'Season ID',
-        type: 'number'
-      },
+      /*      seasonId: {
+       title: 'Season ID',
+       type: 'number'
+       },*/
       seasonName: {
         title: 'Season Name',
         type: 'string'
       },
-      awayTeam: {
-        title: 'Away Team',
+      teams: {
+        title: 'Teams',
         type: 'string'
       },
-      homeTeam: {
-        title: 'Home Team',
-        type: 'string'
-      },
-      formattedDate: {
+      formatted_date: {
         title: 'Date',
         type: 'string'
       },
-      ground: {
+      groundName: {
         title: 'Ground',
         type: 'string'
       },
-      umpireFName: {
-        title: 'Umpire First Name',
-        type: 'string'
-      },
-      umpireLName: {
-        title: 'Umpire Last Name',
+      umpireName: {
+        title: 'Umpire',
         type: 'string'
       },
       week: {
@@ -74,7 +66,7 @@ export class MatchesConstants {
       perPage: 10,
     },
     columns: {
-      match_date: {
+      game_date: {
         title: 'Date',
         type: Date,
       },
@@ -86,11 +78,11 @@ export class MatchesConstants {
         title: 'Guest Team',
         type: 'string',
       },
-      player_first_name: {
+      man_of_the_match: {
         title: 'MOM',
         type: 'string',
       },
-      match_status: {
+      result: {
         title: 'Result',
         type: 'string',
       },

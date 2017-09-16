@@ -21,28 +21,31 @@
   <input #gb type="text" placeholder="Global Filter">
 </div>
 <p-dataTable [value]="result" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt>
-  <p-header>List of Results</p-header>
-  <p-column field="host_team" header="Host Team" [filter]="true" filterPlaceholder="Search"></p-column>
-  <p-column field="match_date" header="Match Date" [filter]="true" filterMatchMode="in">
+
+
+  <p-column field="game_date" header="Match Date" [filter]="true" filterMatchMode="in">
     <ng-template pTemplate="filter" let-col>
       <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null,col.field,col.filterMatchMode)"></i>
-      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="2003" [max]="2018"
+      <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="2017-01-01" [max]="2018-01-01"
                 (onSlideEnd)="dt.filter($event.value,col.field,col.filterMatchMode)"></p-slider>
     </ng-template>
   </p-column>
-  <p-column field="guest_team" header="Filter by Teams" [filter]="true" filterMatchMode="equals">
+  <p-column field="host_team" header="Filter by Host Team" [filter]="true" filterMatchMode="equals">
     <ng-template pTemplate="filter" let-col>
-      <p-dropdown [options]="guest_team" [style]="{'width':'100%'}"
+      <p-dropdown [options]="host_team_opt" [style]="{'width':'100%'}"
                   (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
                   styleClass="ui-column-filter"></p-dropdown>
     </ng-template>
   </p-column>
-  <p-column field="player_first_name" header="Color (Custom)" [filter]="true" filterMatchMode="in">
+
+  <p-column field="guest_team" header="Filter by Guest Team" [filter]="true" filterMatchMode="equals">
     <ng-template pTemplate="filter" let-col>
-      <p-multiSelect [options]="colors" defaultLabel="All Colors"
-                     (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
-                     styleClass="ui-column-filter"></p-multiSelect>
+      <p-dropdown [options]="guest_team_opt" [style]="{'width':'100%'}"
+                  (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"
+                  styleClass="ui-column-filter"></p-dropdown>
     </ng-template>
   </p-column>
+  <p-column field="man_of_the_match" header="Man of the Match" [filter]="true" filterPlaceholder="Search"></p-column>
+  <p-column field="result" header="Result" [filter]="true" filterPlaceholder="Search"></p-column>
 </p-dataTable>
 <!--</ba-card>-->

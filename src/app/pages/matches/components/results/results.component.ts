@@ -22,7 +22,8 @@ export class ResultsComponent {
   result: Result[];
   brands: SelectItem[];
 
-  guest_team: SelectItem[] = [];
+  guest_team_opt: SelectItem[] = [];
+  host_team_opt: SelectItem[] = [];
 
   colors: SelectItem[];
 
@@ -91,7 +92,8 @@ export class ResultsComponent {
     this.source = this.getBasicResults(30);
     this.carService.getCarsMedium().then(cars => this.cars = cars);
 
-    this.guest_team.push({label: 'All Teams', value: null});
+    this.guest_team_opt.push({label: 'All Teams', value: null});
+    this.host_team_opt.push({label: 'All Teams', value: null});
 
     this.brands = [];
     this.brands.push({label: 'All Brands', value: null});
@@ -157,8 +159,8 @@ export class ResultsComponent {
     for (var val of this.result) {
       console.log("the val of hoest team is ", val.host_team);
       console.log("the val of guest team is ", val.guest_team);
-      this.guest_team.push({label: val.guest_team, value: val.guest_team});
-      this.guest_team.push({label: val.host_team, value: val.host_team});
+      this.guest_team_opt.push({label: val.guest_team, value: val.guest_team});
+      this.host_team_opt.push({label: val.host_team, value: val.host_team});
     }
   }
 

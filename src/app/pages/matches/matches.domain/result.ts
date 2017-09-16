@@ -17,4 +17,5 @@ export interface Result {
   player_first_name?;
   man_of_the_match?;
   match_status?;
+  season?;
 }
