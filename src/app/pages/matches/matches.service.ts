@@ -32,6 +32,8 @@ export class MatchesService {
   private score_fow_details = 'updateScorecardFowDetails';
   private score_extras_details = 'updateScorecardExtrasDetails';
   private score_totals_details = 'updateScorecardTotalDetails';
+  private scorecard_batting_inning = '/scorecard/Batting/byInning?';
+  private scorecard_info = '/scorecard/scorcardInfo/byInning?';
 
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -49,6 +51,8 @@ export class MatchesService {
   private score_fow_details_url = this.baseUrl + this.score_fow_details;
   private score_extras_details_url = this.baseUrl + this.score_extras_details;
   private score_totals_details_url = this.baseUrl + this.score_totals_details;
+  private scorecard_batting_inning_url = this.baseUrl + this.scorecard_batting_inning;
+  private scorecard_info_url = this.baseUrl + this.scorecard_info;
 
   // For points table
   getSchedule(seasonId: string): Promise<any> {
@@ -59,10 +63,24 @@ export class MatchesService {
       .catch(this.handleError);
   }
 
-  getBattingDetails(gameId: string): Promise<any> {
+  getBattingDetails(gameId: string): Observable<any> {
     const url = `${this.batting_url}gameId=${gameId}`;
     console.info("Call for getDetailedScore() with url : ", url);
-    return this.http.get(url, this.header).toPromise().then(responce => responce.json())
+    return this.http.get(url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getBattingDetailsByInnings(gameId: number, inning): Observable<any> {
+    const url = `${this.scorecard_batting_inning_url}gameId=${gameId}&inning=${inning}`;
+    console.info("Call for getBattingDetailsByInnings() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getScoreCardByInnings(gameId: number, inning): Observable<any> {
+    const url = `${this.scorecard_info_url}gameId=${gameId}&inning=${inning}`;
+    console.info("Call for getScoreCardByInnings() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
       .catch(this.handleError)
   }
 

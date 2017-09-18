@@ -1,0 +1,69 @@
+<ng-container *ngIf="batting_data_1; else loading;">
+  <ba-card baCardClass="with-scroll" title="First Innings Score Card">
+  <p-dataTable [value]="batting_data_1">
+  <!--<p-header>First Innings Score Card</p-header>-->
+  <p-column field="batsman_full_name" header="Batsman" [style]="{'width':'30%'}"></p-column>
+  <p-column field="out_info" header="" [style]="{'width':'30%'}"></p-column>
+  <p-column field="runs" header="Runs" [style]="{'width':'8%','text-align':'left'}"></p-column>
+  <p-column field="balls" header="Balls" [style]="{'width':'8%','text-align':'left'}"></p-column>
+  <p-column field="fours" header="4s" [style]="{'width':'8%','text-align':'center'}"></p-column>
+  <p-column field="sixes" header="6s" [style]="{'width':'8%','text-align':'center'}"></p-column>
+  <p-column field="strike_rate" header="SR" [style]="{'width':'8%','text-align':'left'}"></p-column>
+
+
+</p-dataTable>
+
+    <p-dataTable [value]="score_card_info" styleClass="data-table-no-header">
+      <!--<p-header>First Innings Score Card</p-header>-->
+      <p-column field="extras_title"  [style]="{'width':'30%'}"></p-column>
+      <p-column field="extras_info" header="" [style]="{'width':'30%'}"></p-column>
+      <p-column field="extras_total" header="" [style]="{'width':'8%'}"></p-column>
+      <p-column field=""   [style]="{'width':'auto'}"></p-column>
+    </p-dataTable>
+    <p-dataTable [value]="score_card_info" styleClass="data-table-no-header">
+      <!--<p-header>First Innings Score Card</p-header>-->
+      <p-column field="total_title"  [style]="{'width':'30%'}"></p-column>
+      <p-column field="totals_info"  [style]="{'width':'30%'}"></p-column>
+      <p-column field="total_score"   [style]="{'width':'8%'}"></p-column>
+      <p-column field=""   [style]="{'width':'auto'}"></p-column>
+
+    </p-dataTable>
+      <!--<p-header>First Innings Score Card</p-header>-->
+    <!--<p-dataTable [value]="firstInnings_info">
+      <p-row>
+        <p-column header="Last Year"></p-column>
+        <p-column header="This Year"></p-column>
+        <p-column header="Last Year"></p-column>
+        <p-column header="This Year"></p-column>
+
+      <p-column field="total" header="Batsman" [style]="{'width':'auto'}"></p-column>
+      <p-column field="wickets" header="" [style]="{'width':'30%'}"></p-column>
+      <p-column field="runs" header="Runs" [style]="{'width':'8%','text-align':'left'}"></p-column>
+      </p-row>
+    </p-dataTable>-->
+  </ba-card>
+  <ba-card baCardClass="with-scroll" title="Second Innings Score Card">
+  <p-dataTable [value]="batting_data_2">
+    <p-column field="batsman_full_name" header="Batsman" [style]="{'width':'auto'}"></p-column>
+    <p-column field="out_info" header="" [style]="{'width':'30%'}"></p-column>
+    <p-column field="runs" header="Runs" [style]="{'width':'8%','text-align':'left'}"></p-column>
+    <p-column field="balls" header="Balls" [style]="{'width':'8%','text-align':'left'}"></p-column>
+    <p-column field="fours" header="4s" [style]="{'width':'8%','text-align':'center'}"></p-column>
+    <p-column field="sixes" header="6s" [style]="{'width':'8%','text-align':'center'}"></p-column>
+    <p-column field="strike_rate" header="SR" [style]="{'width':'8%','text-align':'left'}"></p-column>
+  </p-dataTable>
+  </ba-card>
+</ng-container>
+<ng-template #loading> Wait Please, Scorecard is Loading for you !!! ...</ng-template>
+
+<!--<div class="row">
+  <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-12">
+    <ba-card baCardClass="with-scroll" title="{{firstInnings_info?.BatFirst}} vs {{firstInnings_info?.BatSecond}}">
+      <p-dataTable [value]="cars1" [style]="{'width':'500px'}">
+        <p-column field="firstInnings_info?.WonToss" header="Vin"></p-column>
+        <p-column field="firstInnings_info?.result" header="Year"></p-column>
+        <p-column field="firstInnings_info?.GroundName" header="Brand"></p-column>
+      </p-dataTable>
+    </ba-card>
+  </div>
+</div>-->

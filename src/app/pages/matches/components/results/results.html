@@ -23,7 +23,7 @@
 <p-dataTable [value]="result" [rows]="10" [paginator]="true" [globalFilter]="gb" #dt>
 
 
-  <p-column field="game_date" header="Match Date" [filter]="true" filterMatchMode="in">
+  <p-column field="game_date" header="Match Date" [filter]="true" [sortable]="true" filterMatchMode="in">
     <ng-template pTemplate="filter" let-col>
       <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null,col.field,col.filterMatchMode)"></i>
       <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="2017-01-01" [max]="2018-01-01"
@@ -38,7 +38,7 @@
     </ng-template>
   </p-column>
 
-  <p-column field="guest_team" header="Filter by Guest Team" [filter]="true" filterMatchMode="equals">
+  <p-column field="guest_team" header="Filter by Guest Team" [filter]="true" [sortable]="true" filterMatchMode="equals">
     <ng-template pTemplate="filter" let-col>
       <p-dropdown [options]="guest_team_opt" [style]="{'width':'100%'}"
                   (onChange)="dt.filter($event.value,col.field,col.filterMatchMode)"

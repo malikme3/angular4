@@ -8,6 +8,23 @@
 }
 
 :host /deep/ {
+  .ui-datatable * {
+    border : 0px !important;
+  }
+}
+:host /deep/ {
+  .ui-datatable .ui-datatable-thead > tr > th {
+    background: #ff81c6;
+    font-weight: bold;
+  }
+}
+:host /deep/ {
+  .data-table-no-header thead {
+    display: none;
+  }
+}
+
+:host /deep/ {
   ng2-smart-table {
     th, td {
       //border: 1px solid $border-light !important;
