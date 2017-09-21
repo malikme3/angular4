@@ -32,8 +32,10 @@ export class MatchesService {
   private score_fow_details = 'updateScorecardFowDetails';
   private score_extras_details = 'updateScorecardExtrasDetails';
   private score_totals_details = 'updateScorecardTotalDetails';
-  private scorecard_batting_inning = '/scorecard/Batting/byInning?';
-  private scorecard_info = '/scorecard/scorcardInfo/byInning?';
+  private scorecard_batting = '/scorecard/battingByInnings?';
+  private scorecard_bowling = '/scorecard/bowlingByInnings?';
+  private scorecard_info = '/scorecard/scorcardInfoByInnings?';
+  private scorecard_dnb = '/scorecard/dnbByInnings?';
 
 
   private schduel_url = this.baseUrl + this.sch_path;
@@ -51,7 +53,9 @@ export class MatchesService {
   private score_fow_details_url = this.baseUrl + this.score_fow_details;
   private score_extras_details_url = this.baseUrl + this.score_extras_details;
   private score_totals_details_url = this.baseUrl + this.score_totals_details;
-  private scorecard_batting_inning_url = this.baseUrl + this.scorecard_batting_inning;
+  private scorecard_batting_url = this.baseUrl + this.scorecard_batting;
+  private scorecard_bowling_url = this.baseUrl + this.scorecard_bowling;
+  private scorecard_dnb_url = this.baseUrl + this.scorecard_dnb;
   private scorecard_info_url = this.baseUrl + this.scorecard_info;
 
   // For points table
@@ -71,7 +75,21 @@ export class MatchesService {
   }
 
   getBattingDetailsByInnings(gameId: number, inning): Observable<any> {
-    const url = `${this.scorecard_batting_inning_url}gameId=${gameId}&inning=${inning}`;
+    const url = `${this.scorecard_batting_url}gameId=${gameId}&inning=${inning}`;
+    console.info("Call for getBattingDetailsByInnings() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getBowlingDetail(gameId: number, inning): Observable<any> {
+    const url = `${this.scorecard_bowling_url}gameId=${gameId}&inning=${inning}`;
+    console.info("Call for getBattingDetailsByInnings() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getDNBPlayers(gameId: number, inning): Observable<any> {
+    const url = `${this.scorecard_dnb_url}gameId=${gameId}&inning=${inning}`;
     console.info("Call for getBattingDetailsByInnings() with url : ", url);
     return this.http.get(url, this.header).map(responce => responce.json())
       .catch(this.handleError)
