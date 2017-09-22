@@ -43,7 +43,7 @@ import {submitButtonComponent} from "./components/submit.button/submit.button.co
 import {
   DataTableModule, DropdownModule, ProgressBarModule, SharedModule, Slider,
   SplitButtonModule,
-  MultiSelect,
+  MultiSelect, FieldsetModule,
 } from "primeng/primeng";
 import {CricTabMenu} from "../shared/components/tabmenu/tabmenu";
 import {CarService} from "../shared/carservice";
@@ -80,7 +80,7 @@ import {CarService} from "../shared/carservice";
     DropdownModule,
     DataTableModule,
     SharedModule,
-
+    FieldsetModule
     //SharedModule
 
   ],
