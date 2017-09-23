@@ -1,0 +1,132 @@
+<p-accordion [multiple]="true">
+  <p-accordionTab header="T20 League">
+    <p-carousel headerText="T20 League" [value]="cars" [circular]="true" [pageLinks]="5" [autoplayInterval]="10000" [numVisible]="5">
+      <ng-template let-car pTemplate="item">
+        <div class="ui-grid ui-grid-responsive">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12 align='center'"><h3>{{car.price}}</h3></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Matches</div>
+            <div class="ui-grid-col-6">{{car.vin}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Runs</div>
+            <div class="ui-grid-col-6">{{car.year}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Average</div>
+            <div class="ui-grid-col-6">{{car.brand}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Fifties</div>
+            <div class="ui-grid-col-6">{{car.color}}</div>
+          </div>
+          <!-- <div class="ui-grid-row">
+             <div class="ui-grid-col-12">
+               <button type="button" pButton icon="fa-search" (click)="selectCar(car)"></button>
+             </div>
+           </div>-->
+        </div>
+      </ng-template>
+    </p-carousel>
+  </p-accordionTab>
+  <p-accordionTab header="T35 League">
+    <p-carousel headerText="T35 League" [value]="cars" [circular]="true" [pageLinks]="5" [autoplayInterval]="10000" [numVisible]="5">
+      <ng-template let-car pTemplate="item" >
+        <div class="ui-grid ui-grid-responsive">
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-12 align='center'"><h3>{{car.price}}</h3></div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Matches</div>
+            <div class="ui-grid-col-6">{{car.vin}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Runs</div>
+            <div class="ui-grid-col-6">{{car.year}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Average</div>
+            <div class="ui-grid-col-6">{{car.brand}}</div>
+          </div>
+          <div class="ui-grid-row">
+            <div class="ui-grid-col-6">Fifties</div>
+            <div class="ui-grid-col-6">{{car.color}}</div>
+          </div>
+          <!-- <div class="ui-grid-row">
+             <div class="ui-grid-col-12">
+               <button type="button" pButton icon="fa-search" (click)="selectCar(car)"></button>
+             </div>
+           </div>-->
+        </div>
+      </ng-template>
+    </p-carousel>
+  </p-accordionTab>
+  <!--<p-accordionTab header="Godfather III">
+    After a break of more than  15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate.
+  </p-accordionTab>-->
+</p-accordion>
+
+
+<!--<p-carousel headerText="T20 League" [value]="cars">
+  <ng-template let-car pTemplate="item">
+    <div class="ui-grid ui-grid-responsive">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12 align='center'"><h3>{{car.price}}</h3></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Matches</div>
+        <div class="ui-grid-col-6">{{car.vin}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Runs</div>
+        <div class="ui-grid-col-6">{{car.year}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Average</div>
+        <div class="ui-grid-col-6">{{car.brand}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Fifties</div>
+        <div class="ui-grid-col-6">{{car.color}}</div>
+      </div>
+     &lt;!&ndash; <div class="ui-grid-row">
+        <div class="ui-grid-col-12">
+          <button type="button" pButton icon="fa-search" (click)="selectCar(car)"></button>
+        </div>
+      </div>&ndash;&gt;
+    </div>
+  </ng-template>
+</p-carousel>-->
+
+<!--<p-carousel headerText="T35 League" [value]="cars">
+  <ng-template let-car pTemplate="item">
+    <div class="ui-grid ui-grid-responsive">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12 align='center'"><h2>Majid Zubair</h2></div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Matches</div>
+        <div class="ui-grid-col-6">{{car.vin}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Runs</div>
+        <div class="ui-grid-col-6">{{car.year}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Average</div>
+        <div class="ui-grid-col-6">{{car.brand}}</div>
+      </div>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-6">Fifties</div>
+        <div class="ui-grid-col-6">{{car.color}}</div>
+      </div>
+      &lt;!&ndash; <div class="ui-grid-row">
+         <div class="ui-grid-col-12">
+           <button type="button" pButton icon="fa-search" (click)="selectCar(car)"></button>
+         </div>
+       </div>&ndash;&gt;
+    </div>
+  </ng-template>
+</p-carousel>-->

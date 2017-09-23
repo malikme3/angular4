@@ -29,6 +29,8 @@ import {DomHandlerService} from "./cricGallery/domhandler";
 import {PlotChartComponent} from "./charts/teamChartComponent";
 import {ChartsModule} from "ng2-charts";
 import {PlotChartNgComponent} from "./charts/ngchartsComponent";
+import {TopPlayersComponent} from "./topPlayers/topPlayers";
+import {AccordionModule, CarouselModule} from "primeng/primeng";
 
 @NgModule({
   imports: [
@@ -38,7 +40,9 @@ import {PlotChartNgComponent} from "./charts/ngchartsComponent";
     NgaModule,
     routing,
     TablesModule,
-    ChartsModule
+    ChartsModule,
+    CarouselModule,
+    AccordionModule
   ],
   declarations: [
     PopularApp,
@@ -53,6 +57,7 @@ import {PlotChartNgComponent} from "./charts/ngchartsComponent";
     GalleryComponent,
     PlotChartComponent,
     PlotChartNgComponent,
+    TopPlayersComponent
 
   ],
   exports: [

@@ -5,6 +5,7 @@ import {Injectable} from "@angular/core";
 import {Http} from '@angular/http';
 
 import {PagesConstants} from '../pages.constants.service'
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class DashboardService {
@@ -19,6 +20,13 @@ export class DashboardService {
   teamUrl = this.pagesConstant.pagesContants.url.baseUrl + this.url;
   private groupsUrls = this.pagesConstant.pagesContants.url.baseUrl + '/season/groups/?year=';
 
+  private options = this.pagesConstant.pagesContants.url.options;
+  private baseUrl = this.pagesConstant.pagesContants.url.baseUrl;
+
+  private batting_path = '/records/battings/?';
+
+  private batting_url = this.baseUrl + this.batting_path;
+
   getSeasonGroups(year: String): Promise<any[]> {
     console.info('Making request to server for teams standing');
     return this.http.get(this.groupsUrls + year, this.header).toPromise().then(res => res.json()).catch(this.handleError);
@@ -29,6 +37,18 @@ export class DashboardService {
     return this.http.get(this.teamUrl, this.header).toPromise().then(res => res.json())
       .catch(this.handleError);
 
+  }
+  getBattingRecords(): Observable<any> {
+    let team = "47";
+    let player = "1396";
+    let season = "31";
+    let year = "2017";
+    let club = "10";
+    const url = `${this.batting_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
+    console.info("Call for getBattingRecond() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+    // return this.http.get(url, this.options).map(responce => responce.json())
+      .catch(this.handleError)
   }
 
   private handleError(error: any): Promise<any> {

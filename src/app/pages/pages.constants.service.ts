@@ -15,7 +15,7 @@ export class PagesConstants {
   /*private headers = new Headers({ 'Content-Type': 'application/json' });*/
   private options = new RequestOptions({headers: this.headers});
 
-  private url = 'http://localhost:786/';  // URL to middle tier Java (Spring MVC)
+  private url = 'api/';  // URL to middle tier Java (Spring MVC)
 
   pagesContants = {
     url: {
