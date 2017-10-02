@@ -35,6 +35,12 @@ export class BaThemeConfigProvider {
       silverTree: '#1b70ef',
       gossip: '#3c4eb9',
       white: '#ffffff',
+      lightGreen: '#c5f126',
+      lightPink: '#ff9d85',
+      redBrown: '#ef0b72',
+      redBlue: '#b927a5',
+      green: '#44ff16',
+      yellow:'#fffc03',
     };
 
     this.conf = {
@@ -71,6 +77,13 @@ export class BaThemeConfigProvider {
           silverTree: this.dashboardColors.silverTree,
           gossip: this.dashboardColors.gossip,
           white: this.dashboardColors.white,
+
+          lightGreen: this.dashboardColors.lightGreen,
+          lightPink: this.dashboardColors.lightPink,
+          redBrown: this.dashboardColors.redBrown,
+          redBlue: this.dashboardColors.redBlue,
+          green: this.dashboardColors.green,
+          yellow: this.dashboardColors.yellow,
         },
 
         custom: {
