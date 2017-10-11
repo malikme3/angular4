@@ -13,6 +13,7 @@ import {ClubsService} from "../../clubs.service";
 export class ClubsPageComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   clubs: any;
+  roles: any
   data: any;
   clubMap = new Map<string, Map<string, string>>();
   clubChild = new Map<string, string>();
@@ -29,21 +30,38 @@ export class ClubsPageComponent {
   hcaClub: any[] = [];
   hcaClubTeams: any[] = [];
 
+  rrcc_name = "Round Rock Cricket Club";
+  president: any;
+  vice_president: any;
+  secretary: any;
+  treasurer: any;
+
+  hca_name = "Hill Country Cricket Association";
+  aca_name = "Austin Cricket Association (ACA)";
+
   constructor(private clubsService: ClubsService) {
 
   }
 
   ngOnInit() {
     this.clubsList();
+    //this.playersRole();
   }
-
 
   clubsList() {
     console.info("Fetching clubs list: ")
     const types$ = this.clubsService.getClubLists();
     types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.clubs = responce,
-      (err) => console.error('battingRecords: Response Error =>', err),
-      () => this.requestCompleted2());
+      (err) => console.error('getClubLists: Response Error =>', err),
+      () => this.requestCompleted());
+  }
+
+  playersRole() {
+    console.info("Fetching clubs list: ")
+    const types$ = this.clubsService.getPlayersRoles();
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.roles = responce,
+      (err) => console.error('getPlayersRoles: Res Error =>', err),
+      () => this.playersRoleReqCompleted());
   }
 
   ngOnDestroy() {
@@ -52,45 +70,87 @@ export class ClubsPageComponent {
   }
 
 
-  requestCompleted2() {
+  requestCompleted() {
+    this.playersRole();
     let expanded = true;
-    let rrcc = "Round Rock Cricket Club";
-    let aca = "Austin Cricket Association (ACA)";
-    let hca = "Hill Country Cricket Association";
-    for (let club of this.clubs) {
-      if (rrcc === club.club_name) {
-        this.rrccClubTeams.push({label: club.team_abbrev});
-      } else if (aca === club.club_name) {
-        this.acaClubTeams.push({label: club.team_abbrev});
-      } else if (hca === club.club_name) {
-        this.hcaClubTeams.push({label: club.team_abbrev});
 
+    let rrcc_id = 10;
+    let aca_id = 8;
+    let hca_id = 1;
+    for (let club of this.clubs) {
+
+      if (club.president_name) {
+        this.president = club.president_name;
+      }
+      if (club.vice_president_name) {
+        this.vice_president = club.vice_president_name;
+      }
+      if (club.secretary_name) {
+        this.secretary = club.secretary_name;
+      }
+      if (club.treasurer_name) {
+        this.treasurer = club.treasurer_name;
+      }
+
+      if (this.rrcc_name === club.club_name) {
+        this.rrccClubTeams.push({
+          label: club.team_abbrev,
+          team_id: club.team_id,
+          children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
+            {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
+        });
+      } else if (this.aca_name === club.club_name) {
+        this.acaClubTeams.push({
+          label: club.team_abbrev,
+          team_id: club.team_id,
+          children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
+            {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
+
+        });
+      } else if (this.hca_name === club.club_name) {
+        this.hcaClubTeams.push({
+          label: club.team_abbrev,
+          team_id: club.team_id,
+          children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
+            {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
+        });
       }
     }
-    this.acaClubTeams.push({children: [{label: rrcc, expanded: expanded, children: this.rrccClubTeams}]});
-    this.rrccClub.push(
-      {
-        label: "CTCL",
-        expanded: true,
-        children: [{label: rrcc, expanded: expanded, children: this.rrccClubTeams}]
-      });
-    this.acaClub.push({label: aca, expanded: expanded, children: this.acaClubTeams});
-    this.hcaClub.push({label: hca, expanded: expanded, children: this.hcaClubTeams});
-    this.ctcl.push({label: "CTCL", expanded: true, children: [this.rrccClub, this.acaClub, this.hcaClub]})
-   console.log("The ACC acaClubTeams ", JSON.stringify(this.acaClubTeams));
+
+    this.rrccClub.push({label: this.rrcc_name, club_id: rrcc_id, expanded: true, children: this.rrccClubTeams});
+    this.acaClub.push({label: this.aca_name, club_id: aca_id, expanded: true, children: this.acaClubTeams});
+    this.hcaClub.push({label: this.hca_name, club_id: hca_id, expanded: true, children: this.hcaClubTeams});
+    this.ctcl.push({
+      label: 'Central Texas League', expanded: true, children: [{
+        label: 'Organisers', expanded: true, children: [{label: 'President', children: [{label: this.president}]},
+          {label: 'Vice President', children: [{label: this.vice_president}]},
+          {label: 'Secretarty', children: [{label: this.secretary}]},
+          {label: 'Treasurer', children: [{label: this.treasurer}]}]
+      },
+        {
+          label: "Leagues Clubs",
+          expanded: true,
+          children: [{label: this.rrcc_name}, {label: this.hca_name}, {label: this.aca_name}]
+
+        }
+
+      ]
+    });
+    console.log("The hcaClub ", JSON.stringify(this.hcaClub));
   }
 
+  playersRoleReqCompleted() {
+    console.log("Roles are ", this.roles);
 
+  };
 }
 
 interface ctclTree {
   label?: string;
   expanded?: boolean;
   children?: string[];
-
 }
 
 interface clubChildren {
   label?: string;
-
 }

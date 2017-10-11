@@ -16,8 +16,10 @@ export class ClubsService {
 
 
   private club_list_path = 'clubs/details/';
+  private players_roles = 'players/roles/';
 
   private club_list_path_url = this.baseUrl + this.club_list_path;
+  private players_roles_url = this.baseUrl + this.players_roles;
 
   getClubLists(): Observable<any> {
 
@@ -26,6 +28,12 @@ export class ClubsService {
       .catch(this.handleError)
   }
 
+  getPlayersRoles(): Observable<any> {
+
+    console.info("Call for getPlayerRoles() with url : ", this.club_list_path_url);
+    return this.http.get(this.players_roles_url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('ClubsService: Error while fetching date from server', error);
