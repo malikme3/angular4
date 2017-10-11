@@ -6,7 +6,7 @@ import {ClubsService} from "../../clubs.service";
 @Component({
   selector: "ctcl-clubs-page",
   templateUrl: "./clubs.page.html",
-  // styleUrls: ['./clubs.page.scss'],
+  //styleUrls: ['../../clubs.scss'],
   // providers : [MessageService],
 })
 
