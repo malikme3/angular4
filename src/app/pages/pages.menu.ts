@@ -107,6 +107,14 @@ export const PAGES_MENU = [
                 title: 'general.menu.teams_view',
               }
             }
+          },
+          {
+            path: 'clubsView',
+            data: {
+              menu: {
+                title: 'general.menu.clubs_view',
+              }
+            }
           }
         ]
       },

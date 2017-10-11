@@ -1,4 +1,4 @@
-// tslint:disbale
+/* tslint:disable */
 import {Component} from "@angular/core";
 
 @Component({
