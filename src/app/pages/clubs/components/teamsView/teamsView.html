@@ -1,6 +1,38 @@
-<div class="col-md-6">
-  <ba-card title="tree_view.title">
-    <tree id="tree-view" [tree]="tree"></tree>
-    <ctcl-clubs-page></ctcl-clubs-page>
-  </ba-card>
-</div>
+<p-accordion>
+  <p-accordionTab header="Year 2017" [selected]="true">
+    <ng-container *ngFor=" let news of newsList;  let i=index">
+      <ng-container *ngIf="news.news_year === '2017'">
+        <ba-card title='{{news.writer_info}}'>
+          <p-fieldset legend='{{news.title}}' [toggleable]="true"  collapsed="false">
+            {{news.article}}
+          </p-fieldset>
+        </ba-card>
+      </ng-container>
+    </ng-container>
+  </p-accordionTab>
+
+  <p-accordionTab header="Year 2016" [selected]="false">
+    <ng-container *ngFor=" let news of newsList;  let i=index">
+      <ng-container *ngIf="news.news_year === '2016'">
+        <ba-card title='{{news.writer_info}}'>
+          <p-fieldset legend='{{news.title}}' [toggleable]="true" collapsed="true">
+            {{news.article}}
+          </p-fieldset>
+        </ba-card>
+      </ng-container>
+    </ng-container>
+  </p-accordionTab>
+
+  <p-accordionTab header="Year 2015 ..." [selected]="false">
+    <ng-container *ngFor=" let news of newsList;  let i=index">
+      <ng-container *ngIf="news.news_year < '2016'">
+        <ba-card title='{{news.writer_info}}'>
+          <p-fieldset legend='{{news.title}}' [toggleable]="true" collapsed="true">
+            {{news.article}}
+          </p-fieldset>
+        </ba-card>
+      </ng-container>
+    </ng-container>
+  </p-accordionTab>
+
+</p-accordion>
