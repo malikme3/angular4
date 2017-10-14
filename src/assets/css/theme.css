@@ -15,6 +15,11 @@
   .ui-widget-content a {
     color: #f15592; }
 
+.ui-widget-content-dashboard {
+  border: 1px solid #f9fffd;
+  background: #457c7d;
+  color: #2426ef; }
+
 .ui-widget-header {
   border: 1px solid #d9d9d9;
   background: #f6f7f9;

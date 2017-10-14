@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -30,7 +31,8 @@ import {PlotChartComponent} from "./charts/teamChartComponent";
 import {ChartsModule} from "ng2-charts";
 import {PlotChartNgComponent} from "./charts/ngchartsComponent";
 import {TopPlayersComponent} from "./topPlayers/topPlayers";
-import {AccordionModule, CarouselModule} from "primeng/primeng";
+import {AccordionModule, CarouselModule, PanelModule} from "primeng/primeng";
+import {ClubsService} from "../clubs/clubs.service";
 
 @NgModule({
   imports: [
@@ -42,7 +44,9 @@ import {AccordionModule, CarouselModule} from "primeng/primeng";
     TablesModule,
     ChartsModule,
     CarouselModule,
-    AccordionModule
+    AccordionModule,
+    PanelModule
+
   ],
   declarations: [
     PopularApp,
@@ -73,6 +77,7 @@ import {AccordionModule, CarouselModule} from "primeng/primeng";
     UsersMapService,
     DashboardService,
     DomHandlerService,
+    ClubsService
 
   ]
 })

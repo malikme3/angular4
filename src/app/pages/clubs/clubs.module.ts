@@ -11,7 +11,7 @@ import { TeamsView } from './components/teamsView/teamsView.component';
 import { TablesModule } from '../tables/tables.module';
 import {ClubsService} from "./clubs.service";
 import {ClubsPageComponent} from "app/pages/clubs/components/clubsHome/clubs.page.component";
-import {AccordionModule, FieldsetModule, OrganizationChartModule} from "primeng/primeng";
+import {AccordionModule, DataScrollerModule, FieldsetModule, OrganizationChartModule} from "primeng/primeng";
 
 @NgModule({
   imports: [
@@ -23,6 +23,7 @@ import {AccordionModule, FieldsetModule, OrganizationChartModule} from "primeng/
     OrganizationChartModule,
     FieldsetModule,
     AccordionModule,
+    DataScrollerModule,
     routing
   ],
   declarations: [

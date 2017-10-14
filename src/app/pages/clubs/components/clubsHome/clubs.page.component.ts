@@ -38,7 +38,27 @@ export class ClubsPageComponent {
 
   hca_name = "Hill Country Cricket Association";
   aca_name = "Austin Cricket Association (ACA)";
-
+  tree: any = {
+    value: 'CTCL Clubs',
+    children: [
+      {
+        value: 'Rounf Rocks',
+        children: [
+          { value: 'Lions' },
+          { value: 'Laggan' },
+          { value: 'Tiger' },
+        ]
+      },
+      {
+        value: 'HCCA',
+        children: [
+          { value: 'Ravens' },
+          { value: 'Gladiators' },
+          { value: 'Hawks' },
+        ]
+      }
+    ]
+  };
   constructor(private clubsService: ClubsService) {
 
   }
@@ -121,21 +141,19 @@ export class ClubsPageComponent {
     this.acaClub.push({label: this.aca_name, club_id: aca_id, expanded: true, children: this.acaClubTeams});
     this.hcaClub.push({label: this.hca_name, club_id: hca_id, expanded: true, children: this.hcaClubTeams});
     this.ctcl.push({
-      label: 'Central Texas League', expanded: true, children: [{
-        label: 'Organisers', expanded: true, children: [{label: 'President', children: [{label: this.president}]},
-          {label: 'Vice President', children: [{label: this.vice_president}]},
-          {label: 'Secretarty', children: [{label: this.secretary}]},
-          {label: 'Treasurer', children: [{label: this.treasurer}]}]
-      },
-        {
-          label: "Leagues Clubs",
-          expanded: true,
-          children: [{label: this.rrcc_name}, {label: this.hca_name}, {label: this.aca_name}]
 
-        }
+      label: "Leagues Clubs",
+      expanded: true,
+      children: [{label: this.rrcc_name}, {label: this.hca_name}, {label: this.aca_name}]
 
-      ]
     });
+
+    /* {
+       label: 'Organisers', expanded: true, children: [{label: 'President', children: [{label: this.president}]},
+       {label: 'Vice President', children: [{label: this.vice_president}]},
+       {label: 'Secretarty', children: [{label: this.secretary}]},
+       {label: 'Treasurer', children: [{label: this.treasurer}]}]
+     },*/
     console.log("The hcaClub ", JSON.stringify(this.hcaClub));
   }
 

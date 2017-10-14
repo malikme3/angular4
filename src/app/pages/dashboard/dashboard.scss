@@ -21,3 +21,16 @@
 .blurCalendar {
   height: 475px;
 }
+
+
+  .dashboard {
+    border: 1px solid #f1bf55;
+    background: rgba(31, 241, 38, 0.53);
+    color: #ddf9e7;
+  }
+:host /deep/ {
+  .ui-widget-content {
+    border: 1px solid #f1bf55;
+    background: rgba(74, 24, 43, 0.75);
+    color: #f6f7f9; }
+}

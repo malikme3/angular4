@@ -13,6 +13,7 @@ import {Subject} from "rxjs/Subject";
 export class TeamsView {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   newsList:any;
+  today: string;
   tree: TreeModel = {
     value: 'CTCL Clubs',
     children: [
@@ -40,7 +41,13 @@ export class TeamsView {
 
   ngOnInit() {
     this.ctclNews();
+    this.currentDate();
   }
+
+  currentDate(){
+   this.today = (new Date()).getFullYear().toString();
+   console.log("Date is ",this.today);
+  };
 
   ctclNews() {
     console.info("Fetching clubs list: ")

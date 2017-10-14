@@ -1,6 +1,8 @@
 /* tslint:disable */
 import {Component} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
+import {ClubsService} from "../clubs/clubs.service";
+import {Subject} from "rxjs/Subject";
 
 @Component({
   selector: 'dashboard',
@@ -8,8 +10,9 @@ import {DashboardService} from "./dashboard.service";
   templateUrl: './dashboard.html'
 })
 export class Dashboard {
-
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   points;
+  newsList:any;
   groups;
   data: any;
   images: any[];
@@ -17,7 +20,7 @@ export class Dashboard {
   //Default year : 2017
   year: String = '2017';
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService, private clubsService: ClubsService) {
 
      this.data = {
      datasets: [{
@@ -42,6 +45,7 @@ export class Dashboard {
     this.groups = this.seasonGroups(this.year);
     this.images = this.dashboardService.getPhoto();
     this.images_odd = this.dashboardService.getPhoto_odd();
+    this.ctclNews();
 
   }
 
@@ -56,6 +60,18 @@ export class Dashboard {
     this.dashboardService.getTeamStanding().then(res => this.points = res);
     console.info("Point are back from backend", this.points)
     return this.points;
+  }
+
+
+  ctclNews() {
+    console.info("Fetching clubs list: ")
+    const types$ = this.clubsService.getCtclNews();
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.newsList = responce,
+      (err) => console.error('getCtclNews: Res Error =>', err),
+      () => this.ctclNewsReqCompleted());
+  }
+  ctclNewsReqCompleted(){
+    console.log("ctclNews is completed", this.newsList)
   }
 
 }

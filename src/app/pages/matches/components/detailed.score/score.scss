@@ -25,6 +25,22 @@
   }
 }
 
+/*:host /deep/ {
+  .ui-widget-content {
+    border: 2px solid rgba(178, 53, 68, 0.85);
+    background: #457c7d;
+  }
+}*/
+
+:host /deep/ {
+  .ui-widget-content {
+    border: 2px solid #b29e35;
+    background: rgba(106, 199, 186, 0.24);
+    color: #000000;
+  }
+}
+
+
 :host /deep/ {
   ng2-smart-table {
     th, td {

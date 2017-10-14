@@ -1,5 +1,12 @@
-@import '../../../../theme/sass/conf/conf';
+@import '../../../../../../theme/sass/conf/conf';
 
+.with-round-sm {
+  margin-bottom: 3px;
+  img {
+    border-radius: 25%;
+    margin-bottom: 2px;
+  }
+}
 :host /deep/ .widgets {
 
   @mixin icon-hover($color) {
@@ -100,10 +107,10 @@
   }
 
   .with-round-bg {
-    margin-bottom: 6px;
+    margin-bottom: 1px;
     img {
-      border-radius: 50%;
-      margin-bottom: 4px;
+      border-radius: 5%;
+      margin-bottom: 1px;
     }
     @include setImgBg($default);
 
