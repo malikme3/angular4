@@ -33,6 +33,7 @@ import {PlotChartNgComponent} from "./charts/ngchartsComponent";
 import {TopPlayersComponent} from "./topPlayers/topPlayers";
 import {AccordionModule, CarouselModule, PanelModule} from "primeng/primeng";
 import {ClubsService} from "../clubs/clubs.service";
+import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import {ClubsService} from "../clubs/clubs.service";
     GalleryComponent,
     PlotChartComponent,
     PlotChartNgComponent,
-    TopPlayersComponent
+    TopPlayersComponent,
+    LatestMatchesSummary,
 
   ],
   exports: [

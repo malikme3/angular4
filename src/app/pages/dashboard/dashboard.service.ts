@@ -1,3 +1,4 @@
+/* tslint:disable */
 /**
  * Created by HudaZulifqar on 6/26/2017.
  */
@@ -17,15 +18,17 @@ export class DashboardService {
   }
 
   header = this.pagesConstant.pagesContants.url.header;
-  teamUrl = this.pagesConstant.pagesContants.url.baseUrl + this.url;
-  private groupsUrls = this.pagesConstant.pagesContants.url.baseUrl + '/season/groups/?year=';
-
-  private options = this.pagesConstant.pagesContants.url.options;
-  private baseUrl = this.pagesConstant.pagesContants.url.baseUrl;
-
+  private matches_latest_path = 'matches/latest/';
   private batting_path = '/records/battings/?';
 
+
+  private options = this.pagesConstant.pagesContants.url.options;
+  teamUrl = this.pagesConstant.pagesContants.url.baseUrl + this.url;
+  private groupsUrls = this.pagesConstant.pagesContants.url.baseUrl + '/season/groups/?year=';
+  private baseUrl = this.pagesConstant.pagesContants.url.baseUrl;
   private batting_url = this.baseUrl + this.batting_path;
+  private matches_latest_url = this.baseUrl + this.matches_latest_path;
+
 
   getSeasonGroups(year: String): Promise<any[]> {
     console.info('Making request to server for teams standing');
@@ -38,15 +41,23 @@ export class DashboardService {
       .catch(this.handleError);
 
   }
-  getBattingRecords(): Observable<any> {
+
+  getBattingRecords(season): Observable<any> {
     let team = "47";
     let player = "1396";
-    let season = "31";
+    /*let season = "31";*/
     let year = "2017";
     let club = "10";
     const url = `${this.batting_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
     console.info("Call for getBattingRecond() with url : ", url);
     return this.http.get(url, this.header).map(responce => responce.json())
+    // return this.http.get(url, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+
+  getLatestMatchesResult(): Observable<any> {
+    console.info("Call for getBattingRecond() with url : ", this.matches_latest_url);
+    return this.http.get(this.matches_latest_url, this.header).map(responce => responce.json())
     // return this.http.get(url, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }
@@ -135,7 +146,6 @@ export class DashboardService {
       alt: 'Description for Image 26',
       title: 'Title 26'
     });
-
 
 
     return this.images;
