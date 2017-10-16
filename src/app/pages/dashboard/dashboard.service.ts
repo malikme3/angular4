@@ -20,6 +20,7 @@ export class DashboardService {
   header = this.pagesConstant.pagesContants.url.header;
   private matches_latest_path = 'matches/latest/';
   private batting_path = '/records/battings/?';
+  private bowling_path = '/records/bowlings/?';
 
 
   private options = this.pagesConstant.pagesContants.url.options;
@@ -27,6 +28,7 @@ export class DashboardService {
   private groupsUrls = this.pagesConstant.pagesContants.url.baseUrl + '/season/groups/?year=';
   private baseUrl = this.pagesConstant.pagesContants.url.baseUrl;
   private batting_url = this.baseUrl + this.batting_path;
+  private bowling_url = this.baseUrl + this.bowling_path;
   private matches_latest_url = this.baseUrl + this.matches_latest_path;
 
 
@@ -50,6 +52,18 @@ export class DashboardService {
     let club = "10";
     const url = `${this.batting_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
     console.info("Call for getBattingRecond() with url : ", url);
+    return this.http.get(url, this.header).map(responce => responce.json())
+    // return this.http.get(url, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+  getBowlingRecords(season): Observable<any> {
+    let team = "47";
+    let player = "1396";
+    /*let season = "31";*/
+    let year = "2017";
+    let club = "10";
+    const url = `${this.bowling_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
+    console.info("Call for getBowlingRecond() with url : ", url);
     return this.http.get(url, this.header).map(responce => responce.json())
     // return this.http.get(url, this.options).map(responce => responce.json())
       .catch(this.handleError)

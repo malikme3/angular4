@@ -9,6 +9,7 @@ import {Subject} from "rxjs/Subject";
 /**
  * Created by HudaZulifqar on 8/22/2017.
  */
+/* tslint:disable */
 
 @Component({
   selector: 'score-basic-details',

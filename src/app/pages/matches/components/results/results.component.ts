@@ -1,4 +1,5 @@
 // tslint:disbale
+/* tslint:disable */
 import {Component} from "@angular/core";
 import {ResultsService} from "./results.service";
 import {MatchesConstants} from "../matches.constant.service";

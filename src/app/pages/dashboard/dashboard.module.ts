@@ -31,9 +31,10 @@ import {PlotChartComponent} from "./charts/teamChartComponent";
 import {ChartsModule} from "ng2-charts";
 import {PlotChartNgComponent} from "./charts/ngchartsComponent";
 import {TopPlayersComponent} from "./topPlayers/topPlayers";
-import {AccordionModule, CarouselModule, PanelModule} from "primeng/primeng";
+import {AccordionModule, CarouselModule, ChartModule, PanelModule} from "primeng/primeng";
 import {ClubsService} from "../clubs/clubs.service";
 import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
+import {CtclCarousel} from "./ctclCarousel/carousel.component";
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
     ChartsModule,
     CarouselModule,
     AccordionModule,
-    PanelModule
+    PanelModule,
+    ChartModule
 
   ],
   declarations: [
@@ -64,6 +66,7 @@ import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
     PlotChartNgComponent,
     TopPlayersComponent,
     LatestMatchesSummary,
+    CtclCarousel
 
   ],
   exports: [

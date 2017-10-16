@@ -1,6 +1,7 @@
 /**
  * Created by HudaZulifqar on 8/18/2017.
  */
+/* tslint:disable */
 import {
   AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, OnDestroy,
   Output

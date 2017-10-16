@@ -18,3 +18,9 @@ h3{
   text-align: left;
   padding-left: 2%;
 }
+:host /deep/ {
+  .ui-widget-content {
+    border: 1px solid #0f5ea2;
+    background: rgba(122, 59, 212, 0.42);
+    color: #f6f7f9; }
+}

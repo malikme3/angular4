@@ -1,3 +1,4 @@
+<ctcl-latest-matches></ctcl-latest-matches>
 <div class="row">
   <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
     <ba-card title="T20 League" baCardClass="medium-card with-scroll">
@@ -12,59 +13,61 @@
 </div>
 
 <!--<ba-card title="Best Batsman">-->
-<top-players></top-players>
-<!--</ba-card>-->
 
-<div class="row">
-  <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
-    <ba-card title="dashboard.match_features" baCardClass="medium-card with-scroll">
-      <iframe width="560" height="360" src="https://www.youtube.com/embed/dH7zZPcI1U8" frameborder="0"
-              allowfullscreen></iframe>
-    </ba-card>
+  <top-players></top-players>
+
+  <!--</ba-card>-->
+
+  <div class="row">
+    <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
+      <ba-card title="dashboard.match_features" baCardClass="medium-card with-scroll">
+        <iframe width="560" height="360" src="https://www.youtube.com/embed/dH7zZPcI1U8" frameborder="0"
+                allowfullscreen></iframe>
+      </ba-card>
+    </div>
+
+    <div class="col-xlg-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+      <ba-card title="dashboard.rencent_matches" baCardClass="medium-card with-scroll">
+        <!--<plot-chart type="polarArea" [data]="data" [width]="941" [height]="auto"></plot-chart>-->
+        <plot-chart-ng></plot-chart-ng>
+      </ba-card>
+    </div>
   </div>
 
-  <div class="col-xlg-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-    <ba-card title="dashboard.rencent_matches" baCardClass="medium-card with-scroll">
-      <!--<plot-chart type="polarArea" [data]="data" [width]="941" [height]="auto"></plot-chart>-->
-      <plot-chart-ng></plot-chart-ng>
-    </ba-card>
-  </div>
-</div>
+  <div class="row" *ngFor="let group of groups, let i = index">
+    <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12" *ngIf="i==1">
+      <ba-card title="T30:Point Table" baCardClass="medium-card with-scroll">
+        <bordered-table [group]="group"></bordered-table>
+      </ba-card>
+    </div>
 
-<div class="row" *ngFor="let group of groups, let i = index">
-  <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12" *ngIf="i==1">
-    <ba-card title="Point Table" baCardClass="medium-card with-scroll">
-      <bordered-table [group]="group"></bordered-table>
-    </ba-card>
+    <div class="col-xlg-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" *ngIf="i==1">
+      <ba-card title="T20:Point Table" baCardClass="medium-card with-scroll feed-panel">
+        <bordered-table [group]="group"></bordered-table>
+      </ba-card>
+    </div>
   </div>
 
-  <div class="col-xlg-6 col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" *ngIf="i==1">
-    <ba-card title="dashboard.rencent_matches" baCardClass="medium-card with-scroll feed-panel">
-      <bordered-table [group]="group"></bordered-table>
-    </ba-card>
-  </div>
-</div>
+  <div class="row">
+    <ba-card class="col-xlg-3 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.ctcl_news"
+             baCardClass="xmedium-card feed-comply-panel with-scroll todo-panel">
+      <ng-container *ngFor=" let news of newsList;  let i=index">
+        <ng-container *ngIf="i<9">
+          <p-panel header="{{news.title}}" [toggleable]="true" collapsed="false" [styleClass]="dashboard"
+                   [style]="{'margin-bottom':'20px', 'background':'rgba(29, 63, 74, 0.53)'}">
+            {{news.article}}
+          </p-panel>
+        </ng-container>
 
-<div class="row">
-  <ba-card class="col-xlg-3 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.ctcl_news"
-           baCardClass="xmedium-card feed-comply-panel with-scroll todo-panel">
-    <ng-container *ngFor=" let news of newsList;  let i=index">
-      <ng-container *ngIf="i<9">
-        <p-panel header="{{news.title}}" [toggleable]="true" collapsed="false"  [styleClass]="dashboard"
-                 [style]="{'margin-bottom':'20px', 'background':'rgba(29, 63, 74, 0.53)'}">
-          {{news.article}}
-        </p-panel>
       </ng-container>
-
-    </ng-container>
-  </ba-card>
-  <ba-card class="col-xlg-6 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.calendar"
-           baCardClass="xmedium-card feed-comply-panel with-scroll calendar-panel">
-    <calendar></calendar>
-  </ba-card>
-  <!-- <ba-card class="col-xlg-3 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.todo_list"
-            baCardClass="xmedium-card feed-comply-panel with-scroll todo-panel">
-     <todo></todo>
-   </ba-card>-->
-</div>
+    </ba-card>
+    <ba-card class="col-xlg-6 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.calendar"
+             baCardClass="xmedium-card feed-comply-panel with-scroll calendar-panel">
+      <calendar></calendar>
+    </ba-card>
+    <!-- <ba-card class="col-xlg-3 col-lg-6 col-md-12 col-sm-12 col-12" title="dashboard.todo_list"
+              baCardClass="xmedium-card feed-comply-panel with-scroll todo-panel">
+       <todo></todo>
+     </ba-card>-->
+  </div>
 

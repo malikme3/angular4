@@ -3,6 +3,7 @@ import {Component} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
 import {ClubsService} from "../clubs/clubs.service";
 import {Subject} from "rxjs/Subject";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'dashboard',
@@ -12,7 +13,7 @@ import {Subject} from "rxjs/Subject";
 export class Dashboard {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   points;
-  newsList:any;
+  newsList: any;
   groups;
   data: any;
   images: any[];
@@ -20,21 +21,21 @@ export class Dashboard {
   //Default year : 2017
   year: String = '2017';
 
-  constructor(private dashboardService: DashboardService, private clubsService: ClubsService) {
+  constructor(private router: Router, private dashboardService: DashboardService, private clubsService: ClubsService) {
 
-     this.data = {
-     datasets: [{
-     data: [6, 4, 2, 12],
-     backgroundColor: [
-     "#ff96ec",
-     "#a9c05e",
-     "#FFCE56",
-     "#8bebed"
-     ],
-     label: 'My dataset'
-     }],
-     labels: ['Played', 'Won', 'Lost', 'Total']
-     }
+    this.data = {
+      datasets: [{
+        data: [6, 4, 2, 12],
+        backgroundColor: [
+          "#ff96ec",
+          "#a9c05e",
+          "#FFCE56",
+          "#8bebed"
+        ],
+        label: 'My dataset'
+      }],
+      labels: ['Played', 'Won', 'Lost', 'Total']
+    }
 
 
   }
@@ -70,8 +71,14 @@ export class Dashboard {
       (err) => console.error('getCtclNews: Res Error =>', err),
       () => this.ctclNewsReqCompleted());
   }
-  ctclNewsReqCompleted(){
+
+  ctclNewsReqCompleted() {
     console.log("ctclNews is completed", this.newsList)
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
 }
