@@ -78,8 +78,22 @@ h5{
 :host /deep/ {
   .ui-widget-content {
     border: 1px solid #0f5ea2;
-    background: rgba(155, 47, 147, 0.42);
-    color: #f6f7f9; }
+    background: rgba(155, 127, 147, 0.42);
+    color: #f6f7f9;
+  }
+  .ui-carousel .ui-carousel-header {
+    margin: 0 1px;
+    overflow: hidden;
+    //border: 1px solid #0f5ea2;
+    background: rgba(22, 98, 11, 0.35);
+    padding: 1%;
+  }
+  .ui-carousel-header-title {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+
+  }
 }
 
 img {

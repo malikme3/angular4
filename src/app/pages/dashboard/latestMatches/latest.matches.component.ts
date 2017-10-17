@@ -13,7 +13,9 @@ export class LatestMatchesSummary {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private url: string = '/pages/matches/scoreView';
   matchesResult: any;
+  nextMatchesResult: any;
   diplayScore: any = [];
+  nextMatchesData:any = [];
   displayScoreData: any = [];
 
   constructor(private router: Router, private dashboardService: DashboardService) {
@@ -21,6 +23,7 @@ export class LatestMatchesSummary {
 
   ngOnInit() {
     this.latestMatchesSummary();
+    this.nextMatches(null);
   }
 
   latestMatchesSummary() {
@@ -29,7 +32,14 @@ export class LatestMatchesSummary {
     types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.matchesResult = responce,
       (err) => console.error('matchesResult: Response Error =>', err),
       () => this.loadData1(this.matchesResult));
+  }
 
+  nextMatches(seasonId) {
+    console.info("next Matches list: ")
+    const types$ = this.dashboardService.getNextMatches(seasonId);
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.nextMatchesResult = responce,
+      (err) => console.error('next matches: Response Error =>', err),
+      () => this.loadNextMatches(this.nextMatchesResult));
   }
 
 
@@ -56,6 +66,11 @@ export class LatestMatchesSummary {
     }
     console.log("displayScore: ", this.diplayScore);
     this.displayScoreData = this.diplayScore;
+  }
+
+  loadNextMatches(value: any){
+    console.log("next Matches: ", this.nextMatchesResult);
+    this.nextMatchesData = this.nextMatchesResult;
   }
 
   onClickMatch(value) {

@@ -1,7 +1,7 @@
 /**
  * Created by HudaZulifqar on 6/28/2017.
  */
-
+/* tslint:disable */
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {PagesConstants} from "../pages.constants.service";

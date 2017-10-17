@@ -21,6 +21,8 @@ export class DashboardService {
   private matches_latest_path = 'matches/latest/';
   private batting_path = '/records/battings/?';
   private bowling_path = '/records/bowlings/?';
+  private sch_path = 'matches/schedule/?';
+
 
 
   private options = this.pagesConstant.pagesContants.url.options;
@@ -30,6 +32,7 @@ export class DashboardService {
   private batting_url = this.baseUrl + this.batting_path;
   private bowling_url = this.baseUrl + this.bowling_path;
   private matches_latest_url = this.baseUrl + this.matches_latest_path;
+  private schduel_url = this.baseUrl + this.sch_path;
 
 
   getSeasonGroups(year: String): Promise<any[]> {
@@ -72,6 +75,13 @@ export class DashboardService {
   getLatestMatchesResult(): Observable<any> {
     console.info("Call for getBattingRecond() with url : ", this.matches_latest_url);
     return this.http.get(this.matches_latest_url, this.header).map(responce => responce.json())
+    // return this.http.get(url, this.options).map(responce => responce.json())
+      .catch(this.handleError)
+  }
+  getNextMatches(seasonId): Observable<any> {
+    const url = `${this.schduel_url}seasonId=${seasonId}`;
+    console.info("Call for getNextMatches() with url : ", this.schduel_url);
+    return this.http.get(url, this.header).map(responce => responce.json())
     // return this.http.get(url, this.options).map(responce => responce.json())
       .catch(this.handleError)
   }

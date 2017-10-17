@@ -51,6 +51,8 @@ export class CtclCarousel implements AfterViewChecked, AfterViewInit, OnDestroy 
 
   public left: any = 0;
 
+  public timeSet: any = 0;
+
   public items: any;
 
   public columns: any;
@@ -80,6 +82,7 @@ export class CtclCarousel implements AfterViewChecked, AfterViewInit, OnDestroy 
   differ: any;
 
   constructor(public el: ElementRef, public domHandler: DomHandlerService, public renderer: Renderer2, public cd: ChangeDetectorRef) {
+    this.autoplay();
   }
 
   ngAfterContentInit() {
@@ -99,6 +102,10 @@ export class CtclCarousel implements AfterViewChecked, AfterViewInit, OnDestroy 
   @Input()
   get value(): any[] {
     return this._value;
+  }
+
+  ngOnInit() {
+    this.autoplay();
   }
 
   set value(val: any[]) {
@@ -219,6 +226,28 @@ export class CtclCarousel implements AfterViewChecked, AfterViewInit, OnDestroy 
   setPageWithLink(event, p: number) {
     this.setPage(p);
     event.preventDefault();
+  }
+
+  autoplay() {
+    //this.timeSet++
+    this.interval = setInterval(() => {
+        this.timeSet++;
+        if (this.timeSet < 2) {
+          console.log("Time Set inside :", this.timeSet);
+          this.setPageWithLink1(1);
+          //this.setPage(1);
+        }
+      },
+      10000);
+
+
+  }
+
+
+  setPageWithLink1(p: number) {
+    this.setPage(p);
+    this.startAutoplay();
+    this.onNextNav();
   }
 
   setPage(p, enforce?: boolean) {

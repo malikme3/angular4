@@ -168,7 +168,6 @@ export class GalleryComponent implements AfterViewChecked,AfterViewInit,OnDestro
   }
 
   next() {
-  console.log("next clicked");
     if(this.activeIndex !== (this.panels.length-1)) {
       this.select(this.activeIndex + 1, true);
     }
