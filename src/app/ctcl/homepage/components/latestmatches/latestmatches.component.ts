@@ -35,9 +35,10 @@ export class LatestMatchesComponent {
   }
 
   nextMatches(seasonId) {
-    console.info("next Matches list: ")
+
     const types$ = this.dashboardService.getNextMatches(seasonId);
-    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.nextMatchesResult = responce,
+    console.info("types$: ",types$);
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.nextMatchesResult = responce.filter(x => x.row_number < 10),
       (err) => console.error('next matches: Response Error =>', err),
       () => this.loadNextMatches(this.nextMatchesResult));
   }
