@@ -1,12 +1,13 @@
+/* tslint:disable */
 import {AfterViewInit, Component, OnDestroy} from "@angular/core";
 /**
  * Created by HudaZulifqar on 8/21/2017.
  */
 @Component({
-  selector: 'plot-chart-ng',
-  templateUrl: './plotchart.html'
+  selector: 'ctcl-polar-chart',
+  templateUrl: 'polarchart.component.html',
 })
-export class PlotChartNgComponent {
+export class PolarChartComponent {
   data:any;
 
   constructor() {

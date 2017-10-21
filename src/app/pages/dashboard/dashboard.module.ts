@@ -36,6 +36,7 @@ import {ClubsService} from "../clubs/clubs.service";
 import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
 import {CtclCarousel} from "./ctclCarousel/carousel.component";
 import {HomeModule} from "../../ctcl/homepage/home.module";
+import {CtclSharedModule} from "../../ctcl/shared/shared.module";
 
 @NgModule({
   imports: [
@@ -50,6 +51,7 @@ import {HomeModule} from "../../ctcl/homepage/home.module";
     AccordionModule,
     PanelModule,
     HomeModule,
+    CtclSharedModule,
     ChartModule,
   ],
   declarations: [
