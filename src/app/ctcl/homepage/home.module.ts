@@ -9,6 +9,7 @@ import {CommonModule} from "@angular/common";
 import {ServicesConstants} from "../common/services/constants.services";
 import {ClubsService} from "../common/services/clubs.service";
 import {DomHandlerService} from "../common/services/domhandler.service";
+import {BestPlayersComponent} from "./components/bestplayers/bestplayers.component";
 
 
 @NgModule({
@@ -23,11 +24,13 @@ import {DomHandlerService} from "../common/services/domhandler.service";
     HomeComponent,
     LatestMatchesComponent,
     CircularComponent,
+    BestPlayersComponent
   ],
   exports: [
     LatestMatchesComponent,
     CircularComponent,
-    HomeComponent
+    HomeComponent,
+    BestPlayersComponent
   ],
   providers: [
     HomePageService,
