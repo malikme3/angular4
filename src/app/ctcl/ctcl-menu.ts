@@ -1,7 +1,7 @@
 /* tslint:disable */
-import { NbMenuItem } from '@nebular/theme';
+/*import { NbMenuItem } from '@nebular/theme';*/
 
-export const CTCL_MENU_ITEMS: NbMenuItem[] = [
+export const CTCL_MENU_ITEMS: any[] = [
   {
     title: 'Ctcl ctcl Home',
     icon: 'nb-home',

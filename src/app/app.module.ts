@@ -1,3 +1,5 @@
+/* tslint:disable */
+
 import {NgModule, ApplicationRef} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -8,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 /*
  * Platform and Environment providers/directives/pipes
  */
+
 import {routing} from './app.routing';
 
 // App is our top level component

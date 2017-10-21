@@ -8,7 +8,7 @@ import {
   Output, QueryList, Renderer2, TemplateRef, ViewChild
 } from "@angular/core";
 import {PrimeTemplate} from "primeng/primeng";
-import {DomHandlerService} from "../../../common/services/domhandler";
+import {DomHandlerService} from "../../../common/services/domhandler.service";
 
 @Component({
   selector: 'ctcl-circular',

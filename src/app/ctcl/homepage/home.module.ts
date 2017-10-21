@@ -8,7 +8,7 @@ import {LatestMatchesComponent} from "./components/latestmatches/latestmatches.c
 import {CommonModule} from "@angular/common";
 import {ServicesConstants} from "../common/services/constants.services";
 import {ClubsService} from "../common/services/clubs.service";
-import {DomHandlerService} from "../common/services/domhandler";
+import {DomHandlerService} from "../common/services/domhandler.service";
 
 
 @NgModule({
