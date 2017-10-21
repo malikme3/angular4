@@ -37,7 +37,7 @@
   <div class="row" *ngFor="let group of groups, let i = index">
     <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12" *ngIf="i==1">
       <ba-card title="T30:Point Table" baCardClass="medium-card with-scroll">
-        <bordered-table [group]="group"></bordered-table>
+        <ctcl-teams-points-table [group]="group"></ctcl-teams-points-table>
       </ba-card>
     </div>
 

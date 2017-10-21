@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Routes, RouterModule }  from '@angular/router';
 
 import { Dashboard } from './dashboard.component';

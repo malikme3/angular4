@@ -1,3 +1,4 @@
+/* tslint:disable */
 import {AfterViewInit, Component, OnDestroy} from "@angular/core";
 /**
  * Created by HudaZulifqar on 8/21/2017.

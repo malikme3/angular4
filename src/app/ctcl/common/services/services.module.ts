@@ -1,5 +1,6 @@
 /* tslint:disable */
 import { NgModule } from '@angular/core';
+import {TeamsPointsService} from "./teamspoints.service";
 
 
 @NgModule({
@@ -7,5 +8,6 @@ import { NgModule } from '@angular/core';
   ],
   declarations: [
   ],
+  providers:[TeamsPointsService]
 })
 export class ServicesModule { }

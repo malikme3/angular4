@@ -1,3 +1,4 @@
+/* tslint:disable */
 /**
  * Created by HudaZulifqar on 8/20/2017.
  */
