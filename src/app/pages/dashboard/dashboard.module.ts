@@ -35,6 +35,7 @@ import {AccordionModule, CarouselModule, ChartModule, PanelModule} from "primeng
 import {ClubsService} from "../clubs/clubs.service";
 import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
 import {CtclCarousel} from "./ctclCarousel/carousel.component";
+import {HomeModule} from "../../ctcl/homepage/home.module";
 
 @NgModule({
   imports: [
@@ -48,8 +49,8 @@ import {CtclCarousel} from "./ctclCarousel/carousel.component";
     CarouselModule,
     AccordionModule,
     PanelModule,
-    ChartModule
-
+    HomeModule,
+    ChartModule,
   ],
   declarations: [
     PopularApp,
@@ -66,7 +67,7 @@ import {CtclCarousel} from "./ctclCarousel/carousel.component";
     PlotChartNgComponent,
     TopPlayersComponent,
     LatestMatchesSummary,
-    CtclCarousel
+    CtclCarousel,
 
   ],
   exports: [

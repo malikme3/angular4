@@ -1,24 +1,24 @@
 /* tslint:disable */
-import {DashboardService} from "../dashboard.service";
 import {Subject} from "rxjs/Subject";
 import {Component} from "@angular/core";
 import {Router} from "@angular/router";
+import {HomePageService} from "../../../common/services/homepage.service";
 
 @Component({
-  selector: 'ctcl-latest-matchess',
-  templateUrl: 'latestMatches.html',
-  styleUrls: ['latestMatches.scss'],
+  selector: 'ctcl-latest-matches',
+  templateUrl: 'latestmatches.html',
+  styleUrls: ['latestmatches.scss'],
 })
-export class LatestMatchesSummary {
+export class LatestMatchesComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   private url: string = '/pages/matches/scoreView';
   matchesResult: any;
   nextMatchesResult: any;
   diplayScore: any = [];
-  nextMatchesData:any = [];
+  nextMatchesData: any = [];
   displayScoreData: any = [];
 
-  constructor(private router: Router, private dashboardService: DashboardService) {
+  constructor(private router: Router, private dashboardService: HomePageService) {
   }
 
   ngOnInit() {
@@ -68,7 +68,7 @@ export class LatestMatchesSummary {
     this.displayScoreData = this.diplayScore;
   }
 
-  loadNextMatches(value: any){
+  loadNextMatches(value: any) {
     console.log("next Matches: ", this.nextMatchesResult);
     this.nextMatchesData = this.nextMatchesResult;
   }
@@ -89,4 +89,3 @@ export class LatestMatchesSummary {
     this.ngUnsubscribe.complete();
   }
 }
-
