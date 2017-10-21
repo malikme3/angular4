@@ -1,3 +1,4 @@
+/* tslint:disable */
 import { Routes, RouterModule }  from '@angular/router';
 
 import { Login } from './login.component';

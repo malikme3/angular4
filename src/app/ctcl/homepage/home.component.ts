@@ -1,5 +1,5 @@
 /* tslint:disable */
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Subject} from "rxjs/Subject";
 import {Router} from "@angular/router";
 import {HomePageService} from "../common/services/homepage.service";
@@ -11,7 +11,7 @@ import {ClubsService} from "app/ctcl/common/services/clubs.service";
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-private ngUnsubscribe: Subject<void> = new Subject<void>();
+  private ngUnsubscribe: Subject<void> = new Subject<void>();
   points;
   newsList: any;
   groups;
@@ -20,6 +20,7 @@ private ngUnsubscribe: Subject<void> = new Subject<void>();
   images_odd: any[];
   //Default year : 2017
   year: String = '2017';
+
   constructor(private router: Router, private dashboardService: HomePageService, private clubsService: ClubsService) {
 
     this.data = {
@@ -39,7 +40,7 @@ private ngUnsubscribe: Subject<void> = new Subject<void>();
 
   }
 
-
+/*
   ngOnInit(): void {
     this.points = this.teamsStanding();
     this.groups = this.seasonGroups(this.year);
@@ -50,16 +51,25 @@ private ngUnsubscribe: Subject<void> = new Subject<void>();
   }
 
   seasonGroups(year: String) {
-    console.info("Fetching results for season groups")
-    this.dashboardService.getSeasonGroups(year).then(res => this.groups = res);
-    return this.groups;
+    console.info("Fetching results for season groups");
+    const types$ = this.dashboardService.getSeasonGroups(year);
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.groups = responce,
+      (err) => console.error('season groups: Response Error =>', err),
+      () => this.seasonGroupsLoaded(this.groups));
   }
 
+  /!* seasonGroups(year: String) {
+     console.info("Fetching results for season groups")
+     this.dashboardService.getSeasonGroups(year).then(res => this.groups = res);
+     return this.groups;
+   }*!/
+
   teamsStanding() {
-    console.info("Fetching results for teams standing :")
-    this.dashboardService.getTeamStanding().then(res => this.points = res);
-    console.info("Point are back from backend", this.points)
-    return this.points;
+    console.info("Fetching results for teams standing :");
+    const types$ = this.dashboardService.getTeamStanding();
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.points = responce,
+      (err) => console.error('teams points: Response Error =>', err),
+      () => this.teamStandingLoaded(this.points));
   }
 
 
@@ -71,9 +81,17 @@ private ngUnsubscribe: Subject<void> = new Subject<void>();
       () => this.ctclNewsReqCompleted());
   }
 
+  seasonGroupsLoaded(val) {
+    console.log("Calll for seasons group is loaded");
+  };
+
+  teamStandingLoaded(val) {
+    console.log("Calll for teams standing is loaded");
+  };
+
   ctclNewsReqCompleted() {
     console.log("ctclNews is completed", this.newsList)
-  }
+  }*/
 
   ngOnDestroy() {
     this.ngUnsubscribe.next();

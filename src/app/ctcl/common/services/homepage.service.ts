@@ -37,14 +37,14 @@ export class HomePageService {
   private schduel_url = this.baseUrl + this.sch_path;
 
 
-  getSeasonGroups(year: String): Promise<any[]> {
+  getSeasonGroups(year: String): Observable<any[]> {
     console.info('Making request to server for teams standing');
-    return this.http.get(this.groupsUrls + year, this.header).toPromise().then(res => res.json()).catch(this.handleError);
+    return this.http.get(this.groupsUrls + year, this.header).map(res => res.json()).catch(this.handleError);
   }
 
-  getTeamStanding(): Promise<any[]> {
+  getTeamStanding(): Observable<any[]> {
     console.info('Making request to server for teams standing');
-    return this.http.get(this.teamUrl, this.header).toPromise().then(res => res.json())
+    return this.http.get(this.teamUrl, this.header).map(res => res.json())
       .catch(this.handleError);
 
   }
