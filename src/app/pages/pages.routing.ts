@@ -11,6 +11,10 @@ export const routes: Routes = [
     loadChildren: 'app/pages/login/login.module#LoginModule'
   },
   {
+    path: 'ctcl',
+    loadChildren: 'app/ctcl/ctcl.module#CtclModule'
+  },
+  {
     path: 'register',
     loadChildren: 'app/pages/register/register.module#RegisterModule'
   },

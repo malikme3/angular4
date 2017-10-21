@@ -21,6 +21,7 @@ import {NgaModule} from './theme/nga.module';
 import {PagesModule} from './pages/pages.module';
 import {MdNativeDateModule} from "@angular/material";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CtclModule} from "./ctcl/ctcl.module";
 
 
 // Application wide providers
@@ -52,6 +53,7 @@ export type StoreType = {
     NgaModule.forRoot(),
     NgbModule.forRoot(),
     PagesModule,
+    CtclModule,
     BrowserAnimationsModule,
     MdNativeDateModule,
     routing
