@@ -11,10 +11,10 @@ export const routes: Routes = [{
     path: 'clogin',
     loadChildren: 'app/pages/login/login.module#LoginModule'
   },
-  {path: 'ctclc',
+  {path: 'ctcl',
   component: CtclComponent,
   children: [{
-    path: 'homepage1',
+    path: '',
     component: HomeComponent,
   }],
 }];

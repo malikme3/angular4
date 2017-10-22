@@ -55,7 +55,7 @@ import {StatisticsService} from "../common/services/statistics.service";
     MdRadioModule,
     MdAutocompleteModule,
     SelectModule,
-    ReactiveFormsModule,git 
+    ReactiveFormsModule,
     MdDatepickerModule,
     MdNativeDateModule,
     DatePickerModule,

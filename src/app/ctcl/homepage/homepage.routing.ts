@@ -7,7 +7,7 @@ import {HomeComponent} from "./home.component";
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
   {
-    path: 'homepage',
+    path: 'ctcl',
     component: HomeComponent
   }
 ];
