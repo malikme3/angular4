@@ -43,7 +43,6 @@ import {
   MultiSelect, FieldsetModule,
 } from "primeng/primeng";
 import {HomePageService} from "../common/services/homepage.service";
-import {SubmitScoreBatting} from "../../pages/matches/components/submit.score/submitScoreBatting.component";
 import {CtclSharedModule} from "../shared/shared.module";
 import {CarouselService} from "../common/services/carousel.service";
 //import {FormsInPutModule} from "../../pages/forms/forms.module";
@@ -93,7 +92,7 @@ import {CarouselService} from "../common/services/carousel.service";
     ScheduleComponent,
     ScoreComponent,
     SubmitScoreComponent,
-    SubmitScoreBatting,
+    SubmitScoreBattingComponent,
     LabelComponent,
     //Score cared workd
     matchBasicDetailsComponent,

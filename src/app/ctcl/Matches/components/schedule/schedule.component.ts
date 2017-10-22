@@ -10,7 +10,7 @@ import {Subject} from "rxjs/Subject";
 @Component({
   selector: 'matches-schedule',
   templateUrl: 'schedule.html',
-  styleUrls: ['../results/resultTables.scss'],
+  styleUrls: ['./results.component.scss'],
 })
 export class ScheduleComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();

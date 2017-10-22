@@ -11,7 +11,7 @@ import { Subject } from 'rxjs/Subject';
 @Component({
   selector: 'battings-record',
   templateUrl: './batting.record.html',
-  styleUrls: ['../../../matches/components/results/resultTables.scss'],
+  styleUrls: ['batting.scss'],
   providers : [MessageService],
 })
 

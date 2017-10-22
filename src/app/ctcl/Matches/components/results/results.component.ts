@@ -10,8 +10,8 @@ import {CarouselService} from "../../../common/services/carousel.service";
 
 @Component({
   selector: 'results-view',
-  templateUrl: './results.html',
-  styleUrls: ['./resultTables.scss'],
+  templateUrl: './results.component.html',
+  styleUrls: ['./results.component.scss'],
 })
 
 export class ResultsComponent {
