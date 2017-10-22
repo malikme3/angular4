@@ -4,15 +4,13 @@
 /* tslint:disable */
 import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
-import {PagesConstants} from "../pages.constants.service";
-import {BattingRecordInput} from "./battingRecordInput";
 import {Observable} from "rxjs/Observable";
-import {isNull} from "util";
+import {ServicesConstants} from "./constants.services";
 
 @Injectable()
 export class StatisticsService {
 
-  constructor(private http: Http, private pagesConstants: PagesConstants) {
+  constructor(private http: Http, private pagesConstants: ServicesConstants) {
   }
 
   private header = this.pagesConstants.pagesContants.url.header;

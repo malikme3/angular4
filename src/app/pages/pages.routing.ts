@@ -25,7 +25,7 @@ export const routes: Routes = [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule'},
       {path: 'matches', loadChildren: '../ctcl//Matches/matches.module#MatchesModule'},
-      {path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsModule'},
+      {path: 'statistics', loadChildren: '../ctcl/statistics/statistics.module#StatisticsModule'},
       {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
       {path: 'editors', loadChildren: './editors/editors.module#EditorsModule'},
       {path: 'components', loadChildren: './components/components.module#ComponentsModule'},

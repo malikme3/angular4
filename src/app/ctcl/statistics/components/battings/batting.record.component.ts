@@ -1,10 +1,10 @@
 /* tslint:disable */
 import {Component} from "@angular/core";
-import {StatisticsService} from "../../statistics.service";
-import {StatisticsConstantsService} from "../../statistics.constants.service";
 import {MenuItem, Message} from "primeng/primeng";
 import {MessageService} from '../shared.message/messageservice';
 import { Subject } from 'rxjs/Subject';
+import {StatisticsConstantsService} from "../../../common/services/statistics.constants.service";
+import {StatisticsService} from "../../../common/services/statistics.service";
 /**
  * Created by HudaZulifqar on 9/5/2017.
  */
