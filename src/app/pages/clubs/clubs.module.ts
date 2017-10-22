@@ -31,6 +31,7 @@ import {AccordionModule, DataScrollerModule, FieldsetModule, OrganizationChartMo
     TeamsView,
     ClubsPageComponent
   ],
+  export: [ClubsPageComponent],
   providers: [ClubsService],
 })
 export class ClubsModule { }

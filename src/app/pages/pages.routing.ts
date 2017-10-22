@@ -23,7 +23,7 @@ export const routes: Routes = [
     component: Pages,
     children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-      {path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule'},
+      {path: 'clubs', loadChildren: '../ctcl/clubs/clubs.module#ClubsModule'},
       {path: 'matches', loadChildren: '../ctcl//Matches/matches.module#MatchesModule'},
       {path: 'statistics', loadChildren: '../ctcl/statistics/statistics.module#StatisticsModule'},
       {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
