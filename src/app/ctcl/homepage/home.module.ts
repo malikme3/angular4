@@ -1,5 +1,6 @@
 /* tslint:disable */
 import {NgModule} from '@angular/core';
+import { RouterModule } from '@angular/router';
 import {HomeComponent} from "./home.component";
 import 'rxjs/Rx';
 import 'rxjs/add/operator/takeUntil';
@@ -24,7 +25,9 @@ import { routing }       from './homepage.routing';
     CarouselModule,
     AccordionModule,
     PanelModule,
-    AppTranslationModule, NgaModule,
+    AppTranslationModule,
+    NgaModule,
+    RouterModule,
     routing
   ],
 

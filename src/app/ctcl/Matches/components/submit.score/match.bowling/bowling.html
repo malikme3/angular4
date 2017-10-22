@@ -1,0 +1,68 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <ba-card baCardClass="with-scroll" title="Enter Bowling Details: {{innings}}">
+    <div class="row" *ngFor="let position of batting_poistion; let fst = first; let i = index; ">
+      <div class="col-sm-2">
+        <label *ngIf="fst">Bowler Names</label>
+        <div class="form-group row">
+          <ng-select [formControl]="name"
+                     [options]="playersList" [allowClear]="true" placeholder="Select Bowler Name"
+                     highlightTextColor="black"
+                     (selected)="onSelectedBowler(i, $event.value)">
+          </ng-select>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <label *ngIf="fst" for="overs">Overs</label>
+        <input [formControl]="name" type="text" class="form-control" id="overs"
+               placeholder="Overs" #overs
+               (change)="onSelectedOvers(i, overs.value)">
+      </div>
+
+
+      <div class="col-sm-2">
+        <label *ngIf="fst" for="runs">Runs</label>
+        <input [formControl]="name" type="text" class="form-control" id="runs"
+               placeholder="Runs" #runs
+               (change)="onSelectedRuns(i, runs.value)">
+      </div>
+
+      <div class="col-sm-2">
+        <label *ngIf="fst" for="wickets">Wickets</label>
+        <input [formControl]="name" type="text" class="form-control" id="wickets"
+               placeholder="Wickets" #wickets
+               (change)="onSelectedWickets(i, wickets.value)">
+      </div>
+
+      <div class="col-sm-2">
+        <label *ngIf="fst" for="wides">Wides</label>
+        <input [formControl]="name" type="text" class="form-control" id="wides"
+               placeholder="Wides" #wides
+               (change)="onSelectedWides(i, wides.value)">
+      </div>
+
+      <div class="col-sm-1">
+        <label *ngIf="fst" for="noballs">NB</label>
+        <input [formControl]="name" type="text" class="form-control" id="noballs"
+               placeholder="NB" #noballs
+               (change)="onSelectedNoBalls(i, noballs.value)">
+      </div>
+
+
+      <div class="col-sm-1">
+        <label *ngIf="fst" for="maidens">Maidens</label>
+        <input [formControl]="name" type="text" class="form-control" id="maidens"
+               placeholder="Maidens" #maidens
+               (change)="onSelectedMaidens(i, maidens.value)">
+      </div>
+    </div>
+  </ba-card>
+
+  <div class="form-group row">
+    <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+      <button type="submit" class="btn btn-default btn-auth" data-toggle="collapse" data-target="#step2"
+              (click)="onSubmitBowling(form.value)">Submit Batting Details
+      </button>
+    </div>
+  </div>
+
+</form>

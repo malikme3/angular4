@@ -1,0 +1,276 @@
+<div *ngIf="!submitted_step1">
+  <ba-card baCardClass="with-scroll" title="Step 1">
+    <div id="step1" >
+      <div class="row">
+        <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select League">
+            <md-radio-group class="example-radio-group" *ngFor="let league of checkLeagues" [(ngModel)]="selectedLeague"
+                            (click)="onSelected('leagueId', league.leagueId); onSelected('season', league.seasonId) "
+                            [disabled]="league.disabled">
+              <md-radio-button class="example-radio-button" [value]="league">
+                {{league.name}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+        <div class="col-xlg-3 col-lg-3 col-md-3 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select Venue">
+            <md-radio-group class="example-radio-group" [(ngModel)]="selectedVenue" *ngFor="let venue of checkVenues"
+                            [disabled]="venue.disabled">
+              <md-radio-button class="example-radio-button" [value]="venue"
+                               (click)="onSelected('groundId', venue.value)">
+                {{venue.name}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+        <!--Ground Venues-->
+        <div class="col-xlg-6 col-lg-6 col-md-6 col-sm-12">
+          <ba-card baCardClass="with-scroll" title="Select Result">
+            <md-radio-group class="example-radio-group" [(ngModel)]="selectedResult">
+              <md-radio-button class="example-radio-button" *ngFor="let result of checkResults" [value]="result"
+                               (click)="onSelectedResult(result.name, result.value)">
+                {{result.text}}
+              </md-radio-button>
+            </md-radio-group>
+          </ba-card>
+        </div>
+      </div>
+
+      <ba-card baCardClass="with-scroll" title="Select Match Date and Week #">
+        <div class="form-group row">
+          <label class="col-sm-1 control-label">Match Date</label>
+          <div class="col-lg-5 col-md-5 col-sm-5">
+            <ng2-datepicker [options]="options" [(ngModel)]="game_date"></ng2-datepicker>
+          </div>
+
+          <label for="week" class="  col-sm-1 control-label">Week</label>
+          <div class="col-lg-5 col-md-5 col-sm-5">
+            <input [formControl]="matchResult" type="text" class="form-control" id="week" placeholder="Enter Week #"
+                   [(ngModel)]="weekNo" (change)="onSelected('week', weekNo)">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="result" class="col-sm-1 control-label">Match Result</label>
+          <div class="col-sm-5">
+            <input [formControl]="result" type="text" class="form-control" id="result" placeholder="Enter Result">
+          </div>
+          <label for="maxovers" class="col-sm-1 control-label">Maximum Overs</label>
+          <div class="col-sm-5">
+            <input [formControl]="maxovers" type="text" class="form-control" id="maxovers" placeholder="Maximum Overs">
+          </div>
+        </div>
+      </ba-card>
+
+      <ba-card baCardClass="with-scroll" title="Select Match Teams">
+        <form [formGroup]="form" (ngSubmit)="onSubmitBasicDetails(form.value)" class="form-horizontal">
+
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Teams for Home Team's Portable Players</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [multiple]="true" [allowClear]="true"
+                         placeholder="Select Teams for Home Team's Portable Players"
+                         highlightTextColor="black"
+                         (selected)="onTeamsSelected('homeTeamsPortable',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="result" class="col-sm-4 control-label">Teams for Away Team's Portable Players</label>
+            <div class="col-sm-8 ">
+              <ng-select [formControl]="name"
+                         [options]="myOptions" [multiple]="true" [allowClear]="true"
+                         placeholder="Select Teams for Away Team's Portable Players"
+                         highlightTextColor="black" (selected)="onTeamsSelected('awayTeamsPortable',$event.value)"
+                         (selected)="onTeamsSelected('awayTeamsPortable',$event.value)">
+              </ng-select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="myOptions" [allowClear]="true" placeholder="Select Home Team"
+                       highlightTextColor="black" (selected)="onTeamsSelected('homeTeam',$event.value)"
+                       (selected)="onSelected('hometeam',$event.value)" (selected)="playing_teams('hometeam',$event)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="myOptions" [allowClear]="true" placeholder="Select Visiting Team"
+                       highlightTextColor="black" (selected)="onTeamsSelected('awayTeam',$event.value)"
+                       (selected)="onSelected('awayteam',$event.value)" (selected)="playing_teams('awayteam',$event)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="myOptions" [allowClear]="true" placeholder="Select Umpiring Team"
+                       highlightTextColor="black" (selected)="onTeamsSelected('umpiringTeam',$event.value)"
+                       (selected)="matchByPlayingTeamAndDate()"
+                       (selected)="onSelected('umpireTeam',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="teams_playings" [allowClear]="true"
+                       placeholder="Select Winning Toss team" highlightTextColor="black"
+                       (selected)="storeMatchDetails()"
+                       (selected)="onSelected('tossWonId',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [(options)]="teams_playings" [allowClear]="true" (selected)="battingOrderStatus($event.value)"
+                       placeholder="Select Batting First Team" highlightTextColor="black"
+                       (selected)="onSelected('battingSecondId',$event.value)">
+            </ng-select>
+          </div>
+
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [(options)]="teams_playings" [allowClear]="true"
+                       placeholder="Select Batting Second Team" highlightTextColor="black"
+                       (selected)="onSelected('battingFirstId',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="teams_playings" [allowClear]="true"
+                       placeholder="Select Victorious Team" highlightTextColor="black"
+                       (selected)="onSelected('resultWonId',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+            <ng-select [formControl]="name"
+                       [options]="playersForUmpiringTeam" [allowClear]="true"
+                       placeholder="Select First Umpire " highlightTextColor="black"
+                       (selected)="onSelected('umpire1',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row">
+
+            <ng-select [formControl]="name"
+                       [options]="playersList" [allowClear]="true"
+                       placeholder="Select Second Umpire " highlightTextColor="black"
+                       (selected)="onSelected('umpire2',$event.value)">
+            </ng-select>
+          </div>
+          <div class="form-group row"
+               [ngClass]="has-error">
+
+            <ng-select [formControl]="name"
+                       [options]="playersList" [allowClear]="true"
+                       placeholder="Select Man of the Match " highlightTextColor="black"
+                       (selected)="onSelected('mom',$event.value)">
+            </ng-select>
+          </div>
+
+
+        </form>
+        <!--[disabled]="!form.valid"-->
+        <!--<div class="auth-sep"><span><span>or Sign up with one click</span></span></div>-->
+
+        <!--<div class="al-share-auth">-->
+        <!--<ul claSss="al-share clearfix">-->
+        <!--<li><i class="socicon socicon-facebook" title="Share on Facebook"></i></li>-->
+        <!--<li><i class="socicon socicon-twitter" title="Share on Twitter"></i></li>-->
+        <!--<li><i class="socicon socicon-google" title="Share on Google Plus"></i></li>-->
+        <!--</ul>-->
+        <!--</div>-->
+      </ba-card>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+        <button type="submit" class="btn btn-default btn-auth" data-target="#step1">Score Card
+          details !!
+        </button>
+      </div>
+    </div>
+
+  </ba-card>
+</div>
+
+<!--*************************************************************
+*******************************  STEP 2 ******************************
+*************************************************************-->
+<!--
+<div *ngIf="!submitted_step1">
+  <ba-card baCardClass="with-scroll" title="Batsman Score Details">
+    <form [formGroup]="battingForm" (ngSubmit)="onSubmit(battingForm.value)" class="form-horizontal">
+      <submit-score-batting (notify)='onNotify_batting($event)' [batFirstPlayers]="playersList"
+                            [inningsId]="1"></submit-score-batting>
+      &lt;!&ndash;
+      ================= Batsman Score Details Section <= End ========================
+      ================ ************  STEP 2 ************ ============================
+      ======================= Extras Details Section => Start =======================
+     &ndash;&gt;
+      <ba-card baCardClass="with-scroll" title="Enter Total & Extras Detail">
+        <submit-score-totals (notify)='onNotify($event)'></submit-score-totals>
+        <submit-score-extras></submit-score-extras>
+      </ba-card>
+
+      &lt;!&ndash;================= Bowling Details Section <= End ===============================
+      ================ ************  STEP 2 ************ ============================
+      ======================= Fall of wickets => Start ==============================&ndash;&gt;
+
+      <submit-score-wickets></submit-score-wickets>
+
+      &lt;!&ndash; ================= Fall of wickets <= End ==================================
+       ================ ************  STEP 2 ************ ============================
+       ======================= Bowling Details Section => Start ======================&ndash;&gt;
+
+      <submit-score-bowling [Players]="playersList" [inningsId]="1" ></submit-score-bowling>
+      &lt;!&ndash;Bowling Details&ndash;&gt;
+      &lt;!&ndash;<ba-card baCardClass="with-scroll" title="Enter Bowling Details">
+        <div class="row" *ngFor="let position of batting_poistion; let fst = first; ">
+          <div class="col-sm-2">
+            <label *ngIf="fst">Bowler Names</label>
+            <div class="form-group row">
+              <ng-select [formControl]="battingName"
+                         [options]="batSecondPlayers" [allowClear]="true" placeholder="Select Bowler Name"
+                         highlightTextColor="black"
+                         (selected)="onSelected($event.label, position.id)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <label *ngIf="fst" for="bowlerovers">Overs</label>
+            <input type="text" class="form-control" id="bowlerovers" placeholder="Overs">
+          </div>
+          <div class="col-sm-2">
+            <label *ngIf="fst" for="maidens">Maidens</label>
+            <input type="text" class="form-control" id="maidens" placeholder="maidens">
+          </div>
+          <div class="col-sm-2">
+            <label *ngIf="fst" for="bowlerruns">Runs</label>
+            <input type="text" class="form-control" id="bowlerruns" placeholder="Runs">
+          </div>
+          <div class="col-sm-2">
+            <label *ngIf="fst" for="wickets">Wickets</label>
+            <input type="text" class="form-control" id="wickets" placeholder="wickets">
+          </div>
+          <div class="col-sm-1">
+            <label *ngIf="fst" for="noballs">NB</label>
+            <input type="text" class="form-control" id="noballs" placeholder="NB">
+          </div>
+          <div class="col-sm-1">
+            <label *ngIf="fst" for="bowlerwides">Wides</label>
+            <input type="text" class="form-control" id="bowlerwides" placeholder="wides">
+          </div>
+        </div>
+      </ba-card>&ndash;&gt;
+
+      &lt;!&ndash;
+  ================= Bowling Details Section <= End ===============================
+  ================ ************  STEP 2 ************ =============================
+  ======================= *********END************* ==============================
+ &ndash;&gt;
+      <div class="form-group row">
+        <div class="offset-sm-4 col-xlg-4 col-lg-4 col-md-4 col-sm-4">
+          <button type="submit" class="btn btn-default btn-auth">Submit Step 2 Score Card details !!</button>
+        </div>
+      </div>
+
+    </form>
+  </ba-card>
+</div>-->

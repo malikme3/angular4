@@ -24,7 +24,7 @@ export const routes: Routes = [
     children: [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'clubs', loadChildren: './clubs/clubs.module#ClubsModule'},
-      {path: 'matches', loadChildren: './matches/matches.module#MatchesModule'},
+      {path: 'matches', loadChildren: '../ctcl//Matches/matches.module#MatchesModule'},
       {path: 'statistics', loadChildren: './statistics/statistics.module#StatisticsModule'},
       {path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule'},
       {path: 'editors', loadChildren: './editors/editors.module#EditorsModule'},

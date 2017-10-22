@@ -1,0 +1,47 @@
+
+<div class="row col-xlg-12 col-lg-12 col-md-12 col-sm-12" [style]="{'width':'100%','margin-top':'8px'}">
+  <ng-container class="row col-xlg-8 col-lg-8 col-md-8 col-sm-12">
+    <cric-tab-menu [model]="items" [popup]="true" (notify_tabMenu)="onNotify_menuTab($event)"
+                  styleClass="float center"></cric-tab-menu>
+  </ng-container>
+  <ng-container class="row col-xlg-4 col-lg4 col-md-4 col-sm-12">
+    <p-dropdown [options]="scoreEditOpt" [(ngModel)]="selectedEditScoreOpt" placeholder="Edit Score"
+                (click)="selectedEditScore(selectedEditScoreOpt)"></p-dropdown>
+   <!-- <p-slideMenu #menuToggleu [model]="items" [popup]="true"></p-slideMenu>-->
+    <!--<cric-megaMenu [model]="items"></cric-megaMenu>-->
+  </ng-container>
+
+</div>
+<p-progressBar [value]="value"></p-progressBar>
+
+<div [ngSwitch]="true">
+  <!--Basic Match Scoring => code implementation in matchBasicDetailsComponent-->
+  <div *ngIf="isBasicDetails">
+    <score-basic-details (notify_homeTeam)='onNotify_homeTeam($event)' (notify_awayTeam)='onNotify_awayTeam($event)'
+                         (notify_date)='onNotify_date($event)' (notify_matchCall)='onNotify_matchInfo($event)'>
+    </score-basic-details>
+  </div>
+  <!--TODO: Refactore code to use directive one time instead duplicate for both innings-->
+  <div *ngSwitchCase="isBatting">
+    <submit-score-batting [innings]="'First Innings'" [matchData]="matchObjectByDate"></submit-score-batting>
+    <submit-score-batting [innings]="'Second Innings'" (notify_Batting)="OnNotify_Batting($event)">
+    </submit-score-batting>
+  </div>
+
+  <div *ngIf="isExtrasSec">
+    <submit-score-extras [innings]="'First Innings'"></submit-score-extras>
+    <submit-score-totals [innings]="'First Innings'"></submit-score-totals>
+    <submit-score-wickets [innings]="'First Innings'"></submit-score-wickets>
+  </div>
+  <div *ngIf="isExtrasSec_2">
+    <submit-score-extras [innings]="'Second Innings'"></submit-score-extras>
+    <submit-score-totals [innings]="'Second Innings'"></submit-score-totals>
+    <submit-score-wickets [innings]="'Second Innings'" (notify_Extras)="OnNotify_Extras($event)"></submit-score-wickets>
+  </div>
+
+  <div *ngSwitchCase="isBowling">
+    <submit-score-bowling [innings]="'First Innings'"></submit-score-bowling>
+    <submit-score-bowling [innings]="'Second Innings'" (notify_Bowling)="OnNotify_Bowling($event)">
+    </submit-score-bowling>
+  </div>
+</div>
