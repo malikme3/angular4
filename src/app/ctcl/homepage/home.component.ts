@@ -8,7 +8,8 @@ import {ClubsService} from "app/ctcl/common/services/clubs.service";
 @Component({
   selector: 'ctcl-home',
   styleUrls: ['./home.component.scss'],
-  templateUrl: './home.component.html',
+  //templateUrl: './home.component.html',
+  template: `<router-outlet></router-outlet>`
 })
 export class HomeComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();

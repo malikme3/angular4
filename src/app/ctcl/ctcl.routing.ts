@@ -6,18 +6,24 @@ import {CtclComponent} from "./ctcl.component";
 import {HomeComponent} from "./homepage/home.component";
 
 // noinspection TypeScriptValidateTypes
-export const routes: Routes = [{
 
-    path: 'clogin',
+export const routes: Routes = [
+  {
+    path: 'login',
     loadChildren: 'app/pages/login/login.module#LoginModule'
   },
-  {path: 'ctcl',
-  component: CtclComponent,
-  children: [{
-    path: '',
-    component: HomeComponent,
-  }],
-}];
-
+  {
+    path: 'register',
+    loadChildren: 'app/pages/register/register.module#RegisterModule'
+  },
+  {
+    path: 'ctcl',
+    component: CtclComponent,
+    children: [
+      {path: '', redirectTo: 'home', pathMatch: 'full'},
+      {path: 'clubs', loadChildren: '../ctcl/clubs/clubs.module#ClubsModule'}
+    ]
+  }
+];
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);
 

@@ -12,7 +12,7 @@ const routes: Routes = [
     component: ClubsComponent,
     children: [
       { path: 'teamsview', component: TeamsViewComponent },
-      { path: 'clubsView', component: ClubsPageComponent }
+      { path: 'clubsview', component: ClubsPageComponent }
     ]
   }
 ];

@@ -109,7 +109,7 @@ export const PAGES_MENU = [
             }
           },
           {
-            path: 'clubsView',
+            path: 'clubsview',
             data: {
               menu: {
                 title: 'general.menu.clubs_view',

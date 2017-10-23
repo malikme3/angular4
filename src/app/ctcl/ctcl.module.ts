@@ -1,6 +1,5 @@
 /* tslint:disable */
 import { NgModule } from '@angular/core';
-import {CtclComponent} from "./ctcl.component";
 import {HomeModule} from "./homepage/home.module";
 import {CtclSharedModule} from "./shared/shared.module";
 import {routing} from "./ctcl.routing";
@@ -9,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {AppTranslationModule} from "../app.translation.module";
 import {NgaModule} from "../theme/nga.module";
+import {CtclComponent} from "./ctcl.component";
 
 const CTCL_COMPONENTS = [
   CtclComponent,
@@ -22,9 +22,8 @@ const CTCL_COMPONENTS = [
     AppTranslationModule, NgaModule,
     routing
   ],
-  declarations: [
-    ...CTCL_COMPONENTS,
-  ]
+  declarations: [CtclComponent],
+  exports: [CtclComponent],
 })
 export class CtclModule { }
 

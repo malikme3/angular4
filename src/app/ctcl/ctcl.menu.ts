@@ -1,159 +1,459 @@
-/* tslint:disable */
-/*import { NbMenuItem } from '@nebular/theme';*/
+// tslint:disable
+export const CTCL_MENU_ITEMS = [
+  {
+    path: 'pages',
+    children: [
+      {
+        path: 'dashboard',
+        data: {
+          menu: {
+            title: 'general.menu.dashboard',
+            icon: 'ion-android-home',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'matches',
+        data: {
+          menu: {
+            title: 'general.menu.matchtes',
+            icon: 'ion-happy-outline',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'resultsView',
+            data: {
+              menu: {
+                title: 'general.menu.results',
+              }
+            }
+          },
+          {
+            path: 'scheduleView',
+            data: {
+              menu: {
+                title: 'general.menu.schedule',
+              }
+            }
+          },
+          {
+            path: 'pointsTableView',
+            data: {
+              menu: {
+                title: 'general.menu.pointstable',
+              }
+            }
+          }, {
+            path: 'scoreView',
+            data: {
+              menu: {
+                title: 'score',
+              }
+            }
+          }, {
+            path: 'submitScore',
+            data: {
+              menu: {
+                title: 'Submit Score',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'statistics',
+        data: {
+          menu: {
+            title: 'Statistics',
+            icon: 'ion-speedometer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        children: [
+          {
+            path: 'battingRecords',
+            data: {
+              menu: {
+                title: 'Batting Record',
+              }
+            }
+          }]
+      },
+      {
+        path: 'clubs',
+        data: {
+          menu: {
+            title: 'Clubs',
+            icon: 'ion-gear-a',
+            selected: false,
+            expanded: false,
+            order: 250,
+          }
+        },
+        children: [
+          {
+            path: 'teamsview',
+            data: {
+              menu: {
+                title: 'general.menu.teams_view',
+              }
+            }
+          },
+          {
+            path: 'clubsView',
+            data: {
+              menu: {
+                title: 'general.menu.clubs_view',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'editors',
+        data: {
+          menu: {
+            title: 'general.menu.editors',
+            icon: 'ion-edit',
+            selected: false,
+            expanded: false,
+            order: 100,
+          }
+        },
+        children: [
+          {
+            path: 'ckeditor',
+            data: {
+              menu: {
+                title: 'general.menu.ck_editor',
+              }
+            }
+          }
+        ]
+      },
+      {
+        path: 'components',
+        data: {
+          menu: {
+            title: 'general.menu.components',
+            icon: 'ion-gear-a',
+            selected: false,
+            expanded: false,
+            order: 250,
+          }
+        },
+        children: [
+          {
+            path: 'treeview',
+            data: {
+              menu: {
+                title: 'general.menu.tree_view',
+              }
+            }
+          }
+        ]
+      },
 
-export const CTCL_MENU_ITEMS: any[] = [
-  {
-    title: 'Ctcl ctcl Home',
-    icon: 'nb-home',
-    link: '/ctcl/home',
-    home: true,
-  },
-  {
-    title: 'CTCL FEATURES',
-    group: true,
-  },
-  {
-    title: 'CTCL UI Features',
-    icon: 'nb-keypad',
-    link: '/pages/ui-features',
-    children: [
       {
-        title: 'CTCL Buttons',
-        link: '/pages/ui-features/buttons',
+        path: 'charts',
+        data: {
+          menu: {
+            title: 'general.menu.charts',
+            icon: 'ion-stats-bars',
+            selected: false,
+            expanded: false,
+            order: 200,
+          }
+        },
+        children: [
+          {
+            path: 'chartist-js',
+            data: {
+              menu: {
+                title: 'general.menu.chartist_js',
+              }
+            }
+          }
+        ]
       },
       {
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
+        path: 'ui',
+        data: {
+          menu: {
+            title: 'general.menu.ui_features',
+            icon: 'ion-android-laptop',
+            selected: false,
+            expanded: false,
+            order: 300,
+          }
+        },
+        children: [
+          {
+            path: 'typography',
+            data: {
+              menu: {
+                title: 'general.menu.typography',
+              }
+            }
+          },
+          {
+            path: 'buttons',
+            data: {
+              menu: {
+                title: 'general.menu.buttons',
+              }
+            }
+          },
+          {
+            path: 'icons',
+            data: {
+              menu: {
+                title: 'general.menu.icons',
+              }
+            }
+          },
+          {
+            path: 'modals',
+            data: {
+              menu: {
+                title: 'general.menu.modals',
+              }
+            }
+          },
+          {
+            path: 'slim',
+            data: {
+              menu: {
+                title: 'Slim loading bar',
+              }
+            }
+          },
+          {
+            path: 'grid',
+            data: {
+              menu: {
+                title: 'general.menu.grid',
+              }
+            }
+          },
+        ]
       },
       {
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
+        path: 'forms',
+        data: {
+          menu: {
+            title: 'general.menu.form_elements',
+            icon: 'ion-compose',
+            selected: false,
+            expanded: false,
+            order: 400,
+          }
+        },
+        children: [
+          {
+            path: 'inputs',
+            data: {
+              menu: {
+                title: 'general.menu.form_inputs',
+              }
+            }
+          },
+          {
+            path: 'layouts',
+            data: {
+              menu: {
+                title: 'general.menu.form_layouts',
+              }
+            }
+          }
+        ]
       },
       {
-        title: 'Modals',
-        link: '/pages/ui-features/modals',
+        path: 'tables',
+        data: {
+          menu: {
+            title: 'general.menu.tables',
+            icon: 'ion-grid',
+            selected: false,
+            expanded: false,
+            order: 500,
+          }
+        },
+        children: [
+          {
+            path: 'basictables',
+            data: {
+              menu: {
+                title: 'general.menu.basic_tables',
+              }
+            }
+          },
+          {
+            path: 'smarttables',
+            data: {
+              menu: {
+                title: 'general.menu.smart_tables',
+              }
+            }
+          },
+          {
+            path: 'datatables',
+            data: {
+              menu: {
+                title: 'Data Tables',
+              }
+            }
+          },
+          {
+            path: 'hottables',
+            data: {
+              menu: {
+                title: 'Hot Tables',
+              }
+            }
+          }
+        ]
       },
       {
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
+        path: 'maps',
+        data: {
+          menu: {
+            title: 'general.menu.maps',
+            icon: 'ion-ios-location-outline',
+            selected: false,
+            expanded: false,
+            order: 600,
+          }
+        },
+        children: [
+          {
+            path: 'googlemaps',
+            data: {
+              menu: {
+                title: 'general.menu.google_maps',
+              }
+            }
+          },
+          {
+            path: 'leafletmaps',
+            data: {
+              menu: {
+                title: 'general.menu.leaflet_maps',
+              }
+            }
+          },
+          {
+            path: 'bubblemaps',
+            data: {
+              menu: {
+                title: 'general.menu.bubble_maps',
+              }
+            }
+          },
+          {
+            path: 'linemaps',
+            data: {
+              menu: {
+                title: 'general.menu.line_maps',
+              }
+            }
+          }
+        ]
       },
       {
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
+        path: '',
+        data: {
+          menu: {
+            title: 'general.menu.pages',
+            icon: 'ion-document',
+            selected: false,
+            expanded: false,
+            order: 650,
+          }
+        },
+        children: [
+          {
+            path: ['/login'],
+            data: {
+              menu: {
+                title: 'general.menu.login'
+              }
+            }
+          },
+          {
+            path: ['/register'],
+            data: {
+              menu: {
+                title: 'general.menu.register'
+              }
+            }
+          }
+        ]
       },
       {
-        title: 'Tabs',
-        link: '/pages/ui-features/tabs',
-      },
-    ],
-  },
-  {
-    title: 'CTCL Forms',
-    icon: 'nb-compose',
-    children: [
-      {
-        title: 'Form Inputs',
-        link: '/pages/forms/inputs',
-      },
-      {
-        title: 'Form Layouts',
-        link: '/pages/forms/layouts',
-      },
-    ],
-  },
-  {
-    title: 'Components',
-    icon: 'nb-gear',
-    children: [
-      {
-        title: 'Tree',
-        link: '/pages/components/tree',
-      }, {
-        title: 'Notifications',
-        link: '/pages/components/notifications',
-      },
-    ],
-  },
-  {
-    title: 'Maps',
-    icon: 'nb-location',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
+        path: '',
+        data: {
+          menu: {
+            title: 'general.menu.menu_level_1',
+            icon: 'ion-ios-more',
+            selected: false,
+            expanded: false,
+            order: 700,
+          }
+        },
+        children: [
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'general.menu.menu_level_1_1',
+                url: '#'
+              }
+            }
+          },
+          {
+            path: '',
+            data: {
+              menu: {
+                title: 'general.menu.menu_level_1_2',
+                url: '#'
+              }
+            },
+            children: [
+              {
+                path: '',
+                data: {
+                  menu: {
+                    title: 'general.menu.menu_level_1_2_1',
+                    url: '#'
+                  }
+                }
+              }
+            ]
+          }
+        ]
       },
       {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-    ],
-  },
-  {
-    title: 'Charts',
-    icon: 'nb-bar-chart',
-    children: [
-      {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
-  },
-  {
-    title: 'Editors',
-    icon: 'nb-title',
-    children: [
-      {
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
-  },
-  {
-    title: 'Tables',
-    icon: 'nb-tables',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-    ],
-  },
-  {
-    title: 'Auth',
-    icon: 'nb-locked',
-    children: [
-      {
-        title: 'Login',
-        link: '/auth/login',
-      },
-      {
-        title: 'Register',
-        link: '/auth/register',
-      },
-      {
-        title: 'Request Password',
-        link: '/auth/request-password',
-      },
-      {
-        title: 'Reset Password',
-        link: '/auth/reset-password',
-      },
-    ],
-  },
+        path: '',
+        data: {
+          menu: {
+            title: 'general.menu.external_link',
+            url: 'http://akveo.com',
+            icon: 'ion-android-exit',
+            order: 800,
+            target: '_blank'
+          }
+        }
+      }
+    ]
+  }
 ];
