@@ -32,11 +32,11 @@ import {ChartsModule} from "ng2-charts";
 import {PlotChartNgComponent} from "./charts/ngchartsComponent";
 import {TopPlayersComponent} from "./topPlayers/topPlayers";
 import {AccordionModule, CarouselModule, ChartModule, PanelModule} from "primeng/primeng";
-import {ClubsService} from "../clubs/clubs.service";
 import {LatestMatchesSummary} from "./latestMatches/latest.matches.component";
 import {CtclCarousel} from "./ctclCarousel/carousel.component";
 import {HomeModule} from "../../ctcl/homepage/home.module";
 import {CtclSharedModule} from "../../ctcl/shared/shared.module";
+import {ClubsService} from "../../ctcl/common/services/clubs.service";
 
 @NgModule({
   imports: [

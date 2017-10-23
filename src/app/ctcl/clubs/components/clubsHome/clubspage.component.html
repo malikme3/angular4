@@ -1,9 +1,34 @@
+<ba-card title="Centeral Texas League">
+<p-fieldset legend="Ctcl Clubs" [toggleable]="true">
+  <p-dataTable [value]="clubsInfor" selectionMode="single" [(selection)]="selectedCar" [contextMenu]="cm">
+    <p-column field="club_name" header="Name" [style]="{}">></p-column>
+    <p-column field="president_name" header="President"></p-column>
+    <p-column field="vice_president_name" header="Vice President"></p-column>
+    <p-column field="secretary_name" header="Secretary"></p-column>
+    <p-column field="ground_name" header="Ground"></p-column>
+  </p-dataTable>
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+</p-fieldset>
+</ba-card>
+
+<p-fieldset legend="Ctcl Teams" [toggleable]="true">
+  <p-dataTable [value]="teams_rrcc_data" selectionMode="single" [(selection)]="selectedCar" [contextMenu]="cm">
+    <p-column field="name" header="Name" [style]="{}">></p-column>
+    <p-column field="captain" header="Captain"></p-column>
+    <p-column field="vice_captain" header="Vice Captain"></p-column>
+    <!--<p-column field="color" header="Team Color"></p-column>-->
+    <p-column field="clubd" header="Team Club"></p-column>
+  </p-dataTable>
+  <p-contextMenu #cm [model]="items"></p-contextMenu>
+</p-fieldset>
+
+<!--
 <div class=" banner-text ">
 
-    <tree id="tree-view" [tree]="tree"></tree>
+  <tree id="tree-view" [tree]="tree"></tree>
 
 </div>
-<!--<ba-card title="Raised Buttons" baCardClass="with-scroll button-panel">
+&lt;!&ndash;<ba-card title="Raised Buttons" baCardClass="with-scroll button-panel">
   <div class="banner-text">
     <h1>Simple Banner Text</h1>
 
@@ -12,7 +37,7 @@
     <p>Odio amet viverra rutrum</p>
   </div>
 
-</ba-card>-->
+</ba-card>&ndash;&gt;
 
 
 <p-fieldset legend="Central Texas League" [toggleable]="true">
@@ -41,12 +66,12 @@
   </ba-card>
 </p-fieldset>
 
-<!--<p-treeTable [value]="files1">
+&lt;!&ndash;<p-treeTable [value]="files1">
   <p-header>Basic</p-header>
   <p-column field="name" header="Name"></p-column>
   <p-column field="size" header="Size"></p-column>
   <p-column field="type" header="Type"></p-column>
-</p-treeTable>-->
+</p-treeTable>&ndash;&gt;
 
 <ng-template let-car pTemplate="item">
   <div class="ui-grid ui-grid-responsive ui-fluid" style="font-size:16px;padding:20px;border-bottom:1px solid #D5D5D5">
@@ -77,3 +102,4 @@
     </div>
   </div>
 </ng-template>
+-->

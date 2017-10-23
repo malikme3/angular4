@@ -6,7 +6,15 @@ import {NgaModule} from '../../theme/nga.module';
 import {TreeModule} from 'ng2-tree';
 
 import {routing} from './clubs.routing';
-import {AccordionModule, DataScrollerModule, FieldsetModule, OrganizationChartModule} from "primeng/primeng";
+import {
+  AccordionModule,
+  DataScrollerModule,
+  FieldsetModule,
+  OrganizationChartModule,
+  DataTableModule,
+  SharedModule,
+  ContextMenuModule
+} from "primeng/primeng";
 import {TablesModule} from "../../pages/tables/tables.module";
 import {ClubsService} from "../common/services/clubs.service";
 import {ClubsComponent} from "./clubs.component";
@@ -23,6 +31,9 @@ import {TeamsViewComponent} from "./components/teamsView/teamsView.component";
     OrganizationChartModule,
     FieldsetModule,
     AccordionModule,
+    DataTableModule,
+    SharedModule,
+    ContextMenuModule,
     DataScrollerModule,
     routing
   ],
@@ -31,7 +42,7 @@ import {TeamsViewComponent} from "./components/teamsView/teamsView.component";
     TeamsViewComponent,
     ClubsPageComponent,
   ],
-  exports: [ClubsComponent,ClubsPageComponent],
+  exports: [ClubsComponent, ClubsPageComponent],
   providers: [ClubsService],
 })
 export class ClubsModule {

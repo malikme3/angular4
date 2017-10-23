@@ -1,9 +1,9 @@
 /* tslint:disable */
 import {Component} from '@angular/core';
 import {DashboardService} from "./dashboard.service";
-import {ClubsService} from "../clubs/clubs.service";
 import {Subject} from "rxjs/Subject";
 import {Router} from "@angular/router";
+import {ClubsService} from "../../ctcl/common/services/clubs.service";
 
 @Component({
   selector: 'dashboard',

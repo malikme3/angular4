@@ -5,14 +5,16 @@ import {ClubsService} from "../../../common/services/clubs.service";
 
 @Component({
   selector: "ctcl-clubs-page",
-  templateUrl: "./clubs.page.html",
-  //styleUrls: ['../../clubs.scss'],
+  templateUrl: "./clubspage.component.html",
+  styleUrls: ['./clubspage.component.scss'],
   // providers : [MessageService],
 })
 
 export class ClubsPageComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   clubs: any;
+  clubsInfor: any;
+  clubsNames: any[] = [];
   roles: any
   data: any;
   clubMap = new Map<string, Map<string, string>>();
@@ -24,6 +26,8 @@ export class ClubsPageComponent {
   private ctclOrder = new Subject<ctclTree>();
 
   rrccClub: any = [];
+  teams_rrcc: any[] = [];
+  teams_rrcc_data: any[] = [];
   rrccClubTeams: any[] = [];
   acaClub: any[] = [];
   acaClubTeams: any[] = [];
@@ -36,6 +40,11 @@ export class ClubsPageComponent {
   secretary: any;
   treasurer: any;
 
+  selectedCar: any;
+  msgs: any[];
+  items: any[];
+
+
   hca_name = "Hill Country Cricket Association";
   aca_name = "Austin Cricket Association (ACA)";
   tree: any = {
@@ -44,36 +53,54 @@ export class ClubsPageComponent {
       {
         value: 'Rounf Rocks',
         children: [
-          { value: 'Lions' },
-          { value: 'Laggan' },
-          { value: 'Tiger' },
+          {value: 'Lions'},
+          {value: 'Laggan'},
+          {value: 'Tiger'},
         ]
       },
       {
         value: 'HCCA',
         children: [
-          { value: 'Ravens' },
-          { value: 'Gladiators' },
-          { value: 'Hawks' },
+          {value: 'Ravens'},
+          {value: 'Gladiators'},
+          {value: 'Hawks'},
         ]
       }
     ]
   };
+
   constructor(private clubsService: ClubsService) {
 
   }
 
   ngOnInit() {
     this.clubsList();
+    this.clubsInfo();
+    this.items = [
+      {label: 'View', icon: 'fa-search', command: (event) => this.viewCar(this.selectedCar)},
+      //label: 'Delete', icon: 'fa-close', command: (event) => this.deleteCar(this.selectedCar)}
+    ];
     //this.playersRole();
-  }
+  };
+  viewCar(val: any) {
+    this.msgs = [];
+    this.msgs.push({severity: 'info', summary: 'Club Selected', detail: val.club_name + ' - ' + val.ground_name});
+  };
 
   clubsList() {
     console.info("Fetching clubs list: ")
     const types$ = this.clubsService.getClubLists();
     types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.clubs = responce,
       (err) => console.error('getClubLists: Response Error =>', err),
-      () => this.requestCompleted());
+      () => this.clubsRequestCompleted(this.clubs));
+  };
+
+  clubsInfo() {
+    console.info("Fetching clubs list: ")
+    const types$ = this.clubsService.getClubsInfo();
+    types$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.clubsInfor = responce,
+      (err) => console.error('getClubLists: Response Error =>', err),
+      () => this.clubsInforRequestCompleted(this.clubsInfor));
   }
 
   playersRole() {
@@ -89,8 +116,12 @@ export class ClubsPageComponent {
     this.ngUnsubscribe.complete();
   }
 
+  clubsInforRequestCompleted(value) {
+    console.log("clubsInfo: ", value);
+  }
 
-  requestCompleted() {
+  clubsRequestCompleted(value) {
+    //this.getClubsName(value);
     this.playersRole();
     let expanded = true;
 
@@ -113,26 +144,40 @@ export class ClubsPageComponent {
       }
 
       if (this.rrcc_name === club.club_name) {
-        this.rrccClubTeams.push({
+      /*  this.rrccClubTeams.push({
           label: club.team_abbrev,
           team_id: club.team_id,
           children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
             {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
-        });
-      } else if (this.aca_name === club.club_name) {
-        this.acaClubTeams.push({
-          label: club.team_abbrev,
-          team_id: club.team_id,
-          children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
-            {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
+        });*/
 
+        this.teams_rrcc.push({
+          name: club.team_abbrev,
+          captain: club.captain_name,
+          vice_captain: club.vice_captain_name,
+          team_id: club.team_id,
+          color: club.club_color,
+          clubd: club.club_name
+        });
+
+      } else if (this.aca_name === club.club_name) {
+        this.teams_rrcc.push({
+          name: club.team_abbrev,
+          captain: club.captain_name,
+          vice_captain: club.vice_captain_name,
+          team_id: club.team_id,
+          color: club.club_color,
+          clubd: club.club_name
         });
       } else if (this.hca_name === club.club_name) {
-        this.hcaClubTeams.push({
-          label: club.team_abbrev,
+
+        this.teams_rrcc.push({
+          name: club.team_abbrev,
+          captain: club.captain_name,
+          vice_captain: club.vice_captain_name,
           team_id: club.team_id,
-          children: [{label: 'Captain', expanded: true, children: [{label: club.captain_name}]},
-            {label: 'Vice Captain', expanded: true, children: [{label: club.vice_captain_name}]}]
+          color: club.club_color,
+          clubd: club.club_name
         });
       }
     }
@@ -154,8 +199,45 @@ export class ClubsPageComponent {
        {label: 'Secretarty', children: [{label: this.secretary}]},
        {label: 'Treasurer', children: [{label: this.treasurer}]}]
      },*/
-    console.log("The hcaClub ", JSON.stringify(this.hcaClub));
+    this.teams_rrcc_data = this.teams_rrcc;
   }
+
+/*
+  getClubsName(value) {
+
+    for (let val of value) {
+
+      if (!this.clubsNames[val.club_name]) {
+        this.clubsNames[val.club_name] = [];
+      }
+      ;
+      if (!this.clubsNames[val.club_name].clubsNames) {
+        this.clubsNames[val.club_name].push({
+          vin: val.club_name
+        });
+      }
+
+      if (!this.clubsNames[val.club_name].ground_id) {
+        this.clubsNames[val.club_name].push({
+          brand: val.ground_id
+        });
+      }
+      if (!this.clubsNames[val.club_name].secretary_name) {
+        this.clubsNames[val.club_name].push({
+          year: val.president_name,
+        });
+      }
+      if (!this.clubsNames[val.club_name].vice_president_name) {
+        this.clubsNames[val.club_name].push({
+          color: val.vice_president_name,
+        });
+      }
+
+    }
+    console.log("clubsName :", this.clubsNames);
+
+  }
+*/
 
   playersRoleReqCompleted() {
     console.log("Roles are ", this.roles);

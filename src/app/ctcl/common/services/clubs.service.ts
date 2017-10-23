@@ -16,12 +16,14 @@ export class ClubsService {
 
 
   private club_list_path = 'clubs/details/';
-  private players_roles = 'players/roles/';
-  private ctcl_news = 'ctcl/news/';
+  private players_roles_path = 'players/roles/';
+  private ctcl_news_path = 'ctcl/news/';
+  private clubs_info_path = 'clubs/info/';
 
   private club_list_path_url = this.baseUrl + this.club_list_path;
-  private players_roles_url = this.baseUrl + this.players_roles;
-  private ctcl_news_url = this.baseUrl + this.ctcl_news;
+  private players_roles_url = this.baseUrl + this.players_roles_path;
+  private ctcl_news_url = this.baseUrl + this.ctcl_news_path;
+  private clubs_info_url = this.baseUrl + this.clubs_info_path;
 
   getClubLists(): Observable<any> {
 
@@ -29,6 +31,12 @@ export class ClubsService {
     return this.http.get(this.club_list_path_url, this.header).map(responce => responce.json())
       .catch(this.handleError)
   }
+
+  getClubsInfo(): Observable<any> {
+    console.info("Call for getClubsInfor() with url : ", this.club_list_path_url);
+    return this.http.get(this.clubs_info_url, this.header).map(responce => responce.json())
+      .catch(this.handleError)
+  };
 
   getPlayersRoles(): Observable<any> {
 
