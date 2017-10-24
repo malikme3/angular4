@@ -18,7 +18,7 @@ export class ResultsComponent {
   private ngUnsubscribe: Subject<void> = new Subject<void>();
   source;
   dataList: any;
-  cars: any[];
+  collapsed = false;
   result: ResultPojo[];
   brands: SelectItem[];
   host_teams: any[] = [];
@@ -169,6 +169,7 @@ export class ResultsComponent {
 
   getLeagueResults() {
     this.getBasicResults(this.leagueType);
+
   }
 
   getDetailedScore(gameId) {

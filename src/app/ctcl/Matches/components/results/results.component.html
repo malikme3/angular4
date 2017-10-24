@@ -16,13 +16,7 @@
   </div>
 </div>-->
 <ng-container>
-  <h2 class="box" translate> {{'matches.title'}}
-    <p class="float-right h5 ">
-      <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
-        <option *ngFor=" let option of options2017" value={{option.id}}>{{option.name}}</option>
-      </select>
-    </p>
-  </h2>
+
   <!--<ba-card title="'Score Card Details'">-->
   <!--<div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12" style="padding:4px 10px;border-bottom: 0 none">
     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -58,19 +52,31 @@
   </p-dataTable>-->
   <!--</ba-card>-->
   <ng-container *ngIf="result; else loading;">
-    <div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12"
-         style="padding:4px 10px;border-bottom: 0 none">
-      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-      <input #gb type="text" placeholder="Global Filter">
-    </div>
+    <p-fieldset  [toggleable]="true" [collapsed]="collapsed">
 
-    <p-dataTable [value]="result" selectionMode="single" (onRowSelect)="onRowSelect($event)"
-                 [rows]="30" [paginator]="true" [globalFilter]="gb" #dt>
-      <p-column field="game_date" header="Game Date" [sortable]="true"></p-column>
-      <p-column field="host_team" header="Host Team" [sortable]="true"></p-column>
-      <p-column field="guest_team" header="Guest Team" [sortable]="true"></p-column>
-      <p-column field="man_of_the_match" header="Man of the Match" [sortable]="true"></p-column>
-      <p-column field="result" header="Result" [sortable]="true"></p-column>
-    </p-dataTable>
+      <p-header >
+        Matches Results
+            <p class="float-right h5 " id="options" (onClick)="onCliked($event)">
+              <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
+                <option *ngFor=" let option of options2017" value={{option.id}}>{{option.name}}</option>
+              </select>
+            </p>
+      </p-header>
+
+      <div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12"
+           style="padding:4px 10px;border-bottom: 0 none">
+        <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+        <input #gb type="text" placeholder="Global Filter">
+      </div>
+
+      <p-dataTable [value]="result" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+                   [rows]="30" [paginator]="true" [globalFilter]="gb" #dt>
+        <p-column field="game_date" header="Game Date" [sortable]="true"></p-column>
+        <p-column field="host_team" header="Host Team" [sortable]="true"></p-column>
+        <p-column field="guest_team" header="Guest Team" [sortable]="true"></p-column>
+        <p-column field="man_of_the_match" header="Man of the Match" [sortable]="true"></p-column>
+        <p-column field="result" header="Result" [sortable]="true"></p-column>
+      </p-dataTable>
+    </p-fieldset>
   </ng-container>
   <ng-template #loading> Wait Pleaee, Schdule Sheet is loading for you ...</ng-template>
