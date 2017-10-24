@@ -1,9 +1,9 @@
 /* tslint:disable */
-import { Component } from '@angular/core';
-import { Routes } from '@angular/router';
+import {Component} from '@angular/core';
+import {Routes} from '@angular/router';
 
-import { BaMenuService } from '../theme';
-import { AUSTIN_MENU } from './austin.menu';
+import {BaMenuService} from '../theme';
+import {AUSTIN_MENU} from './austin.menu';
 
 @Component({
   selector: 'austin',
@@ -11,7 +11,7 @@ import { AUSTIN_MENU } from './austin.menu';
 })
 export class Austin {
 
-  constructor(private _menuService: BaMenuService, ) {
+  constructor(private _menuService: BaMenuService,) {
     console.log("Austin Office");
   }
 

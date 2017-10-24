@@ -21,9 +21,10 @@ export class ResultsComponent {
   cars: any[];
   result: ResultPojo[];
   brands: SelectItem[];
-
-  guest_team_opt: SelectItem[] = [];
-  host_team_opt: SelectItem[] = [];
+  host_teams: any[] = [];
+  guest_teams: any;
+  guest_team_opt: any[] = [];
+  host_team_opt: any[] = [];
 
   colors: SelectItem[];
 
@@ -143,25 +144,27 @@ export class ResultsComponent {
     {id: 30, name: '35 Overs', path: '', year: 2017}];
 
 
-  // columns data for basic score card table
+  // columns data for basic score card table`
   getBasicResults(seasonId) {
     console.info("Fetching results for league for id :", seasonId)
     const result$ = this._resultsService.getMatchesResult(seasonId);
     result$.takeUntil(this.ngUnsubscribe).subscribe(responce => this.result = responce as ResultPojo[],
       (err) => console.error('battingRecords: Response Error =>', err),
-      () => this.LoadedResult());
+      () => this.LoadedResult(this.result));
 
   }
 
-  LoadedResult() {
-    console.log("Result loading is complete");
+  LoadedResult(value) {
+    console.log("Result loading is complete: Result", value);
 
     for (var val of this.result) {
-      console.log("the val of hoest team is ", val.host_team);
-      console.log("the val of guest team is ", val.guest_team);
       this.guest_team_opt.push({label: val.guest_team, value: val.guest_team});
       this.host_team_opt.push({label: val.host_team, value: val.host_team});
     }
+    console.log("Host Teams are: ", this.host_team_opt);
+    console.log("Guest Teams are: ", this.guest_team_opt);
+    this.host_teams = this.host_team_opt;
+    this.guest_teams = this.guest_team_opt;
   }
 
   getLeagueResults() {
@@ -171,6 +174,12 @@ export class ResultsComponent {
   getDetailedScore(gameId) {
     const id: string = gameId.data.game_id;
     console.info(" *** Sending :: gameId = ***", gameId.data.game_id);
+    this.router.navigate([this.url], {queryParams: {gameId: id}});
+  }
+
+  onRowSelect(val){
+    const id: string = val.data.game_id;
+    console.info("Details Score of gameId: ", val.data.game_id);
     this.router.navigate([this.url], {queryParams: {gameId: id}});
   }
 

@@ -15,6 +15,6 @@ export class CtclComponent {
   }
 
   ngOnInit() {
-    this._menuService.updateMenuByRoutes(<Routes>CTCL_MENU_ITEMS);
+   // this._menuService.updateMenuByRoutes(<Routes>CTCL_MENU_ITEMS);
   }
 }

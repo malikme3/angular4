@@ -163,7 +163,7 @@ export const PAGES_MENU = [
         ]
       },
 
-      {
+      /*{
         path: 'charts',
         data: {
           menu: {
@@ -452,8 +452,8 @@ export const PAGES_MENU = [
             order: 800,
             target: '_blank'
           }
-        }
-      }
+        }*/
+
     ]
   }
 ];

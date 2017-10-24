@@ -15,6 +15,7 @@ export class ResultsService {
   header = this.pagesConstants.pagesContants.url.header;
   resultUrl = this.pagesConstants.pagesContants.url.baseUrl + this.url;
   smartTablePageSize = 10;
+
   // For points table
   getMatchesResult1(seasonId: number): Promise<ResultPojo[]> {
     const url = `${this.resultUrl}seasonId=${seasonId}`;

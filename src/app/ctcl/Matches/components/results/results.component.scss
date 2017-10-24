@@ -8,6 +8,20 @@
 }
 
 :host /deep/ {
+
+  .ui-widget-content {
+    border: 1px solid #7c2740;
+    border-style: solid;
+    background: rgba(255, 246, 176, 0.53);
+    color: #0f5ea2;
+  }
+
+}
+
+:host /deep/ {
+
+
+
   ng2-smart-table {
     th, td {
       border: 1px solid $border-light !important;
