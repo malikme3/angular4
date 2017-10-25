@@ -9,9 +9,9 @@ import {StatisticsService} from "../../../common/services/statistics.service";
  * Created by HudaZulifqar on 9/5/2017.
  */
 @Component({
-  selector: 'battings-record',
-  templateUrl: './batting.record.html',
-  styleUrls: ['batting.scss'],
+  selector: 'ctcl-battings-records',
+  templateUrl: './battingrecords.component.html',
+  styleUrls: ['battingrecords.component.scss'],
   providers : [MessageService],
 })
 
@@ -37,11 +37,11 @@ export class BattingRecordComponent {
       {label: 'Step 3'}
     ];
     this.items = [
-      {label: 'Stats', icon: 'fa-bar-chart'},
-      {label: 'Teams', icon: 'fa-calendar'},
-      {label: 'Clubs', icon: 'fa-book'},
+      {label: 'Statistics', icon: 'fa-bar-chart'},
+      {label: 'Team', icon: 'fa-calendar'},
+      {label: 'Club', icon: 'fa-book'},
       {label: 'League', icon: 'fa-support'},
-      {label: 'Social', icon: 'fa-twitter'}
+      {label: 'All-Round', icon: 'fa-twitter'}
     ];
     this.battingRecords();
   }

@@ -1,4 +1,4 @@
-// tslint:disbable
+/* tslint:disable */
 import {NgModule} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -8,7 +8,6 @@ import {AppTranslationModule} from '../../app.translation.module';
 import {TreeModule} from 'ng2-tree';
 import {HttpModule} from "@angular/http";
 import {Ng2SmartTableModule} from 'ng2-smart-table';
-//import {DataTableModule} from "angular2-datatable";
 import {HotTable, HotTableModule} from 'ng2-handsontable';
 import {routing} from './matches.routing';
 import {MatchesComponent} from './matches.component';
@@ -19,7 +18,6 @@ import {PointsTableComponent} from "./components/points.table/pointstable.compon
 import {ScheduleComponent} from "./components/schedule/schedule.component";
 import {MatchesService} from "../common/services/matches.service";
 import {ScoreComponent} from "./components/detailed.score/score.component";
-//import {FormsInPutModule} from "../forms/forms.module";
 import {
   MdAutocompleteModule, MdButtonModule, MdCheckboxModule, MdDatepickerModule, MdInputModule, MdNativeDateModule,
   MdRadioModule
@@ -45,7 +43,6 @@ import {
 import {HomePageService} from "../common/services/homepage.service";
 import {CtclSharedModule} from "../shared/shared.module";
 import {CarouselService} from "../common/services/carousel.service";
-//import {FormsInPutModule} from "../../pages/forms/forms.module";
 
 
 @NgModule({
@@ -55,14 +52,11 @@ import {CarouselService} from "../common/services/carousel.service";
     AppTranslationModule,
     NgaModule,
     TreeModule,
-    //TablesModule,
     routing,
     Ng2SmartTableModule,
     DataTableModule,
     HttpModule,
     HotTableModule,
-   // UiModule,
-    //FormsInPutModule,
     MdButtonModule,
     MdCheckboxModule,
     MdInputModule,

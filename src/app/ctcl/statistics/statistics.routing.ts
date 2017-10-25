@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from "@angular/router";
 import {Statistics} from "./statistics.component";
-import {BattingRecordComponent} from "./components/battings/batting.record.component";
+import {BattingRecordComponent} from "./components/battings/battingrecords.component";
 
 // noinspection TypeScriptValidateTypes
 const routes: Routes = [

@@ -1,0 +1,134 @@
+<!--<p-tabMenu [model]="items"></p-tabMenu>-->
+
+<p-steps [model]="items" styleClass="dropdown-item btn btn-warning col-12" [(activeIndex)]="activeIndex"
+         [readonly]="false"></p-steps>
+
+<!--<div class="content-section implementation">
+  <p-growl [value]="msgs"></p-growl>
+
+  &lt;!&ndash;<h3 class="first">Basic</h3>
+  <p-steps [model]="items"></p-steps>&ndash;&gt;
+
+  <h3>Clickable</h3>
+  <p-steps [model]="itemsSteps" [(activeIndex)]="activeIndex" [readonly]="false"></p-steps>
+
+  &lt;!&ndash;<h3>Custom Style</h3>
+  <p-steps [model]="items" styleClass="steps-custom"></p-steps>&ndash;&gt;
+</div>
+<ng-container *ngIf="battingRecordsList; else loading1;">
+<p-tabView>
+  <p-tabPanel header="Most Runs" leftIcon="fa-calendar">
+
+  </p-tabPanel>
+  <p-tabPanel header=" Most Hundered" leftIcon="fa-print">
+    Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather parallels the
+    young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark
+    side of the American dream. In the early 1900s, the child Vito flees his Sicilian village for America after the
+    local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood
+    in Little Italy, killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business.
+    With Fanucci gone, Vito's communal stature grows.
+  </p-tabPanel>
+  <p-tabPanel header="Highest Strike Rate" leftIcon="fa-bell-o" rightIcon="fa-bookmark-o">
+    <p-chart type="bar" [data]="data"></p-chart>
+  </p-tabPanel>
+</p-tabView>
+</ng-container>-->
+
+<!--<ng-container *ngIf="battingRecordsList; else loading;">
+  <p-fieldset legend="Highest Score" [toggleable]="true" [collapsed]="collapsed">
+
+    <div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12"
+         style="padding:4px 10px;border-bottom: 0 none">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input #gb type="text" placeholder="Global Filter">
+    </div>
+
+    <p-dataTable [value]="battingRecordsList" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+                 [rows]="20" [paginator]="true" [globalFilter]="gb" #dt>
+      <p-column field="playerFullName" header="Name" [sortable]="true"></p-column>
+      <p-column field="runs" header="Runs" [sortable]="true"></p-column>
+      <p-column field="average" header="Average" [sortable]="true"></p-column>
+      <p-column field="fifties" header="Fifties" [sortable]="true"></p-column>
+      <p-column field="hundreds" header="Hundreds" [sortable]="true"></p-column>
+    </p-dataTable>
+  </p-fieldset>
+</ng-container>
+<ng-template #loading> Wait Pleaee, Schdule Sheet is loading for you ...</ng-template>-->
+
+<ng-container *ngIf="battingRecordsList; else loading;">
+  <div class="row">
+    <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
+      <p-accordion>
+        <p-accordionTab header="Higest Score" selected="true">
+          <div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12"
+               style="padding:4px 10px;border-bottom: 0 none">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input #gb type="text" placeholder="Global Filter">
+          </div>
+
+          <p-dataTable [value]="battingRecordsList" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+                       [rows]="20" [paginator]="true" [globalFilter]="gb" #dt>
+            <p-column field="playerFullName" header="Name" [sortable]="true"></p-column>
+            <p-column field="runs" header="Runs" [sortable]="true"></p-column>
+            <p-column field="average" header="Average" [sortable]="true"></p-column>
+            <p-column field="fifties" header="Fifties" [sortable]="true"></p-column>
+            <p-column field="hundreds" header="Hundreds" [sortable]="true"></p-column>
+          </p-dataTable>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+    <div class="col-xlg-6 col-xl-6 col-lg-6  col-md-12 col-sm-12 col-12">
+      <p-accordion>
+        <p-accordionTab header="Higest Score" selected="true">
+          <div class="ui-widget-header col-xlg-12 col-lg-12 col-md-12 col-sm-12"
+               style="padding:4px 10px;border-bottom: 0 none">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input #gb type="text" placeholder="Global Filter">
+          </div>
+
+          <p-dataTable [value]="battingRecordsList" selectionMode="single" (onRowSelect)="onRowSelect($event)"
+                       [rows]="20" [paginator]="true" [globalFilter]="gb" #dt>
+            <p-column field="playerFullName" header="Name" [sortable]="true"></p-column>
+            <p-column field="runs" header="Runs" [sortable]="true"></p-column>
+            <p-column field="average" header="Average" [sortable]="true"></p-column>
+            <p-column field="fifties" header="Fifties" [sortable]="true"></p-column>
+            <p-column field="hundreds" header="Hundreds" [sortable]="true"></p-column>
+          </p-dataTable>
+        </p-accordionTab>
+      </p-accordion>
+    </div>
+  </div>
+</ng-container>
+<ng-template #loading> Wait Pleaee, Schdule Sheet is loading for you ...</ng-template>
+<!--<ng-template #loading1> For you !!! ...</ng-template>
+
+&lt;!&ndash;<ng-container *ngIf="battingRecordsList; else loading;">
+  <div class="button-wrapper col-sm-12 col-12">
+    <button type="button" pButton (click)="showViaService()" class="btn btn-default  float-lg-left">Batting Record:
+      Maximum Hundereds
+    </button>
+    <button type="button" class="btn btn-default float-lg-center">Batting Record: Maximum Hundereds</button>
+    <button type="button" class="btn btn-default float-lg-right">Batting Record: Maximum Hundereds</button>
+  </div>
+  <status-messages [(value)]="msgs"></status-messages>
+  <p-chart type="bar" [data]="data"></p-chart>
+
+  <div class="row">
+    <div class="col-xlg-12 col-lg-12 col-md-12 col-sm-1">
+      <h2 class="box" translate> {{'matches.title'}}
+        <p class="float-right h5 ">
+          <select class="btn-outline-warning" [(ngModel)]="leagueType" (ngModelChange)="getLeagueResults()">
+            <option *ngFor=" let option of options2017" value={{option.id}}>{{option.name}}</option>
+          </select>
+        </p>
+      </h2>
+      <ba-card baCardClass="with-scroll">
+        <ng2-smart-table [settings]="settings" [source]="battingRecordsList" (edit)="onRowEdit($event)"
+                         (userRowSelect)="getDetailedScore($event)">
+        </ng2-smart-table>
+
+      </ba-card>
+    </div>
+  </div>
+</ng-container>&ndash;&gt;
+<ng-template #loading> Wait Please, Table is Loading for you !!! ...</ng-template>-->

@@ -1,4 +1,4 @@
-// tslint:disbable
+/* tslint:disable */
 import {NgModule} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -7,7 +7,6 @@ import {AppTranslationModule} from "../../app.translation.module";
 import {TreeModule} from "ng2-tree";
 import {HttpModule} from "@angular/http";
 import {Ng2SmartTableModule} from "ng2-smart-table";
-import {DataTableModule} from "angular2-datatable";
 import {HotTableModule} from "ng2-handsontable";
 import {
   MdAutocompleteModule,
@@ -23,8 +22,11 @@ import {DatePickerModule} from "ng2-datepicker";
 import {NgDateRangePickerModule} from "ng-daterangepicker";
 import {Statistics} from "./statistics.component";
 import {routing} from "./statistics.routing";
-import {BattingRecordComponent} from "./components/battings/batting.record.component";
-import {ChartModule, GrowlModule, MessagesModule, StepsModule, TabMenuModule, TabViewModule} from "primeng/primeng";
+import {BattingRecordComponent} from "./components/battings/battingrecords.component";
+import {
+  ChartModule, FieldsetModule, GrowlModule, MessagesModule, SharedModule, StepsModule, TabMenuModule,
+  TabViewModule, DataTableModule, AccordionModule,
+} from "primeng/primeng";
 import {MessageService} from "./components/shared.message/messageservice";
 import {Messages} from "./components/shared.message/messages";
 import {TablesModule} from "../../pages/tables/tables.module";
@@ -66,6 +68,10 @@ import {StatisticsService} from "../common/services/statistics.service";
     TabViewModule,
     StepsModule,
     GrowlModule,
+    FieldsetModule,
+    SharedModule,
+    AccordionModule
+
 
   ],
   declarations: [
