@@ -22,7 +22,7 @@ export const PAGES_MENU = [
             title: 'general.menu.matchtes',
             icon: 'ion-happy-outline',
             selected: false,
-            expanded: false,
+            expanded: true,
             order: 0
           }
         },
@@ -74,7 +74,7 @@ export const PAGES_MENU = [
             title: 'Statistics',
             icon: 'ion-speedometer',
             selected: false,
-            expanded: false,
+            expanded: true,
             order: 0
           }
         },
@@ -95,7 +95,7 @@ export const PAGES_MENU = [
             title: 'Clubs',
             icon: 'ion-gear-a',
             selected: false,
-            expanded: false,
+            expanded: true,
             order: 250,
           }
         },
@@ -161,7 +161,7 @@ export const PAGES_MENU = [
             }
           }
         ]
-      },
+      }/*,
 
       {
         path: 'charts',
@@ -441,7 +441,7 @@ export const PAGES_MENU = [
             ]
           }
         ]
-      },
+      }*/,
       {
         path: '',
         data: {
