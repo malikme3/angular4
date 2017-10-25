@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {ServicesConstants} from "./constants.services";
+import {BattingRecordInput} from "../../statistics/battingRecordInput";
 
 @Injectable()
 export class StatisticsService {
@@ -32,13 +33,13 @@ export class StatisticsService {
       .catch(this.handleError);
   }
 
-  getBattingRecords(): Observable<any> {
-    let team = "47";
+  getBattingRecords(inputs: BattingRecordInput): Observable<any> {
+   /* let team = "47";
     let player = "1396";
     let season = "31";
     let year = "2017";
-    let club = "10";
-    const url = `${this.batting_url}team=${team}&player=${player}&season=${season}&year=${year}&club=${club}`;
+    let club = "10";*/
+    const url = `${this.batting_url}team=${inputs.teamId}&player=${inputs.playerId}&season=${inputs.seasonId}&year=${inputs.seasonYear}&club=${inputs.clubId}`;
     console.info("Call for getBattingRecond() with url : ", url);
    return this.http.get(url, this.header).map(responce => responce.json())
    // return this.http.get(url, this.options).map(responce => responce.json())
