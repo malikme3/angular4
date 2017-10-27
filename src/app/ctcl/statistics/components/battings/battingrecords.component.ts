@@ -59,7 +59,6 @@ export class BattingRecordComponent {
     setInterval(() => {
       //replaced function() by ()=>
       this.updateDisplayData();
-      console.log("Testing call back !", d); // just testing if it is working
     }, 3000);
 
     this.itemsSteps = [

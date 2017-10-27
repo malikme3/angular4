@@ -1,8 +1,8 @@
+/* tslint:disable */
 import {RouterModule, Routes} from "@angular/router";
 import {Statistics} from "./statistics.component";
 import {BattingRecordComponent} from "./components/battings/battingrecords.component";
 
-// noinspection TypeScriptValidateTypes
 const routes: Routes = [
   {
     path: '',

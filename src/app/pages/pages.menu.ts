@@ -80,6 +80,27 @@ export const PAGES_MENU = [
               }
             }
           }]
+      },{
+        path: 'players',
+        data: {
+          menu: {
+            title: 'Players',
+            icon: 'ion-gear-a',
+            selected: false,
+            expanded: true,
+            order: 250,
+          }
+        },
+        children: [
+          {
+            path: 'plyersProfile',
+            data: {
+              menu: {
+                title: 'Players ProfileS',
+              }
+            }
+          }
+        ]
       },
       {
         path: 'clubs',
