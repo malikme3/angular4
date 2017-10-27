@@ -96,7 +96,7 @@ export const PAGES_MENU = [
             path: 'plyersProfile',
             data: {
               menu: {
-                title: 'Players ProfileS',
+                title: 'Players Profile',
               }
             }
           }
