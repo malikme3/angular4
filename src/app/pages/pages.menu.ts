@@ -51,13 +51,6 @@ export const PAGES_MENU = [
               }
             }
           }, {
-            path: 'scoreView',
-            data: {
-              menu: {
-                title: 'score',
-              }
-            }
-          }, {
             path: 'submitScore',
             data: {
               menu: {

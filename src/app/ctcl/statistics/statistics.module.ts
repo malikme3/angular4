@@ -25,7 +25,7 @@ import {routing} from "./statistics.routing";
 import {BattingRecordComponent} from "./components/battings/battingrecords.component";
 import {
   ChartModule, FieldsetModule, GrowlModule, MessagesModule, SharedModule, StepsModule, TabMenuModule,
-  TabViewModule, DataTableModule, AccordionModule,
+  TabViewModule, DataTableModule, AccordionModule, PanelModule, SplitButtonModule,
 } from "primeng/primeng";
 import {MessageService} from "./components/shared.message/messageservice";
 import {Messages} from "./components/shared.message/messages";
@@ -70,9 +70,9 @@ import {StatisticsService} from "../common/services/statistics.service";
     GrowlModule,
     FieldsetModule,
     SharedModule,
-    AccordionModule
-
-
+    AccordionModule,
+    PanelModule,
+    SplitButtonModule
   ],
   declarations: [
     Statistics,

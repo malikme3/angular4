@@ -25,7 +25,11 @@ export class BattingRecordComponent {
   t20Records: any[] = [];
   t35Records: any[] = [];
   battingRecordsList: any;
-  data: any;
+  data: any = [];
+  dataMatches: any;
+  dataRuns: any;
+  dataAverage: any;
+  checkNum: number = 0;
   msgs: Message[] = [];
   items: MenuItem[];
   itemsSteps: MenuItem[];
@@ -51,7 +55,12 @@ export class BattingRecordComponent {
     var d = new Date().getFullYear();
     //previous 5 years
     this.previousFiveYear = (d - 5);
-    console.log("Previous 5 Years: ", this.previousFiveYear);
+    console.log("Previous 5th Years: ", this.previousFiveYear);
+    setInterval(() => {
+      //replaced function() by ()=>
+      this.updateDisplayData();
+      console.log("Testing call back !", d); // just testing if it is working
+    }, 3000);
 
     this.itemsSteps = [
       {label: 'Step 1'},
@@ -86,6 +95,157 @@ export class BattingRecordComponent {
   }
 
   loadData(records) {
+
+    this.data = {
+      width: '92px',
+
+      labels: [
+        this.battingRecordsList[0].playerFullName,
+        this.battingRecordsList[1].playerFullName,
+        this.battingRecordsList[2].playerFullName,
+        this.battingRecordsList[3].playerFullName,
+        this.battingRecordsList[4].playerFullName,
+        this.battingRecordsList[5].playerFullName,
+        this.battingRecordsList[6].playerFullName,
+        this.battingRecordsList[7].playerFullName],
+      datasets: [
+        {
+          label: 'Matches',
+          backgroundColor: '#6421f5',
+          borderColor: '#1E88E5',
+          width: '2',
+          data: [
+            this.battingRecordsList[0].matches,
+            this.battingRecordsList[1].matches,
+            this.battingRecordsList[2].matches,
+            this.battingRecordsList[3].matches,
+            this.battingRecordsList[4].matches]
+        },
+        {
+          label: 'Total Score',
+          backgroundColor: '#9CCC65',
+          borderColor: '#7CB342',
+
+          data: [
+            this.battingRecordsList[0].runs,
+            this.battingRecordsList[1].runs,
+            this.battingRecordsList[2].runs,
+            this.battingRecordsList[3].runs,
+            this.battingRecordsList[4].runs,
+            this.battingRecordsList[5].runs,
+            this.battingRecordsList[6].runs,
+            this.battingRecordsList[7].runs]
+
+        },
+        {
+          label: 'Average',
+          backgroundColor: '#cc1262',
+          borderColor: '#7CB342',
+          width: '10px',
+          data: [
+            this.battingRecordsList[0].average,
+            this.battingRecordsList[1].average,
+            this.battingRecordsList[2].average,
+            this.battingRecordsList[3].average,
+            this.battingRecordsList[4].average]
+        }
+      ]
+
+    };
+    this.dataMatches = {
+      width: '92px',
+
+      labels: [
+        this.battingRecordsList[0].playerFullName,
+        this.battingRecordsList[1].playerFullName,
+        this.battingRecordsList[2].playerFullName,
+        this.battingRecordsList[3].playerFullName,
+        this.battingRecordsList[4].playerFullName,
+        this.battingRecordsList[5].playerFullName,
+        this.battingRecordsList[6].playerFullName,
+        this.battingRecordsList[7].playerFullName],
+      datasets: [
+        {
+          label: 'Matches',
+          backgroundColor: '#6421f5',
+          borderColor: '#1E88E5',
+          width: '2',
+          data: [
+            this.battingRecordsList[0].matches,
+            this.battingRecordsList[1].matches,
+            this.battingRecordsList[2].matches,
+            this.battingRecordsList[3].matches,
+            this.battingRecordsList[4].matches]
+        }
+      ]
+    };
+
+    this.dataRuns = {
+      width: '92px',
+
+      labels: [
+        this.battingRecordsList[0].playerFullName,
+        this.battingRecordsList[1].playerFullName,
+        this.battingRecordsList[2].playerFullName,
+        this.battingRecordsList[3].playerFullName,
+        this.battingRecordsList[4].playerFullName,
+        this.battingRecordsList[5].playerFullName,
+        this.battingRecordsList[6].playerFullName,
+        this.battingRecordsList[7].playerFullName],
+      datasets: [
+        {
+          label: 'Total Score',
+          backgroundColor: '#9CCC65',
+          borderColor: '#7CB342',
+
+          data: [
+            this.battingRecordsList[0].runs,
+            this.battingRecordsList[1].runs,
+            this.battingRecordsList[2].runs,
+            this.battingRecordsList[3].runs,
+            this.battingRecordsList[4].runs,
+            this.battingRecordsList[5].runs,
+            this.battingRecordsList[6].runs,
+            this.battingRecordsList[7].runs]
+
+        }
+      ]
+
+    };
+    this.dataAverage = {
+      width: '92px',
+
+      labels: [
+        this.battingRecordsList[0].playerFullName,
+        this.battingRecordsList[1].playerFullName,
+        this.battingRecordsList[2].playerFullName,
+        this.battingRecordsList[3].playerFullName,
+        this.battingRecordsList[4].playerFullName,
+        this.battingRecordsList[5].playerFullName,
+        this.battingRecordsList[6].playerFullName,
+        this.battingRecordsList[7].playerFullName],
+      datasets: [
+        {
+          label: 'Players Average',
+          backgroundColor: '#cc55ac',
+          borderColor: '#2a4629',
+
+          data: [
+            this.battingRecordsList[0].average,
+            this.battingRecordsList[1].average,
+            this.battingRecordsList[2].average,
+            this.battingRecordsList[3].average,
+            this.battingRecordsList[4].average,
+            this.battingRecordsList[5].average,
+            this.battingRecordsList[6].average,
+            this.battingRecordsList[7].average]
+
+        }
+      ]
+
+    };
+
+
     console.log("request is completed");
     for (let record of records) {
       if (record.season_year >= this.previousFiveYear) {
@@ -95,9 +255,29 @@ export class BattingRecordComponent {
     for (let record of records) {
       if (record.season_id === 31) {
         this.t20Records.push(record);
-      } else if(record.season_id === 30) {
+      } else if (record.season_id === 30) {
         this.t35Records.push(record);
       }
+    }
+  }
+
+  updateDisplayData() {
+
+    if (this.checkNum === 0 || this.checkNum === 3) {
+      this.data = this.dataRuns;
+      console.log("Inside =>:", this.checkNum);
+      this.checkNum = 1;
+    } else if (this.checkNum === 1) {
+      this.data = this.dataMatches;
+      console.log("Inside =>:", this.checkNum);
+      this.checkNum = 2;
+    } else if (this.checkNum === 2) {
+      this.data = this.dataAverage;
+      console.log("Inside =>:", this.checkNum);
+      this.checkNum = 3;
+    }
+    else {
+      this.data = this.dataRuns;
     }
   }
 
